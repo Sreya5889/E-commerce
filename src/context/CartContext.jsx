@@ -1,46 +1,35 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { db } from '../services/db';
 import { useAuth } from './AuthContext';
+import { cartService } from '../services/cart.service';
+import { wishlistService } from '../services/wishlist.service';
+import { couponService } from '../services/coupon.service';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
-  const [cartIds, setCartIds] = useState([]);
-  const [wishlistIds, setWishlistIds] = useState([]);
-  const [courses, setCourses] = useState([]);
+  const [cartItems, setCartItems] = useState([]);   // full course objects
+  const [wishlistItems, setWishlistItems] = useState([]);
   const [coupon, setCoupon] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Load all available courses for lookup
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const data = await db.getCourses();
-        setCourses(data);
-      } catch (err) {
-        console.error('Failed to load courses for cart:', err);
-      }
-    };
-    fetchCourses();
-  }, []);
-
-  // Fetch cart and wishlist when user logs in/out
+  // Fetch cart and wishlist from Supabase when user changes
   useEffect(() => {
     const loadCartAndWishlist = async () => {
       if (!user) {
-        setCartIds([]);
-        setWishlistIds([]);
+        setCartItems([]);
+        setWishlistItems([]);
         return;
       }
       setLoading(true);
       try {
-        const [cIds, wIds] = await Promise.all([
-          db.getCart(user.id),
-          db.getWishlist(user.id),
+        const [cartData, wishlistData] = await Promise.all([
+          cartService.getCart(user.id),
+          wishlistService.getWishlist(user.id),
         ]);
-        setCartIds(cIds || []);
-        setWishlistIds(wIds || []);
+        // cartData rows have shape: { id, course_id, courses: {...} }
+        setCartItems((cartData || []).map(row => row.courses || row).filter(Boolean));
+        setWishlistItems((wishlistData || []).map(row => row.courses || row).filter(Boolean));
       } catch (err) {
         console.error('Failed to load cart/wishlist:', err);
       } finally {
@@ -52,52 +41,44 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (courseId) => {
     if (!user) {
-      // Local cart for guest users
-      setCartIds(prev => prev.includes(courseId) ? prev : [...prev, courseId]);
+      // Guest: optimistically push courseId (no full object available, handled at display)
       return;
     }
     try {
-      const updated = await db.addToCart(user.id, courseId);
-      setCartIds(updated || []);
+      await cartService.addToCart(user.id, courseId);
+      const updatedCart = await cartService.getCart(user.id);
+      setCartItems((updatedCart || []).map(row => row.courses || row).filter(Boolean));
     } catch (err) {
       console.error('Error adding to cart:', err);
     }
   };
 
   const removeFromCart = async (courseId) => {
-    if (!user) {
-      setCartIds(prev => prev.filter(id => id !== courseId));
-      return;
-    }
+    if (!user) return;
     try {
-      const updated = await db.removeFromCart(user.id, courseId);
-      setCartIds(updated || []);
+      await cartService.removeFromCart(user.id, courseId);
+      setCartItems(prev => prev.filter(c => c.id !== courseId));
     } catch (err) {
       console.error('Error removing from cart:', err);
     }
   };
 
   const addToWishlist = async (courseId) => {
-    if (!user) {
-      setWishlistIds(prev => prev.includes(courseId) ? prev : [...prev, courseId]);
-      return;
-    }
+    if (!user) return;
     try {
-      const updated = await db.addToWishlist(user.id, courseId);
-      setWishlistIds(updated || []);
+      await wishlistService.addToWishlist(user.id, courseId);
+      const updatedWishlist = await wishlistService.getWishlist(user.id);
+      setWishlistItems((updatedWishlist || []).map(row => row.courses || row).filter(Boolean));
     } catch (err) {
       console.error('Error adding to wishlist:', err);
     }
   };
 
   const removeFromWishlist = async (courseId) => {
-    if (!user) {
-      setWishlistIds(prev => prev.filter(id => id !== courseId));
-      return;
-    }
+    if (!user) return;
     try {
-      const updated = await db.removeFromWishlist(user.id, courseId);
-      setWishlistIds(updated || []);
+      await wishlistService.removeFromWishlist(user.id, courseId);
+      setWishlistItems(prev => prev.filter(c => c.id !== courseId));
     } catch (err) {
       console.error('Error removing from wishlist:', err);
     }
@@ -105,7 +86,7 @@ export const CartProvider = ({ children }) => {
 
   const applyCoupon = async (code) => {
     try {
-      const validCoupon = await db.validateCoupon(code);
+      const validCoupon = await couponService.validateCoupon(code);
       setCoupon(validCoupon);
       return validCoupon;
     } catch (err) {
@@ -118,18 +99,27 @@ export const CartProvider = ({ children }) => {
     setCoupon(null);
   };
 
-  const clearCart = () => {
-    setCartIds([]);
+  const clearCart = async () => {
+    setCartItems([]);
     setCoupon(null);
+    if (user) {
+      try {
+        await cartService.clearCart(user.id);
+      } catch (err) {
+        console.error('Error clearing cart:', err);
+      }
+    }
   };
 
-  // Derive cart courses details
-  const cartItems = courses.filter(c => cartIds.includes(c.id));
-  const wishlistItems = courses.filter(c => wishlistIds.includes(c.id));
+  const cartIds = cartItems.map(c => c.id);
+  const wishlistIds = wishlistItems.map(c => c.id);
 
-  // Calculations
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.discountPrice || item.price), 0);
-  const discount = coupon ? (subtotal * coupon.discountPercent) / 100 : 0;
+  // Price calculations
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = item.discount_price ?? item.price ?? 0;
+    return sum + Number(price);
+  }, 0);
+  const discount = coupon ? (subtotal * (coupon.discount_percent || coupon.discountPercent || 0)) / 100 : 0;
   const tax = (subtotal - discount) * 0.05; // 5% tax
   const total = Math.max(0, subtotal - discount + tax);
 

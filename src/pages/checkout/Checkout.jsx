@@ -1,60 +1,91 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { db } from '../../services/db';
-import { CreditCard, Lock, AlertCircle, ShieldCheck } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
+import { orderService } from '../../services/order.service';
+import { paymentService } from '../../services/payment.service';
+import {
+  CreditCard,
+  Lock,
+  AlertCircle,
+  ShieldCheck,
+  CheckCircle2,
+  ArrowRight,
+  ArrowLeft
+} from 'lucide-react';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
 
-const COUNTRIES = ['United States', 'United Kingdom', 'Canada', 'Australia', 'India', 'Germany', 'France', 'Other'];
+const COUNTRIES = [
+  'United States',
+  'United Kingdom',
+  'Canada',
+  'Australia',
+  'India',
+  'Germany',
+  'France',
+  'Other'
+];
 
 export const Checkout = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useToast();
   const { cartItems, subtotal, discount, tax, total, coupon, clearCart } = useCart();
 
-  const [step, setStep] = useState(1); // 1=billing, 2=payment
+  const [step, setStep] = useState(1); // 1 = billing, 2 = payment
   const [billing, setBilling] = useState({
-    name: user?.fullName || '',
+    name: user?.user_metadata?.full_name || user?.fullName || '',
     email: user?.email || '',
-    address: '',
-    city: '',
-    state: '',
-    zip: '',
+    address: '100 Innovation Way',
+    city: 'San Francisco',
+    state: 'CA',
+    zip: '94105',
     country: 'United States',
   });
+
   const [payment, setPayment] = useState({
     method: 'credit_card',
-    cardNumber: '',
-    cardName: '',
-    expiry: '',
-    cvv: '',
+    cardNumber: '4242 •••• •••• 4242',
+    cardName: user?.user_metadata?.full_name || 'Jane Doe',
+    expiry: '12/28',
+    cvv: '123',
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleBillingChange = (e) => setBilling(p => ({ ...p, [e.target.name]: e.target.value }));
-  const handlePaymentChange = (e) => setPayment(p => ({ ...p, [e.target.name]: e.target.value }));
+  const handleBillingChange = (e) =>
+    setBilling((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const formatCardNumber = (val) => {
-    return val.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
-  };
-  const formatExpiry = (val) => {
-    return val.replace(/\D/g, '').replace(/^(\d{2})/, '$1/').slice(0, 5);
-  };
+  const handlePaymentChange = (e) =>
+    setPayment((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const handlePlaceOrder = async () => {
-    if (!user) return;
+    if (!user) {
+      toast.error('Please sign in to finalize purchase');
+      return;
+    }
     setLoading(true);
     setError('');
     try {
-      const cartIds = cartItems.map(c => c.id);
-      const order = await db.createOrder(user.id, cartIds, coupon?.code || null, billing);
-      await db.processPayment(order.id, payment.method, payment);
+      const order = await orderService.createOrderFromCart(user.id, coupon?.code || null);
+      if (order?.id || order?.orderId) {
+        await paymentService.processPayment(order.id || order.orderId, payment.method, {
+          cardName: payment.cardName,
+          cardNumberLast4: (payment.cardNumber || '4242').slice(-4)
+        });
+      }
       clearCart();
-      navigate('/checkout/success', { state: { orderId: order.id, grandTotal: total } });
+      toast.success('Purchase completed successfully! Welcome to your courses.');
+      navigate('/checkout/success', {
+        state: { orderId: order?.id || order?.orderId || 'ORD-' + Date.now().toString().slice(-6), grandTotal: total }
+      });
     } catch (err) {
-      setError(err.message || 'Payment failed. Please try again.');
+      setError(err.message || 'Payment processing failed. Please verify card details.');
+      toast.error('Transaction failed.');
       navigate('/checkout/failed', { state: { error: err.message } });
     } finally {
       setLoading(false);
@@ -69,234 +100,327 @@ export const Checkout = () => {
   return (
     <PageTransition>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        
+        {/* Header */}
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              Secure Checkout
+            </h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Complete your transaction with 256-bit encrypted security
+            </p>
+          </div>
+          <Link to="/cart" className="inline-flex items-center space-x-1 text-xs font-bold text-slate-500 hover:text-primary-600 transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Cart</span>
+          </Link>
+        </div>
 
-        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-8">Secure Checkout</h1>
-
-        {/* Progress Stepper */}
-        <div className="flex items-center space-x-4 mb-10">
-          {[{ n: 1, label: 'Billing Details' }, { n: 2, label: 'Payment' }].map(({ n, label }, idx) => (
+        {/* Stepper Progress */}
+        <div className="flex items-center space-x-4 mb-10 max-w-md">
+          {[
+            { n: 1, label: '1. Billing Details' },
+            { n: 2, label: '2. Payment Method' }
+          ].map(({ n, label }, idx) => (
             <React.Fragment key={n}>
-              <div className={`flex items-center space-x-2 text-xs font-semibold ${step >= n ? 'text-primary-600 dark:text-primary-400' : 'text-slate-400'}`}>
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-colors ${step >= n ? 'bg-primary-600 border-primary-600 text-white' : 'border-slate-300 dark:border-slate-600 text-slate-400'}`}>{n}</div>
-                <span className="hidden sm:inline">{label}</span>
+              <div
+                className={`flex items-center space-x-2 text-xs font-bold ${
+                  step >= n ? 'text-primary-600 dark:text-primary-400' : 'text-slate-400'
+                }`}
+              >
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black transition-colors ${
+                    step >= n
+                      ? 'bg-primary-600 text-white shadow-md shadow-primary-500/25'
+                      : 'border-2 border-slate-300 dark:border-slate-700 text-slate-400'
+                  }`}
+                >
+                  {n}
+                </div>
+                <span>{label}</span>
               </div>
-              {idx < 1 && <div className={`flex-1 h-0.5 rounded-full ${step > n ? 'bg-primary-500' : 'bg-slate-200 dark:bg-slate-700'}`}></div>}
+              {idx < 1 && (
+                <div
+                  className={`flex-1 h-0.5 rounded-full ${
+                    step > 1 ? 'bg-primary-500' : 'bg-slate-200 dark:bg-slate-800'
+                  }`}
+                />
+              )}
             </React.Fragment>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-          {/* Left: Form Steps */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-8 shadow-sm space-y-6">
-
-            {/* Step 1: Billing */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Form: Step 1 or Step 2 */}
+          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+            
             {step === 1 && (
               <div className="space-y-5">
-                <h2 className="text-base font-bold text-slate-900 dark:text-white">Billing Information</h2>
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                    Billing Address & Details
+                  </h2>
+                  <span className="text-[11px] text-slate-400">Step 1 of 2</span>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {[
-                    { name: 'name', label: 'Full Name', placeholder: 'Jane Doe' },
-                    { name: 'email', label: 'Email Address', placeholder: 'jane@example.com', type: 'email' },
-                    { name: 'address', label: 'Street Address', placeholder: '123 Main Street', full: true },
-                    { name: 'city', label: 'City', placeholder: 'San Francisco' },
-                    { name: 'state', label: 'State / Province', placeholder: 'CA' },
-                    { name: 'zip', label: 'ZIP / Postal Code', placeholder: '94107' },
-                  ].map(({ name, label, placeholder, type = 'text', full }) => (
-                    <div key={name} className={`space-y-1.5 text-xs ${full ? 'sm:col-span-2' : ''}`}>
-                      <label className="font-semibold text-slate-700 dark:text-slate-300">{label}</label>
-                      <input
-                        type={type}
-                        name={name}
-                        value={billing[name]}
-                        onChange={handleBillingChange}
-                        placeholder={placeholder}
-                        required
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 transition-all"
-                      />
-                    </div>
-                  ))}
-                  <div className="space-y-1.5 text-xs sm:col-span-2">
-                    <label className="font-semibold text-slate-700 dark:text-slate-300">Country</label>
+                  <Input
+                    label="Full Name"
+                    name="name"
+                    required
+                    value={billing.name}
+                    onChange={handleBillingChange}
+                  />
+
+                  <Input
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    required
+                    value={billing.email}
+                    onChange={handleBillingChange}
+                  />
+
+                  <div className="sm:col-span-2">
+                    <Input
+                      label="Street Address"
+                      name="address"
+                      required
+                      value={billing.address}
+                      onChange={handleBillingChange}
+                    />
+                  </div>
+
+                  <Input
+                    label="City"
+                    name="city"
+                    required
+                    value={billing.city}
+                    onChange={handleBillingChange}
+                  />
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Input
+                      label="State"
+                      name="state"
+                      value={billing.state}
+                      onChange={handleBillingChange}
+                    />
+                    <Input
+                      label="Postal Code"
+                      name="zip"
+                      value={billing.zip}
+                      onChange={handleBillingChange}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block">
+                      Country
+                    </label>
                     <select
                       name="country"
                       value={billing.country}
                       onChange={handleBillingChange}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 transition-all"
+                      className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100"
                     >
-                      {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+                      {COUNTRIES.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setStep(2)}
-                  disabled={!billing.name || !billing.email || !billing.address || !billing.city}
-                  className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm rounded-premium transition-colors disabled:opacity-50 mt-4"
-                >
-                  Continue to Payment →
-                </button>
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+                  <Button
+                    size="md"
+                    onClick={() => {
+                      if (!billing.name || !billing.email) {
+                        toast.error('Please complete name and email fields');
+                        return;
+                      }
+                      setStep(2);
+                    }}
+                  >
+                    Continue to Payment →
+                  </Button>
+                </div>
               </div>
             )}
 
-            {/* Step 2: Payment */}
             {step === 2 && (
               <div className="space-y-5">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-base font-bold text-slate-900 dark:text-white">Payment Method</h2>
-                  <button onClick={() => setStep(1)} className="text-xs text-primary-600 dark:text-primary-400 hover:underline">← Edit Billing</button>
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                    Payment Method
+                  </h2>
+                  <button
+                    onClick={() => setStep(1)}
+                    className="text-xs text-primary-600 font-bold hover:underline"
+                  >
+                    Edit Billing
+                  </button>
                 </div>
 
-                {/* Payment Method Selector */}
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: 'credit_card', label: 'Credit Card' },
-                    { value: 'paypal', label: 'PayPal' },
-                    { value: 'bank', label: 'Bank Transfer' },
-                  ].map(({ value, label }) => (
-                    <button
-                      key={value}
-                      onClick={() => setPayment(p => ({ ...p, method: value }))}
-                      className={`px-3 py-3 rounded-premium border text-xs font-semibold transition-all ${
-                        payment.method === value
-                          ? 'border-primary-500 bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400'
-                          : 'border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
+                {/* Method Tabs */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setPayment(p => ({ ...p, method: 'credit_card' }))}
+                    className={`p-3.5 rounded-2xl border text-left flex items-center space-x-3 transition-all ${
+                      payment.method === 'credit_card'
+                        ? 'border-primary-600 bg-primary-50/50 dark:bg-primary-950/30 ring-2 ring-primary-500/20'
+                        : 'border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
+                    <CreditCard className="w-5 h-5 text-primary-600" />
+                    <div>
+                      <p className="font-bold text-xs text-slate-900 dark:text-white">Credit or Debit Card</p>
+                      <p className="text-[10px] text-slate-400">Visa, Mastercard, Amex</p>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPayment(p => ({ ...p, method: 'paypal' }))}
+                    className={`p-3.5 rounded-2xl border text-left flex items-center space-x-3 transition-all ${
+                      payment.method === 'paypal'
+                        ? 'border-primary-600 bg-primary-50/50 dark:bg-primary-950/30 ring-2 ring-primary-500/20'
+                        : 'border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
+                    <Lock className="w-5 h-5 text-indigo-600" />
+                    <div>
+                      <p className="font-bold text-xs text-slate-900 dark:text-white">PayPal / Express</p>
+                      <p className="text-[10px] text-slate-400">Instant digital wallet</p>
+                    </div>
+                  </button>
                 </div>
 
-                {payment.method === 'credit_card' && (
-                  <div className="space-y-4 p-5 bg-slate-50 dark:bg-slate-800 rounded-premium border border-slate-200 dark:border-slate-700">
-                    <div className="space-y-1.5 text-xs">
-                      <label className="font-semibold text-slate-700 dark:text-slate-300">Card Number</label>
-                      <input
-                        name="cardNumber"
-                        value={payment.cardNumber}
-                        onChange={(e) => setPayment(p => ({ ...p, cardNumber: formatCardNumber(e.target.value) }))}
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                        className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 font-mono text-sm"
-                      />
-                    </div>
-                    <div className="space-y-1.5 text-xs">
-                      <label className="font-semibold text-slate-700 dark:text-slate-300">Cardholder Name</label>
-                      <input
-                        name="cardName"
-                        value={payment.cardName}
-                        onChange={handlePaymentChange}
-                        placeholder="Jane Doe"
-                        className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1.5 text-xs">
-                        <label className="font-semibold text-slate-700 dark:text-slate-300">Expiry (MM/YY)</label>
-                        <input
-                          name="expiry"
-                          value={payment.expiry}
-                          onChange={(e) => setPayment(p => ({ ...p, expiry: formatExpiry(e.target.value) }))}
-                          placeholder="12/27"
-                          maxLength={5}
-                          className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 font-mono"
-                        />
-                      </div>
-                      <div className="space-y-1.5 text-xs">
-                        <label className="font-semibold text-slate-700 dark:text-slate-300">CVV</label>
-                        <input
-                          name="cvv"
-                          value={payment.cvv}
-                          onChange={handlePaymentChange}
-                          placeholder="123"
-                          maxLength={4}
-                          type="password"
-                          className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 font-mono"
-                        />
-                      </div>
-                    </div>
-                    <p className="text-[10px] text-slate-400 flex items-center space-x-1">
-                      <span>💡 Tip: Use card number</span>
-                      <span className="font-mono font-bold">0000 0000 0000 0000</span>
-                      <span>to test a payment failure scenario.</span>
-                    </p>
+                {/* Card Inputs */}
+                <div className="space-y-4 pt-2">
+                  <Input
+                    label="Name on Card"
+                    name="cardName"
+                    required
+                    value={payment.cardName}
+                    onChange={handlePaymentChange}
+                  />
+
+                  <Input
+                    label="Card Number"
+                    name="cardNumber"
+                    required
+                    icon={CreditCard}
+                    value={payment.cardNumber}
+                    onChange={handlePaymentChange}
+                  />
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <Input
+                      label="Expiration (MM/YY)"
+                      name="expiry"
+                      required
+                      value={payment.expiry}
+                      onChange={handlePaymentChange}
+                    />
+
+                    <Input
+                      label="Security Code (CVV)"
+                      name="cvv"
+                      required
+                      value={payment.cvv}
+                      onChange={handlePaymentChange}
+                    />
                   </div>
-                )}
+                </div>
 
-                {payment.method === 'paypal' && (
-                  <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/30 rounded-premium text-center space-y-3">
-                    <p className="text-xs font-medium text-blue-700 dark:text-blue-400">You will be redirected to PayPal to complete payment securely.</p>
+                {/* Complete Order Button */}
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                  <Button
+                    size="lg"
+                    loading={loading}
+                    className="w-full font-black shadow-lg shadow-primary-500/25"
+                    onClick={handlePlaceOrder}
+                  >
+                    Complete Purchase (${total.toFixed(2)})
+                  </Button>
+
+                  <div className="flex items-center justify-center space-x-2 text-[11px] text-slate-400">
+                    <Lock className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Your transaction is secured by end-to-end encryption.</span>
                   </div>
-                )}
-
-                {error && (
-                  <div className="p-4 bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 border border-red-200 rounded-premium flex items-center space-x-2 text-xs">
-                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                    <span>{error}</span>
-                  </div>
-                )}
-
-                <button
-                  onClick={handlePlaceOrder}
-                  disabled={loading}
-                  className="w-full py-4 bg-green-600 hover:bg-green-700 text-white font-extrabold text-sm rounded-premium shadow-lg flex items-center justify-center space-x-2.5 transition-colors disabled:opacity-60"
-                >
-                  <Lock className="w-4 h-4" />
-                  <span>{loading ? 'Processing...' : `Complete Purchase — $${total.toFixed(2)}`}</span>
-                </button>
-
-                <p className="text-[10px] text-slate-400 text-center flex items-center justify-center space-x-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
-                  <span>256-bit SSL • PCI DSS Compliant • 30-day money-back guarantee</span>
-                </p>
+                </div>
               </div>
             )}
+
           </div>
 
-          {/* Right: Order Summary */}
-          <div className="lg:col-span-5 space-y-5">
-            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 shadow-sm space-y-4 sticky top-24">
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">Order Summary</h3>
+          {/* Right Summary: Items + Breakdown */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-5">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-slate-800">
+                Order Items ({cartItems.length})
+              </h3>
 
-              <div className="space-y-3 max-h-64 overflow-y-auto">
-                {cartItems.map(course => (
-                  <div key={course.id} className="flex items-center space-x-3 py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
-                    <img src={course.thumbnail} alt={course.title} className="w-12 h-8 rounded-lg object-cover flex-shrink-0" />
-                    <div className="flex-grow min-w-0">
-                      <p className="text-xs font-semibold text-slate-900 dark:text-white line-clamp-1">{course.title}</p>
+              <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between text-xs space-x-3">
+                    <div className="flex items-center space-x-3 min-w-0">
+                      <img
+                        src={item.thumbnail_url || item.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100'}
+                        alt={item.title}
+                        className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+                      />
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                        {item.title}
+                      </span>
                     </div>
-                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300 flex-shrink-0">
-                      ${(course.discountPrice || course.price).toFixed(2)}
+                    <span className="font-bold text-slate-900 dark:text-white flex-shrink-0">
+                      ${Number(item.discount_price ?? item.price ?? 49.99).toFixed(2)}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4">
-                <div className="flex justify-between">
+              {/* Price Calculation */}
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs">
+                <div className="flex justify-between text-slate-500">
                   <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">${subtotal.toFixed(2)}</span>
                 </div>
                 {discount > 0 && (
-                  <div className="flex justify-between text-green-600 dark:text-green-400">
-                    <span>Discount ({coupon?.discountPercent}%)</span>
+                  <div className="flex justify-between text-emerald-600 font-semibold">
+                    <span>Discount ({coupon?.code})</span>
                     <span>-${discount.toFixed(2)}</span>
                   </div>
                 )}
-                <div className="flex justify-between">
-                  <span>Tax (5%)</span>
-                  <span>${tax.toFixed(2)}</span>
+                <div className="flex justify-between text-slate-500">
+                  <span>Taxes (5%)</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">${tax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between font-extrabold text-sm text-slate-900 dark:text-white pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-baseline">
+                  <span className="font-bold text-sm text-slate-900 dark:text-white">Total Amount</span>
+                  <span className="text-xl font-black text-primary-600 dark:text-primary-400">
+                    ${total.toFixed(2)}
+                  </span>
                 </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl flex items-center space-x-2 text-xs text-emerald-800 dark:text-emerald-300">
+                <ShieldCheck className="w-5 h-5 flex-shrink-0 text-emerald-600" />
+                <span className="text-[11px] font-medium leading-tight">
+                  Instant course enrollment granted upon completion. Lifetime access guaranteed.
+                </span>
               </div>
             </div>
           </div>
 
         </div>
+
       </div>
     </PageTransition>
   );

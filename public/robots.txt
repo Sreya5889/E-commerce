@@ -1,0 +1,10 @@
+# EduAcademy - Production Robots Configuration
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /instructor/
+Disallow: /learn/
+Disallow: /checkout/
+Disallow: /api/
+
+Sitemap: https://www.MYDOMAIN.com/sitemap.xml

@@ -2,40 +2,78 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { ShoppingCart, Trash2, Tag, X, ArrowRight, BookOpen, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
+import {
+  ShoppingCart,
+  Trash2,
+  Tag,
+  X,
+  ArrowRight,
+  BookOpen,
+  AlertCircle,
+  CheckCircle2,
+  Heart,
+  ShieldCheck,
+  Star
+} from 'lucide-react';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { Button } from '../../components/ui/Button';
+import { EmptyState } from '../../components/ui/EmptyState';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useToast();
   const {
-    cartItems, removeFromCart, coupon, applyCoupon, removeCoupon,
-    subtotal, discount, tax, total, loading
+    cartItems,
+    removeFromCart,
+    addToWishlist,
+    coupon,
+    applyCoupon,
+    removeCoupon,
+    subtotal,
+    discount,
+    tax,
+    total,
+    loading
   } = useCart();
 
   const [couponCode, setCouponCode] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
   const [couponError, setCouponError] = useState('');
-  const [couponSuccess, setCouponSuccess] = useState('');
 
-  const handleApplyCoupon = async () => {
+  const handleApplyCoupon = async (e) => {
+    e.preventDefault();
     if (!couponCode.trim()) return;
     setCouponLoading(true);
     setCouponError('');
-    setCouponSuccess('');
     try {
-      const applied = await applyCoupon(couponCode.trim().toUpperCase());
-      setCouponSuccess(`Coupon "${applied.code}" applied! ${applied.discountPercent}% off.`);
+      const code = couponCode.trim().toUpperCase();
+      const applied = await applyCoupon(code);
+      toast.success(`Coupon \"${code}\" applied! ${applied.discountPercent || applied.discount_percent}% off.`);
       setCouponCode('');
     } catch (err) {
-      setCouponError(err.message || 'Invalid coupon code');
+      setCouponError(err.message || 'Invalid or expired coupon code');
+      toast.error('Coupon code is not valid.');
     } finally {
       setCouponLoading(false);
     }
   };
 
+  const handleMoveToWishlist = (course) => {
+    removeFromCart(course.id);
+    addToWishlist(course.id);
+    toast.info(`Moved \"${course.title}\" to your wishlist.`);
+  };
+
+  const handleRemove = (course) => {
+    removeFromCart(course.id);
+    toast.info(`Removed from your cart.`);
+  };
+
   const handleCheckout = () => {
     if (!user) {
+      toast.info('Please sign in or register to complete your order.');
       navigate('/login', { state: { from: { pathname: '/checkout' } } });
       return;
     }
@@ -45,184 +83,215 @@ export const Cart = () => {
   return (
     <PageTransition>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-
-        <div className="mb-8">
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center space-x-3">
-            <ShoppingCart className="w-7 h-7 text-primary-600" />
-            <span>Shopping Cart</span>
-            {cartItems.length > 0 && (
-              <span className="text-sm font-medium text-slate-400">({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})</span>
-            )}
-          </h1>
+        
+        {/* Header */}
+        <div className="mb-8 flex items-center justify-between">
+          <div className="space-y-1">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center space-x-3">
+              <ShoppingCart className="w-8 h-8 text-primary-600" />
+              <span>Shopping Cart</span>
+            </h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {cartItems.length} {cartItems.length === 1 ? 'course' : 'courses'} in your cart
+            </p>
+          </div>
+          {cartItems.length > 0 && (
+            <Link to="/courses" className="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline">
+              Continue Shopping →
+            </Link>
+          )}
         </div>
 
         {cartItems.length === 0 ? (
-          /* Empty Cart State */
-          <div className="text-center py-24 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium space-y-6">
-            <div className="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto">
-              <ShoppingCart className="w-10 h-10 text-slate-300 dark:text-slate-600" />
-            </div>
-            <div className="space-y-2">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Your cart is empty</h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                Browse our premium courses and add the ones you love to get started.
-              </p>
-            </div>
-            <Link
-              to="/courses"
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-premium shadow-md transition-colors"
-            >
-              <BookOpen className="w-4 h-4" />
-              <span>Browse Courses</span>
-            </Link>
-          </div>
+          <EmptyState
+            icon={ShoppingCart}
+            title="Your cart is empty"
+            description="You have no courses in your cart yet. Browse our extensive catalog to find skills that help you advance your tech career."
+            actionText="Browse Courses"
+            actionLink="/courses"
+          />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
             {/* Cart Items List */}
             <div className="lg:col-span-8 space-y-4">
-              {cartItems.map((course) => (
-                <div
-                  key={course.id}
-                  className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium shadow-sm hover:shadow-premium transition-shadow"
-                >
-                  <Link to={`/course/${course.id}`} className="flex-shrink-0">
-                    <img
-                      src={course.thumbnail}
-                      alt={course.title}
-                      className="w-full sm:w-36 h-24 rounded-xl object-cover"
-                    />
-                  </Link>
+              {cartItems.map((course) => {
+                const teacherName = course.teachers?.profiles?.display_name ||
+                  course.instructor_name ||
+                  'Senior Instructor';
+                const price = Number(course.price ?? 49.99);
+                const discountPrice = course.discount_price !== undefined && course.discount_price !== null
+                  ? Number(course.discount_price)
+                  : course.discountPrice !== undefined && course.discountPrice !== null
+                  ? Number(course.discountPrice)
+                  : price;
+                const hasDiscount = discountPrice > 0 && discountPrice < price;
 
-                  <div className="flex-grow min-w-0 flex flex-col justify-between">
-                    <div>
-                      {course.badge && (
-                        <span className="inline-block px-2 py-0.5 bg-amber-100 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 text-[9px] font-bold uppercase rounded mb-1">
-                          {course.badge}
+                return (
+                  <div
+                    key={course.id}
+                    className="flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    {/* Thumbnail */}
+                    <Link to={`/course/${course.id}`} className="flex-shrink-0">
+                      <img
+                        src={course.thumbnail_url || course.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300'}
+                        alt={course.title}
+                        className="w-full sm:w-40 h-24 rounded-xl object-cover"
+                      />
+                    </Link>
+
+                    {/* Details */}
+                    <div className="flex-grow min-w-0 flex flex-col justify-between space-y-2">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+                          {course.categories?.name || course.category || 'Development'}
                         </span>
-                      )}
-                      <Link to={`/course/${course.id}`}>
-                        <h3 className="font-bold text-sm text-slate-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 line-clamp-2 leading-snug transition-colors">
-                          {course.title}
+                        <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug line-clamp-2 hover:text-primary-600 transition-colors">
+                          <Link to={`/course/${course.id}`}>{course.title}</Link>
                         </h3>
-                      </Link>
-                      <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
-                        {course.durationHours} hrs • {course.level} • {course.language}
-                      </p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                          By {teacherName}
+                        </p>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center space-x-4 pt-1 text-xs">
+                        <button
+                          onClick={() => handleRemove(course)}
+                          className="text-slate-400 hover:text-rose-600 flex items-center space-x-1 transition-colors font-medium"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Remove</span>
+                        </button>
+                        <span className="text-slate-200 dark:text-slate-700">•</span>
+                        <button
+                          onClick={() => handleMoveToWishlist(course)}
+                          className="text-slate-400 hover:text-primary-600 flex items-center space-x-1 transition-colors font-medium"
+                        >
+                          <Heart className="w-3.5 h-3.5" />
+                          <span>Save for Later</span>
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-baseline space-x-2">
-                        <span className="text-base font-extrabold text-slate-900 dark:text-white">
-                          ${(course.discountPrice || course.price).toFixed(2)}
-                        </span>
-                        {course.discountPrice && (
-                          <span className="text-xs text-slate-400 line-through">${course.price.toFixed(2)}</span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => removeFromCart(course.id)}
-                        className="flex items-center space-x-1.5 text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors font-medium"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                        <span>Remove</span>
-                      </button>
+                    {/* Price Column */}
+                    <div className="sm:text-right flex-shrink-0 self-start sm:self-center">
+                      <p className="text-lg font-black text-slate-900 dark:text-white">
+                        ${hasDiscount ? discountPrice.toFixed(2) : price.toFixed(2)}
+                      </p>
+                      {hasDiscount && (
+                        <p className="text-xs text-slate-400 line-through">
+                          ${price.toFixed(2)}
+                        </p>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Order Summary Sidebar */}
-            <div className="lg:col-span-4 space-y-5">
-              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 shadow-sm space-y-5 sticky top-24">
-                <h3 className="font-bold text-base text-slate-900 dark:text-white">Order Summary</h3>
+            {/* Right Summary Card */}
+            <div className="lg:col-span-4 space-y-6">
+              <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-6">
+                <h2 className="text-base font-black text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-slate-800">
+                  Order Summary
+                </h2>
+
+                {/* Price Breakdown */}
+                <div className="space-y-3 text-xs">
+                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
+                    <span>Original Price:</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">${subtotal.toFixed(2)}</span>
+                  </div>
+
+                  {discount > 0 && (
+                    <div className="flex justify-between text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <span>Discount ({coupon?.code}):</span>
+                      <span>-${discount.toFixed(2)}</span>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
+                    <span>Estimated Tax (5%):</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">${tax.toFixed(2)}</span>
+                  </div>
+
+                  <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-between items-baseline">
+                    <span className="text-sm font-bold text-slate-900 dark:text-white">Total:</span>
+                    <span className="text-2xl font-black text-primary-600 dark:text-primary-400">
+                      ${total.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
 
                 {/* Coupon Code Input */}
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Promo / Coupon Code</label>
+                <form onSubmit={handleApplyCoupon} className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block">
+                    Promotional Coupon
+                  </label>
                   {coupon ? (
-                    <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900/30 rounded-xl text-xs">
-                      <div className="flex items-center space-x-2 text-green-700 dark:text-green-400">
-                        <Tag className="w-4 h-4" />
-                        <span className="font-bold">{coupon.code}</span>
-                        <span>({coupon.discountPercent}% OFF)</span>
-                      </div>
-                      <button onClick={removeCoupon} className="text-slate-400 hover:text-red-500 transition-colors">
+                    <div className="flex items-center justify-between p-2.5 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-xl text-xs">
+                      <span className="font-bold text-emerald-700 dark:text-emerald-400">
+                        {coupon.code} ({coupon.discount_percent || coupon.discountPercent}% OFF)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={removeCoupon}
+                        className="text-slate-400 hover:text-red-500"
+                      >
                         <X className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
-                    <div className="flex gap-2">
+                    <div className="flex space-x-2">
                       <input
                         type="text"
+                        placeholder="e.g. UDEMY50"
                         value={couponCode}
                         onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                        placeholder="e.g. UDEMY50"
-                        className="flex-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-200 font-mono"
+                        className="flex-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs uppercase font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-primary-500"
                       />
-                      <button
-                        onClick={handleApplyCoupon}
-                        disabled={couponLoading || !couponCode}
-                        className="px-3 py-2 bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold rounded-xl transition-colors disabled:opacity-50"
+                      <Button
+                        type="submit"
+                        size="sm"
+                        loading={couponLoading}
+                        disabled={couponLoading || !couponCode.trim()}
                       >
-                        {couponLoading ? '...' : 'Apply'}
-                      </button>
+                        Apply
+                      </Button>
                     </div>
                   )}
                   {couponError && (
-                    <div className="flex items-center space-x-1.5 text-[10px] text-red-500">
-                      <AlertCircle className="w-3 h-3" />
-                      <span>{couponError}</span>
-                    </div>
+                    <p className="text-[11px] text-rose-500 font-medium">{couponError}</p>
                   )}
-                  {couponSuccess && (
-                    <div className="flex items-center space-x-1.5 text-[10px] text-green-500">
-                      <CheckCircle2 className="w-3 h-3" />
-                      <span>{couponSuccess}</span>
-                    </div>
-                  )}
-                  <p className="text-[10px] text-slate-400">Try: <span className="font-mono font-bold cursor-pointer hover:text-primary-600" onClick={() => setCouponCode('UDEMY50')}>UDEMY50</span>, <span className="font-mono font-bold cursor-pointer hover:text-primary-600" onClick={() => setCouponCode('WELCOME10')}>WELCOME10</span></p>
-                </div>
+                </form>
 
-                {/* Price Breakdown */}
-                <div className="space-y-3 text-xs border-t border-slate-100 dark:border-slate-800 pt-4">
-                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
-                    <span>Subtotal ({cartItems.length} items)</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                  </div>
-                  {discount > 0 && (
-                    <div className="flex justify-between text-green-600 dark:text-green-400 font-semibold">
-                      <span>Coupon Discount</span>
-                      <span>-${discount.toFixed(2)}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
-                    <span>Tax (5%)</span>
-                    <span>${tax.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between font-extrabold text-sm text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 pt-3">
-                    <span>Grand Total</span>
-                    <span>${total.toFixed(2)}</span>
-                  </div>
-                </div>
-
-                <button
+                {/* Checkout Button */}
+                <Button
+                  size="lg"
+                  className="w-full font-black shadow-lg shadow-primary-500/25"
                   onClick={handleCheckout}
-                  className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm rounded-premium shadow-md shadow-primary-500/15 flex items-center justify-center space-x-2 transition-colors"
                 >
-                  <span>Proceed to Checkout</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  Proceed to Checkout <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
 
-                <p className="text-[10px] text-slate-400 text-center">
-                  🔒 Secured by 256-bit SSL encryption. 30-day money-back guarantee.
-                </p>
+                {/* Trust Points */}
+                <div className="text-center space-y-1.5 pt-2">
+                  <div className="flex items-center justify-center space-x-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                    <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                    <span>30-Day Money-Back Guarantee</span>
+                  </div>
+                  <p className="text-[10px] text-slate-400">
+                    Encrypted 256-bit SSL secure checkout.
+                  </p>
+                </div>
               </div>
             </div>
 
           </div>
         )}
+
       </div>
     </PageTransition>
   );

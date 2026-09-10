@@ -1,0 +1,42 @@
+[
+  {
+    "id": "3b41277a-2c21-4230-8168-6a3826967c1d",
+    "email": "jane.learner@example.com",
+    "password_hash": "80cfba0ae2e08aa20266bde117165237:731bfdef028268fb964a9003feb08d8518bc7fc9f43653a1fa1fbb6079c067d84210ad6c7aa9b2541c20561e63d2e7410510ffa454966873d812b3411af9e409",
+    "fullName": "Jane Learner",
+    "firstName": "Jane",
+    "lastName": "Learner",
+    "role": "student",
+    "created_at": "2026-09-10T04:32:17.864Z"
+  },
+  {
+    "id": "0eec7009-728d-4d27-bb94-44b75a041828",
+    "email": "student4366@example.com",
+    "password_hash": "10d5bc93a513a75417b31f9eeafd4cc8:c1bf3c249edba0752ac587c26386bb53b681d0d7a72f8902196c3d410e4030ad04877ce629ddd0484e43a271b8f7d42a7de5fee22becce5a9b1c88d856433f49",
+    "fullName": "Jane Doe",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "role": "student",
+    "created_at": "2026-09-10T04:39:01.176Z"
+  },
+  {
+    "id": "2dec7743-671a-47f8-8d6c-7366182e707f",
+    "email": "minnu@321gmail.com",
+    "password_hash": "e52a9ffa5696c0cf901e1184db29e70b:5da34fd74167da586e7b8c2d555dc5b17cbb47a79c3297f33de6607d5f69eb80ca2322a8ec1b68e05effa356952cca973b2e5f2723da3222a6a1778c8a1eb246",
+    "fullName": "minnu",
+    "firstName": "minnu",
+    "lastName": "",
+    "role": "student",
+    "created_at": "2026-09-10T04:40:50.887Z"
+  },
+  {
+    "id": "cb224a94-c923-4502-95c8-b9947d7dc7cc",
+    "email": "demo1066@mycourse.test",
+    "password_hash": "125de5f01af4f8783d50454db2bd04c6:b07893a56efef28a99cf926dc200753ad3cd2fd1f874d77c247e1f1b65a13af9adbf276bb1d2b5cc3edf21570ddf5fb3d6527ec2ca7bfb1c40a41a09b3a95655",
+    "fullName": "Demo Learner",
+    "firstName": "Demo",
+    "lastName": "Learner",
+    "role": "student",
+    "created_at": "2026-09-10T05:18:50.723Z"
+  }
+]

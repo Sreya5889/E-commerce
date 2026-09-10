@@ -1,287 +1,341 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { useCart } from '../../context/CartContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useCart } from '../../context/CartContext';
+import { categoryService } from '../../services/category.service';
 import {
-  Menu,
-  X,
-  Search,
-  ShoppingCart,
-  Heart,
-  Sun,
-  Moon,
-  ChevronDown,
-  User,
-  LogOut,
-  Settings,
-  BookOpen,
-  LayoutDashboard,
-  Award
+  Search, ShoppingCart, Heart, Sun, Moon, Menu, X, ChevronDown,
+  User, BookOpen, LogOut, LayoutDashboard, Settings, Award, Shield,
+  Layers, PlusCircle
 } from 'lucide-react';
-import { CATEGORIES } from '../../constants/mockData';
+import { Button } from '../ui/Button';
 
 export const Navbar = () => {
-  const { user, logout, isAdmin, isTeacher } = useAuth();
-  const { cartItems, wishlistItems } = useCart();
+  const { user, profile, isAuthenticated, isAdmin, isTeacher, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { cartCount, wishlistCount } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const categoriesRef = useRef(null);
+  const userDropdownRef = useRef(null);
+
+  // Load categories
+  useEffect(() => {
+    let mounted = true;
+    const fetchCategories = async () => {
+      try {
+        const data = await categoryService.getCategories();
+        if (mounted && data) {
+          setCategories(data);
+        }
+      } catch (err) {
+        console.warn('Navbar: failed to load categories:', err);
+      }
+    };
+    fetchCategories();
+    return () => { mounted = false; };
+  }, []);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (categoriesRef.current && !categoriesRef.current.contains(e.target)) {
+        setCategoriesOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target)) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setCategoriesOpen(false);
+    setUserDropdownOpen(false);
+  }, [location.pathname]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/courses?search=${encodeURIComponent(searchQuery)}`);
+      navigate(`/courses?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
     }
   };
 
   const handleCategoryClick = (slug) => {
-    navigate(`/courses?category=${slug}`);
+    navigate(`/courses?category=${encodeURIComponent(slug)}`);
     setCategoriesOpen(false);
   };
 
+  const isActive = (path) => location.pathname === path;
+
+  const displayName =
+    profile?.display_name ||
+    `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() ||
+    user?.user_metadata?.full_name ||
+    user?.email?.split('@')[0] ||
+    'My Account';
+
+  const avatarUrl =
+    profile?.avatar_url ||
+    user?.user_metadata?.avatar_url ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=2563eb&color=fff&size=80`;
+
   return (
-    <nav className="sticky top-0 z-50 w-full glass shadow-premium transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 gap-4">
           
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-premium bg-gradient-to-tr from-primary-600 to-secondary-600 flex items-center justify-center shadow-lg text-white font-extrabold text-xl">
-                E
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                EduAcademy
+          {/* 1. Brand Logo */}
+          <Link
+            to="/"
+            className="flex items-center space-x-3 flex-shrink-0 group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-xl p-1"
+            aria-label="EduAcademy Home"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-indigo-600 flex items-center justify-center shadow-md shadow-primary-500/25 text-white font-extrabold text-xl group-hover:scale-105 transition-transform duration-200">
+              E
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center">
+                Edu<span className="text-primary-600 dark:text-primary-400">Academy</span>
               </span>
-            </Link>
-          </div>
+              <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase -mt-1 hidden sm:block">
+                Marketplace
+              </span>
+            </div>
+          </Link>
 
-          {/* Desktop Search Bar */}
-          <div className="hidden lg:block flex-1 max-w-md mx-8">
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <input
-                type="text"
-                placeholder="Search for courses, skills, or teachers..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-slate-800 dark:text-slate-200"
-              />
-              <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
-            </form>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/courses" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+          {/* 2. Desktop Navigation Links */}
+          <nav className="hidden xl:flex items-center space-x-1">
+            <Link
+              to="/courses"
+              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                isActive('/courses')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
               Courses
             </Link>
 
             {/* Categories Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={categoriesRef}>
               <button
+                type="button"
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className="flex items-center space-x-1 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus:outline-none"
+                className={`flex items-center space-x-1 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
+                  categoriesOpen
+                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                }`}
+                aria-expanded={categoriesOpen}
               >
                 <span>Categories</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? 'rotate-180 text-primary-600' : ''}`} />
               </button>
 
               {categoriesOpen && (
-                <>
-                  <div className="fixed inset-0 z-10" onClick={() => setCategoriesOpen(false)}></div>
-                  <div className="absolute left-0 mt-3 w-56 rounded-premium bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl z-20 py-2">
-                    {CATEGORIES.map((cat) => (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Explore Disciplines</p>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto py-1">
+                    {categories.map((cat) => (
                       <button
-                        key={cat.id}
+                        key={cat.id || cat.slug}
                         onClick={() => handleCategoryClick(cat.slug)}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors block"
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center justify-between group cursor-pointer"
                       >
-                        {cat.name}
+                        <span>{cat.name}</span>
+                        {cat.course_count && (
+                          <span className="text-[10px] text-slate-400 font-normal group-hover:text-primary-500">
+                            {cat.course_count}
+                          </span>
+                        )}
                       </button>
                     ))}
                   </div>
-                </>
+                </div>
               )}
             </div>
 
-            <Link to="/teachers" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            <Link
+              to="/teachers"
+              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                isActive('/teachers')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
               Instructors
             </Link>
-            <Link to="/pricing" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+
+            <Link
+              to="/pricing"
+              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                isActive('/pricing')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
               Pricing
             </Link>
-            <Link to="/about" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              About
-            </Link>
-            <Link to="/contact" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              Contact
-            </Link>
+          </nav>
+
+          {/* 3. Search Bar */}
+          <div className="flex-1 max-w-md mx-2 hidden md:block">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search courses, skills, or teachers..."
+                className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-primary-500 rounded-full text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
+              />
+            </form>
           </div>
 
-          {/* Action Icons & Profile */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Theme Toggle */}
+          {/* 4. Action Items & User Profile */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* Dark Mode Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-premium bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              className="p-2.5 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            {/* Wishlist */}
+            {/* Wishlist Button */}
             <Link
-              to="/dashboard?tab=wishlist"
-              className="relative p-2.5 rounded-premium bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+              to="/wishlist"
+              aria-label="View saved courses in wishlist"
+              className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               <Heart className="w-5 h-5" />
-              {wishlistItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-accent-500 text-white flex items-center justify-center text-[10px] font-bold">
-                  {wishlistItems.length}
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white rounded-full text-[10px] font-extrabold flex items-center justify-center shadow-md animate-in zoom-in">
+                  {wishlistCount}
                 </span>
               )}
             </Link>
 
-            {/* Cart */}
+            {/* Cart Button */}
             <Link
               to="/cart"
-              className="relative p-2.5 rounded-premium bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+              aria-label="View shopping cart"
+              className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               <ShoppingCart className="w-5 h-5" />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary-600 text-white flex items-center justify-center text-[10px] font-bold">
-                  {cartItems.length}
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white rounded-full text-[10px] font-extrabold flex items-center justify-center shadow-md animate-in zoom-in">
+                  {cartCount}
                 </span>
               )}
             </Link>
 
-            {/* Auth Dropdown or Buttons */}
-            {user ? (
-              <div className="relative">
+            {/* Authenticated User Menu */}
+            {isAuthenticated ? (
+              <div className="relative" ref={userDropdownRef}>
                 <button
+                  type="button"
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center space-x-2 border border-slate-200 dark:border-slate-700 rounded-premium p-1.5 focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center space-x-2.5 p-1 rounded-full hover:ring-2 hover:ring-primary-500/30 transition-all cursor-pointer"
+                  aria-expanded={userDropdownOpen}
                 >
-                  <img src={user.avatarUrl} alt={user.fullName} className="w-8 h-8 rounded-premium object-cover" />
-                  <span className="text-sm font-medium hidden lg:inline-block text-slate-700 dark:text-slate-300 max-w-[120px] truncate">
-                    {user.fullName || 'My Account'}
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-slate-500" />
+                  <img
+                    src={avatarUrl}
+                    alt={displayName}
+                    className="w-9 h-9 rounded-full object-cover border border-slate-200 dark:border-slate-700 shadow-sm"
+                  />
+                  <ChevronDown className={`w-4 h-4 text-slate-400 hidden sm:block transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {userDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-10" onClick={() => setUserDropdownOpen(false)}></div>
-                    <div className="absolute right-0 mt-3 w-64 rounded-premium bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl z-20 py-2 text-slate-800 dark:text-slate-200">
-                      
-                      <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center space-x-3">
-                        <img src={user.avatarUrl} alt={user.fullName} className="w-10 h-10 rounded-premium object-cover" />
-                        <div>
-                          <p className="font-semibold text-sm leading-tight truncate max-w-[160px]">{user.fullName}</p>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 truncate max-w-[160px]">{user.email}</p>
-                        </div>
-                      </div>
-
-                      {/* Menu Options */}
-                      <div className="p-1">
-                        {isAdmin ? (
-                          <Link
-                            to="/admin/dashboard"
-                            onClick={() => setUserDropdownOpen(false)}
-                            className="flex items-center space-x-2 px-3 py-2 text-sm rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-                          >
-                            <LayoutDashboard className="w-4 h-4 text-slate-400" />
-                            <span>Admin Dashboard</span>
-                          </Link>
-                        ) : (
-                          <>
-                            <Link
-                              to="/dashboard"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-3 py-2 text-sm rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-                            >
-                              <LayoutDashboard className="w-4 h-4 text-slate-400" />
-                              <span>My Learning Dashboard</span>
-                            </Link>
-                            <Link
-                              to="/dashboard?tab=courses"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-3 py-2 text-sm rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-                            >
-                              <BookOpen className="w-4 h-4 text-slate-400" />
-                              <span>My Courses</span>
-                            </Link>
-                            <Link
-                              to="/dashboard?tab=certificates"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-3 py-2 text-sm rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-                            >
-                              <Award className="w-4 h-4 text-slate-400" />
-                              <span>My Certificates</span>
-                            </Link>
-                            <Link
-                              to="/dashboard?tab=settings"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-3 py-2 text-sm rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-                            >
-                              <Settings className="w-4 h-4 text-slate-400" />
-                              <span>Profile Settings</span>
-                            </Link>
-                          </>
-                        )}
-
-                        <div className="border-t border-slate-100 dark:border-slate-800 my-1"></div>
-
-                        <button
-                          onClick={() => {
-                            logout();
-                            setUserDropdownOpen(false);
-                            navigate('/');
-                          }}
-                          className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-premium transition-colors"
-                        >
-                          <LogOut className="w-4 h-4" />
-                          <span>Logout</span>
-                        </button>
-                      </div>
+                  <div className="absolute right-0 mt-2 w-60 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{displayName}</p>
+                      <p className="text-[11px] text-slate-400 truncate">{user?.email}</p>
                     </div>
-                  </>
+
+                    <div className="py-1">
+                      <Link
+                        to="/dashboard"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <LayoutDashboard className="w-4 h-4" />
+                        <span>Student Dashboard</span>
+                      </Link>
+
+                      <Link
+                        to="/dashboard?tab=learning"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <BookOpen className="w-4 h-4" />
+                        <span>My Learning</span>
+                      </Link>
+
+                      <Link
+                        to="/instructor"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <PlusCircle className="w-4 h-4 text-emerald-500" />
+                        <span>Instructor Studio</span>
+                      </Link>
+
+                      {isAdmin && (
+                        <Link
+                          to="/admin/dashboard"
+                          className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors"
+                        >
+                          <Shield className="w-4 h-4" />
+                          <span>Admin Control Panel</span>
+                        </Link>
+                      )}
+                    </div>
+
+                    <div className="pt-1 border-t border-slate-100 dark:border-slate-800">
+                      <button
+                        onClick={logout}
+                        className="w-full flex items-center space-x-2.5 px-4 py-2 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Sign Out</span>
+                      </button>
+                    </div>
+                  </div>
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-3">
-                <Link
-                  to="/login"
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-sm font-medium rounded-premium hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors"
-                >
-                  Log In
+              /* Guest Auth CTA */
+              <div className="hidden sm:flex items-center space-x-2">
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">Log In</Button>
                 </Link>
-                <Link
-                  to="/register"
-                  className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-premium transition-colors shadow-sm"
-                >
-                  Register
+                <Link to="/register">
+                  <Button size="sm">Register</Button>
                 </Link>
               </div>
             )}
-          </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-premium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
-            </button>
+            {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-premium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none"
+              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl xl:hidden cursor-pointer"
+              aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -289,119 +343,65 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* 5. Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-4 pt-4 pb-6 space-y-4 shadow-lg animate-fade-in">
+        <div className="xl:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-6 space-y-4 animate-in slide-in-from-top-4 duration-200">
           {/* Mobile Search */}
           <form onSubmit={handleSearchSubmit} className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Search courses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-800 dark:text-slate-200"
+              placeholder="Search courses..."
+              className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border rounded-xl text-xs"
             />
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
           </form>
 
-          {/* Navigation Links */}
-          <div className="flex flex-col space-y-3 font-medium text-slate-700 dark:text-slate-300">
-            <Link to="/courses" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary-600 transition-colors">
-              All Courses
+          {/* Links */}
+          <div className="flex flex-col space-y-1 text-sm font-semibold">
+            <Link to="/courses" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
+              Browse Courses
             </Link>
-            <Link to="/teachers" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary-600 transition-colors">
+            <Link to="/teachers" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
               Instructors
             </Link>
-            <Link to="/pricing" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary-600 transition-colors">
-              Pricing Plans
+            <Link to="/pricing" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
+              Membership Pricing
             </Link>
-            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary-600 transition-colors">
-              About Us
+            <Link to="/wishlist" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-between">
+              <span>Saved in Wishlist</span>
+              {wishlistCount > 0 && (
+                <span className="px-2 py-0.5 bg-rose-500 text-white rounded-full text-[10px] font-bold">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
-            <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary-600 transition-colors">
-              Contact Support
-            </Link>
-          </div>
-
-          <div className="border-t border-slate-100 dark:border-slate-800 my-2"></div>
-
-          {/* Actions */}
-          <div className="flex flex-col space-y-3">
-            <Link
-              to="/dashboard?tab=wishlist"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center space-x-2 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600"
-            >
-              <Heart className="w-5 h-5" />
-              <span>Wishlist ({wishlistItems.length})</span>
-            </Link>
-            <Link
-              to="/cart"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center space-x-2 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              <span>Cart ({cartItems.length})</span>
-            </Link>
-
-            {user ? (
+            {isAuthenticated && (
               <>
-                <div className="flex items-center space-x-3 py-2">
-                  <img src={user.avatarUrl} alt={user.fullName} className="w-10 h-10 rounded-premium object-cover" />
-                  <div>
-                    <p className="font-semibold text-sm">{user.fullName}</p>
-                    <p className="text-xs text-slate-500">{user.email}</p>
-                  </div>
-                </div>
-                {isAdmin ? (
-                  <Link
-                    to="/admin/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full text-center py-2 bg-slate-100 dark:bg-slate-800 rounded-premium font-medium text-sm text-slate-800 dark:text-slate-200 block"
-                  >
-                    Admin Dashboard
-                  </Link>
-                ) : (
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full text-center py-2 bg-slate-100 dark:bg-slate-800 rounded-premium font-medium text-sm text-slate-800 dark:text-slate-200 block"
-                  >
-                    Student Dashboard
-                  </Link>
-                )}
-                <button
-                  onClick={() => {
-                    logout();
-                    setMobileMenuOpen(false);
-                    navigate('/');
-                  }}
-                  className="w-full text-center py-2 border border-red-200 text-red-600 rounded-premium font-medium text-sm"
-                >
-                  Logout
-                </button>
+                <Link to="/dashboard" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
+                  Student Dashboard
+                </Link>
+                <Link to="/instructor" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-primary-600">
+                  Instructor Studio
+                </Link>
               </>
-            ) : (
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2 border border-slate-200 dark:border-slate-700 rounded-premium font-medium text-sm text-slate-700 dark:text-slate-200"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/register"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2 bg-primary-600 text-white rounded-premium font-medium text-sm"
-                >
-                  Register
-                </Link>
-              </div>
             )}
           </div>
+
+          {/* Mobile Auth Buttons */}
+          {!isAuthenticated && (
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <Link to="/login" className="w-full">
+                <Button variant="outline" size="sm" className="w-full">Log In</Button>
+              </Link>
+              <Link to="/register" className="w-full">
+                <Button size="sm" className="w-full">Register</Button>
+              </Link>
+            </div>
+          )}
         </div>
       )}
-    </nav>
+    </header>
   );
 };

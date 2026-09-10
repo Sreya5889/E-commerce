@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Eye, EyeOff, BookOpen, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
+import { Mail, Lock, AlertCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { Input } from '../../components/ui/Input';
+import { Button } from '../../components/ui/Button';
 
 export const Login = () => {
-  const { login, isAuthenticated, user } = useAuth();
+  const { login, isAuthenticated, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const toast = useToast();
 
   const [formData, setFormData] = useState({ email: '', password: '', rememberMe: false });
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -18,13 +21,14 @@ export const Login = () => {
 
   // Redirect if already logged in
   if (isAuthenticated) {
-    navigate(user?.role === 'admin' ? '/admin/dashboard' : '/dashboard');
+    navigate(isAdmin ? '/admin/dashboard' : '/dashboard');
     return null;
   }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -32,13 +36,14 @@ export const Login = () => {
     setLoading(true);
     setError('');
     try {
-      const loggedUser = await login(formData.email, formData.password);
+      await login(formData.email, formData.password);
       if (formData.rememberMe) {
         localStorage.setItem('edu_remember', formData.email);
       }
-      navigate(loggedUser?.role === 'admin' ? '/admin/dashboard' : from);
+      toast.success('Welcome back to EduAcademy!');
+      navigate(isAdmin ? '/admin/dashboard' : from);
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      setError(err.message || 'Invalid email or password. Please check credentials.');
     } finally {
       setLoading(false);
     }
@@ -49,121 +54,133 @@ export const Login = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-bgLight dark:bg-bgDark py-12 px-4">
-        <div className="w-full max-w-md space-y-8">
+      <div className="w-full min-h-[calc(100vh-80px)] flex flex-col justify-center items-center py-12 px-4 sm:px-6 bg-slate-50 dark:bg-slate-950">
+        <div className="w-full max-w-md space-y-6">
 
-          {/* Brand */}
+          {/* Brand Header */}
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-premium bg-gradient-to-tr from-primary-600 to-secondary-600 flex items-center justify-center mx-auto shadow-lg text-white font-extrabold text-2xl">
-              E
-            </div>
-            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Welcome back</h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Sign in to continue your learning journey</p>
+            <Link to="/" className="inline-flex items-center space-x-2 group">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary-600 to-indigo-600 flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-primary-500/25">
+                E
+              </div>
+            </Link>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              Welcome back
+            </h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Sign in to continue your personalized learning journey
+            </p>
           </div>
 
-          {/* Demo Credentials Box */}
-          <div className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 rounded-premium text-xs space-y-2">
-            <p className="font-bold text-blue-700 dark:text-blue-400">🔑 Demo Accounts (Mock Mode):</p>
-            <div className="grid grid-cols-2 gap-2">
-              <button onClick={fillDemoStudent} className="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors text-left">
-                <p className="font-bold text-primary-600">Student Login</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">student@eduacademy.com</p>
-              </button>
-              <button onClick={fillDemoAdmin} className="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors text-left">
-                <p className="font-bold text-secondary-600">Admin Login</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">admin@eduacademy.com</p>
-              </button>
+          {/* Dev-Only Demo Accounts Box */}
+          {import.meta.env.DEV && (
+            <div className="p-4 bg-primary-50/80 dark:bg-primary-950/30 border border-primary-100 dark:border-primary-900/50 rounded-2xl text-xs space-y-2.5 shadow-sm">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-primary-700 dark:text-primary-400 flex items-center space-x-1">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Demo Credentials (Dev Mode)</span>
+                </span>
+                <span className="text-[10px] font-mono text-primary-500 bg-primary-100/50 dark:bg-primary-900/50 px-1.5 py-0.5 rounded">
+                  auto-fill
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={fillDemoStudent}
+                  className="p-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-primary-500 text-left transition-colors"
+                >
+                  <p className="font-bold text-slate-800 dark:text-slate-200 text-xs">Student Account</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">student@eduacademy.com</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={fillDemoAdmin}
+                  className="p-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-indigo-500 text-left transition-colors"
+                >
+                  <p className="font-bold text-indigo-600 dark:text-indigo-400 text-xs">Admin Portal</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">admin@eduacademy.com</p>
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Error Alert */}
+          {/* Error Banner */}
           {error && (
-            <div className="p-4 bg-red-50 dark:bg-red-950/20 text-red-700 dark:text-red-400 border border-red-200 rounded-premium flex items-center space-x-2 text-xs">
+            <div className="p-4 bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 rounded-2xl flex items-center space-x-2 text-xs">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* Form Card */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-8 shadow-premium space-y-5">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-slate-900 dark:text-slate-100 transition-all"
-                />
-              </div>
+          {/* Login Card */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 dark:shadow-none space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              
+              <Input
+                label="Email Address"
+                name="email"
+                type="email"
+                required
+                icon={Mail}
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
 
-              <div className="space-y-1.5">
-                <div className="flex justify-between items-center">
-                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Password</label>
-                  <a href="#" className="text-xs text-primary-600 dark:text-primary-400 hover:underline">Forgot Password?</a>
-                </div>
-                <div className="relative">
+              <Input
+                label="Password"
+                name="password"
+                type="password"
+                required
+                icon={Lock}
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              <div className="flex items-center justify-between text-xs pt-1">
+                <label className="flex items-center space-x-2 cursor-pointer text-slate-600 dark:text-slate-400 select-none">
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    value={formData.password}
+                    type="checkbox"
+                    name="rememberMe"
+                    checked={formData.rememberMe}
                     onChange={handleChange}
-                    required
-                    placeholder="Enter your password"
-                    className="w-full px-4 py-3 pr-11 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-slate-900 dark:text-slate-100 transition-all"
+                    className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
+                  <span>Remember me</span>
+                </label>
+
+                <Link
+                  to="/forgot-password"
+                  className="font-bold text-primary-600 dark:text-primary-400 hover:underline"
+                >
+                  Forgot password?
+                </Link>
               </div>
 
-              <label className="flex items-center space-x-2.5 text-xs text-slate-600 dark:text-slate-400 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="rememberMe"
-                  checked={formData.rememberMe}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded text-primary-600 border-slate-300 focus:ring-primary-500"
-                />
-                <span>Keep me signed in for 30 days</span>
-              </label>
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  size="lg"
+                  loading={loading}
+                  disabled={loading || !formData.email || !formData.password}
+                  className="w-full font-bold shadow-md shadow-primary-500/25"
+                >
+                  Sign In
+                </Button>
+              </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm rounded-premium shadow-md shadow-primary-500/15 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {loading ? (
-                  <span className="flex items-center justify-center space-x-2">
-                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin inline-block"></span>
-                    <span>Signing in...</span>
-                  </span>
-                ) : 'Sign In to EduAcademy'}
-              </button>
             </form>
 
-            <div className="text-center text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
-              Don&apos;t have an account?{' '}
-              <Link to="/register" className="text-primary-600 dark:text-primary-400 font-semibold hover:underline">
-                Create a free account
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
+              Don't have an account yet?{' '}
+              <Link to="/register" className="font-bold text-primary-600 dark:text-primary-400 hover:underline">
+                Create free account
               </Link>
             </div>
           </div>
 
-          <p className="text-center text-[10px] text-slate-400 dark:text-slate-500">
-            By signing in, you agree to our{' '}
-            <a href="#" className="underline">Terms of Service</a>{' '}
-            and{' '}
-            <a href="#" className="underline">Privacy Policy</a>.
-          </p>
         </div>
       </div>
     </PageTransition>

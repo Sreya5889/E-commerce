@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageTransition } from '../../components/layout/PageTransition';
 import { Mail, Phone, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
-import { db } from '../../services/db';
+import { contactService } from '../../services/contact.service';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -20,7 +20,7 @@ export const Contact = () => {
     setSuccess(false);
     
     try {
-      await db.submitContactForm(formData.name, formData.email, formData.subject, formData.message);
+      await contactService.submitContactForm(formData.name, formData.email, formData.subject, formData.message);
       setSuccess(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (err) {

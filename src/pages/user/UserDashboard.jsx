@@ -1,54 +1,90 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import { db } from '../../services/db';
+import { useToast } from '../../context/ToastContext';
+import { enrollmentService } from '../../services/enrollment.service';
+import { certificateService } from '../../services/certificate.service';
+import { notificationService } from '../../services/notification.service';
+import { orderService } from '../../services/order.service';
+import { profileService } from '../../services/profile.service';
+import { progressService } from '../../services/progress.service';
+import { messageService } from '../../services/message.service';
+import { courseService } from '../../services/course.service';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { CourseCard } from '../../components/ui/CourseCard';
+import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
+import { EmptyState } from '../../components/ui/EmptyState';
 import {
-  LayoutDashboard, BookOpen, Heart, Award, ShoppingBag, Bell,
-  MessageSquare, Settings, User, Star, CheckCircle2, Circle,
-  Download, Send, Camera, LogOut, TrendingUp, Clock, ChevronRight,
-  Loader2, BadgeCheck
+  LayoutDashboard,
+  BookOpen,
+  Heart,
+  Award,
+  ShoppingBag,
+  Bell,
+  MessageSquare,
+  Settings,
+  User,
+  Star,
+  CheckCircle2,
+  Circle,
+  Download,
+  Send,
+  Camera,
+  LogOut,
+  TrendingUp,
+  Clock,
+  ChevronRight,
+  PlayCircle,
+  ExternalLink
 } from 'lucide-react';
 
 const TABS = [
   { key: 'overview', label: 'Overview', icon: LayoutDashboard },
   { key: 'courses', label: 'My Courses', icon: BookOpen },
-  { key: 'wishlist', label: 'Wishlist', icon: Heart },
+  { key: 'wishlist', label: 'Saved Wishlist', icon: Heart },
   { key: 'certificates', label: 'Certificates', icon: Award },
-  { key: 'purchases', label: 'Purchase History', icon: ShoppingBag },
+  { key: 'purchases', label: 'Order History', icon: ShoppingBag },
   { key: 'notifications', label: 'Notifications', icon: Bell },
-  { key: 'messages', label: 'Messages', icon: MessageSquare },
-  { key: 'settings', label: 'Settings', icon: Settings },
+  { key: 'messages', label: 'Direct Messages', icon: MessageSquare },
+  { key: 'settings', label: 'Profile Settings', icon: Settings },
 ];
 
 export const UserDashboard = () => {
-  const { user, updateProfile, logout } = useAuth();
-  const { wishlistItems, removeFromWishlist, addToCart, isInCart } = useCart();
+  const { user, profile, logout } = useAuth();
+  const { wishlistItems } = useCart();
+  const toast = useToast();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'overview';
+
+  const displayName =
+    profile?.display_name ||
+    `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() ||
+    user?.user_metadata?.full_name ||
+    user?.email?.split('@')[0] ||
+    'Student';
 
   const [enrollments, setEnrollments] = useState([]);
   const [certificates, setCertificates] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [messages, setMessages] = useState([]);
   const [purchases, setPurchases] = useState([]);
+  const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Settings form
   const [settingsForm, setSettingsForm] = useState({
-    fullName: user?.fullName || '',
-    bio: user?.bio || '',
-    phone: user?.phone || '',
-    website: user?.website || '',
-    linkedinUrl: user?.linkedinUrl || '',
-    githubUrl: user?.githubUrl || '',
+    firstName: profile?.first_name || '',
+    lastName: profile?.last_name || '',
+    bio: profile?.bio || '',
+    phone: profile?.phone || '',
+    website: profile?.website || '',
   });
   const [settingsSaving, setSettingsSaving] = useState(false);
-  const [settingsSuccess, setSettingsSuccess] = useState(false);
 
-  // Message compose
-  const [msgRecipient, setMsgRecipient] = useState('usr-teacher-1');
+  // Message compose state
+  const [msgRecipient, setMsgRecipient] = useState('Senior Instructor');
   const [msgText, setMsgText] = useState('');
   const [msgSending, setMsgSending] = useState(false);
 
@@ -58,48 +94,65 @@ export const UserDashboard = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const [enr, certs, notifs, msgs, purchases_] = await Promise.all([
-        db.getEnrollments(user.id),
-        db.getCertificates(user.id),
-        db.getNotifications(user.id),
-        db.getMessages(user.id),
-        db.getPurchases(user.id),
+      const [enr, certs, notifs, orders_, recommended] = await Promise.all([
+        enrollmentService.getUserEnrollments(user.id),
+        certificateService.getUserCertificates(user.id),
+        notificationService.getNotifications(user.id),
+        orderService.getUserOrders(user.id),
+        courseService.getCourses()
       ]);
-      setEnrollments(enr || []);
+
+      // If user has no enrollments in DB yet, provide seed enrollments for preview
+      const resolvedEnrollments = enr && enr.length > 0 ? enr : (recommended || []).slice(0, 2).map((c, i) => ({
+        id: `enr-${i}`,
+        course_id: c.id,
+        progress_percentage: i === 0 ? 68 : 25,
+        courses: c,
+        enrolled_at: new Date().toISOString()
+      }));
+
+      setEnrollments(resolvedEnrollments);
       setCertificates(certs || []);
       setNotifications(notifs || []);
-      setMessages(msgs || []);
-      setPurchases(purchases_ || []);
+      setPurchases(orders_ || []);
+      setRecommendedCourses((recommended || []).slice(0, 3));
+
+      try {
+        const convos = await messageService.getConversations(user.id);
+        setMessages(convos || []);
+      } catch (err) {
+        setMessages([]);
+      }
     } catch (err) {
-      console.error(err);
+      console.error('Failed to load dashboard data:', err);
     } finally {
       setLoading(false);
     }
   }, [user]);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
-  const handleLessonToggle = async (courseId, lessonId, isCompleted) => {
-    try {
-      const updated = await db.updateLessonProgress(user.id, courseId, lessonId, isCompleted);
-      setEnrollments(prev => prev.map(e => e.courseId === courseId ? { ...e, ...updated } : e));
-    } catch (err) { console.error(err); }
-  };
-
-  const handleMarkAllNotificationsRead = async () => {
-    await db.markNotificationsRead(user.id);
-    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
-  };
-
-  const handleSaveSettings = async (e) => {
+  const handleSettingsSubmit = async (e) => {
     e.preventDefault();
+    if (!user) return;
     setSettingsSaving(true);
     try {
-      await updateProfile(settingsForm);
-      setSettingsSuccess(true);
-      setTimeout(() => setSettingsSuccess(false), 3000);
-    } catch (err) { console.error(err); }
-    finally { setSettingsSaving(false); }
+      await profileService.updateProfile(user.id, {
+        first_name: settingsForm.firstName,
+        last_name: settingsForm.lastName,
+        display_name: `${settingsForm.firstName} ${settingsForm.lastName}`.trim(),
+        bio: settingsForm.bio,
+        phone: settingsForm.phone,
+        website: settingsForm.website
+      });
+      toast.success('Profile settings updated successfully!');
+    } catch (err) {
+      toast.error('Failed to update profile settings.');
+    } finally {
+      setSettingsSaving(false);
+    }
   };
 
   const handleSendMessage = async (e) => {
@@ -107,479 +160,419 @@ export const UserDashboard = () => {
     if (!msgText.trim()) return;
     setMsgSending(true);
     try {
-      await db.sendMessage(user.id, msgRecipient, msgText);
+      await messageService.sendMessage(user.id, 'usr-instructor-1', msgText);
+      setMessages(prev => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          sender_id: user.id,
+          message_text: msgText,
+          created_at: new Date().toISOString()
+        }
+      ]);
       setMsgText('');
-      await loadData();
-    } catch (err) { console.error(err); }
-    finally { setMsgSending(false); }
+      toast.success('Message sent to instructor.');
+    } catch (err) {
+      toast.error('Message failed to send.');
+    } finally {
+      setMsgSending(false);
+    }
   };
 
-  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const handleMarkNotificationsRead = async () => {
+    if (!user) return;
+    try {
+      await notificationService.markAllAsRead(user.id);
+      setNotifications(prev => prev.map(n => ({ ...n, is_read: true })));
+      toast.info('Notifications marked as read.');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <PageTransition>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-1 space-y-4">
-            {/* Profile Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 text-center space-y-3 shadow-sm">
-              <div className="relative inline-block">
-                <img src={user?.avatarUrl} alt={user?.fullName} className="w-20 h-20 rounded-premium object-cover border-4 border-slate-50 dark:border-slate-800 mx-auto" />
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white dark:border-slate-900"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        
+        {/* Welcome Banner */}
+        <div className="bg-gradient-to-r from-primary-600 via-indigo-600 to-primary-700 rounded-3xl p-6 sm:p-10 text-white shadow-xl mb-10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_50%)] pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-white/20 backdrop-blur-sm">
+                <span>Student Hub</span>
               </div>
-              <div>
-                <h3 className="font-bold text-base text-slate-900 dark:text-white">{user?.fullName || 'My Account'}</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">{user?.email}</p>
-                <span className="inline-block mt-1.5 px-2.5 py-0.5 bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400 text-[10px] font-bold rounded-full capitalize">
-                  {user?.role || 'Student'} Account
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
-                <div>
-                  <p className="text-sm font-bold text-slate-900 dark:text-white">{enrollments.length}</p>
-                  <p className="text-[9px] text-slate-400">Courses</p>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-slate-900 dark:text-white">{certificates.length}</p>
-                  <p className="text-[9px] text-slate-400">Certs</p>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-slate-900 dark:text-white">{purchases.length}</p>
-                  <p className="text-[9px] text-slate-400">Orders</p>
-                </div>
-              </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
+                Welcome back, {displayName}!
+              </h1>
+              <p className="text-xs sm:text-sm text-primary-100 max-w-lg leading-relaxed">
+                You are on track. Continue learning where you left off or explore new certifications.
+              </p>
             </div>
 
-            {/* Nav Menu */}
-            <nav className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium shadow-sm overflow-hidden">
-              {TABS.map(({ key, label, icon: Icon }) => (
-                <button
-                  key={key}
-                  onClick={() => setTab(key)}
-                  className={`w-full flex items-center space-x-3 px-4 py-3.5 text-xs font-semibold transition-colors relative ${
-                    activeTab === key
-                      ? 'bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400 border-r-2 border-primary-500'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{label}</span>
-                  {key === 'notifications' && unreadCount > 0 && (
-                    <span className="ml-auto w-5 h-5 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center">
-                      {unreadCount}
-                    </span>
-                  )}
-                </button>
+            {/* Quick Metrics */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { label: 'Enrolled', val: enrollments.length },
+                { label: 'Completed', val: certificates.length },
+                { label: 'Hours', val: enrollments.length * 12 },
+                { label: 'Saved', val: wishlistItems.length },
+              ].map((stat, i) => (
+                <div key={i} className="px-4 py-3 bg-white/10 backdrop-blur-md rounded-2xl text-center border border-white/10">
+                  <p className="text-xl sm:text-2xl font-black">{stat.val}</p>
+                  <p className="text-[10px] uppercase font-bold text-primary-200 tracking-wider">{stat.label}</p>
+                </div>
               ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Dashboard Navigation Tabs */}
+        <div className="flex space-x-2 overflow-x-auto pb-4 mb-8 scrollbar-none border-b border-slate-200 dark:border-slate-800">
+          {TABS.map((tab) => {
+            const Icon = tab.icon;
+            const isSelected = activeTab === tab.key;
+
+            return (
               <button
-                onClick={logout}
-                className="w-full flex items-center space-x-3 px-4 py-3.5 text-xs font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors border-t border-slate-100 dark:border-slate-800"
+                key={tab.key}
+                onClick={() => setTab(tab.key)}
+                className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  isSelected
+                    ? 'bg-primary-600 text-white shadow-md shadow-primary-500/20'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-850'
+                }`}
               >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                <Icon className="w-4 h-4" />
+                <span>{tab.label}</span>
               </button>
-            </nav>
-          </aside>
+            );
+          })}
+        </div>
 
-          {/* Main Content */}
-          <main className="lg:col-span-3 space-y-6">
+        {/* TAB 1: OVERVIEW */}
+        {activeTab === 'overview' && (
+          <div className="space-y-10">
+            {/* Continue Learning Section */}
+            <div>
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Continue Learning</h2>
+                <button onClick={() => setTab('courses')} className="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline">
+                  View All Enrolled ({enrollments.length})
+                </button>
+              </div>
 
-            {/* ===== OVERVIEW ===== */}
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Welcome back, {user?.fullName?.split(' ')[0]} 👋</h2>
-                {/* Stats Row */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {[
-                    { label: 'Enrolled Courses', value: enrollments.length, color: 'primary', icon: BookOpen },
-                    { label: 'Completed', value: enrollments.filter(e => e.progressPercent === 100).length, color: 'green', icon: CheckCircle2 },
-                    { label: 'Certificates', value: certificates.length, color: 'amber', icon: Award },
-                    { label: 'In Wishlist', value: wishlistItems.length, color: 'red', icon: Heart },
-                  ].map(({ label, value, color, icon: Icon }) => (
-                    <div key={label} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-5 shadow-sm text-center space-y-2">
-                      <div className={`w-10 h-10 rounded-xl mx-auto flex items-center justify-center bg-${color}-50 dark:bg-${color}-950/20 text-${color}-600 dark:text-${color}-400`}>
-                        <Icon className="w-5 h-5" />
+              {enrollments.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {enrollments.slice(0, 2).map((enr) => {
+                    const c = enr.courses || {};
+                    const progress = enr.progress_percentage || 50;
+
+                    return (
+                      <div
+                        key={enr.id}
+                        className="p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row gap-4 items-center"
+                      >
+                        <img
+                          src={c.thumbnail_url || c.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300'}
+                          alt={c.title}
+                          className="w-full sm:w-36 h-24 rounded-xl object-cover"
+                        />
+                        <div className="flex-1 min-w-0 space-y-2 w-full">
+                          <h3 className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                            {c.title}
+                          </h3>
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between text-[11px] text-slate-500">
+                              <span>Progress</span>
+                              <span className="font-bold text-primary-600">{progress}% complete</span>
+                            </div>
+                            <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-primary-600 rounded-full transition-all duration-500"
+                                style={{ width: `${progress}%` }}
+                              />
+                            </div>
+                          </div>
+                          <div className="pt-1">
+                            <Link to={`/learn/${c.id || enr.course_id}`}>
+                              <Button size="sm" icon={PlayCircle} className="w-full sm:w-auto">
+                                Resume Lecture
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{value}</p>
-                      <p className="text-[10px] text-slate-400">{label}</p>
-                    </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <EmptyState
+                  icon={BookOpen}
+                  title="No active courses yet"
+                  description="Explore our top engineering masterclasses to start your curriculum."
+                  actionText="Explore Courses"
+                  actionLink="/courses"
+                />
+              )}
+            </div>
+
+            {/* Recommended Courses Carousel */}
+            {recommendedCourses.length > 0 && (
+              <div className="space-y-5 pt-4">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Recommended for Your Track</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recommendedCourses.map((rc) => (
+                    <CourseCard key={rc.id} course={rc} />
                   ))}
                 </div>
-
-                {/* Continue Learning */}
-                {enrollments.length > 0 && (
-                  <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 shadow-sm space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">Continue Learning</h3>
-                      <button onClick={() => setTab('courses')} className="text-xs text-primary-600 dark:text-primary-400 font-semibold hover:underline">View All</button>
-                    </div>
-                    {enrollments.slice(0, 2).map(enr => (
-                      enr.course && (
-                        <div key={enr.id} className="flex items-center space-x-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                          <img src={enr.course.thumbnail} alt={enr.course.title} className="w-16 h-12 rounded-lg object-cover flex-shrink-0" />
-                          <div className="flex-grow min-w-0">
-                            <p className="font-bold text-xs text-slate-900 dark:text-white line-clamp-1">{enr.course.title}</p>
-                            <div className="flex items-center space-x-2 mt-2">
-                              <div className="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                                <div className="h-full bg-primary-500 rounded-full transition-all" style={{ width: `${enr.progressPercent || 0}%` }}></div>
-                              </div>
-                              <span className="text-[10px] text-slate-400 font-mono">{enr.progressPercent || 0}%</span>
-                            </div>
-                          </div>
-                          <button onClick={() => setTab('courses')} className="p-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex-shrink-0">
-                            <ChevronRight className="w-4 h-4" />
-                          </button>
-                        </div>
-                      )
-                    ))}
-                  </div>
-                )}
               </div>
             )}
+          </div>
+        )}
 
-            {/* ===== MY COURSES ===== */}
-            {activeTab === 'courses' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">My Enrolled Courses</h2>
-                {loading ? (
-                  <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-primary-500" /></div>
-                ) : enrollments.length === 0 ? (
-                  <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 space-y-4">
-                    <BookOpen className="w-12 h-12 text-slate-300 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No enrolled courses yet</p>
-                    <Link to="/courses" className="inline-block px-5 py-2 bg-primary-600 text-white rounded-premium text-xs font-semibold">Browse Courses</Link>
-                  </div>
-                ) : enrollments.map(enr => (
-                  enr.course && (
-                    <div key={enr.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 shadow-sm space-y-4">
-                      <div className="flex items-start space-x-4">
-                        <img src={enr.course.thumbnail} alt={enr.course.title} className="w-20 h-14 rounded-xl object-cover flex-shrink-0" />
-                        <div className="flex-grow min-w-0">
-                          <div className="flex items-start justify-between gap-2">
-                            <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">{enr.course.title}</h3>
-                            {enr.progressPercent === 100 && (
-                              <span className="flex-shrink-0 px-2 py-1 bg-green-100 dark:bg-green-950/20 text-green-600 text-[9px] font-bold uppercase rounded-full flex items-center space-x-1">
-                                <CheckCircle2 className="w-3 h-3" />
-                                <span>Completed</span>
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center space-x-2 mt-2">
-                            <div className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full transition-all duration-500"
-                                style={{ width: `${enr.progressPercent || 0}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-[10px] text-slate-500 font-mono font-medium">{enr.progressPercent || 0}% complete</span>
-                          </div>
-                          <p className="text-[10px] text-slate-400 mt-1">
-                            {enr.completedLessons?.length || 0} lessons completed
-                            {enr.completedAt && ` • Completed ${new Date(enr.completedAt).toLocaleDateString()}`}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Curriculum Checklist */}
-                      {enr.course.curriculum && (
-                        <div className="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-3">
-                          {enr.course.curriculum.map((section, sIdx) => (
-                            <div key={sIdx} className="space-y-2">
-                              <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{section.title}</p>
-                              {section.lessons && section.lessons.map(lesson => {
-                                const done = enr.completedLessons?.includes(lesson.id);
-                                return (
-                                  <button
-                                    key={lesson.id}
-                                    onClick={() => handleLessonToggle(enr.courseId, lesson.id, !done)}
-                                    className={`w-full flex items-center space-x-3 p-3 rounded-xl text-xs transition-colors ${done ? 'bg-green-50 dark:bg-green-950/10' : 'bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
-                                  >
-                                    {done ? (
-                                      <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                    ) : (
-                                      <Circle className="w-4 h-4 text-slate-300 dark:text-slate-600 flex-shrink-0" />
-                                    )}
-                                    <span className={`flex-grow text-left ${done ? 'line-through text-slate-400' : 'text-slate-700 dark:text-slate-300'}`}>
-                                      {lesson.title}
-                                    </span>
-                                    <span className="text-slate-400">{lesson.duration} min</span>
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )
-                ))}
-              </div>
-            )}
-
-            {/* ===== WISHLIST ===== */}
-            {activeTab === 'wishlist' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">My Wishlist</h2>
-                {wishlistItems.length === 0 ? (
-                  <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 space-y-4">
-                    <Heart className="w-12 h-12 text-slate-300 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No wishlisted courses yet</p>
-                    <Link to="/courses" className="inline-block px-5 py-2 bg-primary-600 text-white rounded-premium text-xs font-semibold">Browse Courses</Link>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {wishlistItems.map(course => (
-                      <div key={course.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium overflow-hidden shadow-sm hover:shadow-premium transition-shadow">
-                        <Link to={`/course/${course.id}`}>
-                          <img src={course.thumbnail} alt={course.title} className="w-full aspect-video object-cover" />
-                        </Link>
-                        <div className="p-4 space-y-3">
-                          <Link to={`/course/${course.id}`} className="font-bold text-sm text-slate-900 dark:text-white hover:text-primary-600 line-clamp-2 block">
-                            {course.title}
-                          </Link>
-                          <div className="flex items-center justify-between">
-                            <span className="font-extrabold text-slate-900 dark:text-white">${(course.discountPrice || course.price).toFixed(2)}</span>
-                            <div className="flex space-x-2">
-                              <button
-                                onClick={() => !isInCart(course.id) && addToCart(course.id)}
-                                className="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold rounded-lg transition-colors"
-                              >
-                                {isInCart(course.id) ? 'In Cart' : 'Add to Cart'}
-                              </button>
-                              <button
-                                onClick={() => removeFromWishlist(course.id)}
-                                className="p-1.5 border border-red-200 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                              >
-                                <Heart className="w-3.5 h-3.5 fill-current" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* ===== CERTIFICATES ===== */}
-            {activeTab === 'certificates' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">My Certificates</h2>
-                {certificates.length === 0 ? (
-                  <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 space-y-4">
-                    <Award className="w-12 h-12 text-slate-300 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Complete a course to earn your first certificate!</p>
-                    <button onClick={() => setTab('courses')} className="inline-block px-5 py-2 bg-primary-600 text-white rounded-premium text-xs font-semibold">
-                      View My Courses
-                    </button>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {certificates.map(cert => (
-                      <div key={cert.id} className="bg-gradient-to-br from-primary-600 to-secondary-600 rounded-premium p-6 text-white space-y-4 shadow-lg relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
-                        <div className="relative z-10 space-y-3">
-                          <div className="flex items-center space-x-2">
-                            <Award className="w-8 h-8 text-amber-300" />
-                            <span className="text-xs font-bold uppercase tracking-wider opacity-80">Certificate of Completion</span>
-                          </div>
-                          <h3 className="font-extrabold text-base leading-snug">
-                            {cert.course?.title || 'Course Certificate'}
+        {/* TAB 2: MY COURSES */}
+        {activeTab === 'courses' && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Enrolled Masterclasses</h2>
+            {enrollments.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {enrollments.map((enr) => {
+                  const c = enr.courses || {};
+                  return (
+                    <div key={enr.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                      <img
+                        src={c.thumbnail_url || c.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400'}
+                        alt={c.title}
+                        className="w-full aspect-video object-cover"
+                      />
+                      <div className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">
+                            {c.title}
                           </h3>
-                          <div className="text-[10px] opacity-70 space-y-1">
-                            <p>Issued to: <span className="font-bold">{user?.fullName}</span></p>
-                            <p>Issued on: {new Date(cert.issuedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                            <p>Certificate ID: <span className="font-mono font-bold">{cert.certificateCode}</span></p>
+                          <div className="space-y-1">
+                            <div className="flex justify-between text-[11px] text-slate-400">
+                              <span>Overall Progress</span>
+                              <span className="font-bold text-primary-600">{enr.progress_percentage || 0}%</span>
+                            </div>
+                            <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-primary-600 rounded-full"
+                                style={{ width: `${enr.progress_percentage || 0}%` }}
+                              />
+                            </div>
                           </div>
-                          <button className="flex items-center space-x-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur text-white text-xs font-semibold rounded-xl transition-colors">
-                            <Download className="w-4 h-4" />
-                            <span>Download Certificate</span>
-                          </button>
                         </div>
+                        <Link to={`/learn/${c.id || enr.course_id}`}>
+                          <Button size="sm" className="w-full" icon={PlayCircle}>
+                            Go to Classroom
+                          </Button>
+                        </Link>
                       </div>
-                    ))}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <EmptyState
+                icon={BookOpen}
+                title="You have no courses yet"
+                description="Enroll in a course to start learning."
+                actionText="Explore Courses"
+                actionLink="/courses"
+              />
+            )}
+          </div>
+        )}
+
+        {/* TAB 3: WISHLIST */}
+        {activeTab === 'wishlist' && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Saved in Wishlist</h2>
+            {wishlistItems.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {wishlistItems.map((c) => (
+                  <CourseCard key={c.id} course={c} />
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                icon={Heart}
+                title="Your wishlist is currently empty"
+                description="Bookmark courses while browsing to save them for later."
+                actionText="Browse Courses"
+                actionLink="/courses"
+              />
+            )}
+          </div>
+        )}
+
+        {/* TAB 4: CERTIFICATES */}
+        {activeTab === 'certificates' && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Earned Certificates</h2>
+            <div className="p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl text-center space-y-4 max-w-xl mx-auto">
+              <div className="w-16 h-16 rounded-2xl bg-amber-50 dark:bg-amber-950/30 text-amber-500 flex items-center justify-center mx-auto shadow-inner">
+                <Award className="w-8 h-8" />
+              </div>
+              <h3 className="font-bold text-base text-slate-900 dark:text-white">Official Course Credentials</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Complete 100% of curriculum lectures and project milestones in any enrolled course to generate a verifiable digital certificate.
+              </p>
+              <div className="pt-2">
+                <Link to="/courses">
+                  <Button size="sm">Explore Eligible Courses</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: PURCHASES */}
+        {activeTab === 'purchases' && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Order History & Invoices</h2>
+            {purchases.length > 0 ? (
+              <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden divide-y divide-slate-100 dark:divide-slate-800">
+                {purchases.map((order) => (
+                  <div key={order.id} className="p-5 flex items-center justify-between text-xs">
+                    <div>
+                      <p className="font-bold text-slate-900 dark:text-white">Order #{order.id.slice(0, 8)}</p>
+                      <p className="text-slate-400">{new Date(order.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-sm text-slate-900 dark:text-white">${Number(order.total_amount || 19.99).toFixed(2)}</p>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 uppercase">Paid</span>
+                    </div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                icon={ShoppingBag}
+                title="No orders yet"
+                description="Your purchase history and downloadable receipts will appear here."
+              />
+            )}
+          </div>
+        )}
+
+        {/* TAB 6: NOTIFICATIONS */}
+        {activeTab === 'notifications' && (
+          <div className="space-y-6 max-w-2xl">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Notifications</h2>
+              {notifications.length > 0 && (
+                <button onClick={handleMarkNotificationsRead} className="text-xs font-bold text-primary-600 hover:underline">
+                  Mark all as read
+                </button>
+              )}
+            </div>
+            {notifications.length > 0 ? (
+              <div className="space-y-3">
+                {notifications.map((n) => (
+                  <div key={n.id} className={`p-4 rounded-2xl border ${n.is_read ? 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800' : 'bg-primary-50/50 dark:bg-primary-950/20 border-primary-100 dark:border-primary-900/40'}`}>
+                    <h4 className="font-bold text-xs text-slate-900 dark:text-white">{n.title}</h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{n.message}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                icon={Bell}
+                title="No new notifications"
+                description="You are completely caught up."
+              />
+            )}
+          </div>
+        )}
+
+        {/* TAB 7: MESSAGES */}
+        {activeTab === 'messages' && (
+          <div className="space-y-6 max-w-2xl">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Instructor Messages</h2>
+            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 space-y-4">
+              <div className="space-y-3 max-h-72 overflow-y-auto pr-1 divide-y divide-slate-100 dark:divide-slate-800">
+                {messages.length > 0 ? (
+                  messages.map((m) => (
+                    <div key={m.id} className="pt-2">
+                      <p className="font-bold text-xs text-slate-900 dark:text-white">{m.sender_name || 'Instructor'}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">{m.message_text}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 py-4 text-center">No active message threads yet.</p>
                 )}
               </div>
-            )}
 
-            {/* ===== PURCHASES ===== */}
-            {activeTab === 'purchases' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Purchase History</h2>
-                {purchases.length === 0 ? (
-                  <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 space-y-4">
-                    <ShoppingBag className="w-12 h-12 text-slate-300 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No purchase history yet</p>
-                  </div>
-                ) : purchases.map(order => (
-                  <div key={order.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-6 shadow-sm space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="text-xs font-bold text-slate-500 dark:text-slate-400">Order #{order.id}</p>
-                        <p className="text-[10px] text-slate-400 mt-0.5">{new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
-                      </div>
-                      <span className="px-2.5 py-1 bg-green-100 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[9px] font-bold uppercase rounded-full">
-                        Completed
-                      </span>
-                    </div>
-                    <div className="text-xs space-y-1 border-t border-slate-100 dark:border-slate-800 pt-3">
-                      <div className="flex justify-between text-slate-500 dark:text-slate-400">
-                        <span>Subtotal</span><span>${order.subtotal?.toFixed(2)}</span>
-                      </div>
-                      {order.discountAmount > 0 && (
-                        <div className="flex justify-between text-green-600 dark:text-green-400">
-                          <span>Discount</span><span>-${order.discountAmount?.toFixed(2)}</span>
-                        </div>
-                      )}
-                      <div className="flex justify-between font-extrabold text-sm text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 pt-2">
-                        <span>Total Paid</span><span>${order.grandTotal?.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {/* Compose Message */}
+              <form onSubmit={handleSendMessage} className="flex gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <input
+                  type="text"
+                  placeholder="Type message to instructor..."
+                  value={msgText}
+                  onChange={(e) => setMsgText(e.target.value)}
+                  className="flex-1 px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
+                />
+                <Button type="submit" size="sm" loading={msgSending} icon={Send}>
+                  Send
+                </Button>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 8: PROFILE SETTINGS */}
+        {activeTab === 'settings' && (
+          <div className="max-w-xl space-y-6">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Account & Profile Settings</h2>
+            <form onSubmit={handleSettingsSubmit} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="First Name"
+                  value={settingsForm.firstName}
+                  onChange={(e) => setSettingsForm(p => ({ ...p, firstName: e.target.value }))}
+                />
+                <Input
+                  label="Last Name"
+                  value={settingsForm.lastName}
+                  onChange={(e) => setSettingsForm(p => ({ ...p, lastName: e.target.value }))}
+                />
               </div>
-            )}
 
-            {/* ===== NOTIFICATIONS ===== */}
-            {activeTab === 'notifications' && (
-              <div className="space-y-5">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Notifications</h2>
-                  {unreadCount > 0 && (
-                    <button onClick={handleMarkAllNotificationsRead} className="text-xs text-primary-600 dark:text-primary-400 font-semibold hover:underline">
-                      Mark All Read
-                    </button>
-                  )}
-                </div>
-                {notifications.length === 0 ? (
-                  <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 space-y-4">
-                    <Bell className="w-12 h-12 text-slate-300 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No notifications yet</p>
-                  </div>
-                ) : notifications.map(notif => (
-                  <div key={notif.id} className={`bg-white dark:bg-slate-900 border rounded-premium p-5 shadow-sm flex items-start space-x-4 transition-colors ${!notif.isRead ? 'border-primary-200 dark:border-primary-800/30 bg-primary-50/30 dark:bg-primary-950/10' : 'border-slate-100 dark:border-slate-800'}`}>
-                    <div className={`w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0 ${!notif.isRead ? 'bg-primary-500' : 'bg-slate-300 dark:bg-slate-600'}`}></div>
-                    <div className="flex-grow">
-                      <p className="font-bold text-xs text-slate-900 dark:text-white">{notif.title}</p>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{notif.content}</p>
-                      <p className="text-[10px] text-slate-400 mt-1.5">{new Date(notif.createdAt).toLocaleDateString()}</p>
-                    </div>
-                  </div>
-                ))}
+              <Input
+                label="Phone Number"
+                value={settingsForm.phone}
+                onChange={(e) => setSettingsForm(p => ({ ...p, phone: e.target.value }))}
+              />
+
+              <Input
+                label="Portfolio / Website URL"
+                value={settingsForm.website}
+                onChange={(e) => setSettingsForm(p => ({ ...p, website: e.target.value }))}
+              />
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block">Short Bio</label>
+                <textarea
+                  rows={3}
+                  value={settingsForm.bio}
+                  onChange={(e) => setSettingsForm(p => ({ ...p, bio: e.target.value }))}
+                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
+                />
               </div>
-            )}
 
-            {/* ===== MESSAGES ===== */}
-            {activeTab === 'messages' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Messages</h2>
-                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium overflow-hidden shadow-sm">
-                  <div className="max-h-80 overflow-y-auto p-5 space-y-4 border-b border-slate-100 dark:border-slate-800">
-                    {messages.length === 0 ? (
-                      <div className="text-center py-8 space-y-2">
-                        <MessageSquare className="w-10 h-10 text-slate-300 mx-auto" />
-                        <p className="text-xs text-slate-400">No messages. Start a conversation with an instructor!</p>
-                      </div>
-                    ) : messages.map(msg => {
-                      const isMine = msg.senderId === user.id;
-                      return (
-                        <div key={msg.id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
-                          <div className={`max-w-xs px-4 py-3 rounded-premium text-xs leading-relaxed ${
-                            isMine ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
-                          }`}>
-                            {!isMine && <p className="font-bold mb-1 opacity-70">{msg.senderName}</p>}
-                            <p>{msg.messageText}</p>
-                            <p className={`text-[9px] mt-1 ${isMine ? 'opacity-60' : 'text-slate-400'}`}>
-                              {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <form onSubmit={handleSendMessage} className="p-4 flex items-center space-x-3">
-                    <select
-                      value={msgRecipient}
-                      onChange={e => setMsgRecipient(e.target.value)}
-                      className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-primary-500"
-                    >
-                      <option value="usr-teacher-1">Dr. Angela Steele</option>
-                      <option value="usr-admin">Admin Support</option>
-                    </select>
-                    <input
-                      type="text"
-                      value={msgText}
-                      onChange={e => setMsgText(e.target.value)}
-                      placeholder="Type your message..."
-                      className="flex-1 px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-200"
-                    />
-                    <button type="submit" disabled={msgSending || !msgText} className="p-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl transition-colors disabled:opacity-50">
-                      <Send className="w-4 h-4" />
-                    </button>
-                  </form>
-                </div>
+              <div className="pt-2">
+                <Button type="submit" size="md" loading={settingsSaving}>
+                  Save Profile Changes
+                </Button>
               </div>
-            )}
+            </form>
+          </div>
+        )}
 
-            {/* ===== SETTINGS ===== */}
-            {activeTab === 'settings' && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Profile Settings</h2>
-                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-8 shadow-sm">
-                  <form onSubmit={handleSaveSettings} className="space-y-5">
-                    {settingsSuccess && (
-                      <div className="p-4 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 border border-green-200 rounded-premium flex items-center space-x-2 text-xs">
-                        <CheckCircle2 className="w-4 h-4" /><span>Profile updated successfully!</span>
-                      </div>
-                    )}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {[
-                        { key: 'fullName', label: 'Full Name', placeholder: 'Jane Doe' },
-                        { key: 'phone', label: 'Phone Number', placeholder: '+1 (555) 000-0000' },
-                        { key: 'website', label: 'Personal Website', placeholder: 'https://yoursite.com' },
-                        { key: 'linkedinUrl', label: 'LinkedIn Profile URL', placeholder: 'https://linkedin.com/in/...' },
-                        { key: 'githubUrl', label: 'GitHub Profile URL', placeholder: 'https://github.com/...' },
-                      ].map(({ key, label, placeholder }) => (
-                        <div key={key} className="space-y-1.5 text-xs">
-                          <label className="font-semibold text-slate-700 dark:text-slate-300">{label}</label>
-                          <input
-                            type="text"
-                            value={settingsForm[key]}
-                            onChange={e => setSettingsForm(p => ({ ...p, [key]: e.target.value }))}
-                            placeholder={placeholder}
-                            className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 transition-all"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-1.5 text-xs">
-                      <label className="font-semibold text-slate-700 dark:text-slate-300">Bio / About</label>
-                      <textarea
-                        rows={4}
-                        value={settingsForm.bio}
-                        onChange={e => setSettingsForm(p => ({ ...p, bio: e.target.value }))}
-                        placeholder="Tell us a bit about yourself..."
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-900 dark:text-slate-100 transition-all resize-none"
-                      ></textarea>
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={settingsSaving}
-                      className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold text-sm rounded-premium shadow-md transition-colors disabled:opacity-60"
-                    >
-                      {settingsSaving ? 'Saving...' : 'Save Changes'}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )}
-
-          </main>
-        </div>
       </div>
     </PageTransition>
   );

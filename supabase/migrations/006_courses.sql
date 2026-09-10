@@ -1,0 +1,35 @@
+-- Migration 006: Courses
+-- Purpose: Primary course entity with status, pricing, badges, metrics, and SEO metadata.
+
+CREATE TABLE IF NOT EXISTS public.courses (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    instructor_id UUID REFERENCES public.teachers(id) ON DELETE SET NULL,
+    category_id UUID REFERENCES public.categories(id) ON DELETE RESTRICT,
+    subcategory_id UUID REFERENCES public.subcategories(id) ON DELETE SET NULL,
+    title TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    subtitle TEXT,
+    description TEXT,
+    thumbnail_url TEXT,
+    banner_url TEXT,
+    price NUMERIC(10,2) NOT NULL DEFAULT 0.00 CHECK (price >= 0),
+    discount_price NUMERIC(10,2) CHECK (discount_price IS NULL OR (discount_price >= 0 AND discount_price <= price)),
+    currency TEXT NOT NULL DEFAULT 'USD',
+    level TEXT CHECK (level IN ('beginner', 'intermediate', 'advanced', 'all_levels')),
+    language TEXT NOT NULL DEFAULT 'English',
+    duration_minutes INTEGER DEFAULT 0 CHECK (duration_minutes >= 0),
+    total_lessons INTEGER DEFAULT 0 CHECK (total_lessons >= 0),
+    certificate_enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    lifetime_access BOOLEAN NOT NULL DEFAULT TRUE,
+    status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'pending_review', 'published', 'rejected', 'archived')),
+    badge TEXT CHECK (badge IN ('bestseller', 'new', 'free', 'premium', 'trending')),
+    requirements TEXT[],
+    learning_objectives TEXT[],
+    target_audience TEXT[],
+    student_count INTEGER DEFAULT 0 CHECK (student_count >= 0),
+    average_rating NUMERIC(3,2) DEFAULT 0.00 CHECK (average_rating >= 0 AND average_rating <= 5.00),
+    review_count INTEGER DEFAULT 0 CHECK (review_count >= 0),
+    published_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

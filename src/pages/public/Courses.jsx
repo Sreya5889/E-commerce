@@ -1,479 +1,518 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { db } from '../../services/db';
-import { CATEGORIES, INSTRUCTORS } from '../../constants/mockData';
-import { Search, SlidersHorizontal, Star, Heart, ShoppingCart, Check, X, ArrowUpDown } from 'lucide-react';
-import { useCart } from '../../context/CartContext';
+import { courseService } from '../../services/course.service';
+import { categoryService } from '../../services/category.service';
+import {
+  Search,
+  SlidersHorizontal,
+  Star,
+  Check,
+  X,
+  ArrowUpDown,
+  BookOpen,
+  Sparkles,
+  RotateCcw,
+  Clock,
+  Filter
+} from 'lucide-react';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { CourseCard } from '../../components/ui/CourseCard';
+import { CourseCardSkeleton } from '../../components/ui/Skeleton';
+import { EmptyState } from '../../components/ui/EmptyState';
+import { Button } from '../../components/ui/Button';
 
 export const Courses = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { addToCart, isInCart, addToWishlist, isInWishlist } = useCart();
   const [courses, setCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Filters State
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all');
-  const [selectedLevel, setSelectedLevel] = useState('all');
-  const [priceFilter, setPriceFilter] = useState('all'); // 'all', 'free', 'paid'
-  const [selectedRating, setSelectedRating] = useState('all'); // 'all', '4.5', '4.0'
-  const [selectedLanguage, setSelectedLanguage] = useState('all');
-  const [sortBy, setSortBy] = useState('popular'); // 'popular', 'latest', 'price-low', 'price-high'
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
+  // Filters State
+  const searchQuery = searchParams.get('search') || '';
+  const selectedCategory = searchParams.get('category') || 'all';
+  const selectedLevel = searchParams.get('level') || 'all';
+  const priceFilter = searchParams.get('price') || 'all'; // 'all', 'free', 'paid'
+  const selectedRating = searchParams.get('rating') || 'all'; // 'all', '4.5', '4.0'
+  const selectedDuration = searchParams.get('duration') || 'all'; // 'all', 'short', 'medium', 'long'
+  const sortBy = searchParams.get('sort') || 'popular';
+
+  // Load Initial Data
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await db.getCourses();
-        setCourses(data);
+        const [coursesData, categoriesData] = await Promise.all([
+          courseService.getCourses(),
+          categoryService.getCategories(),
+        ]);
+        setCourses(coursesData || []);
+        setCategories(categoriesData || []);
       } catch (err) {
-        console.error(err);
+        console.error('Failed to load courses catalog:', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchCourses();
+    fetchData();
   }, []);
 
-  // Update query state if search params change
-  useEffect(() => {
-    const search = searchParams.get('search');
-    const cat = searchParams.get('category');
-    if (search !== null) setSearchQuery(search);
-    if (cat !== null) setSelectedCategory(cat);
-  }, [searchParams]);
+  const updateFilter = (key, value) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (value && value !== 'all') {
+      newParams.set(key, value);
+    } else {
+      newParams.delete(key);
+    }
+    setSearchParams(newParams);
+  };
 
-  // Apply filters
-  useEffect(() => {
+  const handleSearchChange = (e) => {
+    updateFilter('search', e.target.value.trim());
+  };
+
+  const clearAllFilters = () => {
+    setSearchParams({});
+  };
+
+  // Filter & Sort Logic
+  const filteredCourses = useMemo(() => {
     let result = [...courses];
 
     // Search query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(c => c.title.toLowerCase().includes(q) || c.subtitle.toLowerCase().includes(q) || c.description.toLowerCase().includes(q));
+      result = result.filter(c =>
+        c.title?.toLowerCase().includes(q) ||
+        c.subtitle?.toLowerCase().includes(q) ||
+        c.description?.toLowerCase().includes(q)
+      );
     }
 
     // Category
     if (selectedCategory && selectedCategory !== 'all') {
-      result = result.filter(c => c.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.toLowerCase().replace(/\s+/g, '-'));
+      result = result.filter(c =>
+        c.categories?.slug === selectedCategory ||
+        c.categories?.name?.toLowerCase().replace(/\s+/g, '-') === selectedCategory ||
+        c.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
 
     // Level
     if (selectedLevel !== 'all') {
-      result = result.filter(c => c.level.toLowerCase() === selectedLevel.toLowerCase());
+      result = result.filter(c => c.level?.toLowerCase() === selectedLevel.toLowerCase());
     }
 
     // Price
     if (priceFilter === 'free') {
-      result = result.filter(c => (c.discountPrice || c.price) === 0);
+      result = result.filter(c => Number(c.discount_price ?? c.price ?? 0) === 0);
     } else if (priceFilter === 'paid') {
-      result = result.filter(c => (c.discountPrice || c.price) > 0);
+      result = result.filter(c => Number(c.discount_price ?? c.price ?? 0) > 0);
     }
 
     // Rating
     if (selectedRating !== 'all') {
       const minRating = parseFloat(selectedRating);
-      result = result.filter(c => c.rating >= minRating);
+      result = result.filter(c => Number(c.avg_rating ?? c.rating ?? 0) >= minRating);
     }
 
-    // Language
-    if (selectedLanguage !== 'all') {
-      result = result.filter(c => c.language.toLowerCase() === selectedLanguage.toLowerCase());
+    // Duration
+    if (selectedDuration === 'short') {
+      result = result.filter(c => (c.duration_hours ?? c.durationHours ?? 0) < 10);
+    } else if (selectedDuration === 'medium') {
+      result = result.filter(c => {
+        const d = c.duration_hours ?? c.durationHours ?? 0;
+        return d >= 10 && d <= 30;
+      });
+    } else if (selectedDuration === 'long') {
+      result = result.filter(c => (c.duration_hours ?? c.durationHours ?? 0) > 30);
     }
 
-    // Sort By
+    // Sort
     if (sortBy === 'popular') {
-      result.sort((a, b) => b.studentCount - a.studentCount);
+      result.sort((a, b) => (b.student_count ?? b.studentCount ?? 0) - (a.student_count ?? a.studentCount ?? 0));
+    } else if (sortBy === 'rating') {
+      result.sort((a, b) => (b.avg_rating ?? b.rating ?? 0) - (a.avg_rating ?? a.rating ?? 0));
+    } else if (sortBy === 'price_low') {
+      result.sort((a, b) => (Number(a.discount_price ?? a.price ?? 0)) - (Number(b.discount_price ?? b.price ?? 0)));
+    } else if (sortBy === 'price_high') {
+      result.sort((a, b) => (Number(b.discount_price ?? b.price ?? 0)) - (Number(a.discount_price ?? a.price ?? 0)));
     } else if (sortBy === 'latest') {
-      result.sort((a, b) => new Date(b.created_at || b.id) - new Date(a.created_at || a.id));
-    } else if (sortBy === 'price-low') {
-      result.sort((a, b) => (a.discountPrice || a.price) - (b.discountPrice || b.price));
-    } else if (sortBy === 'price-high') {
-      result.sort((a, b) => (b.discountPrice || b.price) - (a.discountPrice || a.price));
+      result.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
     }
 
-    setFilteredCourses(result);
-  }, [courses, searchQuery, selectedCategory, selectedLevel, priceFilter, selectedRating, selectedLanguage, sortBy]);
+    return result;
+  }, [courses, searchQuery, selectedCategory, selectedLevel, priceFilter, selectedRating, selectedDuration, sortBy]);
 
-  const clearAllFilters = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-    setSelectedLevel('all');
-    setPriceFilter('all');
-    setSelectedRating('all');
-    setSelectedLanguage('all');
-    setSortBy('popular');
-    setSearchParams({});
-  };
+  const activeFiltersCount = [
+    selectedCategory !== 'all',
+    selectedLevel !== 'all',
+    priceFilter !== 'all',
+    selectedRating !== 'all',
+    selectedDuration !== 'all',
+    Boolean(searchQuery),
+  ].filter(Boolean).length;
 
   return (
     <PageTransition>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         
-        {/* Top Header */}
-        <div className="mb-8 space-y-4">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Explore Tech Courses</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Showing {filteredCourses.length} results matching your search criteria.
+        {/* Page Header */}
+        <div className="mb-10 space-y-2 text-center sm:text-left">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Discover Knowledge</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            Explore Courses
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl">
+            Advance your engineering, design, and architecture capabilities with peer-reviewed curriculum taught by senior specialists.
           </p>
         </div>
 
-        {/* Filters Top Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium mb-8 shadow-sm">
-          {/* Search Input inside Courses */}
-          <div className="relative flex-grow max-w-md">
-            <input
-              type="text"
-              placeholder="Search courses..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm focus:outline-none focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-200"
-            />
-            <Search className="absolute left-3 top-2.5 w-4.5 h-4.5 text-slate-400" />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600">
-                <X className="w-4 h-4" />
+        {/* Top Control Bar: Search + Category Pills + Filter Mobile Toggle */}
+        <div className="space-y-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            {/* Search Input */}
+            <div className="relative w-full sm:max-w-md">
+              <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search courses by title, topic, or instructor..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="w-full pl-10 pr-10 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-800 dark:text-slate-200 shadow-sm"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => updateFilter('search', '')}
+                  className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Mobile Filter Button & Sort Select */}
+            <div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-end">
+              <button
+                onClick={() => setShowMobileFilters(true)}
+                className="lg:hidden flex items-center space-x-2 px-3.5 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-sm"
+              >
+                <SlidersHorizontal className="w-4 h-4 text-primary-600" />
+                <span>Filters {activeFiltersCount > 0 && `(${activeFiltersCount})`}</span>
               </button>
-            )}
+
+              {/* Sort Dropdown */}
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 hidden sm:inline">Sort:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => updateFilter('sort', e.target.value)}
+                  className="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm"
+                >
+                  <option value="popular">Most Popular</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="latest">Newest Releases</option>
+                  <option value="price_low">Price: Low to High</option>
+                  <option value="price_high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+
           </div>
 
-          <div className="flex items-center space-x-3 justify-between md:justify-end">
+          {/* Quick Category Chips */}
+          <div className="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
             <button
-              onClick={() => setShowMobileFilters(!showMobileFilters)}
-              className="lg:hidden flex items-center space-x-1.5 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-premium text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50"
+              onClick={() => updateFilter('category', 'all')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold flex-shrink-0 transition-all ${
+                selectedCategory === 'all'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-50'
+              }`}
             >
-              <SlidersHorizontal className="w-4 h-4" />
-              <span>Filters</span>
+              All Categories
             </button>
-
-            <div className="flex items-center space-x-2">
-              <ArrowUpDown className="w-4 h-4 text-slate-400" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-premium text-sm py-2 px-3 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-primary-500"
+            {categories.map((cat) => (
+              <button
+                key={cat.id || cat.slug}
+                onClick={() => updateFilter('category', cat.slug)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold flex-shrink-0 transition-all ${
+                  selectedCategory === cat.slug
+                    ? 'bg-primary-600 text-white shadow-sm'
+                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'
+                }`}
               >
-                <option value="popular">Most Popular</option>
-                <option value="latest">Latest Releases</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
-            </div>
+                {cat.name}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Main Content Grid: Sidebar Filters + Courses Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Sidebar Filter Section (Desktop) */}
-          <aside className="hidden lg:block space-y-6">
-            
-            {/* Clear All Option */}
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm">Filter By</h3>
-              <button onClick={clearAllFilters} className="text-xs text-primary-600 dark:text-primary-400 hover:underline">
-                Clear All
-              </button>
+          {/* Desktop Left Filter Sidebar */}
+          <aside className="hidden lg:block lg:col-span-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6 sticky top-28">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                <Filter className="w-4 h-4 text-primary-600" />
+                <span>Refine Search</span>
+              </h3>
+              {activeFiltersCount > 0 && (
+                <button
+                  onClick={clearAllFilters}
+                  className="text-[11px] font-bold text-primary-600 hover:underline flex items-center space-x-1"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Reset ({activeFiltersCount})</span>
+                </button>
+              )}
             </div>
 
-            {/* Category Filter */}
-            <div className="space-y-2.5">
-              <h4 className="font-semibold text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">Category</h4>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium text-sm p-2 text-slate-700 dark:text-slate-300 focus:ring-primary-500 focus:outline-none"
-              >
-                <option value="all">All Categories</option>
-                {CATEGORIES.map(cat => (
-                  <option key={cat.id} value={cat.slug}>{cat.name}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Difficulty Level Filter */}
-            <div className="space-y-2.5 pt-2">
-              <h4 className="font-semibold text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">Level</h4>
-              <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                {['all', 'Beginner', 'Intermediate', 'Expert', 'All Levels'].map((lvl) => (
-                  <label key={lvl} className="flex items-center space-x-2.5 cursor-pointer">
+            {/* Level Filter */}
+            <div className="space-y-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Level</h4>
+              <div className="space-y-1.5 text-xs">
+                {['all', 'beginner', 'intermediate', 'expert'].map((lvl) => (
+                  <label key={lvl} className="flex items-center space-x-2 cursor-pointer text-slate-700 dark:text-slate-300 hover:text-primary-600">
                     <input
                       type="radio"
                       name="level"
                       checked={selectedLevel === lvl}
-                      onChange={() => setSelectedLevel(lvl)}
-                      className="w-4 h-4 text-primary-600 border-slate-300 focus:ring-primary-500"
+                      onChange={() => updateFilter('level', lvl)}
+                      className="text-primary-600 focus:ring-primary-500 rounded"
                     />
-                    <span className="capitalize">{lvl === 'all' ? 'All Difficulty Levels' : lvl}</span>
+                    <span className="capitalize">{lvl === 'all' ? 'All Levels' : lvl}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Price Filter */}
-            <div className="space-y-2.5 pt-2">
-              <h4 className="font-semibold text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">Price</h4>
-              <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Pricing</h4>
+              <div className="space-y-1.5 text-xs">
                 {[
-                  { value: 'all', label: 'All Courses' },
-                  { value: 'free', label: 'Free' },
-                  { value: 'paid', label: 'Paid / Premium' }
-                ].map((prc) => (
-                  <label key={prc.value} className="flex items-center space-x-2.5 cursor-pointer">
+                  { key: 'all', label: 'All Courses' },
+                  { key: 'paid', label: 'Paid Courses' },
+                  { key: 'free', label: 'Free Previews' }
+                ].map((p) => (
+                  <label key={p.key} className="flex items-center space-x-2 cursor-pointer text-slate-700 dark:text-slate-300 hover:text-primary-600">
                     <input
                       type="radio"
                       name="price"
-                      checked={priceFilter === prc.value}
-                      onChange={() => setPriceFilter(prc.value)}
-                      className="w-4 h-4 text-primary-600 border-slate-300 focus:ring-primary-500"
+                      checked={priceFilter === p.key}
+                      onChange={() => updateFilter('price', p.key)}
+                      className="text-primary-600 focus:ring-primary-500 rounded"
                     />
-                    <span>{prc.label}</span>
+                    <span>{p.label}</span>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Rating Filter */}
-            <div className="space-y-2.5 pt-2">
-              <h4 className="font-semibold text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">Rating</h4>
-              <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            {/* Minimum Rating */}
+            <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Rating</h4>
+              <div className="space-y-1.5 text-xs">
                 {[
-                  { value: 'all', label: 'All Ratings' },
-                  { value: '4.5', label: '4.5 ★ & Above' },
-                  { value: '4.0', label: '4.0 ★ & Above' }
-                ].map((rtg) => (
-                  <label key={rtg.value} className="flex items-center space-x-2.5 cursor-pointer">
+                  { val: 'all', label: 'All Ratings' },
+                  { val: '4.5', label: '4.5 & up' },
+                  { val: '4.0', label: '4.0 & up' },
+                  { val: '3.5', label: '3.5 & up' },
+                ].map((r) => (
+                  <label key={r.val} className="flex items-center space-x-2 cursor-pointer text-slate-700 dark:text-slate-300 hover:text-primary-600">
                     <input
                       type="radio"
                       name="rating"
-                      checked={selectedRating === rtg.value}
-                      onChange={() => setSelectedRating(rtg.value)}
-                      className="w-4 h-4 text-primary-600 border-slate-300 focus:ring-primary-500"
+                      checked={selectedRating === r.val}
+                      onChange={() => updateFilter('rating', r.val)}
+                      className="text-primary-600 focus:ring-primary-500 rounded"
                     />
-                    <span>{rtg.label}</span>
+                    <span className="flex items-center space-x-1">
+                      {r.val !== 'all' && <Star className="w-3 h-3 text-amber-500 fill-current mr-1" />}
+                      <span>{r.label}</span>
+                    </span>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Language Filter */}
-            <div className="space-y-2.5 pt-2">
-              <h4 className="font-semibold text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">Language</h4>
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-premium text-sm p-2 text-slate-700 dark:text-slate-300 focus:ring-primary-500 focus:outline-none"
-              >
-                <option value="all">All Languages</option>
-                <option value="english">English</option>
-                <option value="spanish">Spanish</option>
-                <option value="french">French</option>
-              </select>
-            </div>
-
-          </aside>
-
-          {/* Grid Layout of Courses */}
-          <main className="lg:col-span-3">
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="animate-pulse bg-white dark:bg-slate-900 rounded-premium border border-slate-100 dark:border-slate-800 p-4 space-y-4">
-                    <div className="w-full aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
-                    <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/3"></div>
-                    <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-3/4"></div>
-                    <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/2"></div>
-                  </div>
+            {/* Duration */}
+            <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Duration</h4>
+              <div className="space-y-1.5 text-xs">
+                {[
+                  { key: 'all', label: 'Any Duration' },
+                  { key: 'short', label: 'Under 10 Hours' },
+                  { key: 'medium', label: '10 - 30 Hours' },
+                  { key: 'long', label: '30+ Hours' },
+                ].map((d) => (
+                  <label key={d.key} className="flex items-center space-x-2 cursor-pointer text-slate-700 dark:text-slate-300 hover:text-primary-600">
+                    <input
+                      type="radio"
+                      name="duration"
+                      checked={selectedDuration === d.key}
+                      onChange={() => updateFilter('duration', d.key)}
+                      className="text-primary-600 focus:ring-primary-500 rounded"
+                    />
+                    <span>{d.label}</span>
+                  </label>
                 ))}
               </div>
-            ) : filteredCourses.length === 0 ? (
-              <div className="text-center py-16 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium space-y-4">
-                <SlidersHorizontal className="w-10 h-10 text-slate-300 mx-auto" />
-                <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">No courses match your filters</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Try adjusting your checkboxes or click clear filters.</p>
-                <button
-                  onClick={clearAllFilters}
-                  className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-premium text-xs font-semibold"
-                >
-                  Clear All Filters
-                </button>
+            </div>
+          </aside>
+
+          {/* Right Area: Course Grid & Meta */}
+          <main className="lg:col-span-9 space-y-6">
+            
+            {/* Results Count & Active Filter Pills */}
+            <div className="flex flex-wrap items-center justify-between gap-4 text-xs">
+              <p className="font-semibold text-slate-600 dark:text-slate-400">
+                Showing <span className="font-bold text-slate-900 dark:text-white">{filteredCourses.length}</span> {filteredCourses.length === 1 ? 'course' : 'courses'}
+                {searchQuery && <> for "<span className="text-primary-600 dark:text-primary-400 font-bold">{searchQuery}</span>"</>}
+              </p>
+
+              {activeFiltersCount > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {selectedCategory !== 'all' && (
+                    <span className="inline-flex items-center space-x-1 px-2.5 py-1 bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 rounded-lg text-[11px] font-bold">
+                      <span>Category: {selectedCategory}</span>
+                      <button onClick={() => updateFilter('category', 'all')}><X className="w-3 h-3" /></button>
+                    </span>
+                  )}
+                  {selectedLevel !== 'all' && (
+                    <span className="inline-flex items-center space-x-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-[11px] font-bold capitalize">
+                      <span>Level: {selectedLevel}</span>
+                      <button onClick={() => updateFilter('level', 'all')}><X className="w-3 h-3" /></button>
+                    </span>
+                  )}
+                  {priceFilter !== 'all' && (
+                    <span className="inline-flex items-center space-x-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-[11px] font-bold">
+                      <span>Price: {priceFilter}</span>
+                      <button onClick={() => updateFilter('price', 'all')}><X className="w-3 h-3" /></button>
+                    </span>
+                  )}
+                  <button
+                    onClick={clearAllFilters}
+                    className="text-xs font-bold text-red-600 hover:underline ml-1"
+                  >
+                    Clear All
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Courses Cards Grid */}
+            {loading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {[1, 2, 3, 4, 5, 6].map((n) => <CourseCardSkeleton key={n} />)}
+              </div>
+            ) : filteredCourses.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredCourses.map((course) => {
-                  const teacher = INSTRUCTORS.find(t => t.id === course.teacherId);
-                  const isAlreadyInCart = isInCart(course.id);
-                  const isWishlisted = isInWishlist(course.id);
-                  return (
-                    <div
-                      key={course.id}
-                      className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium overflow-hidden shadow-sm hover:shadow-premium hover:-translate-y-1 transition-all duration-300 flex flex-col group"
-                    >
-                      <Link to={`/course/${course.id}`} className="relative block overflow-hidden aspect-video">
-                        <img
-                          src={course.thumbnail}
-                          alt={course.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        {course.badge && (
-                          <span className={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[9px] font-bold text-white shadow-sm uppercase ${
-                            course.badge === 'Bestseller' ? 'bg-amber-500' : 'bg-primary-600'
-                          }`}>
-                            {course.badge}
-                          </span>
-                        )}
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            isWishlisted ? () => {} : addToWishlist(course.id);
-                          }}
-                          className={`absolute top-3 right-3 p-2 rounded-full shadow-md backdrop-blur-md border ${
-                            isWishlisted
-                              ? 'bg-red-550 border-red-500 text-red-500'
-                              : 'bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-800/50 text-slate-600 hover:text-red-500'
-                          } transition-all`}
-                        >
-                          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-                        </button>
-                      </Link>
-                      
-                      <div className="p-6 flex flex-col flex-grow">
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400 mb-2">
-                          {course.category}
-                        </span>
-                        <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 leading-snug mb-2 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                          <Link to={`/course/${course.id}`}>{course.title}</Link>
-                        </h3>
-
-                        <div className="flex items-center space-x-2 text-xs text-slate-500 mb-3">
-                          <img src={teacher?.avatar} alt={teacher?.name} className="w-5 h-5 rounded-full object-cover" />
-                          <span className="font-medium">{teacher?.name}</span>
-                        </div>
-
-                        <div className="flex items-center space-x-1.5 mb-4 text-xs text-slate-500">
-                          <span className="flex items-center text-amber-500 font-bold">
-                            <Star className="w-3.5 h-3.5 fill-current mr-0.5" />
-                            {course.rating}
-                          </span>
-                          <span>•</span>
-                          <span>{course.durationHours} hrs</span>
-                          <span>•</span>
-                          <span className="capitalize">{course.level}</span>
-                        </div>
-
-                        <div className="border-t border-slate-100 dark:border-slate-800 pt-4 mt-auto flex items-center justify-between">
-                          <div className="flex items-baseline space-x-1.5">
-                            <span className="text-base font-extrabold text-slate-900 dark:text-white">
-                              ${course.discountPrice || course.price}
-                            </span>
-                            {course.discountPrice && (
-                              <span className="text-xs text-slate-400 line-through">
-                                ${course.price}
-                              </span>
-                            )}
-                          </div>
-                          <button
-                            onClick={() => !isAlreadyInCart && addToCart(course.id)}
-                            disabled={isAlreadyInCart}
-                            className={`p-2.5 rounded-premium flex items-center justify-center transition-all ${
-                              isAlreadyInCart
-                                ? 'bg-green-50 dark:bg-green-950/20 text-green-600 border border-green-200'
-                                : 'bg-primary-600 hover:bg-primary-700 text-white shadow-sm'
-                            }`}
-                          >
-                            {isAlreadyInCart ? <Check className="w-4 h-4" /> : <ShoppingCart className="w-4 h-4" />}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <EmptyState
+                icon={BookOpen}
+                title="No courses found matching your criteria"
+                description="Try adjusting your keywords, expanding your price range, or clearing active filters to view other catalog courses."
+                actionText="Reset All Filters"
+                onAction={clearAllFilters}
+              />
             )}
           </main>
         </div>
-      </div>
 
-      {/* Mobile Drawer Filters Modal */}
-      {showMobileFilters && (
-        <div className="fixed inset-0 z-50 overflow-hidden lg:hidden flex justify-end">
-          <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onClick={() => setShowMobileFilters(false)}></div>
-          <div className="relative w-full max-w-xs bg-white dark:bg-slate-900 shadow-2xl flex flex-col p-6 overflow-y-auto h-full text-slate-800 dark:text-slate-100">
-            <div className="flex items-center justify-between border-b pb-4 mb-6">
-              <h3 className="font-bold text-sm">Filters</h3>
-              <button onClick={() => setShowMobileFilters(false)} className="p-1 text-slate-400 hover:text-slate-600">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Sidebar content copy */}
-            <div className="space-y-6">
-              {/* Category */}
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Category</h4>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border rounded-premium p-2 text-xs"
+        {/* Mobile Filter Modal / Drawer */}
+        {showMobileFilters && (
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+            <div
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+              onClick={() => setShowMobileFilters(false)}
+            />
+            <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl p-6 shadow-2xl z-10 max-h-[85vh] overflow-y-auto space-y-6 animate-in slide-in-from-bottom duration-200">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h3 className="font-bold text-base text-slate-900 dark:text-white">Filters</h3>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="p-1 text-slate-400 hover:text-slate-600"
                 >
-                  <option value="all">All Categories</option>
-                  {CATEGORIES.map(cat => (
-                    <option key={cat.id} value={cat.slug}>{cat.name}</option>
-                  ))}
-                </select>
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              {/* Levels */}
+              {/* Level */}
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Level</h4>
-                {['all', 'Beginner', 'Intermediate', 'Expert', 'All Levels'].map((lvl) => (
-                  <label key={lvl} className="flex items-center space-x-2 text-xs">
-                    <input
-                      type="radio"
-                      name="mobile-level"
-                      checked={selectedLevel === lvl}
-                      onChange={() => setSelectedLevel(lvl)}
-                    />
-                    <span className="capitalize">{lvl === 'all' ? 'All Difficulty Levels' : lvl}</span>
-                  </label>
-                ))}
+                <div className="grid grid-cols-2 gap-2">
+                  {['all', 'beginner', 'intermediate', 'expert'].map((lvl) => (
+                    <button
+                      key={lvl}
+                      onClick={() => updateFilter('level', lvl)}
+                      className={`py-2 px-3 rounded-xl text-xs font-bold capitalize text-left border ${
+                        selectedLevel === lvl
+                          ? 'border-primary-600 bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400'
+                          : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      {lvl === 'all' ? 'All Levels' : lvl}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* Price */}
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Price</h4>
-                {[
-                  { value: 'all', label: 'All' },
-                  { value: 'free', label: 'Free' },
-                  { value: 'paid', label: 'Paid' }
-                ].map((prc) => (
-                  <label key={prc.value} className="flex items-center space-x-2 text-xs">
-                    <input
-                      type="radio"
-                      name="mobile-price"
-                      checked={priceFilter === prc.value}
-                      onChange={() => setPriceFilter(prc.value)}
-                    />
-                    <span>{prc.label}</span>
-                  </label>
-                ))}
+              <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Pricing</h4>
+                <div className="grid grid-cols-3 gap-2">
+                  {['all', 'paid', 'free'].map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => updateFilter('price', p)}
+                      className={`py-2 px-3 rounded-xl text-xs font-bold capitalize text-center border ${
+                        priceFilter === p
+                          ? 'border-primary-600 bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400'
+                          : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center space-x-3">
+                <Button
+                  variant="outline"
+                  className="w-1/2"
+                  onClick={() => {
+                    clearAllFilters();
+                    setShowMobileFilters(false);
+                  }}
+                >
+                  Reset
+                </Button>
+                <Button
+                  variant="primary"
+                  className="w-1/2"
+                  onClick={() => setShowMobileFilters(false)}
+                >
+                  Apply Filters
+                </Button>
               </div>
             </div>
-
-            <button
-              onClick={() => {
-                clearAllFilters();
-                setShowMobileFilters(false);
-              }}
-              className="mt-8 w-full py-2.5 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-premium font-semibold text-xs hover:bg-slate-50"
-            >
-              Clear All Filters
-            </button>
           </div>
-        </div>
-      )}
+        )}
+
+      </div>
     </PageTransition>
   );
 };

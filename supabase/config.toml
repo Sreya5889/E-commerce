@@ -1,0 +1,71 @@
+# Supabase CLI configuration file for EduAcademy E-Learning E-Commerce Platform
+
+project_id = "eduacademy-elearning"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+
+[db.pooler]
+enabled = false
+port = 54329
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/auth/callback", "https://eduacademy.app/auth/callback"]
+jwt_expiry = 3600
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+redirect_uri = "http://localhost:54321/auth/v1/callback"
+
+[storage]
+enabled = true
+file_size_limit = "500MiB"
+
+[functions.create-order]
+verify_jwt = true
+
+[functions.process-payment]
+verify_jwt = true
+
+[functions.payment-webhook]
+verify_jwt = false
+
+[functions.generate-certificate]
+verify_jwt = true
+
+[functions.send-notification]
+verify_jwt = true
+
+[functions.send-email]
+verify_jwt = true
+
+[functions.calculate-course-progress]
+verify_jwt = true
+
+[functions.validate-coupon]
+verify_jwt = true
+
+[functions.search-courses]
+verify_jwt = false
+
+[functions.admin-analytics]
+verify_jwt = true
