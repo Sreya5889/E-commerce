@@ -7,7 +7,7 @@ import { categoryService } from '../../services/category.service';
 import {
   Search, ShoppingCart, Heart, Sun, Moon, Menu, X, ChevronDown,
   User, BookOpen, LogOut, LayoutDashboard, Settings, Award, Shield,
-  Layers, PlusCircle
+  Layers, PlusCircle, Route
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -128,6 +128,17 @@ export const Navbar = () => {
               }`}
             >
               Courses
+            </Link>
+
+            <Link
+              to="/learning-paths"
+              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                isActive('/learning-paths') || location.pathname.startsWith('/learning-paths')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              Learning Paths
             </Link>
 
             {/* Categories Dropdown */}
@@ -289,6 +300,14 @@ export const Navbar = () => {
                       </Link>
 
                       <Link
+                        to="/dashboard?tab=learning-paths"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <Route className="w-4 h-4 text-primary-500" />
+                        <span>My Learning Paths</span>
+                      </Link>
+
+                      <Link
                         to="/instructor"
                         className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                       >
@@ -362,6 +381,9 @@ export const Navbar = () => {
           <div className="flex flex-col space-y-1 text-sm font-semibold">
             <Link to="/courses" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
               Browse Courses
+            </Link>
+            <Link to="/learning-paths" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-primary-600 dark:text-primary-400 font-semibold">
+              Learning Paths
             </Link>
             <Link to="/teachers" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
               Instructors

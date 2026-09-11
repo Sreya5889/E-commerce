@@ -1,5 +1,6 @@
 import { query } from '../config/db.js';
 import { AppError } from '../middleware/errorHandler.js';
+import { courseStore } from '../utils/courseStore.js';
 
 export const adminController = {
   // GET /admin/stats: Real database aggregation
@@ -59,21 +60,33 @@ export const adminController = {
   // GET /admin/courses: List all courses (including drafts, pending)
   async getAllCourses(req, res, next) {
     try {
-      const coursesRes = await query(`
-        SELECT 
-          c.*,
-          cat.name as category_name,
-          tp.display_name as teacher_name
-        FROM public.courses c
-        LEFT JOIN public.categories cat ON c.category_id = cat.id
-        LEFT JOIN public.teachers t ON c.teacher_id = t.id
-        LEFT JOIN public.profiles tp ON t.user_id = tp.user_id
-        ORDER BY c.created_at DESC
-      `);
+      try {
+        const coursesRes = await query(`
+          SELECT 
+            c.*,
+            cat.name as category_name,
+            tp.display_name as teacher_name
+          FROM public.courses c
+          LEFT JOIN public.categories cat ON c.category_id = cat.id
+          LEFT JOIN public.teachers t ON COALESCE(c.instructor_id, c.teacher_id) = t.id
+          LEFT JOIN public.profiles tp ON t.user_id = tp.user_id
+          ORDER BY c.created_at DESC
+        `);
 
+        if (coursesRes.rows && coursesRes.rows.length > 0) {
+          return res.status(200).json({
+            success: true,
+            data: coursesRes.rows
+          });
+        }
+      } catch (dbErr) {
+        console.warn('[AdminController] DB getAllCourses offline or empty, falling back to courseStore:', dbErr.message);
+      }
+
+      const allCourses = courseStore.getAll();
       res.status(200).json({
         success: true,
-        data: coursesRes.rows
+        data: allCourses
       });
     } catch (err) {
       next(err);

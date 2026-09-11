@@ -68,7 +68,7 @@ export const Courses = () => {
   };
 
   const handleSearchChange = (e) => {
-    updateFilter('search', e.target.value.trim());
+    updateFilter('search', e.target.value);
   };
 
   const clearAllFilters = () => {
@@ -79,33 +79,45 @@ export const Courses = () => {
   const filteredCourses = useMemo(() => {
     let result = [...courses];
 
-    // Search query
+    // Multi-field Search query
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(c =>
-        c.title?.toLowerCase().includes(q) ||
-        c.subtitle?.toLowerCase().includes(q) ||
-        c.description?.toLowerCase().includes(q)
-      );
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(c => {
+        const titleMatch = c.title?.toLowerCase().includes(q);
+        const subtitleMatch = c.subtitle?.toLowerCase().includes(q);
+        const descMatch = c.description?.toLowerCase().includes(q);
+        const catNameMatch = c.categories?.name?.toLowerCase().includes(q) || c.category?.toLowerCase().includes(q);
+        const catSlugMatch = c.categories?.slug?.toLowerCase().includes(q);
+        const teacherName = c.teachers?.profiles?.display_name ||
+          `${c.teachers?.profiles?.first_name || ''} ${c.teachers?.profiles?.last_name || ''}`.trim();
+        const teacherMatch = teacherName?.toLowerCase().includes(q);
+        const tagMatch = Array.isArray(c.tags) && c.tags.some(t => t.toLowerCase().includes(q));
+        const learnMatch = Array.isArray(c.what_you_will_learn) && c.what_you_will_learn.some(item => item.toLowerCase().includes(q));
+
+        return titleMatch || subtitleMatch || descMatch || catNameMatch || catSlugMatch || teacherMatch || tagMatch || learnMatch;
+      });
     }
 
     // Category
     if (selectedCategory && selectedCategory !== 'all') {
+      const catNorm = selectedCategory.toLowerCase().trim();
       result = result.filter(c =>
-        c.categories?.slug === selectedCategory ||
-        c.categories?.name?.toLowerCase().replace(/\s+/g, '-') === selectedCategory ||
-        c.category?.toLowerCase() === selectedCategory.toLowerCase()
+        c.category_id === selectedCategory ||
+        c.categories?.slug === catNorm ||
+        c.categories?.name?.toLowerCase().replace(/\s+/g, '-') === catNorm ||
+        c.category?.toLowerCase().replace(/\s+/g, '-') === catNorm ||
+        c.category?.toLowerCase() === catNorm
       );
     }
 
     // Level
     if (selectedLevel !== 'all') {
-      result = result.filter(c => c.level?.toLowerCase() === selectedLevel.toLowerCase());
+      result = result.filter(c => (c.level || '').toLowerCase().trim() === selectedLevel.toLowerCase().trim());
     }
 
     // Price
     if (priceFilter === 'free') {
-      result = result.filter(c => Number(c.discount_price ?? c.price ?? 0) === 0);
+      result = result.filter(c => c.is_free === true || Number(c.discount_price ?? c.price ?? 0) === 0);
     } else if (priceFilter === 'paid') {
       result = result.filter(c => Number(c.discount_price ?? c.price ?? 0) > 0);
     }
@@ -132,7 +144,7 @@ export const Courses = () => {
     if (sortBy === 'popular') {
       result.sort((a, b) => (b.student_count ?? b.studentCount ?? 0) - (a.student_count ?? a.studentCount ?? 0));
     } else if (sortBy === 'rating') {
-      result.sort((a, b) => (b.avg_rating ?? b.rating ?? 0) - (a.avg_rating ?? a.rating ?? 0));
+      result.sort((a, b) => Number(b.avg_rating ?? b.rating ?? 0) - Number(a.avg_rating ?? a.rating ?? 0));
     } else if (sortBy === 'price_low') {
       result.sort((a, b) => (Number(a.discount_price ?? a.price ?? 0)) - (Number(b.discount_price ?? b.price ?? 0)));
     } else if (sortBy === 'price_high') {
@@ -421,9 +433,9 @@ export const Courses = () => {
             ) : (
               <EmptyState
                 icon={BookOpen}
-                title="No courses found matching your criteria"
-                description="Try adjusting your keywords, expanding your price range, or clearing active filters to view other catalog courses."
-                actionText="Reset All Filters"
+                title={searchQuery ? `No courses found for "${searchQuery}"` : "No courses found matching your criteria"}
+                description={searchQuery ? `We couldn't find any courses matching "${searchQuery}". Try searching for related topics such as React, Python, Java, Full Stack, Data Science, AWS, UI/UX, or clear active filters.` : "Try adjusting your keywords, expanding your price range, or clearing active filters to view other catalog courses."}
+                actionText={searchQuery ? "Clear Search & View All" : "Reset All Filters"}
                 onAction={clearAllFilters}
               />
             )}

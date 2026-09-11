@@ -1,0 +1,3108 @@
+[
+  {
+    "id": "c001-react-complete",
+    "title": "Complete React JS Development",
+    "slug": "complete-react-js-development",
+    "subtitle": "Master modern React 19, Hooks, Redux Toolkit, React Router, and build 10+ production web apps.",
+    "description": "Comprehensive journey from foundational JavaScript to building high-performance, accessible React applications. You will learn JSX, state, props, custom hooks, context API, Redux Toolkit, SSR basics, performance tuning, and deploy full applications.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-005-0000-0000-0000-000000000005",
+    "category": "React",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 38.5,
+    "duration_minutes": 2310,
+    "total_lessons": 142,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 94210,
+    "avg_rating": 4.9,
+    "review_count": 14200,
+    "tags": [
+      "React",
+      "JavaScript",
+      "Frontend",
+      "Web Development",
+      "Hooks",
+      "Redux"
+    ],
+    "learning_objectives": [
+      "Build real-world React 19 applications from scratch",
+      "Master hooks: useState, useEffect, useMemo, useCallback",
+      "Manage complex global state with Redux Toolkit",
+      "Implement client-side routing with React Router v7"
+    ],
+    "requirements": [
+      "Basic understanding of HTML, CSS, and modern JavaScript (ES6)"
+    ],
+    "categories": {
+      "id": "cat-005-0000-0000-0000-000000000005",
+      "name": "React",
+      "slug": "react"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "React",
+        "TypeScript",
+        "Node.js"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead & Lead Educator."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Modern React Fundamentals",
+        "course_lessons": [
+          {
+            "id": "les-1-1",
+            "title": "React 19 Mental Model & Environment Setup",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          },
+          {
+            "id": "les-1-2",
+            "title": "Components, JSX & Props Deep Dive",
+            "duration_minutes": 25,
+            "is_preview": false,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          },
+          {
+            "id": "les-1-3",
+            "title": "State Management with useState",
+            "duration_minutes": 30,
+            "is_preview": false,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+          }
+        ]
+      },
+      {
+        "id": "sec-2",
+        "title": "Section 2: Production State & Hooks",
+        "course_lessons": [
+          {
+            "id": "les-1-4",
+            "title": "Handling Side Effects with useEffect",
+            "duration_minutes": 20,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+          },
+          {
+            "id": "les-1-5",
+            "title": "Redux Toolkit Architecture",
+            "duration_minutes": 35,
+            "is_preview": false,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "c002-react-typescript",
+    "title": "Advanced React and TypeScript",
+    "slug": "advanced-react-and-typescript",
+    "subtitle": "Enterprise scalable React architecture with strict TypeScript, generic components, and micro-frontends.",
+    "description": "Level up your React engineering with TypeScript. Learn how to type custom hooks, build reusable polymorphic component libraries, handle complex discriminated union states, and optimize rendering performance.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-005-0000-0000-0000-000000000005",
+    "category": "React",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 109.99,
+    "discount_price": 24.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 28,
+    "duration_minutes": 1680,
+    "total_lessons": 98,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 48300,
+    "avg_rating": 4.9,
+    "review_count": 6800,
+    "tags": [
+      "React",
+      "TypeScript",
+      "Frontend",
+      "Enterprise",
+      "Architecture"
+    ],
+    "learning_objectives": [
+      "Write type-safe React code with strict TypeScript",
+      "Build polymorphic, headless UI component libraries",
+      "Eliminate runtime errors with discriminated unions"
+    ],
+    "requirements": [
+      "Intermediate knowledge of React and modern JavaScript"
+    ],
+    "categories": {
+      "id": "cat-005-0000-0000-0000-000000000005",
+      "name": "React",
+      "slug": "react"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "React",
+        "TypeScript",
+        "System Design"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Typing React Components",
+        "course_lessons": [
+          {
+            "id": "les-2-1",
+            "title": "Generics in React Components",
+            "duration_minutes": 22,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-01T10:00:00.000Z"
+  },
+  {
+    "id": "c003-react-beginners",
+    "title": "React Projects for Beginners",
+    "slug": "react-projects-for-beginners",
+    "subtitle": "Learn React by building 5 practical interactive projects: E-Commerce, Weather App, Quiz, and Dashboard.",
+    "description": "The fastest way to learn React is by building actual web apps. No dry theoretical lectures: code along from minute one to build five complete, portfolio-ready projects with Tailwind CSS and React.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-005-0000-0000-0000-000000000005",
+    "category": "React",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 0,
+    "discount_price": 0,
+    "is_free": true,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 12,
+    "duration_minutes": 720,
+    "total_lessons": 45,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "free",
+    "student_count": 112000,
+    "avg_rating": 4.8,
+    "review_count": 18900,
+    "tags": [
+      "React",
+      "JavaScript",
+      "Beginner",
+      "Projects",
+      "Free"
+    ],
+    "learning_objectives": [
+      "Build 5 interactive portfolio projects",
+      "Learn useState and useEffect through building apps",
+      "Style modern web apps with Tailwind CSS"
+    ],
+    "requirements": [
+      "Basic HTML and CSS knowledge"
+    ],
+    "categories": {
+      "id": "cat-005-0000-0000-0000-000000000005",
+      "name": "React",
+      "slug": "react"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "React",
+        "Frontend",
+        "JavaScript"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Project 1 - Interactive Calculator",
+        "course_lessons": [
+          {
+            "id": "les-3-1",
+            "title": "Project Setup and UI Layout",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-10T10:00:00.000Z"
+  },
+  {
+    "id": "c004-python-beginners",
+    "title": "Python Programming for Beginners",
+    "slug": "python-programming-for-beginners",
+    "subtitle": "Go from zero to building real scripts, automation tools, and web scrapers with Python 3.",
+    "description": "Master Python from the absolute basics to writing clean, idiomatic code. Learn variables, data structures, loops, functions, object-oriented programming (OOP), file I/O, error handling, and web scraping with BeautifulSoup.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-007-0000-0000-0000-000000000007",
+    "category": "Python",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 79.99,
+    "discount_price": 16.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 32,
+    "duration_minutes": 1920,
+    "total_lessons": 110,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 87400,
+    "avg_rating": 4.8,
+    "review_count": 12100,
+    "tags": [
+      "Python",
+      "Programming",
+      "Automation",
+      "Beginner",
+      "Coding"
+    ],
+    "learning_objectives": [
+      "Write clean and robust Python 3 programs",
+      "Automate tedious daily tasks with Python scripts",
+      "Scrape websites and parse real-world data",
+      "Understand OOP: Classes, Inheritance, and Methods"
+    ],
+    "requirements": [
+      "No prior coding experience required. Any computer will do."
+    ],
+    "categories": {
+      "id": "cat-007-0000-0000-0000-000000000007",
+      "name": "Python",
+      "slug": "python"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Python",
+        "Machine Learning",
+        "Data Science"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Getting Started with Python",
+        "course_lessons": [
+          {
+            "id": "les-4-1",
+            "title": "Installing Python 3 & PyCharm / VS Code",
+            "duration_minutes": 12,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          },
+          {
+            "id": "les-4-2",
+            "title": "Variables, Strings, and Numbers",
+            "duration_minutes": 22,
+            "is_preview": false,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-20T10:00:00.000Z"
+  },
+  {
+    "id": "c005-python-advanced",
+    "title": "Advanced Python Programming",
+    "slug": "advanced-python-programming",
+    "subtitle": "Metaprogramming, decorators, async/await concurrency, generators, and high-performance design patterns.",
+    "description": "Take your Python skills to senior level. Dive deep into Python internals, memory management, generators, context managers, custom decorators, multithreading, multiprocessing, and asyncio high-concurrency systems.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-007-0000-0000-0000-000000000007",
+    "category": "Python",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 99.99,
+    "discount_price": 22.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 24,
+    "duration_minutes": 1440,
+    "total_lessons": 75,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "premium",
+    "student_count": 34100,
+    "avg_rating": 4.9,
+    "review_count": 4800,
+    "tags": [
+      "Python",
+      "AsyncIO",
+      "Concurrency",
+      "Advanced",
+      "Backend"
+    ],
+    "learning_objectives": [
+      "Master asynchronous I/O with asyncio and aiohttp",
+      "Write custom decorators and metaclasses",
+      "Optimize memory and CPU performance with profiling tools"
+    ],
+    "requirements": [
+      "Solid foundational understanding of Python syntax and OOP"
+    ],
+    "categories": {
+      "id": "cat-007-0000-0000-0000-000000000007",
+      "name": "Python",
+      "slug": "python"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Python",
+        "Machine Learning",
+        "Data Science"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Advanced Metaprogramming & Decorators",
+        "course_lessons": [
+          {
+            "id": "les-5-1",
+            "title": "Parameterized Decorators with Wrapt",
+            "duration_minutes": 24,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-12T10:00:00.000Z"
+  },
+  {
+    "id": "c006-python-data-science",
+    "title": "Python for Data Science",
+    "slug": "python-for-data-science",
+    "subtitle": "Data analysis, manipulation, and visualization with NumPy, Pandas, Matplotlib, and Seaborn.",
+    "description": "Learn how to clean, analyze, and visualize complex datasets with the essential Python data science stack. Work with real-world financial, medical, and e-commerce datasets to uncover actionable insights.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-010-0000-0000-0000-000000000010",
+    "category": "Data Science",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 89.99,
+    "discount_price": 18.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 36,
+    "duration_minutes": 2160,
+    "total_lessons": 118,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 68900,
+    "avg_rating": 4.8,
+    "review_count": 9200,
+    "tags": [
+      "Python",
+      "Data Science",
+      "Pandas",
+      "NumPy",
+      "Analytics",
+      "Data Visualization"
+    ],
+    "learning_objectives": [
+      "Master array operations with NumPy",
+      "Perform data wrangling and aggregation with Pandas",
+      "Create interactive charts with Matplotlib and Seaborn"
+    ],
+    "requirements": [
+      "Basic Python programming syntax"
+    ],
+    "categories": {
+      "id": "cat-010-0000-0000-0000-000000000010",
+      "name": "Data Science",
+      "slug": "data-science"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Python",
+        "Machine Learning",
+        "Data Science"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Data Wrangling with Pandas",
+        "course_lessons": [
+          {
+            "id": "les-6-1",
+            "title": "Series, DataFrames, and Indexing",
+            "duration_minutes": 20,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-05T10:00:00.000Z"
+  },
+  {
+    "id": "c007-java-complete",
+    "title": "Complete Java Programming",
+    "slug": "complete-java-programming",
+    "subtitle": "Master Java 21, Object-Oriented Design, Collections Framework, Multithreading, and Lambdas.",
+    "description": "Comprehensive course on modern Java from ground up. Learn syntax, data types, control flow, object-oriented design patterns, generics, streams API, and core software engineering practices.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-006-0000-0000-0000-000000000006",
+    "category": "Java",
+    "instructor_id": "inst-4",
+    "instructor_name": "Marcus Vance",
+    "price": 84.99,
+    "discount_price": 17.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 42,
+    "duration_minutes": 2520,
+    "total_lessons": 160,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 76500,
+    "avg_rating": 4.8,
+    "review_count": 11300,
+    "tags": [
+      "Java",
+      "OOP",
+      "Backend",
+      "Collections",
+      "Streams",
+      "Programming"
+    ],
+    "learning_objectives": [
+      "Write clean, maintainable Java 21 applications",
+      "Master Object-Oriented Programming (OOP) concepts",
+      "Use the Java Collections Framework effectively",
+      "Apply modern functional features: Lambdas and Streams API"
+    ],
+    "requirements": [
+      "No programming experience required. Computer with Windows/Mac/Linux."
+    ],
+    "categories": {
+      "id": "cat-006-0000-0000-0000-000000000006",
+      "name": "Java",
+      "slug": "java"
+    },
+    "teachers": {
+      "id": "inst-4",
+      "expertise_areas": [
+        "Java",
+        "Spring Boot",
+        "Microservices"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 230000,
+      "profiles": {
+        "display_name": "Marcus Vance",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+        "bio": "Senior Enterprise Architect & Java Champion."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Java Basics & OOP Principles",
+        "course_lessons": [
+          {
+            "id": "les-7-1",
+            "title": "Java Architecture & JVM Internals",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          },
+          {
+            "id": "les-7-2",
+            "title": "Classes, Objects, and Encapsulation",
+            "duration_minutes": 25,
+            "is_preview": false,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-18T10:00:00.000Z"
+  },
+  {
+    "id": "c008-java-advanced",
+    "title": "Advanced Java Development",
+    "slug": "advanced-java-development",
+    "subtitle": "Spring Boot 3, Microservices, Hibernate / JPA, Kafka messaging, and Docker deployment.",
+    "description": "Take your Java skills into enterprise backend engineering. Build production RESTful microservices with Spring Boot, secure them with Spring Security and OAuth2, use Kafka event streaming, and deploy with Docker.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-006-0000-0000-0000-000000000006",
+    "category": "Java",
+    "instructor_id": "inst-4",
+    "instructor_name": "Marcus Vance",
+    "price": 119.99,
+    "discount_price": 29.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 35,
+    "duration_minutes": 2100,
+    "total_lessons": 105,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 39200,
+    "avg_rating": 4.9,
+    "review_count": 5600,
+    "tags": [
+      "Java",
+      "Spring Boot",
+      "Microservices",
+      "Kafka",
+      "Backend",
+      "Docker"
+    ],
+    "learning_objectives": [
+      "Build distributed microservices with Spring Boot 3",
+      "Integrate Apache Kafka for asynchronous messaging",
+      "Deploy containerized Java applications with Docker and Kubernetes"
+    ],
+    "requirements": [
+      "Solid knowledge of Core Java and relational databases"
+    ],
+    "categories": {
+      "id": "cat-006-0000-0000-0000-000000000006",
+      "name": "Java",
+      "slug": "java"
+    },
+    "teachers": {
+      "id": "inst-4",
+      "expertise_areas": [
+        "Java",
+        "Spring Boot",
+        "Microservices"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 230000,
+      "profiles": {
+        "display_name": "Marcus Vance",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+        "bio": "Senior Enterprise Architect & Java Champion."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Spring Boot 3 Architecture",
+        "course_lessons": [
+          {
+            "id": "les-8-1",
+            "title": "Dependency Injection & Auto-Configuration",
+            "duration_minutes": 22,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-14T10:00:00.000Z"
+  },
+  {
+    "id": "c009-nodejs-backend",
+    "title": "Complete Node.js Backend Development",
+    "slug": "complete-nodejs-backend-development",
+    "subtitle": "Build scalable REST APIs, GraphQL services, authentication, and database integrations with Node.js.",
+    "description": "Comprehensive guide to server-side JavaScript with Node.js. Master asynchronous programming, event loop mechanics, Express.js architecture, MongoDB, PostgreSQL, JWT authentication, caching with Redis, and automated testing.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-003-0000-0000-0000-000000000003",
+    "category": "Backend Development",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 34,
+    "duration_minutes": 2040,
+    "total_lessons": 125,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 71800,
+    "avg_rating": 4.8,
+    "review_count": 9900,
+    "tags": [
+      "Node.js",
+      "Express",
+      "Backend",
+      "JavaScript",
+      "REST API",
+      "Database"
+    ],
+    "learning_objectives": [
+      "Master the Node.js event loop and asynchronous patterns",
+      "Build production RESTful APIs with Express",
+      "Secure endpoints with JWT and OAuth2",
+      "Integrate PostgreSQL and Redis caching"
+    ],
+    "requirements": [
+      "Good grasp of JavaScript fundamentals (ES6+)"
+    ],
+    "categories": {
+      "id": "cat-003-0000-0000-0000-000000000003",
+      "name": "Backend Development",
+      "slug": "backend-development"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "React",
+        "Node.js",
+        "Backend"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Node.js Core Architecture",
+        "course_lessons": [
+          {
+            "id": "les-9-1",
+            "title": "The Node.js Runtime & V8 Engine",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-22T10:00:00.000Z"
+  },
+  {
+    "id": "c010-nodejs-express-masterclass",
+    "title": "Node.js and Express Masterclass",
+    "slug": "nodejs-and-express-masterclass",
+    "subtitle": "Advanced backend architecture, clean code principles, rate limiting, and microservices in Node.js.",
+    "description": "Deep-dive into professional backend architecture. Learn domain-driven design, repository patterns, middleware optimization, file streaming, rate limiting, and security best practices for high-traffic Node.js services.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-003-0000-0000-0000-000000000003",
+    "category": "Backend Development",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 94.99,
+    "discount_price": 21.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 26,
+    "duration_minutes": 1560,
+    "total_lessons": 88,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 31200,
+    "avg_rating": 4.9,
+    "review_count": 4200,
+    "tags": [
+      "Node.js",
+      "Express",
+      "Microservices",
+      "Architecture",
+      "Backend"
+    ],
+    "learning_objectives": [
+      "Implement clean layered architecture with Express",
+      "Scale Node applications across multi-core clusters",
+      "Write bulletproof unit and integration tests"
+    ],
+    "requirements": [
+      "Experience building basic Express applications"
+    ],
+    "categories": {
+      "id": "cat-003-0000-0000-0000-000000000003",
+      "name": "Backend Development",
+      "slug": "backend-development"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "React",
+        "Node.js",
+        "Backend"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Architecture & Patterns",
+        "course_lessons": [
+          {
+            "id": "les-10-1",
+            "title": "Layered Architecture in Express",
+            "duration_minutes": 20,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-18T10:00:00.000Z"
+  },
+  {
+    "id": "c011-fullstack-web-dev",
+    "title": "Full Stack Web Development",
+    "slug": "full-stack-web-development",
+    "subtitle": "HTML, CSS, JavaScript, React, Node.js, Express, PostgreSQL, and AWS full stack engineering.",
+    "description": "Become an elite full stack software engineer. Build real-world client-server architectures from the ground up: frontend interfaces in React, backend REST APIs in Express, persistent databases in PostgreSQL, and automated deployment.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-004-0000-0000-0000-000000000004",
+    "category": "Full Stack",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 129.99,
+    "discount_price": 29.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 58,
+    "duration_minutes": 3480,
+    "total_lessons": 210,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 142000,
+    "avg_rating": 4.9,
+    "review_count": 22400,
+    "tags": [
+      "Full Stack",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "JavaScript",
+      "Web Development"
+    ],
+    "learning_objectives": [
+      "Build end-to-end full stack web platforms",
+      "Connect React frontends to Express REST backends",
+      "Design relational databases with PostgreSQL and ORMs",
+      "Deploy full-stack applications with custom domains and SSL"
+    ],
+    "requirements": [
+      "No prior coding required. Absolute beginners welcome."
+    ],
+    "categories": {
+      "id": "cat-004-0000-0000-0000-000000000004",
+      "name": "Full Stack",
+      "slug": "full-stack"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "Full Stack",
+        "React",
+        "Node.js"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Full Stack Foundations",
+        "course_lessons": [
+          {
+            "id": "les-11-1",
+            "title": "Client-Server Model Explained",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-10T10:00:00.000Z"
+  },
+  {
+    "id": "c012-mern-stack-dev",
+    "title": "MERN Stack Development",
+    "slug": "mern-stack-development",
+    "subtitle": "MongoDB, Express, React, and Node.js: Build full-stack social media and e-commerce platforms.",
+    "description": "Master the world's most popular full-stack JavaScript ecosystem. Build full MERN applications from scratch with JWT auth, image uploads, real-time messaging with WebSockets, and payment gateways.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-004-0000-0000-0000-000000000004",
+    "category": "Full Stack",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 99.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 44,
+    "duration_minutes": 2640,
+    "total_lessons": 155,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 63400,
+    "avg_rating": 4.8,
+    "review_count": 8900,
+    "tags": [
+      "Full Stack",
+      "MERN",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express"
+    ],
+    "learning_objectives": [
+      "Build production-ready MERN stack apps",
+      "Design schema and aggregation pipelines in MongoDB",
+      "Implement secure authentication and authorization flows"
+    ],
+    "requirements": [
+      "Basic understanding of JavaScript and React"
+    ],
+    "categories": {
+      "id": "cat-004-0000-0000-0000-000000000004",
+      "name": "Full Stack",
+      "slug": "full-stack"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "Full Stack",
+        "React",
+        "Node.js"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: MERN Architecture",
+        "course_lessons": [
+          {
+            "id": "les-12-1",
+            "title": "Structuring a Monorepo MERN App",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-08T10:00:00.000Z"
+  },
+  {
+    "id": "c013-html-css-js-complete",
+    "title": "HTML CSS JavaScript Complete Course",
+    "slug": "html-css-javascript-complete-course",
+    "subtitle": "The foundational web development course. Master semantic HTML5, modern CSS Grid/Flexbox, and ES6+ JS.",
+    "description": "Start your web development journey right here. Master semantic markup, responsive design principles with Flexbox and Grid, CSS animations, and vanilla JavaScript DOM manipulation.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-002-0000-0000-0000-000000000002",
+    "category": "Frontend Development",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 0,
+    "discount_price": 0,
+    "is_free": true,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 20,
+    "duration_minutes": 1200,
+    "total_lessons": 90,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "free",
+    "student_count": 185000,
+    "avg_rating": 4.9,
+    "review_count": 28400,
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Frontend",
+      "Beginner",
+      "Free"
+    ],
+    "learning_objectives": [
+      "Build responsive websites with HTML5 and CSS3",
+      "Master Flexbox and CSS Grid layout models",
+      "Manipulate the browser DOM with modern JavaScript"
+    ],
+    "requirements": [
+      "None. Anyone with a web browser can start."
+    ],
+    "categories": {
+      "id": "cat-002-0000-0000-0000-000000000002",
+      "name": "Frontend Development",
+      "slug": "frontend-development"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "HTML",
+        "CSS",
+        "Frontend"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: HTML5 & Modern Layouts",
+        "course_lessons": [
+          {
+            "id": "les-13-1",
+            "title": "Semantic HTML & Accessibility",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-05T10:00:00.000Z"
+  },
+  {
+    "id": "c014-advanced-javascript",
+    "title": "Advanced JavaScript",
+    "slug": "advanced-javascript",
+    "subtitle": "Closures, prototypal inheritance, Event Loop, Memory management, Web Workers, and design patterns.",
+    "description": "Deep dive under the hood of the V8 engine and the ECMAScript specification. Understand closures, lexical scoping, call-stack execution contexts, event loop microtasks vs macrotasks, and functional programming.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-002-0000-0000-0000-000000000002",
+    "category": "Frontend Development",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 79.99,
+    "discount_price": 17.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 18,
+    "duration_minutes": 1080,
+    "total_lessons": 65,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "premium",
+    "student_count": 42100,
+    "avg_rating": 4.9,
+    "review_count": 6400,
+    "tags": [
+      "JavaScript",
+      "Frontend",
+      "Advanced",
+      "V8 Engine",
+      "Closures"
+    ],
+    "learning_objectives": [
+      "Understand the JavaScript engine and memory model",
+      "Master asynchronous microtask scheduling",
+      "Apply functional programming patterns like Currying and Composition"
+    ],
+    "requirements": [
+      "Basic understanding of JavaScript syntax"
+    ],
+    "categories": {
+      "id": "cat-002-0000-0000-0000-000000000002",
+      "name": "Frontend Development",
+      "slug": "frontend-development"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "JavaScript",
+        "Frontend",
+        "Architecture"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Execution Contexts & Closures",
+        "course_lessons": [
+          {
+            "id": "les-14-1",
+            "title": "Variable Environment & Lexical Scope",
+            "duration_minutes": 19,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-15T10:00:00.000Z"
+  },
+  {
+    "id": "c015-data-science-masterclass",
+    "title": "Data Science Masterclass",
+    "slug": "data-science-masterclass",
+    "subtitle": "Complete data science pathway: Statistical modeling, hypothesis testing, SQL, and predictive analytics.",
+    "description": "Master data science workflows from end to end. Formulate business hypotheses, extract data with SQL, clean messy real-world datasets, perform exploratory data analysis, and train predictive models.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-010-0000-0000-0000-000000000010",
+    "category": "Data Science",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 109.99,
+    "discount_price": 24.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 40,
+    "duration_minutes": 2400,
+    "total_lessons": 130,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 52400,
+    "avg_rating": 4.8,
+    "review_count": 7800,
+    "tags": [
+      "Data Science",
+      "Python",
+      "SQL",
+      "Statistics",
+      "Machine Learning"
+    ],
+    "learning_objectives": [
+      "Perform rigorous statistical inference and A/B testing",
+      "Extract and aggregate big data with SQL",
+      "Build predictive machine learning models"
+    ],
+    "requirements": [
+      "Basic arithmetic and high-school algebra"
+    ],
+    "categories": {
+      "id": "cat-010-0000-0000-0000-000000000010",
+      "name": "Data Science",
+      "slug": "data-science"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Python",
+        "Data Science",
+        "Machine Learning"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Data Science Methodology",
+        "course_lessons": [
+          {
+            "id": "les-15-1",
+            "title": "The Data Science Lifecycle",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-25T10:00:00.000Z"
+  },
+  {
+    "id": "c016-sql-database-dev",
+    "title": "SQL and Database Development",
+    "slug": "sql-and-database-development",
+    "subtitle": "Master PostgreSQL and MySQL: Complex joins, window functions, indexing, optimization, and transactions.",
+    "description": "SQL is the universal language of data. Learn relational database design, normalization, multi-table joins, subqueries, common table expressions (CTEs), window functions, query execution plans, and performance index tuning.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-003-0000-0000-0000-000000000003",
+    "category": "Backend Development",
+    "instructor_id": "inst-4",
+    "instructor_name": "Marcus Vance",
+    "price": 69.99,
+    "discount_price": 14.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 22,
+    "duration_minutes": 1320,
+    "total_lessons": 80,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 67800,
+    "avg_rating": 4.9,
+    "review_count": 9100,
+    "tags": [
+      "SQL",
+      "PostgreSQL",
+      "Database",
+      "Backend",
+      "Analytics"
+    ],
+    "learning_objectives": [
+      "Write complex SQL queries and window functions",
+      "Design normalized database schemas",
+      "Optimize slow queries using EXPLAIN ANALYZE and indexes"
+    ],
+    "requirements": [
+      "No database experience needed"
+    ],
+    "categories": {
+      "id": "cat-003-0000-0000-0000-000000000003",
+      "name": "Backend Development",
+      "slug": "backend-development"
+    },
+    "teachers": {
+      "id": "inst-4",
+      "expertise_areas": [
+        "SQL",
+        "Databases",
+        "Java"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 230000,
+      "profiles": {
+        "display_name": "Marcus Vance",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+        "bio": "Senior Enterprise Architect."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Relational Database Fundamentals",
+        "course_lessons": [
+          {
+            "id": "les-16-1",
+            "title": "Tables, Primary Keys, and Foreign Keys",
+            "duration_minutes": 14,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-02T10:00:00.000Z"
+  },
+  {
+    "id": "c017-machine-learning-fundamentals",
+    "title": "Machine Learning Fundamentals",
+    "slug": "machine-learning-fundamentals",
+    "subtitle": "Supervised & unsupervised algorithms: Linear regression, decision trees, random forests, and k-means.",
+    "description": "Understand the theory and code behind fundamental machine learning algorithms. Use Python and Scikit-Learn to build classification and regression models, evaluate performance with cross-validation, and avoid overfitting.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-009-0000-0000-0000-000000000009",
+    "category": "Machine Learning",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 30,
+    "duration_minutes": 1800,
+    "total_lessons": 95,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 61200,
+    "avg_rating": 4.8,
+    "review_count": 8700,
+    "tags": [
+      "Machine Learning",
+      "Python",
+      "Scikit-Learn",
+      "AI",
+      "Algorithms"
+    ],
+    "learning_objectives": [
+      "Understand the mathematics behind ML algorithms",
+      "Train and evaluate models with Scikit-Learn",
+      "Prevent overfitting with regularization and cross-validation"
+    ],
+    "requirements": [
+      "Basic Python syntax and high school mathematics"
+    ],
+    "categories": {
+      "id": "cat-009-0000-0000-0000-000000000009",
+      "name": "Machine Learning",
+      "slug": "machine-learning"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Machine Learning",
+        "AI",
+        "Python"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Introduction to Machine Learning",
+        "course_lessons": [
+          {
+            "id": "les-17-1",
+            "title": "Supervised vs Unsupervised Learning",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-28T10:00:00.000Z"
+  },
+  {
+    "id": "c018-practical-ml-python",
+    "title": "Practical Machine Learning with Python",
+    "slug": "practical-machine-learning-with-python",
+    "subtitle": "Deep Learning, PyTorch, Convolutional Neural Networks, and natural language processing NLP.",
+    "description": "Bridge the gap between ML theory and practical production models. Build deep neural networks with PyTorch, image recognition with CNNs, and sentiment classification using transformer language models.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-009-0000-0000-0000-000000000009",
+    "category": "Machine Learning",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 99.99,
+    "discount_price": 24.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "advanced",
+    "language": "English",
+    "duration_hours": 32,
+    "duration_minutes": 1920,
+    "total_lessons": 102,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 41500,
+    "avg_rating": 4.9,
+    "review_count": 5900,
+    "tags": [
+      "Machine Learning",
+      "PyTorch",
+      "Deep Learning",
+      "Python",
+      "Computer Vision"
+    ],
+    "learning_objectives": [
+      "Build deep neural networks using PyTorch",
+      "Implement Convolutional Neural Networks for vision",
+      "Deploy trained models behind a FastAPI microservice"
+    ],
+    "requirements": [
+      "Familiarity with Python and basic machine learning concepts"
+    ],
+    "categories": {
+      "id": "cat-009-0000-0000-0000-000000000009",
+      "name": "Machine Learning",
+      "slug": "machine-learning"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "Machine Learning",
+        "AI",
+        "Python"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Deep Learning with PyTorch",
+        "course_lessons": [
+          {
+            "id": "les-18-1",
+            "title": "PyTorch Tensors & Autograd",
+            "duration_minutes": 22,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-16T10:00:00.000Z"
+  },
+  {
+    "id": "c019-ai-fundamentals",
+    "title": "Artificial Intelligence Fundamentals",
+    "slug": "artificial-intelligence-fundamentals",
+    "subtitle": "Generative AI, Large Language Models (LLMs), Prompt Engineering, and RAG architectures.",
+    "description": "Understand modern Artificial Intelligence and how to build applications on top of generative models. Learn prompt engineering, embeddings, vector databases (Pinecone, pgvector), and Retrieval-Augmented Generation (RAG).",
+    "thumbnail_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-008-0000-0000-0000-000000000008",
+    "category": "Artificial Intelligence",
+    "instructor_id": "inst-3",
+    "instructor_name": "David Miller",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 25,
+    "duration_minutes": 1500,
+    "total_lessons": 80,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 89100,
+    "avg_rating": 4.9,
+    "review_count": 13400,
+    "tags": [
+      "Artificial Intelligence",
+      "AI",
+      "LLM",
+      "Prompt Engineering",
+      "RAG",
+      "Generative AI"
+    ],
+    "learning_objectives": [
+      "Build end-to-end RAG pipelines with vector databases",
+      "Master prompt engineering techniques and system instructions",
+      "Integrate OpenAI and Anthropic APIs into web applications"
+    ],
+    "requirements": [
+      "Basic programming knowledge in Python or JavaScript"
+    ],
+    "categories": {
+      "id": "cat-008-0000-0000-0000-000000000008",
+      "name": "Artificial Intelligence",
+      "slug": "artificial-intelligence"
+    },
+    "teachers": {
+      "id": "inst-3",
+      "expertise_areas": [
+        "AI",
+        "Generative AI",
+        "NLP"
+      ],
+      "avg_rating": 4.7,
+      "total_students": 450100,
+      "profiles": {
+        "display_name": "David Miller",
+        "avatar_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+        "bio": "AI Architect & Data Scientist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Foundations of Generative AI",
+        "course_lessons": [
+          {
+            "id": "les-19-1",
+            "title": "How Large Language Models Work",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-04T10:00:00.000Z"
+  },
+  {
+    "id": "c020-aws-cloud-practitioner",
+    "title": "AWS Cloud Practitioner",
+    "slug": "aws-cloud-practitioner",
+    "subtitle": "Pass the AWS Certified Cloud Practitioner (CLF-C02) exam with complete hands-on labs.",
+    "description": "Comprehensive preparation course for the AWS Certified Cloud Practitioner exam. Understand cloud computing concepts, AWS global infrastructure, core services (EC2, S3, RDS, Lambda), security, IAM, and billing.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-011-0000-0000-0000-000000000011",
+    "category": "Cloud Computing",
+    "instructor_id": "inst-5",
+    "instructor_name": "Elena Rostova",
+    "price": 84.99,
+    "discount_price": 16.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 20,
+    "duration_minutes": 1200,
+    "total_lessons": 75,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 92300,
+    "avg_rating": 4.9,
+    "review_count": 14100,
+    "tags": [
+      "AWS",
+      "Cloud Computing",
+      "Certification",
+      "DevOps",
+      "Infrastructure"
+    ],
+    "learning_objectives": [
+      "Pass the official AWS CLF-C02 certification exam",
+      "Understand core AWS services: EC2, S3, RDS, VPC",
+      "Implement IAM security policies and multi-factor authentication"
+    ],
+    "requirements": [
+      "No prior cloud computing experience required"
+    ],
+    "categories": {
+      "id": "cat-011-0000-0000-0000-000000000011",
+      "name": "Cloud Computing",
+      "slug": "cloud-computing"
+    },
+    "teachers": {
+      "id": "inst-5",
+      "expertise_areas": [
+        "AWS",
+        "DevOps",
+        "Cloud Architecture"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 180000,
+      "profiles": {
+        "display_name": "Elena Rostova",
+        "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&q=80",
+        "bio": "Principal Cloud Solutions Architect & AWS Community Hero."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Cloud Concepts & Global Infrastructure",
+        "course_lessons": [
+          {
+            "id": "les-20-1",
+            "title": "AWS Regions & Availability Zones",
+            "duration_minutes": 14,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-12T10:00:00.000Z"
+  },
+  {
+    "id": "c021-aws-developer-essentials",
+    "title": "AWS Developer Essentials",
+    "slug": "aws-developer-essentials",
+    "subtitle": "Serverless architectures: AWS Lambda, API Gateway, DynamoDB, SQS, SNS, and CDK infrastructure as code.",
+    "description": "Build high-throughput, event-driven serverless backends on AWS. Learn how to write Lambda functions in TypeScript/Node, design DynamoDB single-table schemas, manage asynchronous task queues with SQS, and deploy with AWS CDK.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-011-0000-0000-0000-000000000011",
+    "category": "Cloud Computing",
+    "instructor_id": "inst-5",
+    "instructor_name": "Elena Rostova",
+    "price": 99.99,
+    "discount_price": 22.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 28,
+    "duration_minutes": 1680,
+    "total_lessons": 92,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 38100,
+    "avg_rating": 4.8,
+    "review_count": 5200,
+    "tags": [
+      "AWS",
+      "Serverless",
+      "Lambda",
+      "DynamoDB",
+      "Cloud Computing"
+    ],
+    "learning_objectives": [
+      "Build production-ready Serverless APIs with AWS Lambda",
+      "Model high-performance data in DynamoDB",
+      "Deploy reproducible cloud infrastructure with AWS CDK"
+    ],
+    "requirements": [
+      "Basic familiarity with JavaScript/TypeScript and cloud concepts"
+    ],
+    "categories": {
+      "id": "cat-011-0000-0000-0000-000000000011",
+      "name": "Cloud Computing",
+      "slug": "cloud-computing"
+    },
+    "teachers": {
+      "id": "inst-5",
+      "expertise_areas": [
+        "AWS",
+        "DevOps",
+        "Cloud Architecture"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 180000,
+      "profiles": {
+        "display_name": "Elena Rostova",
+        "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&q=80",
+        "bio": "Principal Cloud Solutions Architect & AWS Community Hero."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Serverless Architecture with Lambda",
+        "course_lessons": [
+          {
+            "id": "les-21-1",
+            "title": "Lambda Execution Model & Cold Starts",
+            "duration_minutes": 20,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-11T10:00:00.000Z"
+  },
+  {
+    "id": "c022-cyber-security-fundamentals",
+    "title": "Cyber Security Fundamentals",
+    "slug": "cyber-security-fundamentals",
+    "subtitle": "Network defense, vulnerability assessments, public key cryptography, and threat mitigation.",
+    "description": "Protect modern networks and digital infrastructures from cyber threats. Learn OSI security layers, port scanning, firewalls, packet analysis with Wireshark, asymmetric cryptography (RSA, ECC), and SOC defense operations.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-012-0000-0000-0000-000000000012",
+    "category": "Cyber Security",
+    "instructor_id": "inst-6",
+    "instructor_name": "Tariq Al-Mansoor",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 26,
+    "duration_minutes": 1560,
+    "total_lessons": 85,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 58400,
+    "avg_rating": 4.8,
+    "review_count": 8100,
+    "tags": [
+      "Cyber Security",
+      "Network Security",
+      "Cryptography",
+      "Ethical Hacking"
+    ],
+    "learning_objectives": [
+      "Identify security vulnerabilities in computer networks",
+      "Analyze network traffic with Wireshark",
+      "Implement public key infrastructure (PKI) and SSL certificates"
+    ],
+    "requirements": [
+      "Basic familiarity with computers and operating systems"
+    ],
+    "categories": {
+      "id": "cat-012-0000-0000-0000-000000000012",
+      "name": "Cyber Security",
+      "slug": "cyber-security"
+    },
+    "teachers": {
+      "id": "inst-6",
+      "expertise_areas": [
+        "Cyber Security",
+        "Penetration Testing",
+        "Network Defense"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 115000,
+      "profiles": {
+        "display_name": "Tariq Al-Mansoor",
+        "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&q=80",
+        "bio": "Certified Information Systems Security Professional (CISSP)."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Network Security & Traffic Analysis",
+        "course_lessons": [
+          {
+            "id": "les-22-1",
+            "title": "TCP/IP Security and Port Scanning",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-29T10:00:00.000Z"
+  },
+  {
+    "id": "c023-ethical-hacking-fundamentals",
+    "title": "Ethical Hacking Fundamentals",
+    "slug": "ethical-hacking-fundamentals",
+    "subtitle": "Penetration testing with Kali Linux, Metasploit, web application security (OWASP Top 10).",
+    "description": "Learn ethical hacking from a professional penetration tester. Set up a secure lab in VirtualBox with Kali Linux, test web applications for SQL injection and XSS vulnerabilities, exploit buffer overflows, and write executive remediation reports.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-012-0000-0000-0000-000000000012",
+    "category": "Cyber Security",
+    "instructor_id": "inst-6",
+    "instructor_name": "Tariq Al-Mansoor",
+    "price": 109.99,
+    "discount_price": 24.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 36,
+    "duration_minutes": 2160,
+    "total_lessons": 115,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 72100,
+    "avg_rating": 4.9,
+    "review_count": 10400,
+    "tags": [
+      "Cyber Security",
+      "Ethical Hacking",
+      "Penetration Testing",
+      "Kali Linux",
+      "OWASP"
+    ],
+    "learning_objectives": [
+      "Set up an isolated ethical hacking laboratory",
+      "Perform penetration tests against OWASP Top 10 vulnerabilities",
+      "Use Kali Linux tools: Nmap, Burp Suite, and Metasploit"
+    ],
+    "requirements": [
+      "Basic understanding of networking and Linux command line"
+    ],
+    "categories": {
+      "id": "cat-012-0000-0000-0000-000000000012",
+      "name": "Cyber Security",
+      "slug": "cyber-security"
+    },
+    "teachers": {
+      "id": "inst-6",
+      "expertise_areas": [
+        "Cyber Security",
+        "Penetration Testing",
+        "Network Defense"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 115000,
+      "profiles": {
+        "display_name": "Tariq Al-Mansoor",
+        "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&q=80",
+        "bio": "Certified Information Systems Security Professional (CISSP)."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Pen Testing Methodology & Reconnaissance",
+        "course_lessons": [
+          {
+            "id": "les-23-1",
+            "title": "Passive vs Active Information Gathering",
+            "duration_minutes": 20,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-06T10:00:00.000Z"
+  },
+  {
+    "id": "c024-ui-ux-masterclass",
+    "title": "UI/UX Design Masterclass",
+    "slug": "ui-ux-design-masterclass",
+    "subtitle": "User research, wireframing, usability testing, mobile UX design, and conversion rate optimization.",
+    "description": "Design software products people love to use. Learn how to conduct user interviews, create personas, design high-converting wireframes, run A/B usability experiments, and apply modern UI aesthetics.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-013-0000-0000-0000-000000000013",
+    "category": "UI/UX Design",
+    "instructor_id": "inst-2",
+    "instructor_name": "Sarah Chen",
+    "price": 89.99,
+    "discount_price": 18.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 30,
+    "duration_minutes": 1800,
+    "total_lessons": 94,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 78900,
+    "avg_rating": 4.9,
+    "review_count": 11500,
+    "tags": [
+      "UI/UX Design",
+      "Product Design",
+      "User Research",
+      "Wireframing",
+      "Figma"
+    ],
+    "learning_objectives": [
+      "Conduct user research interviews and affinity mapping",
+      "Design mobile-first user experiences with intuitive flows",
+      "Validate design prototypes through moderated user testing"
+    ],
+    "requirements": [
+      "No prior design experience needed"
+    ],
+    "categories": {
+      "id": "cat-013-0000-0000-0000-000000000013",
+      "name": "UI/UX Design",
+      "slug": "ui-ux-design"
+    },
+    "teachers": {
+      "id": "inst-2",
+      "expertise_areas": [
+        "UI/UX Design",
+        "Figma",
+        "User Research"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 320400,
+      "profiles": {
+        "display_name": "Sarah Chen",
+        "avatar_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80",
+        "bio": "Design Lead at Meta & Config Speaker."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: User Experience Foundations",
+        "course_lessons": [
+          {
+            "id": "les-24-1",
+            "title": "The UX Design Process from Discovery to Launch",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-14T10:00:00.000Z"
+  },
+  {
+    "id": "c025-figma-complete-course",
+    "title": "Figma Complete Course",
+    "slug": "figma-complete-course",
+    "subtitle": "Master Auto Layout 5.0, design tokens, component variants, variables, and interactive prototypes.",
+    "description": "The definitive Figma masterclass for UI/UX designers. Build a scalable enterprise design system with nested auto layouts, reusable component properties, dark mode color variables, and micro-interaction prototypes.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-013-0000-0000-0000-000000000013",
+    "category": "UI/UX Design",
+    "instructor_id": "inst-2",
+    "instructor_name": "Sarah Chen",
+    "price": 79.99,
+    "discount_price": 14.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 24,
+    "duration_minutes": 1440,
+    "total_lessons": 82,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 64300,
+    "avg_rating": 4.9,
+    "review_count": 8900,
+    "tags": [
+      "Figma",
+      "UI/UX Design",
+      "Design Systems",
+      "Auto Layout",
+      "Prototyping"
+    ],
+    "learning_objectives": [
+      "Master Figma vector tools and Auto Layout 5.0",
+      "Build comprehensive Design Systems with color and typography tokens",
+      "Create interactive prototypes with smart animate transitions"
+    ],
+    "requirements": [
+      "Free Figma account (browser or desktop app)"
+    ],
+    "categories": {
+      "id": "cat-013-0000-0000-0000-000000000013",
+      "name": "UI/UX Design",
+      "slug": "ui-ux-design"
+    },
+    "teachers": {
+      "id": "inst-2",
+      "expertise_areas": [
+        "UI/UX Design",
+        "Figma",
+        "Design Systems"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 320400,
+      "profiles": {
+        "display_name": "Sarah Chen",
+        "avatar_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80",
+        "bio": "Design Lead at Meta."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Auto Layout & Component Architecture",
+        "course_lessons": [
+          {
+            "id": "les-25-1",
+            "title": "Auto Layout Responsive Rules",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-03T10:00:00.000Z"
+  },
+  {
+    "id": "c026-flutter-mobile-app",
+    "title": "Flutter Mobile App Development",
+    "slug": "flutter-mobile-app-development",
+    "subtitle": "Build cross-platform iOS and Android apps with Flutter, Dart, Riverpod, and Firebase.",
+    "description": "Learn how to build beautiful, natively compiled mobile apps from a single codebase with Google Flutter and Dart. Build full projects: chat applications, e-commerce stores, and Google Maps integration.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-014-0000-0000-0000-000000000014",
+    "category": "Mobile Development",
+    "instructor_id": "inst-7",
+    "instructor_name": "Kenji Sato",
+    "price": 94.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 38,
+    "duration_minutes": 2280,
+    "total_lessons": 135,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 51200,
+    "avg_rating": 4.8,
+    "review_count": 7100,
+    "tags": [
+      "Flutter",
+      "Mobile Development",
+      "Dart",
+      "iOS",
+      "Android",
+      "Cross Platform"
+    ],
+    "learning_objectives": [
+      "Build multiplatform iOS and Android apps with Flutter",
+      "Master Dart language fundamentals and async programming",
+      "Manage state with Riverpod and integrate Firebase backend"
+    ],
+    "requirements": [
+      "Basic programming knowledge in any language"
+    ],
+    "categories": {
+      "id": "cat-014-0000-0000-0000-000000000014",
+      "name": "Mobile Development",
+      "slug": "mobile-development"
+    },
+    "teachers": {
+      "id": "inst-7",
+      "expertise_areas": [
+        "Flutter",
+        "Mobile",
+        "Kotlin",
+        "Swift"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 95000,
+      "profiles": {
+        "display_name": "Kenji Sato",
+        "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&q=80",
+        "bio": "Senior Mobile Engineer & Flutter Contributor."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Flutter Widgets & Layouts",
+        "course_lessons": [
+          {
+            "id": "les-26-1",
+            "title": "Stateless vs Stateful Widgets",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-26T10:00:00.000Z"
+  },
+  {
+    "id": "c027-android-development",
+    "title": "Android Development",
+    "slug": "android-development",
+    "subtitle": "Modern Android app development with Kotlin, Jetpack Compose, Coroutines, and Room DB.",
+    "description": "Build high-performance native Android apps using official Google best practices. Learn Kotlin, declarative UI with Jetpack Compose, MVVM architecture, Retrofit for REST APIs, and publish to the Google Play Store.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-014-0000-0000-0000-000000000014",
+    "category": "Mobile Development",
+    "instructor_id": "inst-7",
+    "instructor_name": "Kenji Sato",
+    "price": 89.99,
+    "discount_price": 18.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 34,
+    "duration_minutes": 2040,
+    "total_lessons": 110,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 43200,
+    "avg_rating": 4.8,
+    "review_count": 6200,
+    "tags": [
+      "Android",
+      "Kotlin",
+      "Jetpack Compose",
+      "Mobile Development",
+      "Google Play"
+    ],
+    "learning_objectives": [
+      "Build native Android apps with Kotlin and Jetpack Compose",
+      "Implement clean MVVM architecture with Coroutines and Flow",
+      "Store offline data with Room SQLite database"
+    ],
+    "requirements": [
+      "Basic object-oriented programming knowledge"
+    ],
+    "categories": {
+      "id": "cat-014-0000-0000-0000-000000000014",
+      "name": "Mobile Development",
+      "slug": "mobile-development"
+    },
+    "teachers": {
+      "id": "inst-7",
+      "expertise_areas": [
+        "Flutter",
+        "Mobile",
+        "Kotlin"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 95000,
+      "profiles": {
+        "display_name": "Kenji Sato",
+        "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&q=80",
+        "bio": "Senior Mobile Engineer."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Modern Jetpack Compose UI",
+        "course_lessons": [
+          {
+            "id": "les-27-1",
+            "title": "Declarative UI in Compose",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-09T10:00:00.000Z"
+  },
+  {
+    "id": "c028-digital-marketing-masterclass",
+    "title": "Digital Marketing Masterclass",
+    "slug": "digital-marketing-masterclass",
+    "subtitle": "SEO, Google Ads, Content Marketing, Email Funnels, and Social Media growth hacking.",
+    "description": "Drive real traffic, leads, and sales for any business. Learn how to rank #1 on Google with Search Engine Optimization (SEO), set up profitable Google Search & Display ad campaigns, and build automated email sales funnels.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-016-0000-0000-0000-000000000016",
+    "category": "Marketing",
+    "instructor_id": "inst-8",
+    "instructor_name": "Rachel Adams",
+    "price": 79.99,
+    "discount_price": 14.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 26,
+    "duration_minutes": 1560,
+    "total_lessons": 90,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 83400,
+    "avg_rating": 4.8,
+    "review_count": 12300,
+    "tags": [
+      "Digital Marketing",
+      "Marketing",
+      "SEO",
+      "Google Ads",
+      "Content Marketing"
+    ],
+    "learning_objectives": [
+      "Master on-page, technical, and off-page SEO",
+      "Create profitable Google Ads campaigns",
+      "Build automated email marketing funnels with high conversion rates"
+    ],
+    "requirements": [
+      "No prior marketing background needed"
+    ],
+    "categories": {
+      "id": "cat-016-0000-0000-0000-000000000016",
+      "name": "Marketing",
+      "slug": "marketing"
+    },
+    "teachers": {
+      "id": "inst-8",
+      "expertise_areas": [
+        "Digital Marketing",
+        "SEO",
+        "Growth"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 160000,
+      "profiles": {
+        "display_name": "Rachel Adams",
+        "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&q=80",
+        "bio": "VP of Growth & Digital Marketing Strategist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Search Engine Optimization Mastery",
+        "course_lessons": [
+          {
+            "id": "les-28-1",
+            "title": "Keyword Research & Search Intent",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-16T10:00:00.000Z"
+  },
+  {
+    "id": "c029-social-media-marketing",
+    "title": "Social Media Marketing",
+    "slug": "social-media-marketing",
+    "subtitle": "Instagram, TikTok, LinkedIn, YouTube, and viral content strategies for brands and creators.",
+    "description": "Grow a dedicated audience and turn followers into paying customers across Instagram, TikTok, LinkedIn, and YouTube. Learn algorithm optimization, short-form video production, influencer collaborations, and analytics.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-016-0000-0000-0000-000000000016",
+    "category": "Marketing",
+    "instructor_id": "inst-8",
+    "instructor_name": "Rachel Adams",
+    "price": 69.99,
+    "discount_price": 14.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 18,
+    "duration_minutes": 1080,
+    "total_lessons": 62,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 47200,
+    "avg_rating": 4.7,
+    "review_count": 6800,
+    "tags": [
+      "Social Media",
+      "Marketing",
+      "Instagram",
+      "TikTok",
+      "Branding"
+    ],
+    "learning_objectives": [
+      "Master social media algorithms and viral formats",
+      "Produce high-converting short form video content",
+      "Run effective influencer partnership campaigns"
+    ],
+    "requirements": [
+      "A smartphone and computer"
+    ],
+    "categories": {
+      "id": "cat-016-0000-0000-0000-000000000016",
+      "name": "Marketing",
+      "slug": "marketing"
+    },
+    "teachers": {
+      "id": "inst-8",
+      "expertise_areas": [
+        "Digital Marketing",
+        "Social Media",
+        "Growth"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 160000,
+      "profiles": {
+        "display_name": "Rachel Adams",
+        "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&q=80",
+        "bio": "VP of Growth & Digital Marketing Strategist."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Social Media Algorithm Architecture",
+        "course_lessons": [
+          {
+            "id": "les-29-1",
+            "title": "Understanding Feed & Recommendation Engines",
+            "duration_minutes": 14,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-17T10:00:00.000Z"
+  },
+  {
+    "id": "c030-financial-management",
+    "title": "Financial Management",
+    "slug": "financial-management",
+    "subtitle": "Corporate finance, balance sheet analysis, cash flow modeling, budgeting, and capital valuation.",
+    "description": "Gain commanding mastery of corporate finance and financial accounting. Learn how to interpret income statements, balance sheets, and cash flow statements, conduct discounted cash flow (DCF) valuation, and manage enterprise budgets.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-018-0000-0000-0000-000000000018",
+    "category": "Finance",
+    "instructor_id": "inst-9",
+    "instructor_name": "Jonathan Sterling",
+    "price": 99.99,
+    "discount_price": 22.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 28,
+    "duration_minutes": 1680,
+    "total_lessons": 86,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 39800,
+    "avg_rating": 4.9,
+    "review_count": 5400,
+    "tags": [
+      "Finance",
+      "Accounting",
+      "Financial Modeling",
+      "Business",
+      "Valuation"
+    ],
+    "learning_objectives": [
+      "Analyze 3-statement financial models with precision",
+      "Perform company valuations using DCF and comparable multiples",
+      "Optimize working capital and budgeting in corporations"
+    ],
+    "requirements": [
+      "Basic mathematics and Microsoft Excel proficiency"
+    ],
+    "categories": {
+      "id": "cat-018-0000-0000-0000-000000000018",
+      "name": "Finance",
+      "slug": "finance"
+    },
+    "teachers": {
+      "id": "inst-9",
+      "expertise_areas": [
+        "Finance",
+        "Corporate Accounting",
+        "Valuation"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 85000,
+      "profiles": {
+        "display_name": "Jonathan Sterling",
+        "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&q=80",
+        "bio": "CFA Charterholder & Former Wall Street Investment Banker."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Financial Statements Deep Dive",
+        "course_lessons": [
+          {
+            "id": "les-30-1",
+            "title": "Linking the Three Financial Statements",
+            "duration_minutes": 18,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-24T10:00:00.000Z"
+  },
+  {
+    "id": "c031-business-analytics",
+    "title": "Business Analytics",
+    "slug": "business-analytics",
+    "subtitle": "Data-driven decision making: Tableau dashboards, advanced Excel, power BI, and KPI tracking.",
+    "description": "Transform raw business data into actionable executive insights. Master business intelligence tooling: create executive Tableau dashboards, automated Excel reports, customer cohort analysis, and predictive metric forecasts.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-017-0000-0000-0000-000000000017",
+    "category": "Business",
+    "instructor_id": "inst-9",
+    "instructor_name": "Jonathan Sterling",
+    "price": 84.99,
+    "discount_price": 17.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 24,
+    "duration_minutes": 1440,
+    "total_lessons": 78,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 44100,
+    "avg_rating": 4.8,
+    "review_count": 6100,
+    "tags": [
+      "Business",
+      "Analytics",
+      "Tableau",
+      "Excel",
+      "BI",
+      "Dashboards"
+    ],
+    "learning_objectives": [
+      "Build interactive executive dashboards in Tableau",
+      "Model customer retention and cohort lifecycles",
+      "Formulate data-backed strategic recommendations"
+    ],
+    "requirements": [
+      "Basic familiarity with spreadsheets"
+    ],
+    "categories": {
+      "id": "cat-017-0000-0000-0000-000000000017",
+      "name": "Business",
+      "slug": "business"
+    },
+    "teachers": {
+      "id": "inst-9",
+      "expertise_areas": [
+        "Finance",
+        "Corporate Accounting",
+        "Business Analytics"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 85000,
+      "profiles": {
+        "display_name": "Jonathan Sterling",
+        "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&q=80",
+        "bio": "CFA Charterholder."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: KPI Frameworks & Data Storytelling",
+        "course_lessons": [
+          {
+            "id": "les-31-1",
+            "title": "Defining Actionable Business Metrics",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-07T10:00:00.000Z"
+  },
+  {
+    "id": "c032-communication-skills",
+    "title": "Communication Skills",
+    "slug": "communication-skills",
+    "subtitle": "Executive presence, public speaking, persuasive negotiation, and cross-functional leadership.",
+    "description": "Elevate your professional career by mastering persuasive communication. Learn how to present complex technical ideas clearly to executives, resolve team conflicts, lead negotiations, and master active listening.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-021-0000-0000-0000-000000000021",
+    "category": "Communication Skills",
+    "instructor_id": "inst-10",
+    "instructor_name": "Claire Dupont",
+    "price": 0,
+    "discount_price": 0,
+    "is_free": true,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 10,
+    "duration_minutes": 600,
+    "total_lessons": 40,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "free",
+    "student_count": 96200,
+    "avg_rating": 4.9,
+    "review_count": 15400,
+    "tags": [
+      "Communication",
+      "Leadership",
+      "Public Speaking",
+      "Negotiation",
+      "Free"
+    ],
+    "learning_objectives": [
+      "Deliver confident presentations to senior leadership",
+      "Master persuasive negotiation and conflict resolution",
+      "Structure technical ideas clearly for non-technical stakeholders"
+    ],
+    "requirements": [
+      "None. Open to all professionals."
+    ],
+    "categories": {
+      "id": "cat-021-0000-0000-0000-000000000021",
+      "name": "Communication Skills",
+      "slug": "communication-skills"
+    },
+    "teachers": {
+      "id": "inst-10",
+      "expertise_areas": [
+        "Communication",
+        "Leadership",
+        "Executive Coaching"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 140000,
+      "profiles": {
+        "display_name": "Claire Dupont",
+        "avatar_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80",
+        "bio": "Executive Communication Coach & TEDx Speaker."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Foundations of Clear Communication",
+        "course_lessons": [
+          {
+            "id": "les-32-1",
+            "title": "The 3 Pillars of Executive Presence",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-08T10:00:00.000Z"
+  },
+  {
+    "id": "c033-interview-preparation",
+    "title": "Interview Preparation",
+    "slug": "interview-preparation",
+    "subtitle": "Ace technical coding interviews: Data structures, algorithms, system design, and behavioral questions.",
+    "description": "The ultimate tech interview playbook. Master the 75 most common LeetCode patterns (Arrays, Two Pointers, Trees, Graphs, Dynamic Programming), learn scalable system design, and perfect the STAR behavioral interview format.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-022-0000-0000-0000-000000000022",
+    "category": "Interview Preparation",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 99.99,
+    "discount_price": 24.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 36,
+    "duration_minutes": 2160,
+    "total_lessons": 120,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 81900,
+    "avg_rating": 4.9,
+    "review_count": 13900,
+    "tags": [
+      "Interview Preparation",
+      "Algorithms",
+      "Data Structures",
+      "System Design",
+      "Career"
+    ],
+    "learning_objectives": [
+      "Solve algorithmic coding problems in 45-minute timed windows",
+      "Design scalable systems handling millions of daily active users",
+      "Answer behavioral interview questions with high confidence"
+    ],
+    "requirements": [
+      "Basic familiarity with at least one programming language"
+    ],
+    "categories": {
+      "id": "cat-022-0000-0000-0000-000000000022",
+      "name": "Interview Preparation",
+      "slug": "interview-preparation"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "Algorithms",
+        "System Design",
+        "Interviews"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Data Structures Problem Solving Patterns",
+        "course_lessons": [
+          {
+            "id": "les-33-1",
+            "title": "Two Pointers & Sliding Window Patterns",
+            "duration_minutes": 22,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-30T10:00:00.000Z"
+  },
+  {
+    "id": "c034-git-and-github",
+    "title": "Git and GitHub",
+    "slug": "git-and-github",
+    "subtitle": "Version control mastery: Branching strategies, rebase, merge conflicts, pull requests, and GitHub Actions.",
+    "description": "Never fear merge conflicts again. Master Git from foundational commands (`add`, `commit`, `push`, `pull`) to advanced workflows: interactive rebase, cherry-pick, reflog recovery, pull request code reviews, and automated CI with GitHub Actions.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-001-0000-0000-0000-000000000001",
+    "category": "Web Development",
+    "instructor_id": "inst-1",
+    "instructor_name": "Dr. Angela Steele",
+    "price": 0,
+    "discount_price": 0,
+    "is_free": true,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 12,
+    "duration_minutes": 720,
+    "total_lessons": 48,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "free",
+    "student_count": 134000,
+    "avg_rating": 4.9,
+    "review_count": 21000,
+    "tags": [
+      "Git",
+      "GitHub",
+      "DevOps",
+      "Version Control",
+      "Collaboration",
+      "Free"
+    ],
+    "learning_objectives": [
+      "Master Git branching, merging, and interactive rebasing",
+      "Resolve complex merge conflicts smoothly",
+      "Automate linting and testing with GitHub Actions CI/CD"
+    ],
+    "requirements": [
+      "A computer with terminal or command prompt"
+    ],
+    "categories": {
+      "id": "cat-001-0000-0000-0000-000000000001",
+      "name": "Web Development",
+      "slug": "web-development"
+    },
+    "teachers": {
+      "id": "inst-1",
+      "expertise_areas": [
+        "Git",
+        "DevOps",
+        "Architecture"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 1240500,
+      "profiles": {
+        "display_name": "Dr. Angela Steele",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        "bio": "Former Google Tech Lead."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Git Internals & Branching Models",
+        "course_lessons": [
+          {
+            "id": "les-34-1",
+            "title": "How Git Stores Objects: Blobs, Trees, and Commits",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-02T10:00:00.000Z"
+  },
+  {
+    "id": "c035-docker-devops-fundamentals",
+    "title": "Docker and DevOps Fundamentals",
+    "slug": "docker-and-devops-fundamentals",
+    "subtitle": "Containers, Docker Compose, Kubernetes orchestration, CI/CD pipelines, and cloud deployments.",
+    "description": "Containerize any application and deploy it with confidence. Learn Dockerfiles, multi-stage builds, Docker Compose for multi-container microservices, Kubernetes pods and deployments, and automated testing pipelines.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-011-0000-0000-0000-000000000011",
+    "category": "Cloud Computing",
+    "instructor_id": "inst-5",
+    "instructor_name": "Elena Rostova",
+    "price": 94.99,
+    "discount_price": 21.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "intermediate",
+    "language": "English",
+    "duration_hours": 28,
+    "duration_minutes": 1680,
+    "total_lessons": 94,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "bestseller",
+    "student_count": 68400,
+    "avg_rating": 4.9,
+    "review_count": 9800,
+    "tags": [
+      "Docker",
+      "DevOps",
+      "Kubernetes",
+      "CI/CD",
+      "Containers",
+      "Cloud"
+    ],
+    "learning_objectives": [
+      "Create lightweight container images with multi-stage Dockerfiles",
+      "Orchestrate multi-service applications with Docker Compose",
+      "Understand Kubernetes deployments, services, and ingress"
+    ],
+    "requirements": [
+      "Basic familiarity with command line terminal"
+    ],
+    "categories": {
+      "id": "cat-011-0000-0000-0000-000000000011",
+      "name": "Cloud Computing",
+      "slug": "cloud-computing"
+    },
+    "teachers": {
+      "id": "inst-5",
+      "expertise_areas": [
+        "AWS",
+        "Docker",
+        "DevOps"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 180000,
+      "profiles": {
+        "display_name": "Elena Rostova",
+        "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&q=80",
+        "bio": "Principal Cloud Solutions Architect."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Containerization with Docker",
+        "course_lessons": [
+          {
+            "id": "les-35-1",
+            "title": "Containers vs Virtual Machines",
+            "duration_minutes": 14,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-13T10:00:00.000Z"
+  },
+  {
+    "id": "c036-graphic-design-masterclass",
+    "title": "Graphic Design Masterclass",
+    "slug": "graphic-design-masterclass",
+    "subtitle": "Photoshop, Illustrator, InDesign, Color Theory, Typography, and Professional Brand Identity Design.",
+    "description": "Unleash your creative potential. Learn the core principles of graphic design: color psychology, grid systems, typography pairing, logo creation in Adobe Illustrator, photo retouching in Photoshop, and editorial layout.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-015-0000-0000-0000-000000000015",
+    "category": "Graphic Design",
+    "instructor_id": "inst-2",
+    "instructor_name": "Sarah Chen",
+    "price": 79.99,
+    "discount_price": 16.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 26,
+    "duration_minutes": 1560,
+    "total_lessons": 84,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 41200,
+    "avg_rating": 4.8,
+    "review_count": 5300,
+    "tags": [
+      "Graphic Design",
+      "Photoshop",
+      "Illustrator",
+      "Branding",
+      "Typography"
+    ],
+    "learning_objectives": [
+      "Master Adobe Illustrator vector tools and logo design",
+      "Retouch and compose high-resolution imagery in Photoshop",
+      "Apply color theory and typography across real branding assets"
+    ],
+    "requirements": [
+      "Computer capable of running graphic editing software"
+    ],
+    "categories": {
+      "id": "cat-015-0000-0000-0000-000000000015",
+      "name": "Graphic Design",
+      "slug": "graphic-design"
+    },
+    "teachers": {
+      "id": "inst-2",
+      "expertise_areas": [
+        "UI/UX Design",
+        "Graphic Design",
+        "Branding"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 320400,
+      "profiles": {
+        "display_name": "Sarah Chen",
+        "avatar_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80",
+        "bio": "Design Lead at Meta."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Design Theory & Fundamentals",
+        "course_lessons": [
+          {
+            "id": "les-36-1",
+            "title": "The Golden Ratio & Visual Hierarchy",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-01-19T10:00:00.000Z"
+  },
+  {
+    "id": "c037-digital-photography-masterclass",
+    "title": "Digital Photography Masterclass",
+    "slug": "digital-photography-masterclass",
+    "subtitle": "Master your DSLR or Mirrorless camera: Exposure triangle, lighting, composition, and Lightroom.",
+    "description": "Take stunning photographs in any environment. Master the exposure triangle (Aperture, Shutter Speed, ISO), natural and studio lighting techniques, creative composition rules, and professional RAW editing in Adobe Lightroom.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-019-0000-0000-0000-000000000019",
+    "category": "Photography",
+    "instructor_id": "inst-11",
+    "instructor_name": "Lucas Rossi",
+    "price": 69.99,
+    "discount_price": 14.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "beginner",
+    "language": "English",
+    "duration_hours": 18,
+    "duration_minutes": 1080,
+    "total_lessons": 68,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 31400,
+    "avg_rating": 4.8,
+    "review_count": 4200,
+    "tags": [
+      "Photography",
+      "Lighting",
+      "Lightroom",
+      "Camera",
+      "Creative"
+    ],
+    "learning_objectives": [
+      "Shoot in full manual mode with complete confidence",
+      "Master creative portrait, landscape, and street photography",
+      "Color grade and edit RAW photos in Adobe Lightroom"
+    ],
+    "requirements": [
+      "Any DSLR, mirrorless camera, or advanced smartphone camera"
+    ],
+    "categories": {
+      "id": "cat-019-0000-0000-0000-000000000019",
+      "name": "Photography",
+      "slug": "photography"
+    },
+    "teachers": {
+      "id": "inst-11",
+      "expertise_areas": [
+        "Photography",
+        "Lighting",
+        "Lightroom"
+      ],
+      "avg_rating": 4.8,
+      "total_students": 52000,
+      "profiles": {
+        "display_name": "Lucas Rossi",
+        "avatar_url": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&h=400&fit=crop&q=80",
+        "bio": "Commercial Photographer & Visual Storyteller."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: The Exposure Triangle",
+        "course_lessons": [
+          {
+            "id": "les-37-1",
+            "title": "Aperture, Shutter Speed, and ISO Explained",
+            "duration_minutes": 15,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-11T10:00:00.000Z"
+  },
+  {
+    "id": "c038-music-production-ableton",
+    "title": "Music Production with Ableton Live",
+    "slug": "music-production-with-ableton-live",
+    "subtitle": "Beatmaking, sound design, audio synthesis, mixing, and mastering in Ableton Live 12.",
+    "description": "Produce broadcast-ready electronic, pop, and hip-hop tracks from scratch. Learn audio synthesis, MIDI programming, audio recording, compression, EQ, reverb spatial design, and final mastering.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1600&auto=format&fit=crop&q=80",
+    "category_id": "cat-020-0000-0000-0000-000000000020",
+    "category": "Music",
+    "instructor_id": "inst-12",
+    "instructor_name": "Maya Lin",
+    "price": 89.99,
+    "discount_price": 19.99,
+    "is_free": false,
+    "currency": "USD",
+    "level": "all_levels",
+    "language": "English",
+    "duration_hours": 24,
+    "duration_minutes": 1440,
+    "total_lessons": 80,
+    "certificate_enabled": true,
+    "lifetime_access": true,
+    "status": "published",
+    "badge": "trending",
+    "student_count": 28900,
+    "avg_rating": 4.9,
+    "review_count": 3900,
+    "tags": [
+      "Music",
+      "Ableton Live",
+      "Audio Production",
+      "Sound Design",
+      "Mixing"
+    ],
+    "learning_objectives": [
+      "Produce complete musical arrangements in Ableton Live",
+      "Design custom synth patches using wavetable and analog synthesis",
+      "Mix and master audio tracks to commercial loudness standards"
+    ],
+    "requirements": [
+      "Computer with Ableton Live (trial or full version) and headphones"
+    ],
+    "categories": {
+      "id": "cat-020-0000-0000-0000-000000000020",
+      "name": "Music",
+      "slug": "music"
+    },
+    "teachers": {
+      "id": "inst-12",
+      "expertise_areas": [
+        "Music Production",
+        "Audio Engineering",
+        "Sound Design"
+      ],
+      "avg_rating": 4.9,
+      "total_students": 48000,
+      "profiles": {
+        "display_name": "Maya Lin",
+        "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&q=80",
+        "bio": "Electronic Music Producer & Certified Audio Engineer."
+      }
+    },
+    "course_sections": [
+      {
+        "id": "sec-1",
+        "title": "Section 1: Ableton Live Workflow & Beatmaking",
+        "course_lessons": [
+          {
+            "id": "les-38-1",
+            "title": "Session View vs Arrangement View",
+            "duration_minutes": 16,
+            "is_preview": true,
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-02-14T10:00:00.000Z"
+  }
+]

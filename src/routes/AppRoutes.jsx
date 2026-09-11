@@ -13,6 +13,8 @@ import { About } from '../pages/public/About';
 import { Contact } from '../pages/public/Contact';
 import { Pricing } from '../pages/public/Pricing';
 import { Teachers } from '../pages/public/Teachers';
+import { LearningPaths } from '../pages/public/LearningPaths';
+import { LearningPathDetail } from '../pages/public/LearningPathDetail';
 
 // Auth Pages
 import { Login } from '../pages/auth/Login';
@@ -68,6 +70,8 @@ export const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/course/:id" element={<CourseDetail />} />
+          <Route path="/learning-paths" element={<LearningPaths />} />
+          <Route path="/learning-paths/:slug" element={<LearningPathDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/pricing" element={<Pricing />} />

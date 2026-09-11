@@ -18,54 +18,73 @@ export interface CourseSearchFilters {
 }
 
 const formatMockCourse = (c: any) => {
-  const teacher = INSTRUCTORS.find(t => t.id === c.teacherId) || INSTRUCTORS[0];
-  const cat = CATEGORIES.find(k => k.name === c.category || k.slug === c.category) || CATEGORIES[0];
+  const teacher = c.teachers || (() => {
+    const found = INSTRUCTORS.find(t => t.id === (c.teacherId || c.instructor_id)) || INSTRUCTORS[0];
+    return {
+      id: found.id,
+      expertise_areas: found.skills,
+      avg_rating: found.rating,
+      total_students: found.students,
+      total_courses: found.totalCourses,
+      verification_badge: found.isVerified,
+      profiles: {
+        display_name: found.name,
+        first_name: found.name.split(' ')[0],
+        last_name: found.name.split(' ').slice(1).join(' '),
+        avatar_url: found.avatar,
+        bio: found.biography,
+        website: found.website
+      }
+    };
+  })();
+
+  const cat = c.categories || (() => {
+    const found = CATEGORIES.find(k => k.name === c.category || k.slug === c.category) || CATEGORIES[0];
+    return { id: found.id, name: found.name, slug: found.slug };
+  })();
+
+  const courseSections = c.course_sections || (c.curriculum || []).map((sec: any, sIdx: number) => ({
+    id: `sec-${sIdx + 1}`,
+    title: sec.title,
+    course_lessons: (sec.lessons || []).map((les: any) => ({
+      id: les.id,
+      title: les.title,
+      duration_minutes: les.duration || les.duration_minutes || 10,
+      video_url: les.videoUrl || les.video_url,
+      is_preview: Boolean(les.isPreview ?? les.is_preview)
+    }))
+  }));
+
   return {
     ...c,
     id: c.id,
     title: c.title,
-    slug: c.id,
-    subtitle: c.subtitle,
-    description: c.description,
-    thumbnail_url: c.thumbnail,
-    banner_url: c.banner,
-    price: c.price,
-    discount_price: c.discountPrice,
-    avg_rating: c.rating,
-    student_count: c.studentCount,
-    duration_hours: c.durationHours,
-    level: c.level,
-    language: c.language,
-    is_bestseller: c.badge === 'Bestseller',
+    slug: c.slug || c.id,
+    subtitle: c.subtitle || '',
+    description: c.description || '',
+    thumbnail_url: c.thumbnail_url || c.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+    thumbnail: c.thumbnail_url || c.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+    banner_url: c.banner_url || c.banner || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600',
+    banner: c.banner_url || c.banner || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600',
+    price: Number(c.price ?? 0),
+    discount_price: c.discount_price !== undefined ? (c.discount_price === null ? null : Number(c.discount_price)) : (c.discountPrice !== undefined ? (c.discountPrice === null ? null : Number(c.discountPrice)) : null),
+    discountPrice: c.discount_price !== undefined ? (c.discount_price === null ? null : Number(c.discount_price)) : (c.discountPrice !== undefined ? (c.discountPrice === null ? null : Number(c.discountPrice)) : null),
+    avg_rating: Number(c.avg_rating ?? c.rating ?? 4.8),
+    rating: Number(c.avg_rating ?? c.rating ?? 4.8),
+    student_count: Number(c.student_count ?? c.studentCount ?? 0),
+    studentCount: Number(c.student_count ?? c.studentCount ?? 0),
+    duration_hours: Number(c.duration_hours ?? c.durationHours ?? 10),
+    durationHours: Number(c.duration_hours ?? c.durationHours ?? 10),
+    level: c.level || 'all_levels',
+    language: c.language || 'English',
+    is_bestseller: c.badge === 'bestseller' || c.badge === 'Bestseller' || Boolean(c.is_bestseller),
     badge: c.badge,
-    categories: { id: cat.id, name: cat.name, slug: cat.slug },
-    teachers: {
-      id: teacher.id,
-      expertise_areas: teacher.skills,
-      avg_rating: teacher.rating,
-      total_students: teacher.students,
-      total_courses: teacher.totalCourses,
-      verification_badge: teacher.isVerified,
-      profiles: {
-        display_name: teacher.name,
-        first_name: teacher.name.split(' ')[0],
-        last_name: teacher.name.split(' ').slice(1).join(' '),
-        avatar_url: teacher.avatar,
-        bio: teacher.biography,
-        website: teacher.website
-      }
-    },
-    course_sections: (c.curriculum || []).map((sec: any, sIdx: number) => ({
-      id: `sec-${sIdx + 1}`,
-      title: sec.title,
-      course_lessons: (sec.lessons || []).map((les: any) => ({
-        id: les.id,
-        title: les.title,
-        duration_minutes: les.duration,
-        video_url: les.videoUrl,
-        is_preview: les.isPreview
-      }))
-    }))
+    category: cat.name,
+    categories: cat,
+    teachers: teacher,
+    course_sections: courseSections,
+    tags: Array.isArray(c.tags) ? c.tags : [],
+    what_you_will_learn: Array.isArray(c.what_you_will_learn) ? c.what_you_will_learn : (Array.isArray(c.learning_objectives) ? c.learning_objectives : [])
   };
 };
 
@@ -128,17 +147,26 @@ export const courseService = {
     // 3. Resilient catalog fallback
     let list = [...MOCK_COURSES_FORMATTED];
     if (filters?.query) {
-      const q = filters.query.toLowerCase();
+      const q = filters.query.toLowerCase().trim();
       list = list.filter(c =>
         c.title?.toLowerCase().includes(q) ||
         c.subtitle?.toLowerCase().includes(q) ||
-        c.description?.toLowerCase().includes(q)
+        c.description?.toLowerCase().includes(q) ||
+        c.categories?.name?.toLowerCase().includes(q) ||
+        c.categories?.slug?.toLowerCase().includes(q) ||
+        c.category?.toLowerCase().includes(q) ||
+        c.teachers?.profiles?.display_name?.toLowerCase().includes(q) ||
+        (Array.isArray(c.tags) && c.tags.some((t: string) => t.toLowerCase().includes(q))) ||
+        (Array.isArray(c.what_you_will_learn) && c.what_you_will_learn.some((item: string) => item.toLowerCase().includes(q)))
       );
     }
     if (filters?.categoryId && filters.categoryId !== 'all') {
+      const catNorm = filters.categoryId.toLowerCase().trim();
       list = list.filter(c =>
-        c.categories?.slug === filters.categoryId ||
-        c.categories?.name?.toLowerCase().replace(/\s+/g, '-') === filters.categoryId
+        c.categories?.slug === catNorm ||
+        c.categories?.name?.toLowerCase().replace(/\s+/g, '-') === catNorm ||
+        c.category?.toLowerCase().replace(/\s+/g, '-') === catNorm ||
+        c.category?.toLowerCase() === catNorm
       );
     }
     if (filters?.level && filters.level !== 'all') {

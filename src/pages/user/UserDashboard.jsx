@@ -11,6 +11,7 @@ import { profileService } from '../../services/profile.service';
 import { progressService } from '../../services/progress.service';
 import { messageService } from '../../services/message.service';
 import { courseService } from '../../services/course.service';
+import { learningPathService } from '../../services/learningPath.service';
 import { PageTransition } from '../../components/layout/PageTransition';
 import { CourseCard } from '../../components/ui/CourseCard';
 import { Button } from '../../components/ui/Button';
@@ -37,12 +38,14 @@ import {
   Clock,
   ChevronRight,
   PlayCircle,
-  ExternalLink
+  ExternalLink,
+  Route
 } from 'lucide-react';
 
 const TABS = [
   { key: 'overview', label: 'Overview', icon: LayoutDashboard },
   { key: 'courses', label: 'My Courses', icon: BookOpen },
+  { key: 'learning-paths', label: 'Career Roadmaps', icon: Route },
   { key: 'wishlist', label: 'Saved Wishlist', icon: Heart },
   { key: 'certificates', label: 'Certificates', icon: Award },
   { key: 'purchases', label: 'Order History', icon: ShoppingBag },
@@ -72,6 +75,7 @@ export const UserDashboard = () => {
   const [messages, setMessages] = useState([]);
   const [purchases, setPurchases] = useState([]);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
+  const [studentLearningPaths, setStudentLearningPaths] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [settingsForm, setSettingsForm] = useState({
@@ -94,12 +98,13 @@ export const UserDashboard = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const [enr, certs, notifs, orders_, recommended] = await Promise.all([
+      const [enr, certs, notifs, orders_, recommended, userPaths] = await Promise.all([
         enrollmentService.getUserEnrollments(user.id),
         certificateService.getUserCertificates(user.id),
         notificationService.getNotifications(user.id),
         orderService.getUserOrders(user.id),
-        courseService.getCourses()
+        courseService.getCourses(),
+        learningPathService.getMyLearningPaths()
       ]);
 
       // If user has no enrollments in DB yet, provide seed enrollments for preview
@@ -116,6 +121,7 @@ export const UserDashboard = () => {
       setNotifications(notifs || []);
       setPurchases(orders_ || []);
       setRecommendedCourses((recommended || []).slice(0, 3));
+      setStudentLearningPaths(userPaths || []);
 
       try {
         const convos = await messageService.getConversations(user.id);
@@ -318,19 +324,89 @@ export const UserDashboard = () => {
               )}
             </div>
 
-            {/* Recommended Courses Carousel */}
-            {recommendedCourses.length > 0 && (
-              <div className="space-y-5 pt-4">
-                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Recommended for Your Track</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recommendedCourses.map((rc) => (
-                    <CourseCard key={rc.id} course={rc} />
-                  ))}
+              {/* Active Career Roadmaps in Overview */}
+              <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center space-x-2">
+                    <Route className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                    <h2 className="text-xl font-bold text-slate-900 dark:text-white">Active Career Roadmaps</h2>
+                  </div>
+                  <Link to="/learning-paths" className="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline">
+                    Browse All 20 Paths
+                  </Link>
                 </div>
+
+                {studentLearningPaths.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {studentLearningPaths.slice(0, 2).map((slp) => {
+                      const lp = slp.learning_paths || {};
+                      return (
+                        <div
+                          key={slp.id}
+                          className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between text-[11px] font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wider mb-1">
+                              <span>{lp.category || 'Specialization'}</span>
+                              <span className="text-slate-400 capitalize">{lp.difficulty || 'All Levels'}</span>
+                            </div>
+                            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+                              {lp.title || 'Career Learning Path'}
+                            </h3>
+                            <div className="mt-3 space-y-1.5">
+                              <div className="flex justify-between text-xs font-medium text-slate-500">
+                                <span>Stage {slp.current_stage || 1}</span>
+                                <span className="font-bold text-primary-600">{slp.progress_pct || 0}% Complete</span>
+                              </div>
+                              <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-gradient-to-r from-primary-600 to-indigo-600 rounded-full"
+                                  style={{ width: `${slp.progress_pct || 0}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <span className="text-xs text-slate-500">
+                              {slp.completed_courses?.length || 0} of {lp.total_courses || 3} courses completed
+                            </span>
+                            <Link to={`/learning-paths/${lp.slug || lp.id}`}>
+                              <Button size="sm">Resume Path</Button>
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="p-6 bg-gradient-to-r from-primary-500/10 via-indigo-500/10 to-transparent border border-primary-200/50 dark:border-primary-900/30 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="space-y-1 text-center sm:text-left">
+                      <h4 className="font-bold text-sm text-slate-900 dark:text-white">Ready to prepare for a specific tech role?</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md">
+                        Follow sequenced course tracks for Full Stack Developer, Data Scientist, DevOps, AI Engineer, and 16 more IT careers.
+                      </p>
+                    </div>
+                    <Link to="/learning-paths" className="flex-shrink-0">
+                      <Button size="sm">Explore 20 Career Paths</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        )}
+
+              {/* Recommended Courses Carousel */}
+              {recommendedCourses.length > 0 && (
+                <div className="space-y-5 pt-4">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">Recommended for Your Track</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {recommendedCourses.map((rc) => (
+                      <CourseCard key={rc.id} course={rc} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
         {/* TAB 2: MY COURSES */}
         {activeTab === 'courses' && (
@@ -382,6 +458,92 @@ export const UserDashboard = () => {
                 description="Enroll in a course to start learning."
                 actionText="Explore Courses"
                 actionLink="/courses"
+              />
+            )}
+          </div>
+        )}
+
+        {/* TAB: LEARNING PATHS */}
+        {activeTab === 'learning-paths' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <Route className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <span>Enrolled Career Learning Paths</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Sequential role-based tracks to prepare you for industry developer, analyst, and cloud engineering positions.
+                </p>
+              </div>
+              <Link to="/learning-paths">
+                <Button size="sm">Browse All 20 Career Paths</Button>
+              </Link>
+            </div>
+
+            {studentLearningPaths.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {studentLearningPaths.map((slp) => {
+                  const lp = slp.learning_paths || {};
+                  return (
+                    <div
+                      key={slp.id}
+                      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                    >
+                      <div className="relative h-36 bg-slate-100 dark:bg-slate-800">
+                        <img
+                          src={lp.banner_url || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600'}
+                          alt={lp.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 text-white text-[10px] font-bold">
+                          {lp.category || 'Specialization'}
+                        </span>
+                        <span className="absolute bottom-3 left-3 text-white text-xs font-bold">
+                          Stage {slp.current_stage || 1}
+                        </span>
+                      </div>
+
+                      <div className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div className="space-y-3">
+                          <h3 className="font-bold text-base text-slate-900 dark:text-white line-clamp-1">
+                            {lp.title || 'Career Learning Path'}
+                          </h3>
+                          <div className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-semibold">
+                              <span className="text-slate-500">Path Progress</span>
+                              <span className="text-primary-600 dark:text-primary-400">{slp.progress_pct || 0}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-gradient-to-r from-primary-600 to-indigo-600 rounded-full transition-all duration-500"
+                                style={{ width: `${slp.progress_pct || 0}%` }}
+                              />
+                            </div>
+                            <p className="text-[11px] text-slate-400">
+                              {slp.completed_courses?.length || 0} of {lp.total_courses || 3} courses completed
+                            </p>
+                          </div>
+                        </div>
+
+                        <Link to={`/learning-paths/${lp.slug || lp.id}`}>
+                          <Button size="sm" className="w-full">
+                            Resume Learning Roadmap
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <EmptyState
+                icon={Route}
+                title="You haven't enrolled in any career paths yet"
+                description="EduAcademy offers 20 comprehensive IT Career Learning Paths with guided stage sequences and capstone projects."
+                actionText="Explore 20 Career Paths"
+                actionLink="/learning-paths"
               />
             )}
           </div>

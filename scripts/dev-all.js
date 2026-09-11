@@ -16,7 +16,7 @@ const rootDir = path.resolve(__dirname, '..');
 
 const isWindows = process.platform === 'win32';
 const npmCmd = isWindows ? 'npm.cmd' : 'npm';
-const nodeCmd = process.execPath;
+const nodeCmd = 'node';
 
 const processes = [];
 

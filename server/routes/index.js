@@ -15,11 +15,13 @@ import notificationRoutes from './notification.routes.js';
 import certificateRoutes from './certificate.routes.js';
 import adminRoutes from './admin.routes.js';
 import supportRoutes from './support.routes.js';
+import learningPathRoutes from './learningPath.routes.js';
 
 const router = Router();
 
 router.use('/auth', authRoutes);
 router.use('/courses', courseRoutes);
+router.use('/learning-paths', learningPathRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/teachers', teacherRoutes);
 router.use('/cart', cartRoutes);

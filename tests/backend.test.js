@@ -153,6 +153,26 @@ async function runTests() {
     const unauthAdmin = await request('GET', '/api/v1/admin/stats');
     assert(unauthAdmin.status === 401, 'Protected /admin/stats rejects with 401');
 
+    // 10. Learning Paths API
+    console.log('\n[10] Learning Paths API');
+    const lpRes = await request('GET', '/api/v1/learning-paths?page=1&limit=20');
+    assert(lpRes.status === 200, 'GET /api/v1/learning-paths returns 200');
+    assert(Array.isArray(lpRes.body.data), 'Learning paths response contains array of paths');
+    assert(lpRes.body.data.length >= 20, `Learning paths contains all 20 IT paths (found ${lpRes.body.data.length})`);
+    assert(Boolean(lpRes.body.pagination), 'Learning paths response includes pagination metadata');
+
+    const singleLp = await request('GET', '/api/v1/learning-paths/full-stack-developer');
+    assert(singleLp.status === 200, 'GET /api/v1/learning-paths/:slug returns 200 for full-stack-developer');
+    assert(singleLp.body.data?.slug === 'full-stack-developer', 'Full Stack Developer path returns correct slug');
+    assert(Array.isArray(singleLp.body.data?.stages) && singleLp.body.data.stages.length > 0, 'Learning path contains stages roadmap');
+
+    const searchLp = await request('GET', '/api/v1/learning-paths?search=python');
+    assert(searchLp.status === 200, 'GET /api/v1/learning-paths?search=python returns 200');
+    assert(searchLp.body.data.some(p => p.title.toLowerCase().includes('python')), 'Search results include Python Developer path');
+
+    const unauthMyLp = await request('GET', '/api/v1/learning-paths/my/paths');
+    assert(unauthMyLp.status === 401, 'Protected /learning-paths/my/paths rejects unauthenticated with 401');
+
     console.log('\n====================================================');
     console.log(`📊 Test Results: ${passed} Passed, ${failed} Failed`);
     console.log('====================================================\n');

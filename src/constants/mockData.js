@@ -1,12 +1,28 @@
+import coursesCatalog from '../../server/data/courses.json';
+
 export const CATEGORIES = [
-  { id: 'cat-1', name: 'Web Development', slug: 'web-development', icon: 'Code', count: 124 },
-  { id: 'cat-2', name: 'Artificial Intelligence', slug: 'artificial-intelligence', icon: 'Cpu', count: 85 },
-  { id: 'cat-3', name: 'UI/UX Design', slug: 'ui-ux-design', icon: 'Figma', count: 62 },
-  { id: 'cat-4', name: 'Mobile Development', slug: 'mobile-development', icon: 'Smartphone', count: 48 },
-  { id: 'cat-5', name: 'Marketing', slug: 'marketing', icon: 'TrendingUp', count: 93 },
-  { id: 'cat-6', name: 'Business & Finance', slug: 'business-finance', icon: 'DollarSign', count: 110 },
-  { id: 'cat-7', name: 'Photography', slug: 'photography', icon: 'Camera', count: 35 },
-  { id: 'cat-8', name: 'Interview Preparation', slug: 'interview-prep', icon: 'Briefcase', count: 54 },
+  { id: 'cat-001-0000-0000-0000-000000000001', name: 'Web Development', slug: 'web-development', icon: 'Code', count: 124 },
+  { id: 'cat-002-0000-0000-0000-000000000002', name: 'Frontend Development', slug: 'frontend-development', icon: 'Layout', count: 86 },
+  { id: 'cat-003-0000-0000-0000-000000000003', name: 'Backend Development', slug: 'backend-development', icon: 'Server', count: 72 },
+  { id: 'cat-004-0000-0000-0000-000000000004', name: 'Full Stack', slug: 'full-stack', icon: 'Layers', count: 95 },
+  { id: 'cat-005-0000-0000-0000-000000000005', name: 'React', slug: 'react', icon: 'Atom', count: 88 },
+  { id: 'cat-006-0000-0000-0000-000000000006', name: 'Java', slug: 'java', icon: 'Coffee', count: 54 },
+  { id: 'cat-007-0000-0000-0000-000000000007', name: 'Python', slug: 'python', icon: 'Terminal', count: 110 },
+  { id: 'cat-008-0000-0000-0000-000000000008', name: 'Artificial Intelligence', slug: 'artificial-intelligence', icon: 'Cpu', count: 85 },
+  { id: 'cat-009-0000-0000-0000-000000000009', name: 'Machine Learning', slug: 'machine-learning', icon: 'GitBranch', count: 76 },
+  { id: 'cat-010-0000-0000-0000-000000000010', name: 'Data Science', slug: 'data-science', icon: 'BarChart2', count: 68 },
+  { id: 'cat-011-0000-0000-0000-000000000011', name: 'Cloud Computing', slug: 'cloud-computing', icon: 'Cloud', count: 59 },
+  { id: 'cat-012-0000-0000-0000-000000000012', name: 'Cyber Security', slug: 'cyber-security', icon: 'Shield', count: 47 },
+  { id: 'cat-013-0000-0000-0000-000000000013', name: 'UI/UX Design', slug: 'ui-ux-design', icon: 'Figma', count: 62 },
+  { id: 'cat-014-0000-0000-0000-000000000014', name: 'Mobile Development', slug: 'mobile-development', icon: 'Smartphone', count: 48 },
+  { id: 'cat-015-0000-0000-0000-000000000015', name: 'Graphic Design', slug: 'graphic-design', icon: 'Image', count: 42 },
+  { id: 'cat-016-0000-0000-0000-000000000016', name: 'Marketing', slug: 'marketing', icon: 'TrendingUp', count: 93 },
+  { id: 'cat-017-0000-0000-0000-000000000017', name: 'Business', slug: 'business', icon: 'Briefcase', count: 64 },
+  { id: 'cat-018-0000-0000-0000-000000000018', name: 'Finance', slug: 'finance', icon: 'DollarSign', count: 52 },
+  { id: 'cat-019-0000-0000-0000-000000000019', name: 'Photography', slug: 'photography', icon: 'Camera', count: 35 },
+  { id: 'cat-020-0000-0000-0000-000000000020', name: 'Music', slug: 'music', icon: 'Music', count: 29 },
+  { id: 'cat-021-0000-0000-0000-000000000021', name: 'Communication Skills', slug: 'communication-skills', icon: 'MessageCircle', count: 41 },
+  { id: 'cat-022-0000-0000-0000-000000000022', name: 'Interview Preparation', slug: 'interview-prep', icon: 'Award', count: 54 },
 ];
 
 export const INSTRUCTORS = [
@@ -78,103 +94,7 @@ export const INSTRUCTORS = [
   }
 ];
 
-export const COURSES = [
-  {
-    id: 'course-1',
-    title: 'The Complete Web Development Bootcamp',
-    subtitle: 'Learn HTML, CSS, JavaScript, React, Node.js, and build 25+ real-world projects.',
-    description: 'Become a full-stack web developer from scratch. This course covers everything from absolute basics to advanced system deployments. We cover semantic HTML5, CSS Flexbox & Grid, ES6+ Javascript, React, database design, REST APIs, and authentication. By the end, you will be coding professional applications ready for deployment.',
-    thumbnail: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=800&auto=format&fit=crop&q=80',
-    banner: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=1600&auto=format&fit=crop&q=80',
-    price: 99.99,
-    discountPrice: 19.99,
-    rating: 4.8,
-    studentCount: 84320,
-    durationHours: 64.5,
-    level: 'Beginner',
-    language: 'English',
-    hasCertificate: true,
-    lifetimeAccess: true,
-    badge: 'Bestseller',
-    category: 'Web Development',
-    teacherId: 'inst-1',
-    curriculum: [
-      {
-        title: 'Section 1: Getting Started with Web Development',
-        lessons: [
-          { id: 'les-1-1', title: 'Welcome to the Bootcamp!', duration: 5, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', isPreview: true },
-          { id: 'les-1-2', title: 'How the Web Works: Clients & Servers', duration: 12, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', isPreview: false },
-          { id: 'les-1-3', title: 'Setting Up Your Environment (VS Code & Git)', duration: 18, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', isPreview: false }
-        ]
-      },
-      {
-        title: 'Section 2: React.js Essentials',
-        lessons: [
-          { id: 'les-1-4', title: 'Introduction to React & JSX', duration: 15, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', isPreview: true },
-          { id: 'les-1-5', title: 'State & Props: The Core of React', duration: 25, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', isPreview: false }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'course-2',
-    title: 'Figma UI/UX Design Masterclass: Figma to Production',
-    subtitle: 'Master Figma, Design Systems, UX Research, Wireframing, and interactive prototyping.',
-    description: 'Learn modern UI/UX principles and apply them inside Figma. Master vector tools, auto layout 5.0, components, variables, styles, and interactive prototypes. Transition your designs seamlessly into production formats and build a professional portfolio.',
-    thumbnail: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&auto=format&fit=crop&q=80',
-    banner: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1600&auto=format&fit=crop&q=80',
-    price: 79.99,
-    discountPrice: 14.99,
-    rating: 4.9,
-    studentCount: 28410,
-    durationHours: 32.0,
-    level: 'All Levels',
-    language: 'English',
-    hasCertificate: true,
-    lifetimeAccess: true,
-    badge: 'Trending',
-    category: 'UI/UX Design',
-    teacherId: 'inst-2',
-    curriculum: [
-      {
-        title: 'Section 1: Fundamentals of Great UI/UX',
-        lessons: [
-          { id: 'les-2-1', title: 'Course Overview & Figma Essentials', duration: 8, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', isPreview: true },
-          { id: 'les-2-2', title: 'UX Laws Every Designer Must Know', duration: 15, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', isPreview: false }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'course-3',
-    title: 'Machine Learning A-Z: Hands-On Python',
-    subtitle: 'Learn ML algorithms, Neural Networks, Deep Learning, and data analysis using Python.',
-    description: 'Enter the world of Artificial Intelligence. This course teaches regression, classification, clustering, association rules, deep learning, NLP, and model evaluation techniques using Python libraries like TensorFlow, PyTorch, and Scikit-Learn.',
-    thumbnail: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?w=800&auto=format&fit=crop&q=80',
-    banner: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?w=1600&auto=format&fit=crop&q=80',
-    price: 129.99,
-    discountPrice: 24.99,
-    rating: 4.7,
-    studentCount: 45290,
-    durationHours: 48.0,
-    level: 'Intermediate',
-    language: 'English',
-    hasCertificate: true,
-    lifetimeAccess: true,
-    badge: 'Premium',
-    category: 'Artificial Intelligence',
-    teacherId: 'inst-3',
-    curriculum: [
-      {
-        title: 'Section 1: Data Preprocessing in Python',
-        lessons: [
-          { id: 'les-3-1', title: 'Introduction to Machine Learning', duration: 10, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', isPreview: true },
-          { id: 'les-3-2', title: 'Cleaning Data and Handling Missing Values', duration: 20, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', isPreview: false }
-        ]
-      }
-    ]
-  }
-];
+export const COURSES = coursesCatalog;
 
 export const REVIEWS = [
   {

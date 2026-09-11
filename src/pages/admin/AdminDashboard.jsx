@@ -6,13 +6,15 @@ import { faqService } from '../../services/faq.service';
 import { couponService } from '../../services/coupon.service';
 import { contactService } from '../../services/contact.service';
 import { courseService } from '../../services/course.service';
+import { learningPathService } from '../../services/learningPath.service';
 import { PageTransition } from '../../components/layout/PageTransition';
 import {
   BarChart2, Users, BookOpen, DollarSign, TrendingUp,
   GraduationCap, ShieldCheck, Settings, MessageSquare, HelpCircle,
   Tag, Package, Star, LogOut, Loader2, Check, Trash2, X,
-  LayoutDashboard, PlusCircle, Eye, CheckCircle2, AlertCircle
+  LayoutDashboard, PlusCircle, Plus, Eye, CheckCircle2, AlertCircle, Route
 } from 'lucide-react';
+import { CATEGORIES } from '../../constants/mockData';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -32,6 +34,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointEleme
 const ADMIN_TABS = [
   { key: 'overview', label: 'Dashboard', icon: LayoutDashboard },
   { key: 'courses', label: 'Courses', icon: BookOpen },
+  { key: 'learning-paths', label: 'Learning Paths', icon: Route },
   { key: 'users', label: 'Users & Students', icon: Users },
   { key: 'orders', label: 'Orders', icon: Package },
   { key: 'coupons', label: 'Coupons', icon: Tag },
@@ -73,12 +76,120 @@ export const AdminDashboard = () => {
   const [couponForm, setCouponForm] = useState({ code: '', discountPercent: 10 });
   const [couponSaving, setCouponSaving] = useState(false);
 
+  // Course add form & modal
+  const [showCourseModal, setShowCourseModal] = useState(false);
+  const [courseSaving, setCourseSaving] = useState(false);
+  const [courseError, setCourseError] = useState('');
+  const [courseForm, setCourseForm] = useState({
+    title: '',
+    subtitle: '',
+    description: '',
+    category: 'Web Development',
+    level: 'all_levels',
+    price: 49.99,
+    discountPrice: 19.99,
+    isFree: false,
+    thumbnailUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+    bannerUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600',
+    previewVideoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    learningObjectives: 'Build scalable real-world projects\nMaster modern best practices and patterns',
+    requirements: 'Basic computer and internet knowledge',
+    targetAudience: 'Developers, designers, and tech enthusiasts',
+    status: 'published',
+    badge: 'none'
+  });
+
+  // Learning Paths add form & modal
+  const [allLearningPaths, setAllLearningPaths] = useState([]);
+  const [showPathModal, setShowPathModal] = useState(false);
+  const [pathSaving, setPathSaving] = useState(false);
+  const [pathError, setPathError] = useState('');
+  const [pathForm, setPathForm] = useState({
+    title: '',
+    description: '',
+    category: 'Software Development',
+    difficulty: 'all_levels',
+    duration_weeks: 12,
+    key_skills: 'React, Node.js, TypeScript',
+    tools_and_technologies: 'Git, VS Code, Postman',
+    career_outcomes: 'Full Stack Developer, Software Engineer',
+    banner_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800'
+  });
+
+  const handleCreateCourse = async (e) => {
+    e.preventDefault();
+    if (!courseForm.title.trim() || !courseForm.description.trim()) {
+      setCourseError('Title and description are required.');
+      return;
+    }
+
+    setCourseSaving(true);
+    setCourseError('');
+    try {
+      const catObj = CATEGORIES.find(c => c.name === courseForm.category || c.slug === courseForm.category) || CATEGORIES[0];
+      const payload = {
+        title: courseForm.title.trim(),
+        subtitle: courseForm.subtitle.trim(),
+        description: courseForm.description.trim(),
+        category: catObj.name,
+        categoryId: catObj.id,
+        category_id: catObj.id,
+        categories: { id: catObj.id, name: catObj.name, slug: catObj.slug },
+        level: courseForm.level,
+        price: courseForm.isFree ? 0 : Number(courseForm.price || 0),
+        discountPrice: courseForm.isFree ? null : (courseForm.discountPrice ? Number(courseForm.discountPrice) : null),
+        discount_price: courseForm.isFree ? null : (courseForm.discountPrice ? Number(courseForm.discountPrice) : null),
+        isFree: Boolean(courseForm.isFree),
+        is_free: Boolean(courseForm.isFree),
+        thumbnailUrl: courseForm.thumbnailUrl.trim(),
+        thumbnail_url: courseForm.thumbnailUrl.trim(),
+        bannerUrl: courseForm.bannerUrl.trim(),
+        banner_url: courseForm.bannerUrl.trim(),
+        previewVideoUrl: courseForm.previewVideoUrl.trim(),
+        preview_video_url: courseForm.previewVideoUrl.trim(),
+        what_you_will_learn: courseForm.learningObjectives.split('\n').map(s => s.trim()).filter(Boolean),
+        learning_objectives: courseForm.learningObjectives.split('\n').map(s => s.trim()).filter(Boolean),
+        requirements: courseForm.requirements.split('\n').map(s => s.trim()).filter(Boolean),
+        target_audience: courseForm.targetAudience.split('\n').map(s => s.trim()).filter(Boolean),
+        status: courseForm.status,
+        badge: courseForm.badge !== 'none' ? courseForm.badge : null,
+      };
+
+      const created = await courseService.createCourse(user?.id || 'inst-1', payload);
+      setAllCourses(prev => [created, ...prev]);
+      setShowCourseModal(false);
+      setCourseForm({
+        title: '',
+        subtitle: '',
+        description: '',
+        category: 'Web Development',
+        level: 'all_levels',
+        price: 49.99,
+        discountPrice: 19.99,
+        isFree: false,
+        thumbnailUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+        bannerUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600',
+        previewVideoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+        learningObjectives: 'Build scalable real-world projects\nMaster modern best practices and patterns',
+        requirements: 'Basic computer and internet knowledge',
+        targetAudience: 'Developers, designers, and tech enthusiasts',
+        status: 'published',
+        badge: 'none'
+      });
+    } catch (err) {
+      console.error('Failed to create course:', err);
+      setCourseError(err.message || 'Failed to create course. Please try again.');
+    } finally {
+      setCourseSaving(false);
+    }
+  };
+
   const setTab = (key) => setSearchParams({ tab: key });
 
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [stats, courses_, faqs_, msgs_, coupons_, users_, orders_] = await Promise.all([
+      const [stats, courses_, faqs_, msgs_, coupons_, users_, orders_, paths_] = await Promise.all([
         adminService.getDashboardStats(),
         adminService.getCourses(),
         faqService.getAllFAQs(),
@@ -86,6 +197,7 @@ export const AdminDashboard = () => {
         couponService.getActiveCoupons(),
         adminService.getUsers(),
         adminService.getOrders(),
+        learningPathService.adminGetAllPaths()
       ]);
       setAnalytics(stats);
       setAllCourses(courses_ || []);
@@ -94,6 +206,7 @@ export const AdminDashboard = () => {
       setCoupons(coupons_ || []);
       setAllUsers(users_ || []);
       setAllOrders(orders_ || []);
+      setAllLearningPaths(paths_ || []);
     } catch (err) {
       console.error(err);
     } finally {
@@ -163,6 +276,68 @@ export const AdminDashboard = () => {
       const updated = await adminService.updateCourseStatus(courseId, status);
       setAllCourses(prev => prev.map(c => c.id === courseId ? { ...c, status: updated.status } : c));
     } catch (err) { console.error(err); }
+  };
+
+  const handleTogglePublishPath = async (id, currentStatus) => {
+    try {
+      const updated = await learningPathService.updatePath(id, { is_published: !currentStatus });
+      if (updated) {
+        setAllLearningPaths(prev => prev.map(p => (p.id === id || p.slug === id) ? { ...p, is_published: !currentStatus } : p));
+      }
+    } catch (err) { console.error(err); }
+  };
+
+  const handleDeleteLearningPath = async (id) => {
+    if (!window.confirm('Delete this career learning path?')) return;
+    try {
+      await learningPathService.deletePath(id);
+      setAllLearningPaths(prev => prev.filter(p => p.id !== id && p.slug !== id));
+    } catch (err) { console.error(err); }
+  };
+
+  const handleCreateLearningPath = async (e) => {
+    e.preventDefault();
+    if (!pathForm.title.trim() || !pathForm.description.trim()) {
+      setPathError('Title and description are required.');
+      return;
+    }
+    setPathSaving(true);
+    setPathError('');
+    try {
+      const payload = {
+        title: pathForm.title.trim(),
+        description: pathForm.description.trim(),
+        category: pathForm.category,
+        difficulty: pathForm.difficulty,
+        duration_weeks: Number(pathForm.duration_weeks || 12),
+        banner_url: pathForm.banner_url.trim(),
+        key_skills: pathForm.key_skills.split(',').map(s => s.trim()).filter(Boolean),
+        tools_and_technologies: pathForm.tools_and_technologies.split(',').map(s => s.trim()).filter(Boolean),
+        career_outcomes: pathForm.career_outcomes.split(',').map(s => s.trim()).filter(Boolean),
+        is_published: true
+      };
+      const created = await learningPathService.createPath(payload);
+      if (created) {
+        setAllLearningPaths(prev => [created, ...prev]);
+        setShowPathModal(false);
+        setPathForm({
+          title: '',
+          description: '',
+          category: 'Software Development',
+          difficulty: 'all_levels',
+          duration_weeks: 12,
+          key_skills: 'React, Node.js, TypeScript',
+          tools_and_technologies: 'Git, VS Code, Postman',
+          career_outcomes: 'Full Stack Developer, Software Engineer',
+          banner_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800'
+        });
+      }
+    } catch (err) {
+      console.error('Failed to create learning path:', err);
+      setPathError(err.message || 'Failed to create learning path.');
+    } finally {
+      setPathSaving(false);
+    }
   };
 
   // Extract stats from adminService response (RPC returns different structure)
@@ -346,9 +521,19 @@ export const AdminDashboard = () => {
             {activeTab === 'courses' && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-xl font-extrabold text-slate-900 dark:text-white">Course Management</h1>
-                  <span className="text-xs text-slate-400">{allCourses.length} total courses</span>
+                  <div>
+                    <h1 className="text-xl font-extrabold text-slate-900 dark:text-white">Course Management</h1>
+                    <p className="text-xs text-slate-400 mt-0.5">{allCourses.length} total courses in catalog</p>
+                  </div>
+                  <button
+                    onClick={() => setShowCourseModal(true)}
+                    className="flex items-center gap-2 px-3.5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-xs rounded-xl transition-all shadow-sm active:scale-95"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add New Course</span>
+                  </button>
                 </div>
+
                 <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium shadow-sm overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-xs">
@@ -367,25 +552,29 @@ export const AdminDashboard = () => {
                           <tr key={course.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                             <td className="px-6 py-4">
                               <div className="flex items-center space-x-3">
-                                <img src={course.thumbnail_url || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200'} alt="" className="w-12 h-8 rounded-lg object-cover" />
+                                <img src={course.thumbnail_url || course.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200'} alt="" className="w-12 h-8 rounded-lg object-cover" />
                                 <div className="min-w-0">
                                   <p className="font-semibold text-slate-900 dark:text-white line-clamp-1 max-w-xs">{course.title}</p>
                                   {course.badge && (
-                                    <span className="px-1.5 py-0.5 bg-amber-100 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 text-[9px] font-bold rounded">{course.badge}</span>
+                                    <span className="px-1.5 py-0.5 bg-amber-100 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 text-[9px] font-bold rounded capitalize">{course.badge}</span>
                                   )}
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{course.category}</td>
-                            <td className="px-6 py-4 text-right font-semibold text-slate-900 dark:text-white">${(course.discountPrice || course.price).toFixed(2)}</td>
-                            <td className="px-6 py-4 text-right text-slate-500 dark:text-slate-400">{course.studentCount?.toLocaleString()}</td>
-                            <td className="px-6 py-4 text-right text-amber-500 font-bold">★ {course.rating}</td>
+                            <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{course.category || course.categories?.name || 'Development'}</td>
+                            <td className="px-6 py-4 text-right font-semibold text-slate-900 dark:text-white">
+                              ${Number(course.discount_price ?? course.discountPrice ?? course.price ?? 0).toFixed(2)}
+                            </td>
+                            <td className="px-6 py-4 text-right text-slate-500 dark:text-slate-400">
+                              {Number(course.student_count ?? course.studentCount ?? 0).toLocaleString()}
+                            </td>
+                            <td className="px-6 py-4 text-right text-amber-500 font-bold">★ {Number(course.avg_rating ?? course.rating ?? 4.8).toFixed(1)}</td>
                             <td className="px-6 py-4 text-right">
                               <div className="flex items-center justify-end space-x-2">
-                                <Link to={`/course/${course.id}`} className="p-1.5 text-slate-400 hover:text-primary-600 transition-colors">
+                                <Link to={`/courses/${course.id}`} className="p-1.5 text-slate-400 hover:text-primary-600 transition-colors" title="View course">
                                   <Eye className="w-4 h-4" />
                                 </Link>
-                                <button onClick={() => handleDeleteCourse(course.id)} className="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <button onClick={() => handleDeleteCourse(course.id)} className="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Delete course">
                                   <Trash2 className="w-4 h-4" />
                                 </button>
                               </div>
@@ -396,6 +585,585 @@ export const AdminDashboard = () => {
                     </table>
                   </div>
                 </div>
+
+                {/* Modal: Add New Course (16 Fields) */}
+                {showCourseModal && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+                      {/* Modal Header */}
+                      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+                        <div>
+                          <h2 className="text-base font-bold text-slate-900 dark:text-white">Add New Course</h2>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">Configure all course details for the platform catalog</p>
+                        </div>
+                        <button
+                          onClick={() => setShowCourseModal(false)}
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      {/* Modal Body / Form */}
+                      <form onSubmit={handleCreateCourse} className="flex-1 overflow-y-auto p-6 space-y-4 text-xs">
+                        {courseError && (
+                          <div className="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-xl text-red-600 dark:text-red-400 font-medium">
+                            {courseError}
+                          </div>
+                        )}
+
+                        {/* 1. Title & 2. Subtitle */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              1. Course Title *
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="e.g. Master Modern React 19"
+                              value={courseForm.title}
+                              onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              2. Subtitle
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="e.g. Comprehensive guide from zero to hero"
+                              value={courseForm.subtitle}
+                              onChange={(e) => setCourseForm({ ...courseForm, subtitle: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        {/* 3. Description */}
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            3. Description *
+                          </label>
+                          <textarea
+                            rows={3}
+                            required
+                            placeholder="Provide an in-depth summary of what students will master..."
+                            value={courseForm.description}
+                            onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        {/* 4. Category & 5. Level */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              4. Category
+                            </label>
+                            <select
+                              value={courseForm.category}
+                              onChange={(e) => setCourseForm({ ...courseForm, category: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            >
+                              {CATEGORIES.map((cat) => (
+                                <option key={cat.id || cat.slug} value={cat.name}>
+                                  {cat.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              5. Level
+                            </label>
+                            <select
+                              value={courseForm.level}
+                              onChange={(e) => setCourseForm({ ...courseForm, level: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white capitalize"
+                            >
+                              <option value="all_levels">All Levels</option>
+                              <option value="beginner">Beginner</option>
+                              <option value="intermediate">Intermediate</option>
+                              <option value="advanced">Advanced</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* 6. Price, 7. Discount Price & 8. Free toggle */}
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-slate-700 dark:text-slate-300">Pricing Configuration</span>
+                            <label className="flex items-center gap-2 cursor-pointer font-semibold text-slate-600 dark:text-slate-300">
+                              <input
+                                type="checkbox"
+                                checked={courseForm.isFree}
+                                onChange={(e) => setCourseForm({ ...courseForm, isFree: e.target.checked })}
+                                className="rounded border-slate-300 text-primary-600 focus:ring-primary-500 w-4 h-4"
+                              />
+                              <span>8. Free Course</span>
+                            </label>
+                          </div>
+                          {!courseForm.isFree && (
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <label className="block text-[11px] font-medium text-slate-500 mb-1">6. Regular Price ($)</label>
+                                <input
+                                  type="number"
+                                  step="0.01"
+                                  min="0"
+                                  value={courseForm.price}
+                                  onChange={(e) => setCourseForm({ ...courseForm, price: e.target.value })}
+                                  className="w-full px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg dark:text-white"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[11px] font-medium text-slate-500 mb-1">7. Discount Price ($)</label>
+                                <input
+                                  type="number"
+                                  step="0.01"
+                                  min="0"
+                                  value={courseForm.discountPrice}
+                                  onChange={(e) => setCourseForm({ ...courseForm, discountPrice: e.target.value })}
+                                  className="w-full px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg dark:text-white"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* 9. Thumbnail & 10. Banner URLs */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              9. Thumbnail Image URL
+                            </label>
+                            <input
+                              type="url"
+                              placeholder="https://..."
+                              value={courseForm.thumbnailUrl}
+                              onChange={(e) => setCourseForm({ ...courseForm, thumbnailUrl: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              10. Banner Image URL
+                            </label>
+                            <input
+                              type="url"
+                              placeholder="https://..."
+                              value={courseForm.bannerUrl}
+                              onChange={(e) => setCourseForm({ ...courseForm, bannerUrl: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        {/* 11. Preview Video URL */}
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            11. Preview Video URL
+                          </label>
+                          <input
+                            type="url"
+                            placeholder="https://..."
+                            value={courseForm.previewVideoUrl}
+                            onChange={(e) => setCourseForm({ ...courseForm, previewVideoUrl: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        {/* 12. Learning Objectives, 13. Requirements, 14. Target Audience */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              12. Learning Objectives
+                            </label>
+                            <textarea
+                              rows={2}
+                              placeholder="One outcome per line"
+                              value={courseForm.learningObjectives}
+                              onChange={(e) => setCourseForm({ ...courseForm, learningObjectives: e.target.value })}
+                              className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              13. Requirements
+                            </label>
+                            <textarea
+                              rows={2}
+                              placeholder="One per line"
+                              value={courseForm.requirements}
+                              onChange={(e) => setCourseForm({ ...courseForm, requirements: e.target.value })}
+                              className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              14. Target Audience
+                            </label>
+                            <textarea
+                              rows={2}
+                              placeholder="One per line"
+                              value={courseForm.targetAudience}
+                              onChange={(e) => setCourseForm({ ...courseForm, targetAudience: e.target.value })}
+                              className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        {/* 15. Status & 16. Badge */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              15. Publication Status
+                            </label>
+                            <select
+                              value={courseForm.status}
+                              onChange={(e) => setCourseForm({ ...courseForm, status: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl dark:text-white capitalize"
+                            >
+                              <option value="published">Published</option>
+                              <option value="draft">Draft</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              16. Promotional Badge
+                            </label>
+                            <select
+                              value={courseForm.badge}
+                              onChange={(e) => setCourseForm({ ...courseForm, badge: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl dark:text-white"
+                            >
+                              <option value="none">None</option>
+                              <option value="Bestseller">Bestseller</option>
+                              <option value="Trending">Trending</option>
+                              <option value="New">New</option>
+                              <option value="Premium">Premium</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* Modal Actions */}
+                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                          <button
+                            type="button"
+                            onClick={() => setShowCourseModal(false)}
+                            className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            disabled={courseSaving}
+                            className="flex items-center gap-2 px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all shadow-sm disabled:opacity-60"
+                          >
+                            {courseSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                            <span>{courseSaving ? 'Creating Course...' : 'Create Course'}</span>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ===== LEARNING PATHS ===== */}
+            {activeTab === 'learning-paths' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h1 className="text-xl font-extrabold text-slate-900 dark:text-white">IT Career Learning Paths</h1>
+                    <p className="text-xs text-slate-400 mt-0.5">{allLearningPaths.length} career roadmaps configured</p>
+                  </div>
+                  <button
+                    onClick={() => setShowPathModal(true)}
+                    className="flex items-center gap-2 px-3.5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-xs rounded-xl transition-all shadow-sm active:scale-95"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Create Learning Path</span>
+                  </button>
+                </div>
+
+                {/* Learning Paths Table */}
+                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium shadow-sm overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-slate-50 dark:bg-slate-800/50">
+                          <th className="text-left px-6 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Learning Path</th>
+                          <th className="text-left px-4 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Category</th>
+                          <th className="text-left px-4 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Difficulty</th>
+                          <th className="text-center px-4 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Courses</th>
+                          <th className="text-center px-4 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Enrolled</th>
+                          <th className="text-center px-4 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
+                          <th className="text-right px-6 py-4 font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {allLearningPaths.length === 0 ? (
+                          <tr>
+                            <td colSpan={7} className="text-center py-12 text-slate-400">
+                              No learning paths found. Create one using the button above.
+                            </td>
+                          </tr>
+                        ) : (
+                          allLearningPaths.map((pathItem) => (
+                            <tr key={pathItem.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                              <td className="px-6 py-4">
+                                <div className="flex items-center space-x-3">
+                                  <img
+                                    src={pathItem.banner_url || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300'}
+                                    alt=""
+                                    className="w-14 h-9 rounded-lg object-cover flex-shrink-0"
+                                  />
+                                  <div>
+                                    <Link
+                                      to={`/learning-paths/${pathItem.slug || pathItem.id}`}
+                                      target="_blank"
+                                      className="font-bold text-slate-900 dark:text-white hover:text-primary-600 transition-colors line-clamp-1 max-w-xs"
+                                    >
+                                      {pathItem.title}
+                                    </Link>
+                                    <p className="text-[10px] text-slate-400 line-clamp-1">{pathItem.slug}</p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-4 py-4 font-medium text-slate-600 dark:text-slate-300">
+                                {pathItem.category || 'Development'}
+                              </td>
+                              <td className="px-4 py-4">
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 capitalize">
+                                  {pathItem.difficulty?.replace('_', ' ') || 'All Levels'}
+                                </span>
+                              </td>
+                              <td className="px-4 py-4 text-center font-bold text-slate-700 dark:text-slate-300">
+                                {pathItem.total_courses || 3}
+                              </td>
+                              <td className="px-4 py-4 text-center text-slate-500 dark:text-slate-400">
+                                {(pathItem.enrolled_count || 0).toLocaleString()}
+                              </td>
+                              <td className="px-4 py-4 text-center">
+                                <button
+                                  type="button"
+                                  onClick={() => handleTogglePublishPath(pathItem.id, pathItem.is_published)}
+                                  className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-colors cursor-pointer ${
+                                    pathItem.is_published
+                                      ? 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-200'
+                                      : 'bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-200'
+                                  }`}
+                                >
+                                  {pathItem.is_published ? 'Published' : 'Draft'}
+                                </button>
+                              </td>
+                              <td className="px-6 py-4 text-right">
+                                <div className="flex items-center justify-end space-x-2">
+                                  <Link
+                                    to={`/learning-paths/${pathItem.slug || pathItem.id}`}
+                                    target="_blank"
+                                    className="p-1.5 text-slate-400 hover:text-primary-600 transition-colors"
+                                    title="View Public Page"
+                                  >
+                                    <Eye className="w-4 h-4" />
+                                  </Link>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleDeleteLearningPath(pathItem.id)}
+                                    className="p-1.5 text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                                    title="Delete Learning Path"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Create Learning Path Modal */}
+                {showPathModal && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 my-8">
+                      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+                        <div className="flex items-center space-x-2">
+                          <Route className="w-5 h-5 text-primary-600" />
+                          <h2 className="text-base font-extrabold text-slate-900 dark:text-white">
+                            Create New Career Learning Path
+                          </h2>
+                        </div>
+                        <button
+                          onClick={() => setShowPathModal(false)}
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      <form onSubmit={handleCreateLearningPath} className="p-6 space-y-4 max-h-[80vh] overflow-y-auto text-xs">
+                        {pathError && (
+                          <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 text-rose-700 dark:text-rose-300 rounded-xl">
+                            {pathError}
+                          </div>
+                        )}
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Path Title *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. AI / Machine Learning Engineer Learning Path"
+                            value={pathForm.title}
+                            onChange={(e) => setPathForm({ ...pathForm, title: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              Category
+                            </label>
+                            <select
+                              value={pathForm.category}
+                              onChange={(e) => setPathForm({ ...pathForm, category: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            >
+                              <option value="Software Development">Software Development</option>
+                              <option value="Data & AI">Data & AI</option>
+                              <option value="Cloud & DevOps">Cloud & DevOps</option>
+                              <option value="Cybersecurity">Cybersecurity</option>
+                              <option value="Design & UX">Design & UX</option>
+                              <option value="Quality Assurance">Quality Assurance</option>
+                            </select>
+                          </div>
+
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              Difficulty
+                            </label>
+                            <select
+                              value={pathForm.difficulty}
+                              onChange={(e) => setPathForm({ ...pathForm, difficulty: e.target.value })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            >
+                              <option value="all_levels">All Levels</option>
+                              <option value="beginner">Beginner</option>
+                              <option value="intermediate">Intermediate</option>
+                              <option value="advanced">Advanced</option>
+                            </select>
+                          </div>
+
+                          <div>
+                            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                              Duration (Weeks)
+                            </label>
+                            <input
+                              type="number"
+                              min={1}
+                              value={pathForm.duration_weeks}
+                              onChange={(e) => setPathForm({ ...pathForm, duration_weeks: Number(e.target.value) })}
+                              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Description *
+                          </label>
+                          <textarea
+                            rows={3}
+                            required
+                            placeholder="Provide a comprehensive summary of this career track and who it is for..."
+                            value={pathForm.description}
+                            onChange={(e) => setPathForm({ ...pathForm, description: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Banner Image URL
+                          </label>
+                          <input
+                            type="url"
+                            value={pathForm.banner_url}
+                            onChange={(e) => setPathForm({ ...pathForm, banner_url: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Key Skills (comma-separated)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. React, Node.js, TypeScript, PostgreSQL"
+                            value={pathForm.key_skills}
+                            onChange={(e) => setPathForm({ ...pathForm, key_skills: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Tools & Technologies (comma-separated)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Git, Docker, VS Code, Postman"
+                            value={pathForm.tools_and_technologies}
+                            onChange={(e) => setPathForm({ ...pathForm, tools_and_technologies: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                            Target Job Outcomes (comma-separated)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Full Stack Developer, Software Engineer"
+                            value={pathForm.career_outcomes}
+                            onChange={(e) => setPathForm({ ...pathForm, career_outcomes: e.target.value })}
+                            className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:outline-none dark:text-white"
+                          />
+                        </div>
+
+                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                          <button
+                            type="button"
+                            onClick={() => setShowPathModal(false)}
+                            className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            disabled={pathSaving}
+                            className="flex items-center gap-2 px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all shadow-sm disabled:opacity-60"
+                          >
+                            {pathSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                            <span>{pathSaving ? 'Creating...' : 'Create Learning Path'}</span>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
