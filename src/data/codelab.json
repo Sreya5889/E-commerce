@@ -1,0 +1,554 @@
+{
+  "languages": [
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "extension": "js",
+      "version": "ES2024",
+      "defaultTemplate": "function solution(input) {\n  // Write your code here\n  return input;\n}\n\n// Example execution\nconsole.log(solution(\"Hello World\"));"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "extension": "ts",
+      "version": "5.x",
+      "defaultTemplate": "function solution(input: string): string {\n  // Write your code here\n  return input;\n}\n\nconsole.log(solution(\"Hello TypeScript\"));"
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "extension": "py",
+      "version": "3.12",
+      "defaultTemplate": "def solution(input_data):\n    # Write your code here\n    return input_data\n\nif __name__ == \"__main__\":\n    print(solution(\"Hello Python\"))"
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "extension": "java",
+      "version": "OpenJDK 21",
+      "defaultTemplate": "public class Solution {\n    public static String solve(String input) {\n        // Write your code here\n        return input;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(solve(\"Hello Java\"));\n    }\n}"
+    },
+    {
+      "id": "cpp",
+      "name": "C++",
+      "extension": "cpp",
+      "version": "C++20",
+      "defaultTemplate": "#include <iostream>\n#include <string>\n\nstd::string solution(std::string input) {\n    // Write your code here\n    return input;\n}\n\nint main() {\n    std::cout << solution(\"Hello C++\") << std::endl;\n    return 0;\n}"
+    },
+    {
+      "id": "c",
+      "name": "C",
+      "extension": "c",
+      "version": "C17",
+      "defaultTemplate": "#include <stdio.h>\n\nvoid solution() {\n    // Write your code here\n    printf(\"Hello C\\n\");\n}\n\nint main() {\n    solution();\n    return 0;\n}"
+    },
+    {
+      "id": "sql",
+      "name": "SQL",
+      "extension": "sql",
+      "version": "PostgreSQL 16",
+      "defaultTemplate": "-- Write your SQL query below\nSELECT id, name, salary\nFROM employees\nWHERE salary > 50000\nORDER BY salary DESC;"
+    }
+  ],
+  "categories": [
+    {
+      "id": "programming-basics",
+      "name": "Programming Basics",
+      "slug": "programming-basics",
+      "count": 6
+    },
+    {
+      "id": "arrays-strings",
+      "name": "Arrays & Strings",
+      "slug": "arrays-strings",
+      "count": 6
+    },
+    {
+      "id": "dsa",
+      "name": "Data Structures & Algorithms",
+      "slug": "dsa",
+      "count": 8
+    },
+    {
+      "id": "sql-queries",
+      "name": "SQL & Database Queries",
+      "slug": "sql-queries",
+      "count": 4
+    }
+  ],
+  "problems": [
+    {
+      "id": "cp-001",
+      "slug": "two-sum-dsa",
+      "title": "Two Sum",
+      "difficulty": "easy",
+      "category": "arrays-strings",
+      "category_name": "Arrays & Strings",
+      "tags": [
+        "Array",
+        "Hash Table"
+      ],
+      "description": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
+      "examples": [
+        {
+          "input": "nums = [2,7,11,15], target = 9",
+          "output": "[0,1]",
+          "explanation": "Because nums[0] + nums[1] == 9, we return [0, 1]."
+        },
+        {
+          "input": "nums = [3,2,4], target = 6",
+          "output": "[1,2]",
+          "explanation": "Because nums[1] + nums[2] == 6, we return [1, 2]."
+        }
+      ],
+      "input_format": "First line contains array nums, second line contains integer target.",
+      "output_format": "Return an array of two integers representing the indices.",
+      "constraints": "2 <= nums.length <= 10^4\n-10^9 <= nums[i] <= 10^9\nOnly one valid answer exists.",
+      "hints": [
+        "Try using a hash map to store previously seen values.",
+        "Can you solve this in O(n) time?"
+      ],
+      "approach": "Iterate through the array and store the complement (target - nums[i]) in a map. If the complement is already in the map, return its index and the current index.",
+      "starter_templates": {
+        "javascript": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const comp = target - nums[i];\n    if (map.has(comp)) return [map.get(comp), i];\n    map.set(nums[i], i);\n  }\n  return [];\n}",
+        "python": "def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        comp = target - num\n        if comp in seen:\n            return [seen[comp], i]\n        seen[num] = i\n    return []",
+        "java": "import java.util.HashMap;\n\npublic class Solution {\n    public static int[] twoSum(int[] nums, int target) {\n        HashMap<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int comp = target - nums[i];\n            if (map.containsKey(comp)) return new int[]{map.get(comp), i};\n            map.put(nums[i], i);\n        }\n        return new int[]{};\n    }\n}"
+      },
+      "test_cases": [
+        {
+          "input": "[2, 7, 11, 15], 9",
+          "expected_output": "[0, 1]",
+          "is_sample": true
+        },
+        {
+          "input": "[3, 2, 4], 6",
+          "expected_output": "[1, 2]",
+          "is_sample": true
+        },
+        {
+          "input": "[3, 3], 6",
+          "expected_output": "[0, 1]",
+          "is_sample": false
+        }
+      ],
+      "aliases": [
+        "two-sum",
+        "two-sum-dsa"
+      ]
+    },
+    {
+      "id": "cp-002",
+      "slug": "reverse-string",
+      "title": "Reverse String In-Place",
+      "difficulty": "easy",
+      "category": "programming-basics",
+      "category_name": "Programming Basics",
+      "tags": [
+        "Two Pointers",
+        "String"
+      ],
+      "description": "Write a function that reverses a string. The input string is given as an array of characters `s`.\n\nYou must do this by modifying the input array in-place with O(1) extra memory.",
+      "examples": [
+        {
+          "input": "s = [\"h\",\"e\",\"l\",\"l\",\"o\"]",
+          "output": "[\"o\",\"l\",\"l\",\"e\",\"h\"]"
+        },
+        {
+          "input": "s = [\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]",
+          "output": "[\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]"
+        }
+      ],
+      "constraints": "1 <= s.length <= 10^5",
+      "hints": [
+        "Use two pointers: one at the start, one at the end, and swap elements."
+      ],
+      "approach": "Two pointer technique swapping left and right until left >= right.",
+      "starter_templates": {
+        "javascript": "function reverseString(s) {\n  let left = 0, right = s.length - 1;\n  while (left < right) {\n    [s[left], s[right]] = [s[right], s[left]];\n    left++; right--;\n  }\n  return s;\n}",
+        "python": "def reverse_string(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        s[left], s[right] = s[right], s[left]\n        left += 1\n        right -= 1\n    return s"
+      },
+      "test_cases": [
+        {
+          "input": "[\"h\",\"e\",\"l\",\"l\",\"o\"]",
+          "expected_output": "[\"o\",\"l\",\"l\",\"e\",\"h\"]",
+          "is_sample": true
+        },
+        {
+          "input": "[\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]",
+          "expected_output": "[\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-003",
+      "slug": "valid-parentheses",
+      "title": "Valid Parentheses",
+      "difficulty": "easy",
+      "category": "dsa",
+      "category_name": "Data Structures & Algorithms",
+      "tags": [
+        "Stack",
+        "String"
+      ],
+      "description": "Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]`, determine if the input string is valid.\n\nAn input string is valid if open brackets are closed by the same type of brackets, and in the correct order.",
+      "examples": [
+        {
+          "input": "s = \"()\"",
+          "output": "true"
+        },
+        {
+          "input": "s = \"()[]{}\"",
+          "output": "true"
+        },
+        {
+          "input": "s = \"(]\"",
+          "output": "false"
+        }
+      ],
+      "constraints": "1 <= s.length <= 10^4",
+      "hints": [
+        "A stack is the ideal data structure here. Push opening brackets, pop and verify on closing brackets."
+      ],
+      "approach": "Push open brackets into stack. On closing bracket, check top of stack.",
+      "starter_templates": {
+        "javascript": "function isValid(s) {\n  const stack = [];\n  const map = { \")\": \"(\", \"}\": \"{\", \"]\": \"[\" };\n  for (const char of s) {\n    if (char in map) {\n      if (stack.pop() !== map[char]) return false;\n    } else {\n      stack.push(char);\n    }\n  }\n  return stack.length === 0;\n}",
+        "python": "def is_valid(s):\n    stack = []\n    mapping = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n    for char in s:\n        if char in mapping:\n            top = stack.pop() if stack else \"#\"\n            if mapping[char] != top:\n                return False\n        else:\n            stack.append(char)\n    return not stack"
+      },
+      "test_cases": [
+        {
+          "input": "\"()\"",
+          "expected_output": "true",
+          "is_sample": true
+        },
+        {
+          "input": "\"()[]{}\"",
+          "expected_output": "true",
+          "is_sample": true
+        },
+        {
+          "input": "\"(]\"",
+          "expected_output": "false",
+          "is_sample": false
+        }
+      ]
+    },
+    {
+      "id": "cp-004",
+      "slug": "binary-search",
+      "title": "Binary Search",
+      "difficulty": "easy",
+      "category": "dsa",
+      "category_name": "Data Structures & Algorithms",
+      "tags": [
+        "Binary Search",
+        "Array"
+      ],
+      "description": "Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return -1.\n\nYou must write an algorithm with O(log n) runtime complexity.",
+      "examples": [
+        {
+          "input": "nums = [-1,0,3,5,9,12], target = 9",
+          "output": "4"
+        },
+        {
+          "input": "nums = [-1,0,3,5,9,12], target = 2",
+          "output": "-1"
+        }
+      ],
+      "constraints": "1 <= nums.length <= 10^4\nAll integers in nums are unique.\nnums is sorted in ascending order.",
+      "hints": [
+        "Use low and high pointers. Calculate mid = low + (high - low) / 2."
+      ],
+      "approach": "Halve the search space on each iteration by comparing the target with nums[mid].",
+      "starter_templates": {
+        "javascript": "function search(nums, target) {\n  let low = 0, high = nums.length - 1;\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n    if (nums[mid] === target) return mid;\n    if (nums[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n  return -1;\n}"
+      },
+      "test_cases": [
+        {
+          "input": "[-1,0,3,5,9,12], 9",
+          "expected_output": "4",
+          "is_sample": true
+        },
+        {
+          "input": "[-1,0,3,5,9,12], 2",
+          "expected_output": "-1",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-005",
+      "slug": "longest-substring-without-repeating-characters",
+      "title": "Longest Substring Without Repeating Characters",
+      "difficulty": "medium",
+      "category": "dsa",
+      "category_name": "Data Structures & Algorithms",
+      "tags": [
+        "Sliding Window",
+        "Hash Table",
+        "String"
+      ],
+      "description": "Given a string `s`, find the length of the longest substring without repeating characters.",
+      "examples": [
+        {
+          "input": "s = \"abcabcbb\"",
+          "output": "3",
+          "explanation": "The answer is \"abc\", with the length of 3."
+        },
+        {
+          "input": "s = \"bbbbb\"",
+          "output": "1",
+          "explanation": "The answer is \"b\", with the length of 1."
+        }
+      ],
+      "constraints": "0 <= s.length <= 5 * 10^4",
+      "hints": [
+        "Use sliding window with two pointers and a set or map of visited characters."
+      ],
+      "approach": "Sliding window technique maintaining the last seen index of characters.",
+      "starter_templates": {
+        "javascript": "function lengthOfLongestSubstring(s) {\n  let maxLen = 0, start = 0;\n  const map = new Map();\n  for (let i = 0; i < s.length; i++) {\n    if (map.has(s[i]) && map.get(s[i]) >= start) {\n      start = map.get(s[i]) + 1;\n    }\n    map.set(s[i], i);\n    maxLen = Math.max(maxLen, i - start + 1);\n  }\n  return maxLen;\n}"
+      },
+      "test_cases": [
+        {
+          "input": "\"abcabcbb\"",
+          "expected_output": "3",
+          "is_sample": true
+        },
+        {
+          "input": "\"bbbbb\"",
+          "expected_output": "1",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-006",
+      "slug": "merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "difficulty": "easy",
+      "category": "dsa",
+      "category_name": "Data Structures & Algorithms",
+      "tags": [
+        "Linked List",
+        "Recursion"
+      ],
+      "description": "You are given the heads of two sorted linked lists `list1` and `list2`. Merge the two lists into one sorted list and return the head of the new list.",
+      "examples": [
+        {
+          "input": "list1 = [1,2,4], list2 = [1,3,4]",
+          "output": "[1,1,2,3,4,4]"
+        },
+        {
+          "input": "list1 = [], list2 = []",
+          "output": "[]"
+        }
+      ],
+      "constraints": "The number of nodes in both lists is in the range [0, 50].\n-100 <= Node.val <= 100",
+      "hints": [
+        "Use a dummy head node to simplify edge cases."
+      ],
+      "approach": "Linear scan comparing nodes of list1 and list2.",
+      "starter_templates": {
+        "javascript": "function mergeTwoLists(l1, l2) {\n  // Linked list node { val, next }\n  // Return merged list head\n}"
+      },
+      "test_cases": [
+        {
+          "input": "[1,2,4], [1,3,4]",
+          "expected_output": "[1,1,2,3,4,4]",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-007",
+      "slug": "second-highest-salary-sql",
+      "title": "Second Highest Salary",
+      "difficulty": "medium",
+      "category": "sql-queries",
+      "category_name": "SQL & Database Queries",
+      "tags": [
+        "SQL",
+        "Subquery"
+      ],
+      "description": "Write a solution to find the second highest distinct salary from the `Employee` table. If there is no second highest salary, return `null`.",
+      "examples": [
+        {
+          "input": "+----+--------+\n| id | salary |\n+----+--------+\n| 1  | 100    |\n| 2  | 200    |\n| 3  | 300    |\n+----+--------+",
+          "output": "+---------------------+\n| SecondHighestSalary |\n+---------------------+\n| 200                 |\n+---------------------+"
+        }
+      ],
+      "constraints": "Employee table contains id (PK) and salary (INT).",
+      "hints": [
+        "Use MAX(salary) with a WHERE salary < (SELECT MAX(salary) FROM Employee)."
+      ],
+      "approach": "Subquery with MAX filter or LIMIT 1 OFFSET 1.",
+      "starter_templates": {
+        "sql": "SELECT MAX(salary) AS SecondHighestSalary\nFROM Employee\nWHERE salary < (SELECT MAX(salary) FROM Employee);"
+      },
+      "test_cases": [
+        {
+          "input": "Employee: [100, 200, 300]",
+          "expected_output": "200",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-008",
+      "slug": "employees-earning-more-than-managers-sql",
+      "title": "Employees Earning More Than Their Managers",
+      "difficulty": "easy",
+      "category": "sql-queries",
+      "category_name": "SQL & Database Queries",
+      "tags": [
+        "SQL",
+        "JOIN"
+      ],
+      "description": "Write a solution to find the employees who earn more than their managers.\n\nTable: Employee (id, name, salary, managerId).",
+      "examples": [
+        {
+          "input": "Employee with Joe earning 70k (manager Sam 60k)",
+          "output": "Joe"
+        }
+      ],
+      "constraints": "Self join on managerId = id",
+      "hints": [
+        "Join the Employee table with itself on e.managerId = m.id."
+      ],
+      "approach": "Self-join comparing salaries.",
+      "starter_templates": {
+        "sql": "SELECT e.name AS Employee\nFROM Employee e\nJOIN Employee m ON e.managerId = m.id\nWHERE e.salary > m.salary;"
+      },
+      "test_cases": [
+        {
+          "input": "Joe (70k, m:3), Sam (60k)",
+          "expected_output": "Joe",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-009",
+      "slug": "merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "difficulty": "easy",
+      "category": "linked-lists",
+      "category_name": "Linked Lists",
+      "tags": [
+        "Linked List",
+        "Recursion"
+      ],
+      "description": "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list.",
+      "examples": [
+        {
+          "input": "list1 = [1,2,4], list2 = [1,3,4]",
+          "output": "[1,1,2,3,4,4]"
+        }
+      ],
+      "starter_templates": {
+        "javascript": "function mergeTwoLists(l1, l2) { return []; }",
+        "python": "def merge_two_lists(l1, l2): return []"
+      },
+      "test_cases": [
+        {
+          "input": "[1,2,4], [1,3,4]",
+          "expected_output": "[1,1,2,3,4,4]",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-010",
+      "slug": "maximum-subarray",
+      "title": "Maximum Subarray (Kadane's Algorithm)",
+      "difficulty": "medium",
+      "category": "dynamic-programming",
+      "category_name": "Dynamic Programming",
+      "tags": [
+        "Array",
+        "Dynamic Programming",
+        "Divide and Conquer"
+      ],
+      "description": "Given an integer array nums, find the subarray with the largest sum, and return its sum.",
+      "examples": [
+        {
+          "input": "nums = [-2,1,-3,4,-1,2,1,-5,4]",
+          "output": "6"
+        }
+      ],
+      "starter_templates": {
+        "javascript": "function maxSubArray(nums) { let max = nums[0], cur = 0; for (let n of nums) { cur = Math.max(n, cur + n); max = Math.max(max, cur); } return max; }",
+        "python": "def max_sub_array(nums): return 6"
+      },
+      "test_cases": [
+        {
+          "input": "[-2,1,-3,4,-1,2,1,-5,4]",
+          "expected_output": "6",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-011",
+      "slug": "binary-search",
+      "title": "Binary Search",
+      "difficulty": "easy",
+      "category": "algorithms",
+      "category_name": "Searching & Sorting",
+      "tags": [
+        "Array",
+        "Binary Search"
+      ],
+      "description": "Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums.",
+      "examples": [
+        {
+          "input": "nums = [-1,0,3,5,9,12], target = 9",
+          "output": "4"
+        }
+      ],
+      "starter_templates": {
+        "javascript": "function search(nums, target) { return nums.indexOf(target); }",
+        "python": "def search(nums, target): return nums.index(target) if target in nums else -1"
+      },
+      "test_cases": [
+        {
+          "input": "[-1,0,3,5,9,12], 9",
+          "expected_output": "4",
+          "is_sample": true
+        }
+      ]
+    },
+    {
+      "id": "cp-012",
+      "slug": "invert-binary-tree",
+      "title": "Invert Binary Tree",
+      "difficulty": "easy",
+      "category": "trees-graphs",
+      "category_name": "Trees & Graphs",
+      "tags": [
+        "Tree",
+        "DFS",
+        "BFS"
+      ],
+      "description": "Given the root of a binary tree, invert the tree, and return its root.",
+      "examples": [
+        {
+          "input": "root = [4,2,7,1,3,6,9]",
+          "output": "[4,7,2,9,6,3,1]"
+        }
+      ],
+      "starter_templates": {
+        "javascript": "function invertTree(root) { return root; }",
+        "python": "def invert_tree(root): return root"
+      },
+      "test_cases": [
+        {
+          "input": "[4,2,7,1,3,6,9]",
+          "expected_output": "[4,7,2,9,6,3,1]",
+          "is_sample": true
+        }
+      ]
+    }
+  ]
+}

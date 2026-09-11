@@ -1,0 +1,997 @@
+[
+  {
+    "id": "att-968b554f-9dd9-4e7a-b6a3-abf20ec738a6",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:20:01.288Z",
+    "completed_at": "2026-09-11T10:20:01.296Z"
+  },
+  {
+    "id": "att-d714fd4d-f678-4a96-b9c8-01ab4fc04e71",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:37:29.447Z",
+    "completed_at": "2026-09-11T10:37:29.454Z"
+  },
+  {
+    "id": "att-64424770-ddfc-41ba-8c30-43d48b43559d",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:56:03.758Z",
+    "completed_at": "2026-09-11T10:56:03.765Z"
+  },
+  {
+    "id": "att-aa8e595e-ae7f-48f0-934e-d5c2e04ad484",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:56:51.312Z",
+    "completed_at": "2026-09-11T10:56:51.319Z"
+  },
+  {
+    "id": "att-1da04b72-4e8a-42f3-b378-52adbcb6214d",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:57:14.868Z",
+    "completed_at": "2026-09-11T10:57:14.875Z"
+  },
+  {
+    "id": "att-c2f741a8-f750-463f-ac4c-2f34c4ecd2ae",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:57:43.886Z",
+    "completed_at": "2026-09-11T10:57:43.893Z"
+  },
+  {
+    "id": "att-c8658d12-618b-4fb9-a411-bd69320221db",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:57:59.103Z",
+    "completed_at": "2026-09-11T10:57:59.110Z"
+  },
+  {
+    "id": "att-f395b5ce-6fd8-4486-89a8-6a8ca37b8711",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:58:15.143Z",
+    "completed_at": "2026-09-11T10:58:15.150Z"
+  },
+  {
+    "id": "att-598bba31-6536-4394-9afd-9f0a62f15417",
+    "student_id": "guest",
+    "mode": "practice",
+    "test_id": null,
+    "category_id": null,
+    "topic_id": null,
+    "total_questions": 2,
+    "duration_minutes": 15,
+    "score": 1,
+    "accuracy": 50,
+    "correct_count": 1,
+    "incorrect_count": 1,
+    "unanswered_count": 0,
+    "time_spent_seconds": 70,
+    "average_time_seconds": 35,
+    "status": "completed",
+    "answers": [
+      {
+        "question_id": "q-quant-01",
+        "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+        "options": [
+          {
+            "key": "A",
+            "text": "20%"
+          },
+          {
+            "key": "B",
+            "text": "25%"
+          },
+          {
+            "key": "C",
+            "text": "16.66%"
+          },
+          {
+            "key": "D",
+            "text": "18.75%"
+          }
+        ],
+        "difficulty": "easy",
+        "selected_option": "A",
+        "correct_option": "A",
+        "is_correct": true,
+        "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+        "time_spent_seconds": 30,
+        "topic_id": "top-quant-percentages",
+        "category_id": "cat-quant"
+      },
+      {
+        "question_id": "q-quant-02",
+        "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+        "options": [
+          {
+            "key": "A",
+            "text": "2% Profit"
+          },
+          {
+            "key": "B",
+            "text": "2% Loss"
+          },
+          {
+            "key": "C",
+            "text": "4% Profit"
+          },
+          {
+            "key": "D",
+            "text": "5% Loss"
+          }
+        ],
+        "difficulty": "medium",
+        "selected_option": "B",
+        "correct_option": "A",
+        "is_correct": false,
+        "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+        "time_spent_seconds": 40,
+        "topic_id": "top-quant-profit-loss",
+        "category_id": "cat-quant"
+      }
+    ],
+    "topic_performance": [
+      {
+        "topic_id": "top-quant-percentages",
+        "topic_name": "Percentages",
+        "total": 1,
+        "correct": 1,
+        "accuracy": 100
+      },
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "total": 1,
+        "correct": 0,
+        "accuracy": 0
+      }
+    ],
+    "weak_topics": [
+      {
+        "topic_id": "top-quant-profit-loss",
+        "topic_name": "Profit & Loss",
+        "accuracy": 0,
+        "correct": 0,
+        "total": 1,
+        "recommendation": "Strengthen fundamental concepts in Profit & Loss with dedicated practice."
+      }
+    ],
+    "created_at": "2026-09-11T10:58:30.845Z",
+    "completed_at": "2026-09-11T10:58:30.852Z"
+  },
+  {
+    "id": "att-639b79ad-a436-4a02-bae7-c47d3df49d44",
+    "student_id": "2dec7743-671a-47f8-8d6c-7366182e707f",
+    "mode": "mock_test",
+    "test_id": "test-quant-speed-challenge",
+    "category_id": "cat-quant",
+    "topic_id": null,
+    "total_questions": 10,
+    "duration_minutes": 10,
+    "score": 0,
+    "accuracy": 0,
+    "correct_count": 0,
+    "incorrect_count": 0,
+    "unanswered_count": 10,
+    "time_spent_seconds": 0,
+    "average_time_seconds": 0,
+    "status": "in_progress",
+    "answers": [],
+    "topic_performance": [],
+    "weak_topics": [],
+    "created_at": "2026-09-11T11:07:00.656Z",
+    "completed_at": null
+  }
+]

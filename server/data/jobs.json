@@ -1,0 +1,145 @@
+{
+  "jobs": [
+    {
+      "id": "job-001",
+      "slug": "associate-frontend-engineer-react",
+      "title": "Associate Frontend Engineer (React)",
+      "company": "TechCorp Solutions",
+      "company_logo": "https://ui-avatars.com/api/?name=Tech+Corp&background=2563eb&color=fff",
+      "location": "Bangalore, India",
+      "work_mode": "Hybrid",
+      "employment_type": "Full-time",
+      "experience_level": "0-2 Years",
+      "salary_range": "₹6,00,000 - ₹9,00,000 / year",
+      "category": "Frontend Developer",
+      "skills": [
+        "React",
+        "JavaScript",
+        "TypeScript",
+        "Tailwind CSS",
+        "Redux / React Query"
+      ],
+      "description": "We are seeking an enthusiastic Associate Frontend Engineer to build high-performance, accessible web applications for our enterprise SaaS ecosystem. You will collaborate with product designers, backend engineers, and QA specialists to deliver smooth, polished user experiences.",
+      "requirements": [
+        "Hands-on experience building web apps with React, JavaScript (ES6+), and modern CSS frameworks",
+        "Solid grasp of component lifecycle, hooks, and client-side performance optimization",
+        "Familiarity with REST APIs, Git version control, and responsive design principles",
+        "Good communication and problem-solving skills"
+      ],
+      "benefits": [
+        "Flexible hybrid schedule",
+        "Health insurance covering family",
+        "Annual learning stipend",
+        "MacBook equipment provided"
+      ],
+      "posted_date": "2 days ago",
+      "application_deadline": "2026-10-15",
+      "external_apply_url": "https://example.com/apply/techcorp-frontend"
+    },
+    {
+      "id": "job-002",
+      "slug": "junior-full-stack-developer-python-react",
+      "title": "Junior Full Stack Developer (Python & React)",
+      "company": "InnovateAI Labs",
+      "company_logo": "https://ui-avatars.com/api/?name=Innovate+AI&background=4f46e5&color=fff",
+      "location": "Hyderabad, India",
+      "work_mode": "Remote",
+      "employment_type": "Full-time",
+      "experience_level": "0-2 Years",
+      "salary_range": "₹7,00,000 - ₹11,00,000 / year",
+      "category": "Full Stack Developer",
+      "skills": [
+        "Python",
+        "FastAPI / Django",
+        "React",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "description": "InnovateAI is looking for a versatile Full Stack Developer to build customer-facing analytics dashboards and backend data pipeline integrations. You will work across the full stack from database modeling to UI implementation.",
+      "requirements": [
+        "Proficiency with Python (FastAPI or Django) and modern React",
+        "Experience querying and designing relational databases (PostgreSQL/MySQL)",
+        "Understanding of Docker containers and RESTful API best practices",
+        "Prior portfolio projects demonstrating end-to-end development"
+      ],
+      "benefits": [
+        "100% remote anywhere in India",
+        "Performance bonus",
+        "Continuous mentorship from Staff Engineers"
+      ],
+      "posted_date": "3 days ago",
+      "application_deadline": "2026-10-20",
+      "external_apply_url": "https://example.com/apply/innovate-fullstack"
+    },
+    {
+      "id": "job-003",
+      "slug": "cloud-devops-intern",
+      "title": "Cloud & DevOps Engineering Intern",
+      "company": "CloudScale Technologies",
+      "company_logo": "https://ui-avatars.com/api/?name=Cloud+Scale&background=059669&color=fff",
+      "location": "Pune, India",
+      "work_mode": "Hybrid",
+      "employment_type": "Internship",
+      "experience_level": "Internship",
+      "salary_range": "₹25,000 - ₹35,000 / month",
+      "category": "DevOps Engineer",
+      "skills": [
+        "Linux",
+        "Docker",
+        "AWS",
+        "GitHub Actions",
+        "Python/Bash"
+      ],
+      "description": "Join our Cloud Platform team for a 6-month intensive internship focused on automating cloud deployments, continuous integration, and infrastructure monitoring.",
+      "requirements": [
+        "Strong grasp of Linux command line, networking fundamentals, and Git",
+        "Hands-on projects with Docker and containerization",
+        "Basic familiarity with AWS services (EC2, S3, IAM)",
+        "Pre-placement offer (PPO) opportunities based on internship performance"
+      ],
+      "benefits": [
+        "Pre-Placement Offer (PPO) opportunity",
+        "Dedicated mentor",
+        "Industry certifications sponsored"
+      ],
+      "posted_date": "1 week ago",
+      "application_deadline": "2026-10-10",
+      "external_apply_url": "https://example.com/apply/cloudscale-intern"
+    },
+    {
+      "id": "job-004",
+      "slug": "data-analyst-trainee",
+      "title": "Data Analyst Trainee",
+      "company": "Global Insights Group",
+      "company_logo": "https://ui-avatars.com/api/?name=Global+Insights&background=d97706&color=fff",
+      "location": "Remote",
+      "work_mode": "Remote",
+      "employment_type": "Full-time",
+      "experience_level": "0-1 Years",
+      "salary_range": "₹5,50,000 - ₹8,00,000 / year",
+      "category": "Data Analyst",
+      "skills": [
+        "SQL",
+        "Python",
+        "Pandas",
+        "PowerBI / Tableau",
+        "Excel"
+      ],
+      "description": "Transform complex business data into actionable executive insights. You will write SQL queries, automate reports, and build interactive dashboards.",
+      "requirements": [
+        "Proficiency in complex SQL queries (Joins, Window functions, Aggregations)",
+        "Experience with Python for data manipulation (Pandas, NumPy)",
+        "Knowledge of dashboard tools such as PowerBI, Tableau, or Metabase",
+        "Strong communication skills for presenting findings"
+      ],
+      "benefits": [
+        "Comprehensive health insurance",
+        "Wellness reimbursement",
+        "Remote home office allowance"
+      ],
+      "posted_date": "5 days ago",
+      "application_deadline": "2026-10-30",
+      "external_apply_url": "https://example.com/apply/global-insights-analyst"
+    }
+  ]
+}

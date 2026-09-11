@@ -10,11 +10,14 @@ const resolveDefaultApiUrl = (): string => {
   if (typeof window !== 'undefined') {
     const host = window.location.hostname;
     if (host === 'localhost' || host === '127.0.0.1') {
+      if (window.location.port === '5173') {
+        return '/api/v1';
+      }
       return 'http://localhost:5000/api/v1';
     }
     if (host === 'mycourse.test' || host.endsWith('.mycourse.test')) {
       const isPort80OrEmpty = !window.location.port || window.location.port === '80';
-      return isPort80OrEmpty ? 'http://api.mycourse.test/api/v1' : 'http://api.mycourse.test:5000/api/v1';
+      return isPort80OrEmpty ? '/api/v1' : 'http://api.mycourse.test:5000/api/v1';
     }
   }
   if (import.meta.env.VITE_API_URL) {

@@ -7,9 +7,11 @@ import { categoryService } from '../../services/category.service';
 import {
   Search, ShoppingCart, Heart, Sun, Moon, Menu, X, ChevronDown,
   User, BookOpen, LogOut, LayoutDashboard, Settings, Award, Shield,
-  Layers, PlusCircle, Route
+  Layers, PlusCircle, Route, Target
 } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { GlobalSearchModal } from '../common/GlobalSearchModal';
+import { Code2, FolderGit2, MessageSquareCode, Compass, Briefcase, Bot, Sparkles } from 'lucide-react';
 
 export const Navbar = () => {
   const { user, profile, isAuthenticated, isAdmin, isTeacher, logout } = useAuth();
@@ -23,6 +25,7 @@ export const Navbar = () => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const categoriesRef = useRef(null);
   const userDropdownRef = useRef(null);
@@ -121,7 +124,7 @@ export const Navbar = () => {
           <nav className="hidden xl:flex items-center space-x-1">
             <Link
               to="/courses"
-              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
                 isActive('/courses')
                   ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
@@ -132,91 +135,109 @@ export const Navbar = () => {
 
             <Link
               to="/learning-paths"
-              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
                 isActive('/learning-paths') || location.pathname.startsWith('/learning-paths')
                   ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
               }`}
             >
-              Learning Paths
+              Paths
             </Link>
 
-            {/* Categories Dropdown */}
-            <div className="relative" ref={categoriesRef}>
-              <button
-                type="button"
-                onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
-                  categoriesOpen
-                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                }`}
-                aria-expanded={categoriesOpen}
-              >
-                <span>Categories</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? 'rotate-180 text-primary-600' : ''}`} />
-              </button>
-
-              {categoriesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Explore Disciplines</p>
-                  </div>
-                  <div className="max-h-80 overflow-y-auto py-1">
-                    {categories.map((cat) => (
-                      <button
-                        key={cat.id || cat.slug}
-                        onClick={() => handleCategoryClick(cat.slug)}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center justify-between group cursor-pointer"
-                      >
-                        <span>{cat.name}</span>
-                        {cat.course_count && (
-                          <span className="text-[10px] text-slate-400 font-normal group-hover:text-primary-500">
-                            {cat.course_count}
-                          </span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
             <Link
-              to="/teachers"
-              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
-                isActive('/teachers')
+              to="/codelab"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/codelab') || location.pathname.startsWith('/codelab')
                   ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
               }`}
             >
-              Instructors
+              CodeLab
             </Link>
 
             <Link
-              to="/pricing"
-              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
-                isActive('/pricing')
+              to="/aptitude"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/aptitude') || location.pathname.startsWith('/aptitude')
                   ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
               }`}
             >
-              Pricing
+              Aptitude
+            </Link>
+
+            <Link
+              to="/projects"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/projects') || location.pathname.startsWith('/projects')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              Projects
+            </Link>
+
+            <Link
+              to="/interview"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/interview') || location.pathname.startsWith('/interview')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              Interview Hub
+            </Link>
+
+            <Link
+              to="/career"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/career') || location.pathname.startsWith('/career')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              Career
+            </Link>
+
+            <Link
+              to="/jobs"
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                isActive('/jobs') || location.pathname.startsWith('/jobs')
+                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/40'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              Jobs
+            </Link>
+
+            <Link
+              to="/ai-career"
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                isActive('/ai-career')
+                  ? 'bg-purple-600 text-white shadow-md shadow-purple-500/20'
+                  : 'bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-800/60 hover:bg-purple-100'
+              }`}
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>AI Mentor</span>
             </Link>
           </nav>
 
-          {/* 3. Search Bar */}
-          <div className="flex-1 max-w-md mx-2 hidden md:block">
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search courses, skills, or teachers..."
-                className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-primary-500 rounded-full text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-              />
-            </form>
+          {/* 3. Unified Global Search Bar */}
+          <div className="flex-1 max-w-xs lg:max-w-sm mx-2 hidden md:block">
+            <button
+              type="button"
+              onClick={() => setSearchModalOpen(true)}
+              className="w-full flex items-center justify-between px-3.5 py-2 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-full text-xs text-slate-500 dark:text-slate-400 hover:border-primary-500 transition-all cursor-pointer shadow-sm"
+            >
+              <span className="flex items-center gap-2">
+                <Search className="w-3.5 h-3.5 text-slate-400" />
+                <span className="truncate">Search platform (courses, codelab, jobs)...</span>
+              </span>
+              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-400 bg-white dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600">
+                ⌘K
+              </kbd>
+            </button>
           </div>
 
           {/* 4. Action Items & User Profile */}
@@ -308,6 +329,38 @@ export const Navbar = () => {
                       </Link>
 
                       <Link
+                        to="/aptitude/analytics"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <Target className="w-4 h-4 text-indigo-500" />
+                        <span>Aptitude Performance</span>
+                      </Link>
+
+                      <Link
+                        to="/codelab/submissions"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <Code2 className="w-4 h-4 text-emerald-500" />
+                        <span>CodeLab Submissions</span>
+                      </Link>
+
+                      <Link
+                        to="/projects/portfolio"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <FolderGit2 className="w-4 h-4 text-purple-500" />
+                        <span>Project Portfolio</span>
+                      </Link>
+
+                      <Link
+                        to="/career"
+                        className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <Compass className="w-4 h-4 text-amber-500" />
+                        <span>Career Command Center</span>
+                      </Link>
+
+                      <Link
                         to="/instructor"
                         className="flex items-center space-x-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                       >
@@ -385,6 +438,28 @@ export const Navbar = () => {
             <Link to="/learning-paths" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-primary-600 dark:text-primary-400 font-semibold">
               Learning Paths
             </Link>
+            <Link to="/aptitude" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold">
+              Aptitude Arena
+            </Link>
+            <Link to="/codelab" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-emerald-600 dark:text-emerald-400 font-semibold">
+              CodeLab (Coding & DSA)
+            </Link>
+            <Link to="/projects" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-purple-600 dark:text-purple-400 font-semibold">
+              Projects Hub
+            </Link>
+            <Link to="/interview" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-amber-600 dark:text-amber-400 font-semibold">
+              Interview Hub
+            </Link>
+            <Link to="/career" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold">
+              Career Readiness Score
+            </Link>
+            <Link to="/jobs" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold">
+              Tech Jobs & Internships
+            </Link>
+            <Link to="/ai-career" className="px-3 py-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 font-semibold flex items-center gap-2">
+              <Bot className="w-4 h-4" />
+              <span>AI Career Mentor</span>
+            </Link>
             <Link to="/teachers" className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
               Instructors
             </Link>
@@ -424,6 +499,7 @@ export const Navbar = () => {
           )}
         </div>
       )}
+      <GlobalSearchModal isOpen={searchModalOpen} onClose={() => setSearchModalOpen(false)} />
     </header>
   );
 };

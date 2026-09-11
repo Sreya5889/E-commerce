@@ -56,7 +56,7 @@ export const learningPathStore = {
     difficulty = '',
     sort = 'popular',
     page = 1,
-    limit = 12
+    limit = 50
   } = {}) {
     let list = this.getAll();
 

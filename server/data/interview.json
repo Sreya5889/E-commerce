@@ -1,0 +1,321 @@
+{
+  "categories": [
+    {
+      "id": "tech-dsa",
+      "name": "DSA & Algorithms",
+      "type": "technical",
+      "count": 10
+    },
+    {
+      "id": "tech-web",
+      "name": "Web & Full Stack",
+      "type": "technical",
+      "count": 12
+    },
+    {
+      "id": "tech-dbms",
+      "name": "DBMS & SQL",
+      "type": "technical",
+      "count": 8
+    },
+    {
+      "id": "tech-sysdesign",
+      "name": "System Design",
+      "type": "technical",
+      "count": 6
+    },
+    {
+      "id": "hr-behavioral",
+      "name": "HR & Behavioral",
+      "type": "hr",
+      "count": 10
+    }
+  ],
+  "questions": [
+    {
+      "id": "iq-001",
+      "category_id": "tech-web",
+      "category_name": "Web & Full Stack",
+      "title": "Explain the React Virtual DOM and how reconciliation works.",
+      "difficulty": "intermediate",
+      "suggested_answer": "The Virtual DOM (VDOM) is a lightweight JavaScript in-memory representation of the actual DOM. When component state changes, React creates a new Virtual DOM tree and compares it with the previous snapshot using a heuristic O(n) diffing algorithm called Reconciliation.\n\nKey aspects:\n1. Element Type Check: If element types differ, React tears down the old subtree and mounts the new one.\n2. Keys in Lists: Unique stable keys allow React to track elements across renders, minimizing DOM insertions and deletions.\n3. Batching: React batches multiple state updates into a single render pass to avoid layout thrashing.",
+      "key_points": [
+        "Virtual DOM is in-memory JavaScript representation of real DOM",
+        "Diffing algorithm operates in O(n) complexity rather than standard O(n^3) tree diffing",
+        "Keys are critical for list rendering performance",
+        "Batching groups DOM updates into single reflow"
+      ],
+      "common_mistakes": [
+        "Saying Virtual DOM is directly faster than real DOM (it adds overhead, but minimizes expensive layout reflows)",
+        "Using array index as key in dynamic lists that reorder",
+        "Failing to mention Fiber architecture and incremental rendering"
+      ],
+      "follow_up_questions": [
+        "What was the motivation behind React Fiber?",
+        "How does React 18 automatic batching differ from earlier versions?"
+      ]
+    },
+    {
+      "id": "iq-002",
+      "category_id": "tech-dbms",
+      "category_name": "DBMS & SQL",
+      "title": "What are ACID properties in relational database systems?",
+      "difficulty": "easy",
+      "suggested_answer": "ACID guarantees reliability in transactional database operations:\n\n1. Atomicity: \"All or nothing\". Either the entire transaction succeeds, or it is rolled back completely.\n2. Consistency: Transactions must take the database from one valid state to another, upholding all constraints, cascades, and rules.\n3. Isolation: Concurrent transactions execute independently without interfering with each other (controlled via isolation levels like Read Committed, Repeatable Read, Serializable).\n4. Durability: Once a transaction commits, its modifications are permanently recorded in non-volatile storage (WAL / Write-Ahead Log) even in system crash.",
+      "key_points": [
+        "Atomicity prevents partial writes",
+        "Consistency enforces schema integrity constraints",
+        "Isolation avoids dirty reads and phantom reads",
+        "Durability utilizes Write-Ahead Logging"
+      ],
+      "common_mistakes": [
+        "Confusing Atomicity with Consistency",
+        "Assuming all transactions run with Serializable isolation by default"
+      ],
+      "follow_up_questions": [
+        "What are dirty reads, non-repeatable reads, and phantom reads?",
+        "How does Postgres implement isolation using MVCC (Multi-Version Concurrency Control)?"
+      ]
+    },
+    {
+      "id": "iq-003",
+      "category_id": "tech-sysdesign",
+      "category_name": "System Design",
+      "title": "How would you design a URL shortening service like Bitly or TinyURL?",
+      "difficulty": "medium",
+      "suggested_answer": "Designing a URL shortener requires addressing high-read throughput, URL uniqueness, and minimal redirect latency:\n\n1. Requirements: Shorten long URL to 7-character string, redirect short URL to original destination, track click metrics.\n2. Capacity: 100M URLs/month, 10:1 read-to-write ratio. 7-character Base62 string (a-z, A-Z, 0-9) provides 62^7 = ~3.5 trillion unique combinations.\n3. Encoding: Counter / Snowflake ID converted to Base62, avoiding MD5/SHA256 collisions.\n4. Architecture: Load Balancer -> Web API -> Redis Cache -> PostgreSQL / NoSQL.\n5. Cache: Cache top 20% most accessed URLs in Redis with LRU eviction for sub-10ms redirection.",
+      "key_points": [
+        "Base62 encoding (a-z, A-Z, 0-9) yields 3.5T unique 7-char keys",
+        "Distributed counter or Ticket Server prevents ID collision across microservices",
+        "Redis caching with LRU handles 80/20 read-heavy traffic",
+        "HTTP 301 vs 302: 301 caches in browser, 302 routes through server for analytics"
+      ],
+      "common_mistakes": [
+        "Using pure hash function without collision handling strategy",
+        "Forgetting HTTP 301 vs 302 distinction"
+      ],
+      "follow_up_questions": [
+        "Why would you pick 302 Temporary Redirect over 301 Moved Permanently if analytics are required?",
+        "How do you handle expired short URLs?"
+      ]
+    },
+    {
+      "id": "iq-004",
+      "category_id": "hr-behavioral",
+      "category_name": "HR & Behavioral",
+      "title": "Tell me about a time you had a technical disagreement with a team member and how you resolved it.",
+      "difficulty": "medium",
+      "suggested_answer": "Use the STAR method (Situation, Task, Action, Result):\n\n\"In my previous project, we were deciding whether to implement client-side state management with Redux or React Query for our dashboard. A senior engineer wanted Redux because of past familiarity, while I noticed our data was primarily server-state with caching and re-fetching needs.\n\nInstead of debating opinions, I created a time-boxed 1-day spike comparing boilerplate, bundle size, and cache invalidation between both approaches. When we reviewed the metrics together, we saw React Query reduced our codebase by 40% while automatically providing background re-validation.\n\nMy colleague agreed with the data-driven recommendation, and we successfully delivered the feature ahead of schedule with zero state synchronization bugs.\"",
+      "key_points": [
+        "Use the STAR framework (Situation, Task, Action, Result)",
+        "Focus on objective data, prototypes, and team outcomes rather than winning an argument",
+        "Show professional respect and active listening"
+      ],
+      "common_mistakes": [
+        "Blaming the other person or sounding defensive",
+        "Leaving out the concrete result or lessons learned"
+      ],
+      "follow_up_questions": [
+        "What would you have done if the team chose the alternative approach anyway?"
+      ]
+    },
+    {
+      "id": "iq-005",
+      "category_id": "system-design",
+      "category_name": "System Design",
+      "title": "How do you design a high-throughput URL shortener like bit.ly?",
+      "difficulty": "medium",
+      "suggested_answer": "To design a URL shortener, compute an MD5 or SHA-256 hash or use a distributed counter (Snowflake/base62 encoding) to generate a 7-character slug. Store key-value mappings in a distributed NoSQL key-value store (like DynamoDB/Cassandra) with a Redis cache layer for the top 20% hot links. Use Rate limiting with Token Bucket to prevent scraping.",
+      "key_points": [
+        "Base62 encoding of an auto-incrementing ID (62^7 combinations)",
+        "Distributed cache (Redis) fronting the persistent database",
+        "Handling hash collisions vs base62 sequence IDs",
+        "Read-heavy caching strategy (80/20 rule)"
+      ],
+      "common_mistakes": [
+        "Using relational single-node DB with auto-increment without sharding",
+        "Forgetting redirection HTTP status codes (301 vs 302)"
+      ],
+      "follow_up_questions": [
+        "How do you handle custom alias URLs?",
+        "How do you handle expired links and cleanup?"
+      ]
+    },
+    {
+      "id": "iq-006",
+      "category_id": "backend",
+      "category_name": "Backend Engineering",
+      "title": "What is the difference between SQL and NoSQL databases, and how do you choose?",
+      "difficulty": "easy",
+      "suggested_answer": "SQL databases (PostgreSQL, MySQL) are relational, table-based, ACID-compliant, and excel at complex joins and transactional consistency. NoSQL databases (MongoDB, Cassandra, Redis) are non-relational, document or key-value stores with flexible schemas designed for horizontal scalability and high throughput. Choose SQL for finance/e-commerce orders and NoSQL for sensor telemetry, chat logs, or cache.",
+      "key_points": [
+        "ACID vs BASE consistency models",
+        "Horizontal vs vertical scalability",
+        "Structured vs dynamic schema",
+        "Read/write patterns and join overhead"
+      ],
+      "common_mistakes": [
+        "Claiming NoSQL is always faster than SQL",
+        "Ignoring PostgreSQL JSONB support"
+      ],
+      "follow_up_questions": [
+        "What is the CAP theorem?",
+        "When would you use a hybrid polyglot persistence architecture?"
+      ]
+    },
+    {
+      "id": "iq-007",
+      "category_id": "hr-behavioral",
+      "category_name": "HR & Behavioral",
+      "title": "Tell me about a time you had a technical disagreement with a teammate.",
+      "difficulty": "medium",
+      "suggested_answer": "Use the STAR method: Situation: During an API migration, a teammate favored GraphQL while I recommended REST with OpenAPI due to our team's existing monitoring tooling. Task: We needed to deliver within 3 weeks without breaking downstream consumers. Action: We scheduled a 30-minute spike, built small prototypes of both, and evaluated latency, caching simplicity, and client adoption costs together. Result: We agreed on REST with OpenAPI, delivered 2 days ahead of deadline with zero regression bugs.",
+      "key_points": [
+        "Focus on facts and technical prototypes rather than ego",
+        "Seek consensus aligned with project constraints",
+        "Acknowledge the merit of the other person's proposal",
+        "Deliver measurable positive outcomes"
+      ],
+      "common_mistakes": [
+        "Blaming or portraying the coworker negatively",
+        "Saying you have never had a disagreement"
+      ],
+      "follow_up_questions": [
+        "What would you do if your manager made a technical decision you strongly disagree with?"
+      ]
+    },
+    {
+      "id": "iq-008",
+      "category_id": "frontend",
+      "category_name": "Frontend Development",
+      "title": "Explain CSS Specificity, the Box Model, and BEM methodology.",
+      "difficulty": "easy",
+      "suggested_answer": "The CSS box model consists of content, padding, border, and margin. Box-sizing: border-box includes padding and border in width/height. Specificity determines which rules apply: Inline styles (1000) > IDs (100) > Classes/Attributes/Pseudo-classes (10) > Elements/Pseudo-elements (1). BEM (Block Element Modifier) provides structured naming like .btn, .btn__icon, .btn--primary to prevent specificity wars.",
+      "key_points": [
+        "box-sizing: border-box vs content-box",
+        "Calculation weights: inline, ID, class, tag",
+        "BEM structure avoiding deeply nested selectors"
+      ],
+      "common_mistakes": [
+        "Overusing !important to bypass specificity",
+        "Confusing margin collapsing"
+      ],
+      "follow_up_questions": [
+        "How does CSS Grid differ from Flexbox?"
+      ]
+    },
+    {
+      "id": "iq-009",
+      "category_id": "system-design",
+      "category_name": "System Design",
+      "title": "What is Database Indexing, and how do B-Trees and Hash Indexes work?",
+      "difficulty": "medium",
+      "suggested_answer": "An index is a data structure (commonly B-Tree or B+Tree) that improves data retrieval speed at the expense of additional writes and storage. B-Trees maintain sorted keys with log(N) lookup, range scans, and insertions. Hash indexes provide O(1) equality lookup but do not support range queries.",
+      "key_points": [
+        "B-Tree vs Hash index trade-offs",
+        "Clustered index vs secondary indexes",
+        "Index selectivity and composite index column order",
+        "Write amplification during INSERT/UPDATE"
+      ],
+      "common_mistakes": [
+        "Adding indexes on every single column indiscriminately",
+        "Not knowing that leading columns matter in composite indexes"
+      ],
+      "follow_up_questions": [
+        "What is an index scan vs an index-only scan?"
+      ]
+    },
+    {
+      "id": "iq-010",
+      "category_id": "backend",
+      "category_name": "Backend Engineering",
+      "title": "How does JWT authentication work and how do you handle token revocation?",
+      "difficulty": "medium",
+      "suggested_answer": "JSON Web Tokens contain Header, Payload, and Signature encoded in base64. The server verifies the signature using a secret/public key without querying a database (stateless). Because JWTs cannot be revoked natively until expiration, best practice is short-lived access tokens (15 mins) paired with rotating refresh tokens stored in HTTP-only cookies and tracked in Redis for immediate revocation.",
+      "key_points": [
+        "Header, Payload, Signature breakdown",
+        "Stateless verification benefit",
+        "Token revocation strategy via Redis blocklist or refresh token rotation",
+        "Storing tokens in secure HTTP-only SameSite cookies vs LocalStorage"
+      ],
+      "common_mistakes": [
+        "Storing sensitive passwords or secrets inside JWT payload (payload is only base64 encoded, not encrypted)",
+        "Making access tokens valid for 30 days without revocation"
+      ],
+      "follow_up_questions": [
+        "How does OAuth 2.0 differ from standard JWT auth?"
+      ]
+    },
+    {
+      "id": "iq-011",
+      "category_id": "hr-behavioral",
+      "category_name": "HR & Behavioral",
+      "title": "Why do you want to work for our company and what are your long-term goals?",
+      "difficulty": "easy",
+      "suggested_answer": "Tie your response to the company's specific product, engineering culture, and domain impact. Emphasize how your technical skills in building production systems align with their roadmap, and articulate a desire to grow into a senior engineer who champions clean architecture, automated testing, and mentorship.",
+      "key_points": [
+        "Specific knowledge of company's tech stack and mission",
+        "Mutual growth alignment",
+        "Focus on technical excellence and collaboration"
+      ],
+      "common_mistakes": [
+        "Giving a generic copy-paste answer that applies to any company",
+        "Focusing solely on compensation and perks"
+      ],
+      "follow_up_questions": [
+        "Where do you see yourself in 3 years?"
+      ]
+    },
+    {
+      "id": "iq-012",
+      "category_id": "frontend",
+      "category_name": "Frontend Development",
+      "title": "How do WebSockets differ from HTTP Polling and Server-Sent Events (SSE)?",
+      "difficulty": "medium",
+      "suggested_answer": "HTTP Polling involves repeated requests with high overhead. Long-polling holds connections open until data arrives. SSE (Server-Sent Events) is unidirectional (server-to-client) over standard HTTP, ideal for live feeds and AI streaming. WebSockets provide full-duplex, bidirectional, low-latency communication over a single TCP connection, ideal for chat and multiplayer gaming.",
+      "key_points": [
+        "Unidirectional vs bidirectional communication",
+        "TCP handshake and protocol upgrade (ws://)",
+        "SSE auto-reconnection and HTTP/2 multiplexing support",
+        "Connection scaling and load balancer sticky sessions"
+      ],
+      "common_mistakes": [
+        "Using WebSockets when simple SSE or polling would suffice",
+        "Forgetting heartbeat pings/pongs to detect dropped connections"
+      ],
+      "follow_up_questions": [
+        "How do you scale WebSocket connections across multiple server instances?"
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "id": "prep-full-stack",
+      "title": "Full Stack Engineer Interview Track",
+      "duration_days": 30,
+      "questions_count": 50,
+      "category": "Full Stack"
+    },
+    {
+      "id": "prep-python",
+      "title": "Python & Data Engineering Interview Track",
+      "duration_days": 21,
+      "questions_count": 40,
+      "category": "Python"
+    },
+    {
+      "id": "prep-java",
+      "title": "Java & Spring Enterprise Interview Track",
+      "duration_days": 30,
+      "questions_count": 45,
+      "category": "Java"
+    },
+    {
+      "id": "prep-fresher",
+      "title": "Campus Placement Technical Screening Track",
+      "duration_days": 14,
+      "questions_count": 35,
+      "category": "Campus Prep"
+    }
+  ]
+}

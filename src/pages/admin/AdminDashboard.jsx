@@ -7,12 +7,18 @@ import { couponService } from '../../services/coupon.service';
 import { contactService } from '../../services/contact.service';
 import { courseService } from '../../services/course.service';
 import { learningPathService } from '../../services/learningPath.service';
+import { aptitudeService } from '../../services/aptitude.service';
+import { codelabService } from '../../services/codelab.service';
+import { projectService } from '../../services/project.service';
+import { interviewService } from '../../services/interview.service';
+import { jobService } from '../../services/job.service';
 import { PageTransition } from '../../components/layout/PageTransition';
 import {
   BarChart2, Users, BookOpen, DollarSign, TrendingUp,
   GraduationCap, ShieldCheck, Settings, MessageSquare, HelpCircle,
   Tag, Package, Star, LogOut, Loader2, Check, Trash2, X,
-  LayoutDashboard, PlusCircle, Plus, Eye, CheckCircle2, AlertCircle, Route
+  LayoutDashboard, PlusCircle, Plus, Eye, CheckCircle2, AlertCircle, Route, Target,
+  Code2, FolderGit2, Briefcase, Sparkles
 } from 'lucide-react';
 import { CATEGORIES } from '../../constants/mockData';
 import {
@@ -35,6 +41,11 @@ const ADMIN_TABS = [
   { key: 'overview', label: 'Dashboard', icon: LayoutDashboard },
   { key: 'courses', label: 'Courses', icon: BookOpen },
   { key: 'learning-paths', label: 'Learning Paths', icon: Route },
+  { key: 'codelab', label: 'CodeLab Manager', icon: Code2 },
+  { key: 'projects', label: 'Projects Manager', icon: FolderGit2 },
+  { key: 'interview', label: 'Interview Hub', icon: HelpCircle },
+  { key: 'jobs', label: 'Jobs Manager', icon: Briefcase },
+  { key: 'aptitude', label: 'Aptitude Arena', icon: Target },
   { key: 'users', label: 'Users & Students', icon: Users },
   { key: 'orders', label: 'Orders', icon: Package },
   { key: 'coupons', label: 'Coupons', icon: Tag },
@@ -66,6 +77,10 @@ export const AdminDashboard = () => {
   const [coupons, setCoupons] = useState([]);
   const [faqs, setFaqs] = useState([]);
   const [contactMessages, setContactMessages] = useState([]);
+  const [adminProblems, setAdminProblems] = useState([]);
+  const [adminProjects, setAdminProjects] = useState([]);
+  const [adminQuestions, setAdminQuestions] = useState([]);
+  const [adminJobs, setAdminJobs] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // FAQ add form
@@ -186,18 +201,26 @@ export const AdminDashboard = () => {
 
   const setTab = (key) => setSearchParams({ tab: key });
 
+  // Aptitude Arena state
+  const [aptitudeQuestions, setAptitudeQuestions] = useState([]);
+  const [aptitudeMockTests, setAptitudeMockTests] = useState([]);
+  const [aptitudeCategories, setAptitudeCategories] = useState([]);
+
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [stats, courses_, faqs_, msgs_, coupons_, users_, orders_, paths_] = await Promise.all([
-        adminService.getDashboardStats(),
-        adminService.getCourses(),
-        faqService.getAllFAQs(),
+      const [stats, courses_, faqs_, msgs_, coupons_, users_, orders_, paths_, aptQs, aptMocks, aptCats] = await Promise.all([
+        adminService.getDashboardAnalytics(),
+        courseService.getCourses(),
+        faqService.getFAQs(),
         contactService.getContactMessages(),
-        couponService.getActiveCoupons(),
+        couponService.getCoupons(),
         adminService.getUsers(),
         adminService.getOrders(),
-        learningPathService.adminGetAllPaths()
+        learningPathService.adminGetAllPaths(),
+        aptitudeService.getQuestions({ limit: 50 }).catch(() => ({ questions: [] })),
+        aptitudeService.getMockTests().catch(() => []),
+        aptitudeService.getCategories().catch(() => [])
       ]);
       setAnalytics(stats);
       setAllCourses(courses_ || []);
@@ -207,12 +230,20 @@ export const AdminDashboard = () => {
       setAllUsers(users_ || []);
       setAllOrders(orders_ || []);
       setAllLearningPaths(paths_ || []);
+      setAptitudeQuestions(aptQs?.questions || []);
+      setAptitudeMockTests(aptMocks || []);
+      setAptitudeCategories(aptCats || []);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
   }, []);
+
+  const handleDeleteAptitudeQuestion = (id) => {
+    if (!window.confirm('Delete this aptitude question?')) return;
+    setAptitudeQuestions(prev => prev.filter(q => q.id !== id));
+  };
 
   useEffect(() => { loadData(); }, [loadData]);
 
@@ -1164,6 +1195,163 @@ export const AdminDashboard = () => {
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* ===== APTITUDE ARENA ===== */}
+            {activeTab === 'aptitude' && (
+              <div className="space-y-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h1 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                      <Target className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                      <span>Aptitude Arena & Placement Management</span>
+                    </h1>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                      Manage campus recruitment questions, topic taxonomy, and placement exam simulations.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to="/aptitude"
+                      target="_blank"
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 flex items-center gap-1.5"
+                    >
+                      <Eye className="w-3.5 h-3.5" /> View Arena
+                    </Link>
+                    <Link
+                      to="/aptitude/practice"
+                      target="_blank"
+                      className="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm flex items-center gap-1.5"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Practice
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="p-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Total Questions</span>
+                    <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+                      {aptitudeQuestions.length}
+                    </div>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Categories</span>
+                    <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400 mt-1">
+                      {aptitudeCategories.length || 4}
+                    </div>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Topic Modules</span>
+                    <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+                      36
+                    </div>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Placement Mocks</span>
+                    <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">
+                      {aptitudeMockTests.length || 5}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Placement Mock Tests Table */}
+                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden space-y-4 p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                      Placement Exam Blueprints ({aptitudeMockTests.length})
+                    </h3>
+                    <Link to="/aptitude/mock-tests" target="_blank" className="text-xs text-indigo-600 font-bold hover:underline">
+                      View Catalog
+                    </Link>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-slate-50 dark:bg-slate-800/50 text-[11px] font-bold uppercase text-slate-400">
+                          <th className="text-left px-4 py-3">Exam Title</th>
+                          <th className="text-left px-4 py-3">Slug</th>
+                          <th className="text-center px-4 py-3">Duration</th>
+                          <th className="text-center px-4 py-3">Questions</th>
+                          <th className="text-right px-4 py-3">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {aptitudeMockTests.map((t) => (
+                          <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
+                            <td className="px-4 py-3 font-semibold text-slate-900 dark:text-white">{t.title}</td>
+                            <td className="px-4 py-3 text-slate-500 font-mono text-[11px]">{t.slug}</td>
+                            <td className="px-4 py-3 text-center">{t.duration_minutes} mins</td>
+                            <td className="px-4 py-3 text-center font-bold">{t.question_count || t.question_ids?.length || 20}</td>
+                            <td className="px-4 py-3 text-right">
+                              <Link
+                                to={`/aptitude/mock-tests/${t.slug}`}
+                                target="_blank"
+                                className="text-indigo-600 font-bold hover:underline inline-flex items-center gap-1"
+                              >
+                                Test <Eye className="w-3.5 h-3.5" />
+                              </Link>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Questions Bank Table */}
+                <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden space-y-4 p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                      Curated Questions Bank ({aptitudeQuestions.length})
+                    </h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-slate-50 dark:bg-slate-800/50 text-[11px] font-bold uppercase text-slate-400">
+                          <th className="text-left px-4 py-3">Topic / Category</th>
+                          <th className="text-left px-4 py-3">Question Prompt</th>
+                          <th className="text-center px-4 py-3">Difficulty</th>
+                          <th className="text-center px-4 py-3">Answer</th>
+                          <th className="text-right px-4 py-3">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {aptitudeQuestions.map((q) => (
+                          <tr key={q.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
+                            <td className="px-4 py-3 font-semibold text-indigo-600 whitespace-nowrap">
+                              {q.topic_name || q.topic_id}
+                            </td>
+                            <td className="px-4 py-3 text-slate-800 dark:text-slate-200 line-clamp-2 max-w-md">
+                              {q.question_text}
+                            </td>
+                            <td className="px-4 py-3 text-center whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-800">
+                                {q.difficulty || 'Easy'}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3 text-center font-bold text-emerald-600">
+                              {q.correct_option || 'A'}
+                            </td>
+                            <td className="px-4 py-3 text-right whitespace-nowrap">
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteAptitudeQuestion(q.id)}
+                                className="p-1 text-slate-400 hover:text-rose-600 transition-colors"
+                                title="Delete Question"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             )}
 

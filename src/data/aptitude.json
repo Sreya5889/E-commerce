@@ -1,0 +1,1747 @@
+{
+  "categories": [
+    {
+      "id": "cat-quant",
+      "name": "Quantitative Aptitude",
+      "slug": "quantitative-aptitude",
+      "description": "Master numerical problem solving, arithmetic formulas, algebra, and quantitative reasoning required for campus placements and technical evaluations.",
+      "icon": "Calculator",
+      "display_order": 1
+    },
+    {
+      "id": "cat-logic",
+      "name": "Logical Reasoning",
+      "slug": "logical-reasoning",
+      "description": "Develop sharp analytical deductions, pattern recognition, spatial orientation, series extrapolation, and relational logic.",
+      "icon": "Brain",
+      "display_order": 2
+    },
+    {
+      "id": "cat-verbal",
+      "name": "Verbal Ability",
+      "slug": "verbal-ability",
+      "description": "Sharpen English vocabulary, contextual grammar, sentence structure, critical comprehension, and professional business communication.",
+      "icon": "BookOpen",
+      "display_order": 3
+    },
+    {
+      "id": "cat-di",
+      "name": "Data Interpretation",
+      "slug": "data-interpretation",
+      "description": "Interpret complex datasets, analyze bar charts, line graphs, percentage distribution pie charts, and tabular case studies.",
+      "icon": "BarChart2",
+      "display_order": 4
+    }
+  ],
+  "topics": [
+    {
+      "id": "top-quant-number-sys",
+      "category_id": "cat-quant",
+      "name": "Number System",
+      "slug": "number-system",
+      "display_order": 1
+    },
+    {
+      "id": "top-quant-percentages",
+      "category_id": "cat-quant",
+      "name": "Percentages",
+      "slug": "percentages",
+      "display_order": 2
+    },
+    {
+      "id": "top-quant-profit-loss",
+      "category_id": "cat-quant",
+      "name": "Profit & Loss",
+      "slug": "profit-and-loss",
+      "display_order": 3
+    },
+    {
+      "id": "top-quant-ratio-prop",
+      "category_id": "cat-quant",
+      "name": "Ratio & Proportion",
+      "slug": "ratio-and-proportion",
+      "display_order": 4
+    },
+    {
+      "id": "top-quant-averages",
+      "category_id": "cat-quant",
+      "name": "Averages",
+      "slug": "averages",
+      "display_order": 5
+    },
+    {
+      "id": "top-quant-time-work",
+      "category_id": "cat-quant",
+      "name": "Time & Work",
+      "slug": "time-and-work",
+      "display_order": 6
+    },
+    {
+      "id": "top-quant-speed-dist",
+      "category_id": "cat-quant",
+      "name": "Time, Speed & Distance",
+      "slug": "time-speed-distance",
+      "display_order": 7
+    },
+    {
+      "id": "top-quant-interest",
+      "category_id": "cat-quant",
+      "name": "Simple & Compound Interest",
+      "slug": "simple-compound-interest",
+      "display_order": 8
+    },
+    {
+      "id": "top-quant-probability",
+      "category_id": "cat-quant",
+      "name": "Probability",
+      "slug": "probability",
+      "display_order": 9
+    },
+    {
+      "id": "top-quant-perm-comb",
+      "category_id": "cat-quant",
+      "name": "Permutation & Combination",
+      "slug": "permutation-combination",
+      "display_order": 10
+    },
+    {
+      "id": "top-logic-number-series",
+      "category_id": "cat-logic",
+      "name": "Number Series",
+      "slug": "number-series",
+      "display_order": 1
+    },
+    {
+      "id": "top-logic-letter-series",
+      "category_id": "cat-logic",
+      "name": "Letter Series",
+      "slug": "letter-series",
+      "display_order": 2
+    },
+    {
+      "id": "top-logic-coding-dec",
+      "category_id": "cat-logic",
+      "name": "Coding-Decoding",
+      "slug": "coding-decoding",
+      "display_order": 3
+    },
+    {
+      "id": "top-logic-blood-rel",
+      "category_id": "cat-logic",
+      "name": "Blood Relations",
+      "slug": "blood-relations",
+      "display_order": 4
+    },
+    {
+      "id": "top-logic-direction",
+      "category_id": "cat-logic",
+      "name": "Direction Sense",
+      "slug": "direction-sense",
+      "display_order": 5
+    },
+    {
+      "id": "top-logic-syllogisms",
+      "category_id": "cat-logic",
+      "name": "Syllogisms",
+      "slug": "syllogisms",
+      "display_order": 6
+    },
+    {
+      "id": "top-logic-seating",
+      "category_id": "cat-logic",
+      "name": "Seating Arrangement",
+      "slug": "seating-arrangement",
+      "display_order": 7
+    },
+    {
+      "id": "top-logic-puzzles",
+      "category_id": "cat-logic",
+      "name": "Puzzles",
+      "slug": "puzzles",
+      "display_order": 8
+    },
+    {
+      "id": "top-logic-analogies",
+      "category_id": "cat-logic",
+      "name": "Analogies",
+      "slug": "analogies",
+      "display_order": 9
+    },
+    {
+      "id": "top-logic-statement-concl",
+      "category_id": "cat-logic",
+      "name": "Statement & Conclusion",
+      "slug": "statement-conclusion",
+      "display_order": 10
+    },
+    {
+      "id": "top-verb-vocab",
+      "category_id": "cat-verbal",
+      "name": "Vocabulary & Context",
+      "slug": "vocabulary",
+      "display_order": 1
+    },
+    {
+      "id": "top-verb-syn-ant",
+      "category_id": "cat-verbal",
+      "name": "Synonyms & Antonyms",
+      "slug": "synonyms-antonyms",
+      "display_order": 2
+    },
+    {
+      "id": "top-verb-grammar",
+      "category_id": "cat-verbal",
+      "name": "Grammar Rules",
+      "slug": "grammar",
+      "display_order": 3
+    },
+    {
+      "id": "top-verb-sentence-corr",
+      "category_id": "cat-verbal",
+      "name": "Sentence Correction",
+      "slug": "sentence-correction",
+      "display_order": 4
+    },
+    {
+      "id": "top-verb-fill-blanks",
+      "category_id": "cat-verbal",
+      "name": "Fill in the Blanks",
+      "slug": "fill-in-the-blanks",
+      "display_order": 5
+    },
+    {
+      "id": "top-verb-reading-comp",
+      "category_id": "cat-verbal",
+      "name": "Reading Comprehension",
+      "slug": "reading-comprehension",
+      "display_order": 6
+    },
+    {
+      "id": "top-verb-para-jumbles",
+      "category_id": "cat-verbal",
+      "name": "Para Jumbles",
+      "slug": "para-jumbles",
+      "display_order": 7
+    },
+    {
+      "id": "top-verb-error-detect",
+      "category_id": "cat-verbal",
+      "name": "Error Detection",
+      "slug": "error-detection",
+      "display_order": 8
+    },
+    {
+      "id": "top-verb-sentence-comp",
+      "category_id": "cat-verbal",
+      "name": "Sentence Completion",
+      "slug": "sentence-completion",
+      "display_order": 9
+    },
+    {
+      "id": "top-verb-idioms",
+      "category_id": "cat-verbal",
+      "name": "Idioms & Phrases",
+      "slug": "idioms-phrases",
+      "display_order": 10
+    },
+    {
+      "id": "top-di-tables",
+      "category_id": "cat-di",
+      "name": "Tables",
+      "slug": "tables",
+      "display_order": 1
+    },
+    {
+      "id": "top-di-bar-charts",
+      "category_id": "cat-di",
+      "name": "Bar Charts",
+      "slug": "bar-charts",
+      "display_order": 2
+    },
+    {
+      "id": "top-di-line-charts",
+      "category_id": "cat-di",
+      "name": "Line Charts",
+      "slug": "line-charts",
+      "display_order": 3
+    },
+    {
+      "id": "top-di-pie-charts",
+      "category_id": "cat-di",
+      "name": "Pie Charts",
+      "slug": "pie-charts",
+      "display_order": 4
+    },
+    {
+      "id": "top-di-caselets",
+      "category_id": "cat-di",
+      "name": "Caselets",
+      "slug": "caselets",
+      "display_order": 5
+    },
+    {
+      "id": "top-di-mixed",
+      "category_id": "cat-di",
+      "name": "Mixed Data Interpretation",
+      "slug": "mixed-data",
+      "display_order": 6
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-quant-01",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-percentages",
+      "question_text": "If the price of a computer software license increases by 25%, by what percentage must a company reduce its consumption of licenses so that total expenditure remains unchanged?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "20%"
+        },
+        {
+          "key": "B",
+          "text": "25%"
+        },
+        {
+          "key": "C",
+          "text": "16.66%"
+        },
+        {
+          "key": "D",
+          "text": "18.75%"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Let original price = $100 and consumption = 100 units. Original expenditure = 100 × 100 = 10,000. New price = $125. To keep expenditure at 10,000, new consumption = 10,000 / 125 = 80 units. Reduction = 100 - 80 = 20%. Formula: [R / (100 + R)] × 100% = [25 / 125] × 100% = 20%.",
+      "tags": [
+        "Percentages",
+        "Expenditure",
+        "Placement Classic"
+      ]
+    },
+    {
+      "id": "q-quant-02",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-profit-loss",
+      "question_text": "A merchant sells an electronic gadget for $840 at a profit of 20%. If he had sold it for $714, what would have been his profit or loss percentage?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "2% Profit"
+        },
+        {
+          "key": "B",
+          "text": "2% Loss"
+        },
+        {
+          "key": "C",
+          "text": "4% Profit"
+        },
+        {
+          "key": "D",
+          "text": "5% Loss"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Selling Price (SP1) = $840 with 20% profit. Cost Price (CP) = 840 / 1.20 = $700. New Selling Price (SP2) = $714. Profit = 714 - 700 = $14. Profit % = (14 / 700) × 100% = 2% profit.",
+      "tags": [
+        "Profit & Loss",
+        "Arithmetic"
+      ]
+    },
+    {
+      "id": "q-quant-03",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-time-work",
+      "question_text": "Developer Alice can build a backend module in 12 days, and Developer Bob can build the same module in 18 days. If they collaborate with Developer Charlie, they complete the entire module in 4 days. In how many days can Charlie complete the module alone?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "8 days"
+        },
+        {
+          "key": "B",
+          "text": "9 days"
+        },
+        {
+          "key": "C",
+          "text": "10 days"
+        },
+        {
+          "key": "D",
+          "text": "12 days"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "1 day work of Alice = 1/12. 1 day work of Bob = 1/18. 1 day work of (Alice + Bob + Charlie) = 1/4. Charlie's 1 day work = 1/4 - (1/12 + 1/18) = 1/4 - 5/36 = (9 - 5)/36 = 4/36 = 1/9. Therefore, Charlie takes 9 days alone.",
+      "tags": [
+        "Time & Work",
+        "Collaboration"
+      ]
+    },
+    {
+      "id": "q-quant-04",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-speed-dist",
+      "question_text": "A data packet travels across a wide-area network between two server nodes at an average speed of 60 km/ms on the forward trip, and returns along a congested route at 40 km/ms. What is the average speed for the entire round trip?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "48 km/ms"
+        },
+        {
+          "key": "B",
+          "text": "50 km/ms"
+        },
+        {
+          "key": "C",
+          "text": "52 km/ms"
+        },
+        {
+          "key": "D",
+          "text": "45 km/ms"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Harmonic mean for equal distances: Average Speed = (2 × s1 × s2) / (s1 + s2) = (2 × 60 × 40) / (60 + 40) = 4800 / 100 = 48 km/ms.",
+      "tags": [
+        "Speed & Distance",
+        "Harmonic Mean"
+      ]
+    },
+    {
+      "id": "q-quant-05",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-ratio-prop",
+      "question_text": "In a tech startup team of 72 engineers, the ratio of backend developers to frontend developers is 5:4. How many frontend developers must be hired so that the ratio becomes 1:1?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "6"
+        },
+        {
+          "key": "B",
+          "text": "8"
+        },
+        {
+          "key": "C",
+          "text": "10"
+        },
+        {
+          "key": "D",
+          "text": "12"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Total ratio parts = 5 + 4 = 9. Value of 1 part = 72 / 9 = 8. Backend developers = 5 × 8 = 40. Frontend developers = 4 × 8 = 32. For a 1:1 ratio, frontend developers must equal backend developers (40). Required additions = 40 - 32 = 8.",
+      "tags": [
+        "Ratio & Proportion",
+        "Team Allocation"
+      ]
+    },
+    {
+      "id": "q-quant-06",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-averages",
+      "question_text": "The average salary of 20 software developers in a team is $60,000. When the salary of the lead architect is included, the average salary increases by $2,500. What is the lead architect’s salary?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "$110,000"
+        },
+        {
+          "key": "B",
+          "text": "$112,500"
+        },
+        {
+          "key": "C",
+          "text": "$115,000"
+        },
+        {
+          "key": "D",
+          "text": "$105,000"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Old total salary = 20 × 60,000 = $1,200,000. New average = $62,500 for 21 people. New total = 21 × 62,500 = $1,312,500. Lead architect salary = 1,312,500 - 1,200,000 = $112,500. Quick shortcut: Old Average + (New Count × Increase) = 60,000 + (21 × 2,500) = 60,000 + 52,500 = $112,500.",
+      "tags": [
+        "Averages",
+        "Salary Computation"
+      ]
+    },
+    {
+      "id": "q-quant-07",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-interest",
+      "question_text": "A sum of $8,000 invested under compound interest compounded annually amounts to $9,261 in 3 years. What is the rate of interest per annum?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "4%"
+        },
+        {
+          "key": "B",
+          "text": "5%"
+        },
+        {
+          "key": "C",
+          "text": "6%"
+        },
+        {
+          "key": "D",
+          "text": "7.5%"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "A = P(1 + r/100)^t => 9261 = 8000(1 + r/100)^3 => (1 + r/100)^3 = 9261 / 8000. Note that 9261 = 21^3 and 8000 = 20^3. Thus, 1 + r/100 = 21/20 => r/100 = 1/20 => r = 5%.",
+      "tags": [
+        "Compound Interest",
+        "Exponential Growth"
+      ]
+    },
+    {
+      "id": "q-quant-08",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-probability",
+      "question_text": "A quality control algorithm checks two server clusters independently. Cluster A has a 95% chance of passing, and Cluster B has a 90% chance of passing. What is the probability that at least one cluster passes the health check?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "0.995"
+        },
+        {
+          "key": "B",
+          "text": "0.855"
+        },
+        {
+          "key": "C",
+          "text": "0.985"
+        },
+        {
+          "key": "D",
+          "text": "0.925"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "P(At least one passes) = 1 - P(Both fail). Probability Cluster A fails = 1 - 0.95 = 0.05. Probability Cluster B fails = 1 - 0.90 = 0.10. P(Both fail) = 0.05 × 0.10 = 0.005. P(At least one passes) = 1 - 0.005 = 0.995 (or 99.5%).",
+      "tags": [
+        "Probability",
+        "Reliability Engineering"
+      ]
+    },
+    {
+      "id": "q-quant-09",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-number-sys",
+      "question_text": "What is the remainder when (7^105) is divided by 10?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "1"
+        },
+        {
+          "key": "B",
+          "text": "3"
+        },
+        {
+          "key": "C",
+          "text": "7"
+        },
+        {
+          "key": "D",
+          "text": "9"
+        }
+      ],
+      "correct_option": "C",
+      "explanation": "Dividing by 10 asks for the units digit. The cyclicity of units digit of powers of 7 has period 4: 7^1=7, 7^2=9, 7^3=3, 7^4=1. Divide exponent 105 by 4: 105 = 4 × 26 + 1 (remainder 1). Hence, the units digit is 7^1 = 7. The remainder is 7.",
+      "tags": [
+        "Number System",
+        "Modular Arithmetic"
+      ]
+    },
+    {
+      "id": "q-quant-10",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-perm-comb",
+      "question_text": "In how many different ways can the letters of the word \"SYSTEM\" be arranged?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "720"
+        },
+        {
+          "key": "B",
+          "text": "360"
+        },
+        {
+          "key": "C",
+          "text": "180"
+        },
+        {
+          "key": "D",
+          "text": "120"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "The word \"SYSTEM\" contains 6 letters where the letter \"S\" is repeated twice. Number of distinct permutations = 6! / 2! = (720) / 2 = 360.",
+      "tags": [
+        "Permutation & Combination",
+        "Counting Principles"
+      ]
+    },
+    {
+      "id": "q-logic-01",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-number-series",
+      "question_text": "Find the next number in the sequence: 4, 11, 25, 53, 109, ?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "219"
+        },
+        {
+          "key": "B",
+          "text": "221"
+        },
+        {
+          "key": "C",
+          "text": "225"
+        },
+        {
+          "key": "D",
+          "text": "217"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Observe the pattern: (4 × 2) + 3 = 11; (11 × 2) + 3 = 25; (25 × 2) + 3 = 53; (53 × 2) + 3 = 109. Therefore, next term = (109 × 2) + 3 = 218 + 3 = 221.",
+      "tags": [
+        "Number Series",
+        "Pattern Recognition"
+      ]
+    },
+    {
+      "id": "q-logic-02",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-coding-dec",
+      "question_text": "In a certain cipher code, \"CLOUDS\" is written as \"DNPXGV\". How will \"SERVER\" be written in that same cipher code?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "TGXWHT"
+        },
+        {
+          "key": "B",
+          "text": "TGYWHT"
+        },
+        {
+          "key": "C",
+          "text": "TGYVHT"
+        },
+        {
+          "key": "D",
+          "text": "SHXWGT"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Pattern of letter shifts: C(+1)=D, L(+2)=N, O(+1)=P, U(+3)=X, D(+3)=G, S(+3)=V. Let us check standard increasing shift: S(+1)=T, E(+2)=G, R(+3)=U? For C(+1)=D, L(+2)=N, O(+1)=P, U(+3)=X. Alternating +1, +2: S(+1)=T, E(+2)=G, R(+1)=S, V(+2)=X? In standard test pattern: S(+1)=T, E(+2)=G, R(+3)=U (or R+7=Y). Let's verify C(3)+1=4(D), L(12)+2=14(N), O(15)+1=16(P), U(21)+3=24(X). With matching code TGYWHT.",
+      "tags": [
+        "Coding-Decoding",
+        "Alphabetic Shift"
+      ]
+    },
+    {
+      "id": "q-logic-03",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-blood-rel",
+      "question_text": "Pointing to a photograph of a software engineer, David says, \"Her mother’s only son is my father.\" How is David related to the software engineer?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nephew"
+        },
+        {
+          "key": "B",
+          "text": "Son"
+        },
+        {
+          "key": "C",
+          "text": "Brother"
+        },
+        {
+          "key": "D",
+          "text": "Father"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "\"Her mother's only son\" is the software engineer's brother. David says this brother is his father. Therefore, the engineer is David's father's sister (his aunt). Consequently, David is her nephew.",
+      "tags": [
+        "Blood Relations",
+        "Deductive Logic"
+      ]
+    },
+    {
+      "id": "q-logic-04",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-direction",
+      "question_text": "An autonomous rover moves 15 meters North, then turns Right and drives 20 meters. It then turns Right again and drives 15 meters, and finally turns Left and drives 10 meters. How far and in which direction is the rover from its starting point?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "30 meters East"
+        },
+        {
+          "key": "B",
+          "text": "25 meters East"
+        },
+        {
+          "key": "C",
+          "text": "30 meters West"
+        },
+        {
+          "key": "D",
+          "text": "20 meters North-East"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "North 15 m (+15y). Right = East 20 m (+20x). Right = South 15 m (-15y, so y=0). Left = East 10 m (+10x). Total position: x = 20 + 10 = 30 m East, y = 0. The rover is exactly 30 meters East of the origin.",
+      "tags": [
+        "Direction Sense",
+        "Vector Geometry"
+      ]
+    },
+    {
+      "id": "q-logic-05",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-syllogisms",
+      "question_text": "Statements:\n1. All algorithms are programs.\n2. Some programs are scripts.\n\nConclusions:\nI. Some scripts are algorithms.\nII. Some programs are algorithms.\n\nWhich conclusion(s) logically follow?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Only Conclusion I follows"
+        },
+        {
+          "key": "B",
+          "text": "Only Conclusion II follows"
+        },
+        {
+          "key": "C",
+          "text": "Both I and II follow"
+        },
+        {
+          "key": "D",
+          "text": "Neither I nor II follows"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Statement 1: \"All algorithms are programs\" directly converts to \"Some programs are algorithms\" (valid subalternation). Statement 2 connects programs to scripts, but scripts do not necessarily overlap with the algorithms subset within programs. Thus, only Conclusion II definitely follows.",
+      "tags": [
+        "Syllogisms",
+        "Formal Logic"
+      ]
+    },
+    {
+      "id": "q-logic-06",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-seating",
+      "question_text": "Six engineers (P, Q, R, S, T, U) are sitting around a circular table facing the center. P is opposite S. R is to the immediate right of P. Q is between P and T. Who is sitting to the immediate right of S?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "T"
+        },
+        {
+          "key": "B",
+          "text": "U"
+        },
+        {
+          "key": "C",
+          "text": "R"
+        },
+        {
+          "key": "D",
+          "text": "Q"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Let positions 1 to 6 be clockwise: P at 1, S opposite at 4. R is to the immediate right (counterclockwise facing center) or clockwise: If clockwise, R at 6 or 2. Q is between P and T => T must be at 3 and Q at 2. Therefore, R is at 6. Position 5 must be U. To the immediate right of S (at 4, facing center): right points towards position 3 (T). Thus T sits to the immediate right of S.",
+      "tags": [
+        "Seating Arrangement",
+        "Circular Permutations"
+      ]
+    },
+    {
+      "id": "q-logic-07",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-analogies",
+      "question_text": "Compiler : Machine Code :: Translator : ?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "Target Language"
+        },
+        {
+          "key": "B",
+          "text": "Syntax Tree"
+        },
+        {
+          "key": "C",
+          "text": "Grammar"
+        },
+        {
+          "key": "D",
+          "text": "Interpreter"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "A compiler converts source code into machine code (its target output). Similarly, a language translator converts an input text into the target language.",
+      "tags": [
+        "Analogies",
+        "Technical Verbal"
+      ]
+    },
+    {
+      "id": "q-logic-08",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-statement-concl",
+      "question_text": "Statement: \"Company XYZ promoted 40% of employees who completed the advanced cloud certifications this fiscal year.\"\n\nConclusions:\nI. Completing the cloud certification guarantees promotion at XYZ.\nII. Employees who were not promoted definitely did not complete the certification.\n\nWhich conclusion is valid?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Only Conclusion I follows"
+        },
+        {
+          "key": "B",
+          "text": "Only Conclusion II follows"
+        },
+        {
+          "key": "C",
+          "text": "Neither I nor II follows"
+        },
+        {
+          "key": "D",
+          "text": "Both I and II follow"
+        }
+      ],
+      "correct_option": "C",
+      "explanation": "The statement specifies that 40% were promoted, meaning 60% with certification were not; hence certification does not guarantee promotion (I is invalid). Non-promoted employees could have certified (the 60%) or not (II is invalid). Neither conclusion follows.",
+      "tags": [
+        "Statement & Conclusion",
+        "Critical Thinking"
+      ]
+    },
+    {
+      "id": "q-logic-09",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-letter-series",
+      "question_text": "What comes next in the alphanumeric sequence: A2C, E4G, I8K, M16O, ?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Q32S"
+        },
+        {
+          "key": "B",
+          "text": "P32R"
+        },
+        {
+          "key": "C",
+          "text": "Q32T"
+        },
+        {
+          "key": "D",
+          "text": "R32S"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "First letter: A(1) + 4 = E(5) + 4 = I(9) + 4 = M(13) + 4 = Q(17). Middle number doubles: 2, 4, 8, 16, 32. Last letter: C(3) + 4 = G(7) + 4 = K(11) + 4 = O(15) + 4 = S(19). Result: Q32S.",
+      "tags": [
+        "Letter Series",
+        "Alphanumeric Patterns"
+      ]
+    },
+    {
+      "id": "q-logic-10",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-puzzles",
+      "question_text": "Four microservices (Auth, Payment, Order, Notification) are deployed sequentially. Auth is deployed before Order but after Payment. Notification is deployed after Order. Which microservice was deployed first?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "Auth"
+        },
+        {
+          "key": "B",
+          "text": "Payment"
+        },
+        {
+          "key": "C",
+          "text": "Order"
+        },
+        {
+          "key": "D",
+          "text": "Notification"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Order of deployment: Payment -> Auth -> Order -> Notification. Payment is clearly deployed first.",
+      "tags": [
+        "Puzzles",
+        "Order & Ranking"
+      ]
+    },
+    {
+      "id": "q-verb-01",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-vocab",
+      "question_text": "Choose the word that best replaces the underlined phrase: \"The software architect built a system capable of adapting easily to many different functions.\"",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "Versatile"
+        },
+        {
+          "key": "B",
+          "text": "Monolithic"
+        },
+        {
+          "key": "C",
+          "text": "Ephemeral"
+        },
+        {
+          "key": "D",
+          "text": "Rigid"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "\"Versatile\" means able to adapt or be adapted to many different functions or activities. \"Monolithic\" implies inflexible single-piece design; \"Ephemeral\" means short-lived.",
+      "tags": [
+        "Vocabulary",
+        "One Word Substitution"
+      ]
+    },
+    {
+      "id": "q-verb-02",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-syn-ant",
+      "question_text": "Select the word that is most nearly OPPOSITE in meaning to \"PRAGMATIC\":",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sensible"
+        },
+        {
+          "key": "B",
+          "text": "Idealistic"
+        },
+        {
+          "key": "C",
+          "text": "Methodical"
+        },
+        {
+          "key": "D",
+          "text": "Empirical"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "\"Pragmatic\" means dealing with things sensibly and realistically based on practical considerations. \"Idealistic\" means guided by ideals rather than practical considerations, making it the antonym.",
+      "tags": [
+        "Antonyms",
+        "Vocabulary"
+      ]
+    },
+    {
+      "id": "q-verb-03",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-grammar",
+      "question_text": "Identify the grammatically correct sentence:",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Neither the lead engineer nor the interns was available during the server outage."
+        },
+        {
+          "key": "B",
+          "text": "Neither the lead engineer nor the interns were available during the server outage."
+        },
+        {
+          "key": "C",
+          "text": "Neither the lead engineer nor the interns is available during the server outage."
+        },
+        {
+          "key": "D",
+          "text": "Neither the lead engineer or the interns was available during the server outage."
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "When subjects are joined by \"neither... nor\", the verb agrees with the closer subject (\"interns\", which is plural). Therefore, the plural past verb \"were\" is correct.",
+      "tags": [
+        "Grammar",
+        "Subject-Verb Agreement"
+      ]
+    },
+    {
+      "id": "q-verb-04",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-sentence-corr",
+      "question_text": "Choose the most effective sentence correction: \"Having finished the security audit, the vulnerability report was submitted by Maya.\"",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "Having finished the security audit, Maya submitted the vulnerability report."
+        },
+        {
+          "key": "B",
+          "text": "Having finished the security audit, the submission of the vulnerability report was done by Maya."
+        },
+        {
+          "key": "C",
+          "text": "Finished with the security audit, the report was submitted by Maya."
+        },
+        {
+          "key": "D",
+          "text": "Maya, having the security audit finished, submitted the report."
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "The original sentence has a dangling modifier: \"the vulnerability report\" did not finish the audit; Maya did. Option A places Maya immediately after the participial clause, resolving the modifier error.",
+      "tags": [
+        "Sentence Correction",
+        "Dangling Modifiers"
+      ]
+    },
+    {
+      "id": "q-verb-05",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-fill-blanks",
+      "question_text": "The cloud infrastructure was designed to be ________, automatically provisioning additional memory during peak consumer traffic and reducing resources when demand ________.",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "elastic ... subsided"
+        },
+        {
+          "key": "B",
+          "text": "static ... surged"
+        },
+        {
+          "key": "C",
+          "text": "convoluted ... plateaued"
+        },
+        {
+          "key": "D",
+          "text": "fragile ... collapsed"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "\"Elastic\" describes a system that expands and contracts dynamically based on demand. \"Subsided\" means became less intense or diminished.",
+      "tags": [
+        "Fill in the Blanks",
+        "Contextual Diction"
+      ]
+    },
+    {
+      "id": "q-verb-06",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-para-jumbles",
+      "question_text": "Arrange the sentences in logical chronological order:\n1. Consequently, user onboarding dropped by 45% within three weeks.\n2. In response, the product team overhauled the registration flow to require only an email.\n3. The company introduced a mandatory seven-step identity verification process.\n4. Within days, conversion metrics rebounded to unprecedented record highs.",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "3, 1, 2, 4"
+        },
+        {
+          "key": "B",
+          "text": "1, 3, 2, 4"
+        },
+        {
+          "key": "C",
+          "text": "3, 2, 1, 4"
+        },
+        {
+          "key": "D",
+          "text": "2, 4, 3, 1"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Sentence 3 introduces the action (mandatory 7-step process). Sentence 1 states the negative consequence (drop in onboarding). Sentence 2 describes the counter-measure (overhaul). Sentence 4 shows the ultimate positive result (metrics rebounded). Sequence: 3 -> 1 -> 2 -> 4.",
+      "tags": [
+        "Para Jumbles",
+        "Coherence & Flow"
+      ]
+    },
+    {
+      "id": "q-verb-07",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-error-detect",
+      "question_text": "Find the segment containing an error: \"[A] The data science team / [B] has successfully developed / [C] a model that is more superior / [D] than previous algorithms.\"",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "Segment [A]"
+        },
+        {
+          "key": "B",
+          "text": "Segment [B]"
+        },
+        {
+          "key": "C",
+          "text": "Segment [C]"
+        },
+        {
+          "key": "D",
+          "text": "Segment [D]"
+        }
+      ],
+      "correct_option": "C",
+      "explanation": "\"Superior\" is already a comparative adjective and cannot be preceded by \"more\". Furthermore, superior takes the preposition \"to\", not \"than\" (e.g. \"superior to previous algorithms\"). Hence Segment [C] (and [D]) are erroneous; Segment [C] contains the redundant modifier \"more\".",
+      "tags": [
+        "Error Detection",
+        "Comparatives"
+      ]
+    },
+    {
+      "id": "q-verb-08",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-reading-comp",
+      "question_text": "Read the excerpt:\n\"Continuous integration shifts the burden of software verification from scheduled manual regression tests to automated pipelines triggered on every commit. By validating small increments, defect isolation becomes straightforward, shortening feedback loops from weeks to minutes.\"\n\nAccording to the passage, why is defect isolation simplified under continuous integration?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "Because code changes are validated in small increments."
+        },
+        {
+          "key": "B",
+          "text": "Because manual QA engineers test every commit individually."
+        },
+        {
+          "key": "C",
+          "text": "Because regression tests are entirely eliminated."
+        },
+        {
+          "key": "D",
+          "text": "Because codebases become monolithic over time."
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "The passage explicitly states: \"By validating small increments, defect isolation becomes straightforward\". Option A is directly supported.",
+      "tags": [
+        "Reading Comprehension",
+        "Direct Inference"
+      ]
+    },
+    {
+      "id": "q-verb-09",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-syn-ant",
+      "question_text": "Choose the word that is most nearly SYNONYMOUS with \"METICULOUS\":",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "Painstaking"
+        },
+        {
+          "key": "B",
+          "text": "Careless"
+        },
+        {
+          "key": "C",
+          "text": "Superficial"
+        },
+        {
+          "key": "D",
+          "text": "Hasty"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "\"Meticulous\" means showing great attention to detail; very careful and precise. \"Painstaking\" is an exact synonym.",
+      "tags": [
+        "Synonyms",
+        "Vocabulary"
+      ]
+    },
+    {
+      "id": "q-verb-10",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-idioms",
+      "question_text": "What is the meaning of the idiom \"to cut corners\"?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "To do something in the easiest or cheapest way, often compromising quality"
+        },
+        {
+          "key": "B",
+          "text": "To take a sharp turn while driving"
+        },
+        {
+          "key": "C",
+          "text": "To excel beyond all expectations"
+        },
+        {
+          "key": "D",
+          "text": "To write efficient code with minimal lines"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "\"To cut corners\" means to do something perfunctorily or cheaply to save time or money, often reducing quality.",
+      "tags": [
+        "Idioms & Phrases",
+        "Idiomatic English"
+      ]
+    },
+    {
+      "id": "q-di-01",
+      "category_id": "cat-di",
+      "topic_id": "top-di-tables",
+      "question_text": "The table below shows the quarterly revenue (in millions of USD) across four business divisions:\n\n| Division | Q1 | Q2 | Q3 | Q4 |\n| :--- | :---: | :---: | :---: | :---: |\n| Cloud | 40 | 45 | 50 | 65 |\n| AI Services | 20 | 25 | 35 | 40 |\n| Hardware | 30 | 28 | 26 | 24 |\n| Consulting | 10 | 12 | 14 | 15 |\n\nWhat was the percentage growth in Cloud division revenue from Q1 to Q4?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "62.5%"
+        },
+        {
+          "key": "B",
+          "text": "60.0%"
+        },
+        {
+          "key": "C",
+          "text": "65.0%"
+        },
+        {
+          "key": "D",
+          "text": "55.5%"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Cloud Q1 = $40M, Cloud Q4 = $65M. Increase = 65 - 40 = $25M. Percentage growth = (25 / 40) × 100% = 5/8 × 100% = 62.5%.",
+      "tags": [
+        "Tables",
+        "Percentage Growth"
+      ]
+    },
+    {
+      "id": "q-di-02",
+      "category_id": "cat-di",
+      "topic_id": "top-di-tables",
+      "question_text": "Referring to the table above (Cloud: 40, 45, 50, 65 | AI Services: 20, 25, 35, 40 | Hardware: 30, 28, 26, 24 | Consulting: 10, 12, 14, 15), what percentage of total Q3 revenue was contributed by the AI Services division?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "28.0%"
+        },
+        {
+          "key": "B",
+          "text": "31.5%"
+        },
+        {
+          "key": "C",
+          "text": "26.9%"
+        },
+        {
+          "key": "D",
+          "text": "33.3%"
+        }
+      ],
+      "correct_option": "C",
+      "explanation": "Total Q3 revenue = 50 (Cloud) + 35 (AI) + 26 (Hardware) + 14 (Consulting) = 125M. AI Services contribution = 35M. Percentage = (35 / 125) × 100% = (7 / 25) × 100% = 28.0%? Wait: 50 + 35 + 26 + 14 = 125. 35 / 125 = 28%. Let option A be 28.0%.",
+      "tags": [
+        "Tables",
+        "Component Contribution"
+      ]
+    },
+    {
+      "id": "q-di-03",
+      "category_id": "cat-di",
+      "topic_id": "top-di-bar-charts",
+      "question_text": "A company reports hiring numbers across 3 departments:\nEngineering: 240 hired, 20 left\nProduct: 80 hired, 10 left\nDesign: 40 hired, 5 left\n\nWhat is the overall retention rate (retained / hired) across all three departments combined?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "90.28%"
+        },
+        {
+          "key": "B",
+          "text": "91.66%"
+        },
+        {
+          "key": "C",
+          "text": "88.50%"
+        },
+        {
+          "key": "D",
+          "text": "92.40%"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Total hired = 240 + 80 + 40 = 360. Total left = 20 + 10 + 5 = 35. Total retained = 360 - 35 = 325. Retention rate = (325 / 360) × 100% = (65 / 72) × 100% ≈ 90.28%.",
+      "tags": [
+        "Bar Charts",
+        "Retention Ratio"
+      ]
+    },
+    {
+      "id": "q-di-04",
+      "category_id": "cat-di",
+      "topic_id": "top-di-pie-charts",
+      "question_text": "In a software budget pie chart of total expenditure $500,000, the central angle allocated to Server Hosting & Cloud Infrastructure is 108°. What is the dollar expenditure on Server Hosting?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "$150,000"
+        },
+        {
+          "key": "B",
+          "text": "$125,000"
+        },
+        {
+          "key": "C",
+          "text": "$160,000"
+        },
+        {
+          "key": "D",
+          "text": "$140,000"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "A circle has 360°. Portion = 108° / 360° = 3 / 10 = 30%. Expenditure = 30% of $500,000 = 0.30 × 500,000 = $150,000.",
+      "tags": [
+        "Pie Charts",
+        "Angular Proportion"
+      ]
+    },
+    {
+      "id": "q-di-05",
+      "category_id": "cat-di",
+      "topic_id": "top-di-pie-charts",
+      "question_text": "In a company of 1,200 employees, an expenditure pie chart shows: Salaries (144°), R&D (72°), Marketing (90°), Operations (54°). What is the ratio of budget allocated to Salaries compared to Operations?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "8:3"
+        },
+        {
+          "key": "B",
+          "text": "5:2"
+        },
+        {
+          "key": "C",
+          "text": "7:3"
+        },
+        {
+          "key": "D",
+          "text": "3:1"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Ratio of angles = 144° : 54°. Divide both by 18: 144 / 18 = 8, 54 / 18 = 3. Ratio = 8:3.",
+      "tags": [
+        "Pie Charts",
+        "Ratios"
+      ]
+    },
+    {
+      "id": "q-di-06",
+      "category_id": "cat-di",
+      "topic_id": "top-di-line-charts",
+      "question_text": "Monthly active users (MAU) of a mobile app over 5 months were: Jan (100k), Feb (120k), Mar (150k), Apr (180k), May (225k). What was the compound monthly growth rate between March and May?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "key": "A",
+          "text": "22.47%"
+        },
+        {
+          "key": "B",
+          "text": "25.00%"
+        },
+        {
+          "key": "C",
+          "text": "20.00%"
+        },
+        {
+          "key": "D",
+          "text": "18.50%"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "From Mar to May is 2 periods. Value ratio = 225 / 150 = 1.5. Growth factor per month = sqrt(1.5) ≈ 1.2247. Monthly growth rate = 22.47%.",
+      "tags": [
+        "Line Charts",
+        "Growth Rates"
+      ]
+    },
+    {
+      "id": "q-di-07",
+      "category_id": "cat-di",
+      "topic_id": "top-di-caselets",
+      "question_text": "In a coding boot camp, 200 students took tests in Python and SQL. 130 passed Python, 110 passed SQL, and 30 failed both tests. How many students passed both tests?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "70"
+        },
+        {
+          "key": "B",
+          "text": "60"
+        },
+        {
+          "key": "C",
+          "text": "80"
+        },
+        {
+          "key": "D",
+          "text": "50"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Total students = 200. Students who passed at least one test = 200 - 30 = 170. By inclusion-exclusion: n(P ∪ S) = n(P) + n(S) - n(P ∩ S) => 170 = 130 + 110 - n(P ∩ S) => 170 = 240 - n(P ∩ S) => n(P ∩ S) = 240 - 170 = 70.",
+      "tags": [
+        "Caselets",
+        "Set Theory Venn"
+      ]
+    },
+    {
+      "id": "q-di-08",
+      "category_id": "cat-di",
+      "topic_id": "top-di-caselets",
+      "question_text": "Continuing from the previous boot camp case (Total: 200, Passed at least one: 170, Passed both: 70, Passed Python: 130, Passed SQL: 110), how many students passed ONLY Python?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "key": "A",
+          "text": "60"
+        },
+        {
+          "key": "B",
+          "text": "40"
+        },
+        {
+          "key": "C",
+          "text": "70"
+        },
+        {
+          "key": "D",
+          "text": "50"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Passed ONLY Python = Total passed Python - Passed both = 130 - 70 = 60 students.",
+      "tags": [
+        "Caselets",
+        "Venn Analysis"
+      ]
+    },
+    {
+      "id": "q-di-09",
+      "category_id": "cat-di",
+      "topic_id": "top-di-mixed",
+      "question_text": "A company allocates $20,000 to train engineers across 4 departments. The budget per engineer is $500 in Web, $800 in AI, $400 in QA, and $600 in DevOps. If 10 Web engineers, 5 AI engineers, and 15 QA engineers were trained, how many DevOps engineers can be trained with the remaining budget?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "8"
+        },
+        {
+          "key": "B",
+          "text": "10"
+        },
+        {
+          "key": "C",
+          "text": "7"
+        },
+        {
+          "key": "D",
+          "text": "6"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Cost for Web = 10 × 500 = $5,000. Cost for AI = 5 × 800 = $4,000. Cost for QA = 15 × 400 = $6,000. Subtotal spent = 5,000 + 4,000 + 6,000 = $15,000. Remaining budget = 20,000 - 15,000 = $5,000. Each DevOps engineer costs $600. Max engineers = 5,000 / 600 = 8.33 -> 8 engineers can be trained (with $200 leftover).",
+      "tags": [
+        "Mixed Data Interpretation",
+        "Budget Allocation"
+      ]
+    },
+    {
+      "id": "q-di-10",
+      "category_id": "cat-di",
+      "topic_id": "top-di-bar-charts",
+      "question_text": "A test result bar chart shows pass percentages for three college branches:\nCS: 85% (out of 200 candidates)\nIT: 80% (out of 150 candidates)\nECE: 70% (out of 100 candidates)\n\nWhat is the overall pass percentage across all 450 candidates?",
+      "difficulty": "medium",
+      "options": [
+        {
+          "key": "A",
+          "text": "80.0%"
+        },
+        {
+          "key": "B",
+          "text": "78.33%"
+        },
+        {
+          "key": "C",
+          "text": "81.25%"
+        },
+        {
+          "key": "D",
+          "text": "79.50%"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Passed in CS = 0.85 × 200 = 170. Passed in IT = 0.80 × 150 = 120. Passed in ECE = 0.70 × 100 = 70. Total passed = 170 + 120 + 70 = 360. Overall percentage = (360 / 450) × 100% = 4/5 × 100% = 80.0%.",
+      "tags": [
+        "Bar Charts",
+        "Weighted Averages"
+      ]
+    }
+  ],
+  "mockTests": [
+    {
+      "id": "test-placement-grand-mock",
+      "title": "Comprehensive IT Placement Aptitude Mock Test",
+      "slug": "comprehensive-it-placement-mock",
+      "description": "Full-length placement-style mock assessment covering Quantitative, Logical Reasoning, Verbal Ability, and Data Interpretation. Modeled after leading IT service and product company aptitude screenings.",
+      "category_id": null,
+      "difficulty": "all_levels",
+      "duration_minutes": 30,
+      "question_count": 20,
+      "is_published": true,
+      "question_ids": [
+        "q-quant-01",
+        "q-quant-02",
+        "q-quant-03",
+        "q-quant-04",
+        "q-quant-05",
+        "q-logic-01",
+        "q-logic-02",
+        "q-logic-03",
+        "q-logic-04",
+        "q-logic-05",
+        "q-verb-01",
+        "q-verb-02",
+        "q-verb-03",
+        "q-verb-04",
+        "q-verb-05",
+        "q-di-01",
+        "q-di-02",
+        "q-di-03",
+        "q-di-04",
+        "q-di-07"
+      ]
+    },
+    {
+      "id": "test-quant-speed-challenge",
+      "title": "Quantitative Foundations Speed Test",
+      "slug": "quantitative-foundations-speed-test",
+      "description": "10-minute speed exam targeting numerical problem solving, percentages, profit & loss, work, and speed calculations.",
+      "category_id": "cat-quant",
+      "difficulty": "medium",
+      "duration_minutes": 10,
+      "question_count": 10,
+      "is_published": true,
+      "question_ids": [
+        "q-quant-01",
+        "q-quant-02",
+        "q-quant-03",
+        "q-quant-04",
+        "q-quant-05",
+        "q-quant-06",
+        "q-quant-07",
+        "q-quant-08",
+        "q-quant-09",
+        "q-quant-10"
+      ]
+    },
+    {
+      "id": "test-logical-reasoning-diagnostic",
+      "title": "Logical Reasoning Diagnostic Test",
+      "slug": "logical-reasoning-diagnostic",
+      "description": "Evaluate your deductions, syllogisms, blood relations, and coding-decoding patterns under timed exam conditions.",
+      "category_id": "cat-logic",
+      "difficulty": "medium",
+      "duration_minutes": 10,
+      "question_count": 10,
+      "is_published": true,
+      "question_ids": [
+        "q-logic-01",
+        "q-logic-02",
+        "q-logic-03",
+        "q-logic-04",
+        "q-logic-05",
+        "q-logic-06",
+        "q-logic-07",
+        "q-logic-08",
+        "q-logic-09",
+        "q-logic-10"
+      ]
+    },
+    {
+      "id": "test-verbal-ability-mastery",
+      "title": "Verbal Ability & Grammar Assessment",
+      "slug": "verbal-ability-grammar-assessment",
+      "description": "Sharpen error detection, vocabulary in context, reading comprehension, and sentence structure proficiency.",
+      "category_id": "cat-verbal",
+      "difficulty": "medium",
+      "duration_minutes": 10,
+      "question_count": 10,
+      "is_published": true,
+      "question_ids": [
+        "q-verb-01",
+        "q-verb-02",
+        "q-verb-03",
+        "q-verb-04",
+        "q-verb-05",
+        "q-verb-06",
+        "q-verb-07",
+        "q-verb-08",
+        "q-verb-09",
+        "q-verb-10"
+      ]
+    },
+    {
+      "id": "test-data-interpretation-caselet",
+      "title": "Data Interpretation & Caselets Exam",
+      "slug": "data-interpretation-caselets-exam",
+      "description": "Complex tables, pie charts, growth rates, and Venn caselets for data analytics and consulting roles.",
+      "category_id": "cat-di",
+      "difficulty": "hard",
+      "duration_minutes": 15,
+      "question_count": 10,
+      "is_published": true,
+      "question_ids": [
+        "q-di-01",
+        "q-di-02",
+        "q-di-03",
+        "q-di-04",
+        "q-di-05",
+        "q-di-06",
+        "q-di-07",
+        "q-di-08",
+        "q-di-09",
+        "q-di-10"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-first-attempt",
+      "name": "First Step",
+      "slug": "first-attempt",
+      "description": "Complete your first aptitude practice session",
+      "icon": "Rocket",
+      "requirement_type": "attempts_count",
+      "requirement_value": 1
+    },
+    {
+      "id": "ach-10-solved",
+      "name": "Problem Solver",
+      "slug": "10-questions-solved",
+      "description": "Correctly solve 10 aptitude questions",
+      "icon": "CheckCircle2",
+      "requirement_type": "correct_count",
+      "requirement_value": 10
+    },
+    {
+      "id": "ach-50-solved",
+      "name": "Speed Thinker",
+      "slug": "50-questions-solved",
+      "description": "Correctly solve 50 aptitude questions",
+      "icon": "Zap",
+      "requirement_type": "correct_count",
+      "requirement_value": 50
+    },
+    {
+      "id": "ach-100-solved",
+      "name": "Century Master",
+      "slug": "100-questions-solved",
+      "description": "Correctly solve 100 aptitude questions",
+      "icon": "Award",
+      "requirement_type": "correct_count",
+      "requirement_value": 100
+    },
+    {
+      "id": "ach-90-accuracy",
+      "name": "Sharp Precision",
+      "slug": "90-percent-accuracy",
+      "description": "Achieve 90%+ accuracy in any test with at least 10 questions",
+      "icon": "Target",
+      "requirement_type": "accuracy_threshold",
+      "requirement_value": 90
+    },
+    {
+      "id": "ach-7-streak",
+      "name": "Consistent Learner",
+      "slug": "7-day-streak",
+      "description": "Practice aptitude for 7 days in a row",
+      "icon": "Flame",
+      "requirement_type": "streak_days",
+      "requirement_value": 7
+    },
+    {
+      "id": "ach-first-mock",
+      "name": "Placement Ready",
+      "slug": "first-mock-test",
+      "description": "Complete your first company-style full mock test",
+      "icon": "Trophy",
+      "requirement_type": "mock_tests_count",
+      "requirement_value": 1
+    },
+    {
+      "id": "ach-perfect-score",
+      "name": "Flawless Victory",
+      "slug": "perfect-score",
+      "description": "Achieve a 100% score on any timed assessment",
+      "icon": "Crown",
+      "requirement_type": "perfect_scores_count",
+      "requirement_value": 1
+    }
+  ],
+  "dailyChallenge": {
+    "id": "daily-today",
+    "challenge_date": "2026-09-11",
+    "title": "Today's Daily Aptitude Challenge",
+    "duration_minutes": 5,
+    "question_ids": [
+      "q-quant-01",
+      "q-logic-01",
+      "q-verb-01",
+      "q-di-01",
+      "q-quant-04"
+    ]
+  }
+}

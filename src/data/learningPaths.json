@@ -1,0 +1,3000 @@
+[
+  {
+    "id": "lp-01-full-stack",
+    "slug": "full-stack-developer",
+    "title": "Full Stack Developer",
+    "subtitle": "Master complete end-to-end web engineering from frontend interfaces to backend microservices and databases.",
+    "description": "This career path equips you with complete full-stack mastery. Learn modern JavaScript, React 19, Node.js, Express, SQL, database design, Docker containerization, REST API design, and deploy production full-stack systems with authentication, payment processing, and cloud CI/CD.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format&fit=crop&q=80",
+    "category": "Full Stack",
+    "difficulty": "all_levels",
+    "duration_weeks": 6,
+    "estimated_hours": 122.5,
+    "total_courses": 8,
+    "rating": 4.9,
+    "average_rating": 4.9,
+    "enrolled_count": 14280,
+    "student_count": 14280,
+    "is_published": true,
+    "key_skills": [
+      "HTML5/CSS3",
+      "JavaScript ES6+",
+      "React 19",
+      "Node.js",
+      "Express",
+      "SQL & PostgreSQL",
+      "Docker",
+      "REST APIs",
+      "System Architecture"
+    ],
+    "skills": [
+      "HTML5/CSS3",
+      "JavaScript ES6+",
+      "React 19",
+      "Node.js",
+      "Express",
+      "SQL & PostgreSQL",
+      "Docker",
+      "REST APIs",
+      "System Architecture"
+    ],
+    "tools_and_technologies": [
+      "HTML5/CSS3",
+      "JavaScript ES6+",
+      "React 19",
+      "Node.js",
+      "Express",
+      "SQL & PostgreSQL"
+    ],
+    "career_outcomes": [
+      "Full Stack Software Engineer",
+      "Junior/Mid-level Full Stack Developer",
+      "Web Applications Engineer",
+      "Technical Founder"
+    ],
+    "prerequisites": [
+      "No prior programming experience required",
+      "Basic computer literacy and curiosity"
+    ],
+    "capstone_project": {
+      "title": "Responsive Portfolio & CSS Design System",
+      "description": "Interactive E-Commerce Web Application"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Web Fundamentals & Modern JavaScript",
+        "stage_description": "Master semantic markup, modern CSS layouts, responsive design, and core JavaScript programming.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Frontend Engineering with React 19",
+        "stage_description": "Build scalable user interfaces with React 19, custom hooks, context, and client-side routing.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c001-react-complete",
+            "title": "Complete React JS Development",
+            "slug": "complete-react-js-development",
+            "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 38.5,
+            "level": "beginner",
+            "avg_rating": 4.9,
+            "student_count": 94210,
+            "price": 89.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Advanced React State & Architecture",
+        "stage_description": "Master Redux Toolkit, performance optimization, caching strategies, and large-scale architectural patterns.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c002-react-advanced",
+            "title": "Advanced React Architecture & Performance",
+            "slug": "c002-react-advanced",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Server-Side APIs with Node.js & Express",
+        "stage_description": "Design resilient REST APIs, JWT authentication, middleware pipelines, and error handling architectures.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c009-node-mastery",
+            "title": "Complete Node.js Backend Development",
+            "slug": "c009-node-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 5,
+        "stage_title": "Stage 5: Relational Database Modeling with SQL",
+        "stage_description": "Master relational schema design, query optimization, indexing, ACID transactions, and database migrations.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 6,
+        "stage_title": "Stage 6: End-to-End MERN Application Engineering",
+        "stage_description": "Unify frontend, backend, database, and cloud storage into production-grade applications.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c010-mern-stack",
+            "title": "MERN Stack Development",
+            "slug": "c010-mern-stack",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 7,
+        "stage_title": "Stage 7: Production Full-Stack Architecture",
+        "stage_description": "Deploy full applications with automated testing, CI/CD pipelines, and environment management.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c011-fullstack-dev",
+            "title": "Full Stack Web Development",
+            "slug": "c011-fullstack-dev",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 8,
+        "stage_title": "Stage 8: Tech Interview Preparation & Algorithms",
+        "stage_description": "Ace technical coding interviews, system design discussions, and behavioural evaluations.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c033-interview-prep",
+            "title": "Tech Interview Preparation & Coding DSA",
+            "slug": "c033-interview-prep",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-02-frontend",
+    "slug": "frontend-developer",
+    "title": "Frontend Developer",
+    "subtitle": "Craft pixel-perfect, accessible, and ultra-responsive web interfaces with modern React and CSS.",
+    "description": "Become an expert Frontend Engineer. Specialize in cutting-edge user interfaces, accessibility (a11y), responsive design systems, animations, React architecture, state management, and modern developer tooling.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1600&auto=format&fit=crop&q=80",
+    "category": "Frontend Development",
+    "difficulty": "beginner",
+    "duration_weeks": 4,
+    "estimated_hours": 86.5,
+    "total_courses": 5,
+    "rating": 4.85,
+    "average_rating": 4.85,
+    "enrolled_count": 11250,
+    "student_count": 11250,
+    "is_published": true,
+    "key_skills": [
+      "HTML5",
+      "CSS3 / Tailwind CSS",
+      "Modern JavaScript",
+      "React 19",
+      "Figma to Code",
+      "Web Performance",
+      "State Management"
+    ],
+    "skills": [
+      "HTML5",
+      "CSS3 / Tailwind CSS",
+      "Modern JavaScript",
+      "React 19",
+      "Figma to Code",
+      "Web Performance",
+      "State Management"
+    ],
+    "tools_and_technologies": [
+      "HTML5",
+      "CSS3 / Tailwind CSS",
+      "Modern JavaScript",
+      "React 19",
+      "Figma to Code",
+      "Web Performance"
+    ],
+    "career_outcomes": [
+      "Frontend Software Engineer",
+      "React Developer",
+      "UI Developer",
+      "Web Developer"
+    ],
+    "prerequisites": [
+      "No prior programming needed"
+    ],
+    "capstone_project": {
+      "title": "Interactive Product Landing Page with Animations",
+      "description": "Dynamic SaaS Analytics Dashboard"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: HTML, CSS & Modern JavaScript Essentials",
+        "stage_description": "Deep dive into web standards, modern CSS layouts, and DOM manipulation.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Hands-on React Practice",
+        "stage_description": "Build 5 functional React projects to solidify core components and lifecycle concepts.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c003-react-beginners",
+            "title": "React Projects for Beginners",
+            "slug": "react-projects-for-beginners",
+            "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 12,
+            "level": "beginner",
+            "avg_rating": 4.8,
+            "student_count": 112000,
+            "price": 49.99,
+            "discount_price": 0,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Comprehensive React 19 Mastery",
+        "stage_description": "Master custom hooks, performance profiling, and component design patterns.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c001-react-complete",
+            "title": "Complete React JS Development",
+            "slug": "complete-react-js-development",
+            "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 38.5,
+            "level": "beginner",
+            "avg_rating": 4.9,
+            "student_count": 94210,
+            "price": 89.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Advanced Architecture & State Optimization",
+        "stage_description": "Learn Redux Toolkit, code splitting, memoization, and bundle reduction.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c002-react-advanced",
+            "title": "Advanced React Architecture & Performance",
+            "slug": "c002-react-advanced",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 5,
+        "stage_title": "Stage 5: UI/UX Principles & Figma Implementation",
+        "stage_description": "Bridge the gap between design tokens, auto layout, and responsive code.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c022-uiux-masterclass",
+            "title": "UI/UX Design Masterclass",
+            "slug": "c022-uiux-masterclass",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-03-backend",
+    "slug": "backend-developer",
+    "title": "Backend Developer",
+    "subtitle": "Architect scalable APIs, high-throughput microservices, secure databases, and cloud infrastructures.",
+    "description": "Master server-side engineering. Build robust backends capable of handling millions of requests with Node.js, Python, PostgreSQL, Redis caching, microservices, containerization, and distributed system patterns.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&auto=format&fit=crop&q=80",
+    "category": "Backend Development",
+    "difficulty": "intermediate",
+    "duration_weeks": 5,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.88,
+    "average_rating": 4.88,
+    "enrolled_count": 9840,
+    "student_count": 9840,
+    "is_published": true,
+    "key_skills": [
+      "Node.js",
+      "Express",
+      "Python",
+      "PostgreSQL",
+      "System Design",
+      "Docker & Kubernetes",
+      "REST & GraphQL",
+      "Microservices"
+    ],
+    "skills": [
+      "Node.js",
+      "Express",
+      "Python",
+      "PostgreSQL",
+      "System Design",
+      "Docker & Kubernetes",
+      "REST & GraphQL",
+      "Microservices"
+    ],
+    "tools_and_technologies": [
+      "Node.js",
+      "Express",
+      "Python",
+      "PostgreSQL",
+      "System Design",
+      "Docker & Kubernetes"
+    ],
+    "career_outcomes": [
+      "Backend Engineer",
+      "API Engineer",
+      "Server Architect",
+      "Distributed Systems Engineer"
+    ],
+    "prerequisites": [
+      "Basic understanding of programming logic"
+    ],
+    "capstone_project": {
+      "title": "Secure Multi-Tenant Auth & Role-Based Access Control API",
+      "description": "High-Concurrency Real-Time Notification & Messaging Service"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Production Server Architecture with Node.js",
+        "stage_description": "Event loop internals, streams, clustering, and production REST architectures.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c009-node-mastery",
+            "title": "Complete Node.js Backend Development",
+            "slug": "c009-node-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Relational Databases & Query Engineering",
+        "stage_description": "PostgreSQL query tuning, indexing, ACID transactions, and data integrity.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Containerization with Docker & Kubernetes",
+        "stage_description": "Containerize microservices, manage pods, services, and cluster orchestration.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c019-docker-k8s",
+            "title": "Docker & Kubernetes Essentials",
+            "slug": "c019-docker-k8s",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: High-Scale Distributed System Design",
+        "stage_description": "Learn load balancing, sharding, replication, CAP theorem, and event-driven backends.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-04-java",
+    "slug": "java-developer",
+    "title": "Java Developer",
+    "subtitle": "Enterprise Java programming, Spring Boot microservices, high-performance computing, and DSA.",
+    "description": "Launch an enterprise engineering career with Java. Master Core Java, object-oriented design patterns, Spring Boot, Spring Security, Hibernate ORM, microservices architecture, and technical interview algorithms.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format&fit=crop&q=80",
+    "category": "Java",
+    "difficulty": "intermediate",
+    "duration_weeks": 6,
+    "estimated_hours": 60,
+    "total_courses": 5,
+    "rating": 4.82,
+    "average_rating": 4.82,
+    "enrolled_count": 8920,
+    "student_count": 8920,
+    "is_published": true,
+    "key_skills": [
+      "Java 21",
+      "Spring Boot",
+      "Spring Cloud",
+      "Hibernate / JPA",
+      "Data Structures & Algorithms",
+      "Microservices",
+      "PostgreSQL"
+    ],
+    "skills": [
+      "Java 21",
+      "Spring Boot",
+      "Spring Cloud",
+      "Hibernate / JPA",
+      "Data Structures & Algorithms",
+      "Microservices",
+      "PostgreSQL"
+    ],
+    "tools_and_technologies": [
+      "Java 21",
+      "Spring Boot",
+      "Spring Cloud",
+      "Hibernate / JPA",
+      "Data Structures & Algorithms",
+      "Microservices"
+    ],
+    "career_outcomes": [
+      "Java Enterprise Developer",
+      "Spring Boot Microservices Engineer",
+      "Software Engineer at Top Tech / Financial Institutions"
+    ],
+    "prerequisites": [
+      "Basic understanding of programming concepts"
+    ],
+    "capstone_project": {
+      "title": "Enterprise Banking Transaction Service with Spring Boot",
+      "description": "High-Throughput Order Management Microservice"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Java Data Structures & Algorithms",
+        "stage_description": "Master recursion, trees, graphs, sorting, and algorithmic complexity.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c008-java-dsa",
+            "title": "Java Data Structures & Algorithms",
+            "slug": "c008-java-dsa",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Enterprise Spring Boot & Microservices",
+        "stage_description": "Spring Boot 3, Spring Security, JPA/Hibernate, and cloud-ready REST services.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c007-java-enterprise",
+            "title": "Java Enterprise & Spring Boot Masterclass",
+            "slug": "c007-java-enterprise",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Database Engineering with SQL & PostgreSQL",
+        "stage_description": "Enterprise relational database schemas, connection pooling, and transactions.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Large-Scale System Architecture",
+        "stage_description": "Design resilient systems handling millions of daily active users.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 5,
+        "stage_title": "Stage 5: Technical Coding Interviews",
+        "stage_description": "Prepare for FAANG and Fortune 500 enterprise technical interviews.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c033-interview-prep",
+            "title": "Tech Interview Preparation & Coding DSA",
+            "slug": "c033-interview-prep",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-05-python",
+    "slug": "python-developer",
+    "title": "Python Developer",
+    "subtitle": "From core scripting and web automation to data science, APIs, and machine learning pipelines.",
+    "description": "Learn the world's most popular language. Master Python 3 from fundamental syntax to building web applications, automation bots, web scrapers, data processing pipelines, and introductory AI models.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&auto=format&fit=crop&q=80",
+    "category": "Python",
+    "difficulty": "beginner",
+    "duration_weeks": 4,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.92,
+    "average_rating": 4.92,
+    "enrolled_count": 15400,
+    "student_count": 15400,
+    "is_published": true,
+    "key_skills": [
+      "Python 3",
+      "Object-Oriented Python",
+      "Web Automation",
+      "Pandas & NumPy",
+      "REST APIs",
+      "Data Scraping",
+      "Scripting"
+    ],
+    "skills": [
+      "Python 3",
+      "Object-Oriented Python",
+      "Web Automation",
+      "Pandas & NumPy",
+      "REST APIs",
+      "Data Scraping",
+      "Scripting"
+    ],
+    "tools_and_technologies": [
+      "Python 3",
+      "Object-Oriented Python",
+      "Web Automation",
+      "Pandas & NumPy",
+      "REST APIs",
+      "Data Scraping"
+    ],
+    "career_outcomes": [
+      "Python Software Developer",
+      "Automation Engineer",
+      "Backend Python Engineer",
+      "Data Specialist"
+    ],
+    "prerequisites": [
+      "No prior programming knowledge required"
+    ],
+    "capstone_project": {
+      "title": "Automated Web Scraper & Alerting Bot",
+      "description": "Data Analytics & Reporting Dashboard with Pandas"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python Fundamentals from Scratch",
+        "stage_description": "Variables, loops, functions, OOP, and file I/O fundamentals.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c004-python-bootcamp",
+            "title": "Python Programming for Beginners",
+            "slug": "c004-python-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Real-World Web & Task Automation",
+        "stage_description": "Automate Excel, web browsers, emails, and repetitive operational tasks.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c006-python-automation",
+            "title": "Automate Everything with Python",
+            "slug": "c006-python-automation",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Python for Data Science & Analysis",
+        "stage_description": "NumPy, Pandas, data wrangling, and interactive visualization.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c005-python-ds",
+            "title": "Python for Data Science",
+            "slug": "c005-python-ds",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Machine Learning Foundation",
+        "stage_description": "Supervised and unsupervised models with Scikit-Learn.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c014-ml-fundamentals",
+            "title": "Machine Learning Fundamentals",
+            "slug": "c014-ml-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-06-react",
+    "slug": "react-developer",
+    "title": "React Developer",
+    "subtitle": "Specialized roadmap for modern React 19, Next.js mental models, custom hooks, and mobile React Native.",
+    "description": "Master the React ecosystem end-to-end. Become a sought-after React developer capable of building lightning-fast web and mobile apps with React 19, Redux Toolkit, React Router v7, and React Native.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1600&auto=format&fit=crop&q=80",
+    "category": "React",
+    "difficulty": "all_levels",
+    "duration_weeks": 5,
+    "estimated_hours": 74.5,
+    "total_courses": 4,
+    "rating": 4.91,
+    "average_rating": 4.91,
+    "enrolled_count": 12100,
+    "student_count": 12100,
+    "is_published": true,
+    "key_skills": [
+      "React 19",
+      "React Hooks",
+      "Redux Toolkit",
+      "React Router",
+      "React Native",
+      "TypeScript for React",
+      "SSR & State"
+    ],
+    "skills": [
+      "React 19",
+      "React Hooks",
+      "Redux Toolkit",
+      "React Router",
+      "React Native",
+      "TypeScript for React",
+      "SSR & State"
+    ],
+    "tools_and_technologies": [
+      "React 19",
+      "React Hooks",
+      "Redux Toolkit",
+      "React Router",
+      "React Native",
+      "TypeScript for React"
+    ],
+    "career_outcomes": [
+      "Senior React Developer",
+      "Frontend React Engineer",
+      "React Native Mobile Developer"
+    ],
+    "prerequisites": [
+      "Basic HTML, CSS, and modern JavaScript"
+    ],
+    "capstone_project": {
+      "title": "Real-Time Collaborative Productivity App",
+      "description": "Cross-Platform Mobile App with React Native & Expo"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: JavaScript Foundations",
+        "stage_description": "ES6+ array methods, closures, async/await, and promises.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Core React 19 Architecture",
+        "stage_description": "Components, JSX, state, props, custom hooks, and client routing.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c001-react-complete",
+            "title": "Complete React JS Development",
+            "slug": "complete-react-js-development",
+            "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 38.5,
+            "level": "beginner",
+            "avg_rating": 4.9,
+            "student_count": 94210,
+            "price": 89.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Advanced Patterns & Redux Toolkit",
+        "stage_description": "Enterprise state management, memoization, and performance.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c002-react-advanced",
+            "title": "Advanced React Architecture & Performance",
+            "slug": "c002-react-advanced",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Cross-Platform Mobile with React Native",
+        "stage_description": "Compile React to native iOS and Android applications.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c024-react-native",
+            "title": "React Native Mobile App Development",
+            "slug": "c024-react-native",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-07-javascript",
+    "slug": "javascript-developer",
+    "title": "JavaScript Developer",
+    "subtitle": "Deep-dive into the JavaScript runtime, async patterns, V8 engine internals, and full-stack JS frameworks.",
+    "description": "Become a versatile JavaScript engineer. Understand the JS event loop, closures, prototypes, asynchronous workflows, modern TypeScript, and full-stack JavaScript from frontend React to backend Node.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=1600&auto=format&fit=crop&q=80",
+    "category": "Web Development",
+    "difficulty": "beginner",
+    "duration_weeks": 4,
+    "estimated_hours": 74.5,
+    "total_courses": 4,
+    "rating": 4.84,
+    "average_rating": 4.84,
+    "enrolled_count": 8900,
+    "student_count": 8900,
+    "is_published": true,
+    "key_skills": [
+      "Vanilla JavaScript",
+      "ES6+ to ESNext",
+      "Node.js",
+      "React",
+      "Async/Await",
+      "Event Loop",
+      "MERN Stack"
+    ],
+    "skills": [
+      "Vanilla JavaScript",
+      "ES6+ to ESNext",
+      "Node.js",
+      "React",
+      "Async/Await",
+      "Event Loop",
+      "MERN Stack"
+    ],
+    "tools_and_technologies": [
+      "Vanilla JavaScript",
+      "ES6+ to ESNext",
+      "Node.js",
+      "React",
+      "Async/Await",
+      "Event Loop"
+    ],
+    "career_outcomes": [
+      "JavaScript Engineer",
+      "Full Stack JavaScript Developer",
+      "Software Engineer"
+    ],
+    "prerequisites": [
+      "Curiosity to learn web development"
+    ],
+    "capstone_project": {
+      "title": "Custom Vanilla JavaScript Framework / Component Library",
+      "description": "Real-Time Chat Application with WebSockets and Node.js"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Core JavaScript & Web Fundamentals",
+        "stage_description": "Master the DOM, browser APIs, and asynchronous programming.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Frontend Engineering with React",
+        "stage_description": "Modern functional UI components and state management.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c001-react-complete",
+            "title": "Complete React JS Development",
+            "slug": "complete-react-js-development",
+            "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 38.5,
+            "level": "beginner",
+            "avg_rating": 4.9,
+            "student_count": 94210,
+            "price": 89.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Server-Side JavaScript with Node.js",
+        "stage_description": "Asynchronous backend runtimes, streams, and REST APIs.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c009-node-mastery",
+            "title": "Complete Node.js Backend Development",
+            "slug": "c009-node-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Full-Stack JavaScript MERN Synergy",
+        "stage_description": "Build and deploy production full-stack JS applications.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c010-mern-stack",
+            "title": "MERN Stack Development",
+            "slug": "c010-mern-stack",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-08-data-analyst",
+    "slug": "data-analyst",
+    "title": "Data Analyst",
+    "subtitle": "Transform raw data into strategic business insights using SQL, Python, Pandas, and interactive dashboards.",
+    "description": "Launch your career in analytics. Learn to query enterprise databases with advanced SQL, clean and analyze large datasets in Python, create stunning business visualizations, and deliver actionable data-driven reports.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=80",
+    "category": "Data Science",
+    "difficulty": "beginner",
+    "duration_weeks": 3,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.87,
+    "average_rating": 4.87,
+    "enrolled_count": 7600,
+    "student_count": 7600,
+    "is_published": true,
+    "key_skills": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Pandas",
+      "Data Cleaning",
+      "Data Visualization",
+      "Business Intelligence"
+    ],
+    "skills": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Pandas",
+      "Data Cleaning",
+      "Data Visualization",
+      "Business Intelligence"
+    ],
+    "tools_and_technologies": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Pandas",
+      "Data Cleaning",
+      "Data Visualization"
+    ],
+    "career_outcomes": [
+      "Data Analyst",
+      "Business Intelligence Analyst",
+      "Product Analyst",
+      "Reporting Specialist"
+    ],
+    "prerequisites": [
+      "Basic comfort with numbers and spreadsheets"
+    ],
+    "capstone_project": {
+      "title": "E-Commerce Customer Retention & Cohort Analysis in SQL",
+      "description": "Sales Forecasting & Trend Exploration with Pandas"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python for Data Analysis",
+        "stage_description": "Learn Python syntax, data structures, and scripting fundamentals.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c004-python-bootcamp",
+            "title": "Python Programming for Beginners",
+            "slug": "c004-python-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Enterprise SQL & Relational Databases",
+        "stage_description": "Write complex joins, window functions, and aggregations.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Advanced Data Wrangling with Pandas",
+        "stage_description": "Clean missing values, reshape dataframes, and build visualizations.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c005-python-ds",
+            "title": "Python for Data Science",
+            "slug": "c005-python-ds",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Data Science & Statistical Analysis",
+        "stage_description": "Statistical significance, hypothesis testing, and storytelling with data.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c013-ds-masterclass",
+            "title": "Data Science Masterclass",
+            "slug": "c013-ds-masterclass",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-09-data-scientist",
+    "slug": "data-scientist",
+    "title": "Data Scientist",
+    "subtitle": "Advanced statistical modeling, predictive algorithms, machine learning workflows, and deep insights.",
+    "description": "Combine statistical rigor with algorithmic power. Master exploratory data analysis, feature engineering, regression, classification, clustering, model evaluation, and production inference deployment.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1600&auto=format&fit=crop&q=80",
+    "category": "Data Science",
+    "difficulty": "intermediate",
+    "duration_weeks": 6,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.89,
+    "average_rating": 4.89,
+    "enrolled_count": 8200,
+    "student_count": 8200,
+    "is_published": true,
+    "key_skills": [
+      "Python",
+      "Pandas",
+      "Scikit-Learn",
+      "Machine Learning",
+      "Statistical Modeling",
+      "SQL",
+      "Feature Engineering"
+    ],
+    "skills": [
+      "Python",
+      "Pandas",
+      "Scikit-Learn",
+      "Machine Learning",
+      "Statistical Modeling",
+      "SQL",
+      "Feature Engineering"
+    ],
+    "tools_and_technologies": [
+      "Python",
+      "Pandas",
+      "Scikit-Learn",
+      "Machine Learning",
+      "Statistical Modeling",
+      "SQL"
+    ],
+    "career_outcomes": [
+      "Data Scientist",
+      "Applied Scientist",
+      "Quantitative Analyst",
+      "Machine Learning Associate"
+    ],
+    "prerequisites": [
+      "Basic algebra and Python fundamentals"
+    ],
+    "capstone_project": {
+      "title": "Customer Churn Prediction Engine with Model Evaluation",
+      "description": "Real Estate Valuation Predictor Using Regression Techniques"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python for Data Science",
+        "stage_description": "NumPy, Pandas, and exploratory data analysis.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c005-python-ds",
+            "title": "Python for Data Science",
+            "slug": "c005-python-ds",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Comprehensive Data Science Mastery",
+        "stage_description": "Probability, statistical testing, and data preprocessing.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c013-ds-masterclass",
+            "title": "Data Science Masterclass",
+            "slug": "c013-ds-masterclass",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Core Machine Learning Algorithms",
+        "stage_description": "Decision trees, ensemble methods, SVMs, and neural networks.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c014-ml-fundamentals",
+            "title": "Machine Learning Fundamentals",
+            "slug": "c014-ml-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Practical Machine Learning with Python",
+        "stage_description": "End-to-end ML pipelines, cross-validation, and hyperparameter tuning.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c015-ml-python",
+            "title": "Practical Machine Learning with Python",
+            "slug": "c015-ml-python",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-10-ai-ml",
+    "slug": "ai-machine-learning-engineer",
+    "title": "AI / Machine Learning Engineer",
+    "subtitle": "Train deep neural networks, deploy computer vision and NLP models, and engineer production ML pipelines.",
+    "description": "Become a Machine Learning and Artificial Intelligence Engineer. Master deep learning architectures, convolutional neural networks, transformer models, model serving, latency optimization, and MLOps.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&auto=format&fit=crop&q=80",
+    "category": "Artificial Intelligence",
+    "difficulty": "advanced",
+    "duration_weeks": 7,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.93,
+    "average_rating": 4.93,
+    "enrolled_count": 10450,
+    "student_count": 10450,
+    "is_published": true,
+    "key_skills": [
+      "Deep Learning",
+      "PyTorch",
+      "TensorFlow",
+      "Neural Networks",
+      "NLP",
+      "Computer Vision",
+      "MLOps",
+      "Model Deployment"
+    ],
+    "skills": [
+      "Deep Learning",
+      "PyTorch",
+      "TensorFlow",
+      "Neural Networks",
+      "NLP",
+      "Computer Vision",
+      "MLOps",
+      "Model Deployment"
+    ],
+    "tools_and_technologies": [
+      "Deep Learning",
+      "PyTorch",
+      "TensorFlow",
+      "Neural Networks",
+      "NLP",
+      "Computer Vision"
+    ],
+    "career_outcomes": [
+      "Machine Learning Engineer",
+      "AI Researcher / Engineer",
+      "Deep Learning Specialist",
+      "Algorithm Engineer"
+    ],
+    "prerequisites": [
+      "Good grasp of Python and linear algebra basics"
+    ],
+    "capstone_project": {
+      "title": "Image Recognition & Object Detection with CNNs",
+      "description": "Sentiment & Natural Language Classifier with Transformers"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python for Scientific Computing",
+        "stage_description": "Linear algebra in NumPy and data manipulation in Pandas.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c005-python-ds",
+            "title": "Python for Data Science",
+            "slug": "c005-python-ds",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Foundations of Machine Learning",
+        "stage_description": "Core supervised and unsupervised learning algorithms.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c014-ml-fundamentals",
+            "title": "Machine Learning Fundamentals",
+            "slug": "c014-ml-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Applied Machine Learning Engineering",
+        "stage_description": "Model diagnostics, evaluation metrics, and feature pipelines.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c015-ml-python",
+            "title": "Practical Machine Learning with Python",
+            "slug": "c015-ml-python",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Deep Neural Networks & Artificial Intelligence",
+        "stage_description": "Deep learning, backpropagation, CNNs, and sequence models.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c016-ai-fundamentals",
+            "title": "Artificial Intelligence Fundamentals",
+            "slug": "c016-ai-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-11-genai",
+    "slug": "generative-ai-developer",
+    "title": "Generative AI Developer",
+    "subtitle": "Build next-generation intelligent applications with Large Language Models (LLMs), RAG, and AI agents.",
+    "description": "Step into the bleeding edge of Generative AI. Learn prompt engineering, Retrieval-Augmented Generation (RAG), vector embeddings, LangChain/LlamaIndex, fine-tuning, multimodal models, and autonomous AI agents.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&auto=format&fit=crop&q=80",
+    "category": "Artificial Intelligence",
+    "difficulty": "intermediate",
+    "duration_weeks": 4,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.95,
+    "average_rating": 4.95,
+    "enrolled_count": 13800,
+    "student_count": 13800,
+    "is_published": true,
+    "key_skills": [
+      "Prompt Engineering",
+      "RAG Systems",
+      "Vector Databases",
+      "LangChain",
+      "OpenAI & Gemini APIs",
+      "AI Agents",
+      "Embeddings"
+    ],
+    "skills": [
+      "Prompt Engineering",
+      "RAG Systems",
+      "Vector Databases",
+      "LangChain",
+      "OpenAI & Gemini APIs",
+      "AI Agents",
+      "Embeddings"
+    ],
+    "tools_and_technologies": [
+      "Prompt Engineering",
+      "RAG Systems",
+      "Vector Databases",
+      "LangChain",
+      "OpenAI & Gemini APIs",
+      "AI Agents"
+    ],
+    "career_outcomes": [
+      "Generative AI Developer",
+      "AI Applications Engineer",
+      "LLM Solutions Architect",
+      "AI Product Specialist"
+    ],
+    "prerequisites": [
+      "Basic Python or JavaScript programming skills"
+    ],
+    "capstone_project": {
+      "title": "Enterprise Document Q&A Knowledge Assistant with RAG",
+      "description": "Autonomous Multi-Step AI Agent with Tool Use & Web Search"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python Programming Core",
+        "stage_description": "Object-oriented scripting and working with external REST APIs.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c004-python-bootcamp",
+            "title": "Python Programming for Beginners",
+            "slug": "c004-python-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Artificial Intelligence Fundamentals",
+        "stage_description": "Neural representation, embeddings, and generative architectures.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c016-ai-fundamentals",
+            "title": "Artificial Intelligence Fundamentals",
+            "slug": "c016-ai-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Generative AI & LLM Application Mastery",
+        "stage_description": "Build production RAG pipelines, agents, and vector database integrations.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c037-genai-llm",
+            "title": "Generative AI & LLM Application Development",
+            "slug": "c037-genai-llm",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Scalable Full-Stack AI Application Deployment",
+        "stage_description": "Deploy streaming responses, token billing, and rate limiters.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c009-node-mastery",
+            "title": "Complete Node.js Backend Development",
+            "slug": "c009-node-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-12-data-engineer",
+    "slug": "data-engineer",
+    "title": "Data Engineer",
+    "subtitle": "Design and maintain high-volume data lakes, ETL pipelines, streaming architectures, and data warehouses.",
+    "description": "Power modern analytics and AI platforms. Learn to build resilient distributed pipelines, schedule workflows with Airflow, model data warehouses, stream events with Kafka, and optimize large-scale queries.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1600&auto=format&fit=crop&q=80",
+    "category": "Data Science",
+    "difficulty": "advanced",
+    "duration_weeks": 6,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.86,
+    "average_rating": 4.86,
+    "enrolled_count": 6400,
+    "student_count": 6400,
+    "is_published": true,
+    "key_skills": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Data Warehousing",
+      "ETL / ELT",
+      "AWS S3 / Redshift",
+      "System Design",
+      "Distributed Systems"
+    ],
+    "skills": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Data Warehousing",
+      "ETL / ELT",
+      "AWS S3 / Redshift",
+      "System Design",
+      "Distributed Systems"
+    ],
+    "tools_and_technologies": [
+      "SQL",
+      "PostgreSQL",
+      "Python",
+      "Data Warehousing",
+      "ETL / ELT",
+      "AWS S3 / Redshift"
+    ],
+    "career_outcomes": [
+      "Data Engineer",
+      "Data Platform Architect",
+      "Analytics Engineer",
+      "Big Data Developer"
+    ],
+    "prerequisites": [
+      "Intermediate SQL and Python familiarity"
+    ],
+    "capstone_project": {
+      "title": "Real-Time Clickstream Streaming & Ingestion Pipeline",
+      "description": "Automated Multi-Source Data Warehouse & Marts Architecture"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Python for Data Processing",
+        "stage_description": "Data ingestion, transformation, serialization, and parquet files.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c005-python-ds",
+            "title": "Python for Data Science",
+            "slug": "c005-python-ds",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Advanced Relational SQL & Warehousing",
+        "stage_description": "Window functions, partitioning, indexing, and transactional integrity.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Cloud Infrastructure with AWS",
+        "stage_description": "Cloud storage S3, EC2 instances, and managed database services.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c017-aws-cloud-practitioner",
+            "title": "AWS Cloud Practitioner",
+            "slug": "c017-aws-cloud-practitioner",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Distributed System Architecture",
+        "stage_description": "Design partitioned databases, event logs, and resilient batch systems.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-13-cloud-engineer",
+    "slug": "cloud-engineer",
+    "title": "Cloud Engineer",
+    "subtitle": "Master Amazon Web Services (AWS), serverless computing, infrastructure as code, and cloud security.",
+    "description": "Become a certified Cloud Engineer. Learn core compute, storage, networking (VPC), IAM security, serverless Lambda, microservices, containerization with ECS/EKS, and cost-effective cloud architectures.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&auto=format&fit=crop&q=80",
+    "category": "Cloud Computing",
+    "difficulty": "all_levels",
+    "duration_weeks": 5,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.9,
+    "average_rating": 4.9,
+    "enrolled_count": 11400,
+    "student_count": 11400,
+    "is_published": true,
+    "key_skills": [
+      "AWS EC2",
+      "AWS S3",
+      "IAM Security",
+      "VPC Networking",
+      "Docker",
+      "Serverless Lambda",
+      "CloudFormation",
+      "DevOps"
+    ],
+    "skills": [
+      "AWS EC2",
+      "AWS S3",
+      "IAM Security",
+      "VPC Networking",
+      "Docker",
+      "Serverless Lambda",
+      "CloudFormation",
+      "DevOps"
+    ],
+    "tools_and_technologies": [
+      "AWS EC2",
+      "AWS S3",
+      "IAM Security",
+      "VPC Networking",
+      "Docker",
+      "Serverless Lambda"
+    ],
+    "career_outcomes": [
+      "Cloud Solutions Architect",
+      "AWS Cloud Engineer",
+      "Cloud Infrastructure Specialist",
+      "DevOps Associate"
+    ],
+    "prerequisites": [
+      "Basic computer networking and Linux concepts"
+    ],
+    "capstone_project": {
+      "title": "Fault-Tolerant Multi-AZ Web Application on AWS",
+      "description": "Serverless Event-Driven Image Processing Pipeline"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: AWS Cloud Foundations",
+        "stage_description": "Core AWS services, security, architecture, pricing, and compliance.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c017-aws-cloud-practitioner",
+            "title": "AWS Cloud Practitioner",
+            "slug": "c017-aws-cloud-practitioner",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: AWS Developer Essentials",
+        "stage_description": "AWS SDK, DynamoDB, API Gateway, Lambda, and CI/CD pipelines.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c018-aws-developer",
+            "title": "AWS Developer Essentials",
+            "slug": "c018-aws-developer",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Containerization with Docker & Kubernetes",
+        "stage_description": "Package microservices into containers and deploy to clusters.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c019-docker-k8s",
+            "title": "Docker & Kubernetes Essentials",
+            "slug": "c019-docker-k8s",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Automated CI/CD Pipelines",
+        "stage_description": "Automated testing, deployment triggers, and zero-downtime rollouts.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c035-devops-cicd",
+            "title": "Modern CI/CD Pipelines & Infrastructure",
+            "slug": "c035-devops-cicd",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-14-devops",
+    "slug": "devops-engineer",
+    "title": "DevOps Engineer",
+    "subtitle": "Automate delivery pipelines, container orchestration, GitOps, and high-availability site reliability.",
+    "description": "Bridge development and operations. Master modern CI/CD with GitHub Actions, container orchestration with Kubernetes, infrastructure as code, observability, monitoring, and zero-downtime blue/green deployments.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=1600&auto=format&fit=crop&q=80",
+    "category": "Cloud Computing",
+    "difficulty": "advanced",
+    "duration_weeks": 6,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.92,
+    "average_rating": 4.92,
+    "enrolled_count": 8750,
+    "student_count": 8750,
+    "is_published": true,
+    "key_skills": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "GitHub Actions",
+      "Infrastructure as Code",
+      "AWS",
+      "Monitoring & SRE",
+      "Linux"
+    ],
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "GitHub Actions",
+      "Infrastructure as Code",
+      "AWS",
+      "Monitoring & SRE",
+      "Linux"
+    ],
+    "tools_and_technologies": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "GitHub Actions",
+      "Infrastructure as Code",
+      "AWS"
+    ],
+    "career_outcomes": [
+      "DevOps Engineer",
+      "Site Reliability Engineer (SRE)",
+      "Platform Engineer",
+      "Cloud Operations Specialist"
+    ],
+    "prerequisites": [
+      "Familiarity with command line, Git, and basic server concepts"
+    ],
+    "capstone_project": {
+      "title": "Multi-Environment Automated CI/CD Pipeline with GitHub Actions",
+      "description": "High-Availability Kubernetes Cluster with Ingress & SSL"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Containerization with Docker",
+        "stage_description": "Dockerfiles, multi-stage builds, compose networks, and k8s pods.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c019-docker-k8s",
+            "title": "Docker & Kubernetes Essentials",
+            "slug": "c019-docker-k8s",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Modern CI/CD Pipelines",
+        "stage_description": "Automate build, test, and release cycles with security scans.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c035-devops-cicd",
+            "title": "Modern CI/CD Pipelines & Infrastructure",
+            "slug": "c035-devops-cicd",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Cloud Infrastructure with AWS",
+        "stage_description": "Cloud computing compute, networks, and managed storage.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c017-aws-cloud-practitioner",
+            "title": "AWS Cloud Practitioner",
+            "slug": "c017-aws-cloud-practitioner",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: High-Availability System Design",
+        "stage_description": "Failover strategies, auto-scaling, and distributed reliability.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-15-cybersecurity",
+    "slug": "cybersecurity-engineer",
+    "title": "Cybersecurity Engineer",
+    "subtitle": "Protect digital infrastructure, conduct ethical penetration testing, and implement zero-trust security.",
+    "description": "Guard critical enterprise assets. Learn network security protocols, vulnerability scanning, ethical hacking, OWASP Top 10 web vulnerabilities, cryptography, threat modeling, and defense-in-depth methodologies.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&auto=format&fit=crop&q=80",
+    "category": "Cyber Security",
+    "difficulty": "all_levels",
+    "duration_weeks": 6,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.88,
+    "average_rating": 4.88,
+    "enrolled_count": 9100,
+    "student_count": 9100,
+    "is_published": true,
+    "key_skills": [
+      "Network Security",
+      "Ethical Hacking",
+      "Penetration Testing",
+      "Cryptography",
+      "OWASP Top 10",
+      "Linux Hardening",
+      "Incident Response"
+    ],
+    "skills": [
+      "Network Security",
+      "Ethical Hacking",
+      "Penetration Testing",
+      "Cryptography",
+      "OWASP Top 10",
+      "Linux Hardening",
+      "Incident Response"
+    ],
+    "tools_and_technologies": [
+      "Network Security",
+      "Ethical Hacking",
+      "Penetration Testing",
+      "Cryptography",
+      "OWASP Top 10",
+      "Linux Hardening"
+    ],
+    "career_outcomes": [
+      "Cybersecurity Analyst",
+      "Penetration Tester / Ethical Hacker",
+      "Security Operations Specialist",
+      "Information Security Officer"
+    ],
+    "prerequisites": [
+      "Basic networking and command line familiarity"
+    ],
+    "capstone_project": {
+      "title": "Vulnerability Assessment & Penetration Test Report",
+      "description": "Hardened Linux Bastion Host & Firewall Configuration"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Cybersecurity Foundations",
+        "stage_description": "Security principles, encryption standards, firewalls, and protocols.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c020-cyber-fundamentals",
+            "title": "Cyber Security Fundamentals",
+            "slug": "c020-cyber-fundamentals",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Ethical Hacking & Penetration Testing",
+        "stage_description": "Reconnaissance, network scanning, exploitation, and mitigation.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c021-ethical-hacking",
+            "title": "Ethical Hacking Fundamentals",
+            "slug": "c021-ethical-hacking",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Container & Environment Isolation",
+        "stage_description": "Container security scanning, least privilege, and network policies.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c019-docker-k8s",
+            "title": "Docker & Kubernetes Essentials",
+            "slug": "c019-docker-k8s",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Automated Security CI/CD Scans",
+        "stage_description": "Static application security testing (SAST) and vulnerability audits.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c035-devops-cicd",
+            "title": "Modern CI/CD Pipelines & Infrastructure",
+            "slug": "c035-devops-cicd",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-16-mobile",
+    "slug": "mobile-app-developer",
+    "title": "Mobile App Developer",
+    "subtitle": "Build polished native iOS and Android applications with React Native, Expo, and Flutter.",
+    "description": "Bring your app ideas to app stores. Master mobile UX patterns, native device APIs (camera, GPS, notifications), state management, offline data synchronization, and automated App Store / Google Play publishing.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1600&auto=format&fit=crop&q=80",
+    "category": "Mobile Development",
+    "difficulty": "intermediate",
+    "duration_weeks": 5,
+    "estimated_hours": 74.5,
+    "total_courses": 4,
+    "rating": 4.85,
+    "average_rating": 4.85,
+    "enrolled_count": 7300,
+    "student_count": 7300,
+    "is_published": true,
+    "key_skills": [
+      "React Native",
+      "Flutter",
+      "Dart",
+      "Mobile UI/UX",
+      "Offline Storage",
+      "Push Notifications",
+      "App Store Publishing"
+    ],
+    "skills": [
+      "React Native",
+      "Flutter",
+      "Dart",
+      "Mobile UI/UX",
+      "Offline Storage",
+      "Push Notifications",
+      "App Store Publishing"
+    ],
+    "tools_and_technologies": [
+      "React Native",
+      "Flutter",
+      "Dart",
+      "Mobile UI/UX",
+      "Offline Storage",
+      "Push Notifications"
+    ],
+    "career_outcomes": [
+      "Mobile App Developer",
+      "React Native Engineer",
+      "Cross-Platform Mobile Specialist"
+    ],
+    "prerequisites": [
+      "Basic understanding of JavaScript or programming"
+    ],
+    "capstone_project": {
+      "title": "Fitness Tracker with Geolocation & Offline Sync",
+      "description": "Food Delivery App with Real-Time Order Tracking"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: JavaScript & UI Foundations",
+        "stage_description": "Object-oriented scripting and reactive state flow.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: React Component Architecture",
+        "stage_description": "Hooks, state synchronization, and component lifecycles.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c001-react-complete",
+            "title": "Complete React JS Development",
+            "slug": "complete-react-js-development",
+            "thumbnail_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80",
+            "duration_hours": 38.5,
+            "level": "beginner",
+            "avg_rating": 4.9,
+            "student_count": 94210,
+            "price": 89.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Cross-Platform React Native Engineering",
+        "stage_description": "Native modules, gesture handling, navigation, and storage.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c024-react-native",
+            "title": "React Native Mobile App Development",
+            "slug": "c024-react-native",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Modern Flutter & Dart Development",
+        "stage_description": "Declarative widget trees, animation controllers, and state.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c025-flutter-bootcamp",
+            "title": "Flutter & Dart Mobile App Development",
+            "slug": "c025-flutter-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-17-qa",
+    "slug": "software-testing-qa-engineer",
+    "title": "Software Testing / QA Engineer",
+    "subtitle": "Automate web, API, and unit testing suites to guarantee flawless software quality and stability.",
+    "description": "Ensure software excellence. Master automated testing frameworks, end-to-end browser testing with Playwright/Selenium, REST API testing, test-driven development (TDD), performance load testing, and CI/CD quality gates.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&auto=format&fit=crop&q=80",
+    "category": "Software Testing",
+    "difficulty": "beginner",
+    "duration_weeks": 3,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.83,
+    "average_rating": 4.83,
+    "enrolled_count": 5800,
+    "student_count": 5800,
+    "is_published": true,
+    "key_skills": [
+      "Unit Testing",
+      "Integration Testing",
+      "End-to-End Testing",
+      "Python Test Automation",
+      "Postman / Newman",
+      "TDD",
+      "CI/CD Gates"
+    ],
+    "skills": [
+      "Unit Testing",
+      "Integration Testing",
+      "End-to-End Testing",
+      "Python Test Automation",
+      "Postman / Newman",
+      "TDD",
+      "CI/CD Gates"
+    ],
+    "tools_and_technologies": [
+      "Unit Testing",
+      "Integration Testing",
+      "End-to-End Testing",
+      "Python Test Automation",
+      "Postman / Newman",
+      "TDD"
+    ],
+    "career_outcomes": [
+      "QA Automation Engineer",
+      "Software Development Engineer in Test (SDET)",
+      "Quality Assurance Specialist"
+    ],
+    "prerequisites": [
+      "Basic computer and web literacy"
+    ],
+    "capstone_project": {
+      "title": "Automated End-to-End Regression Test Suite for Web",
+      "description": "API Contract & Load Testing Suite with Performance Benchmarks"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Web & Application Fundamentals",
+        "stage_description": "Understanding HTTP requests, DOM structures, and browser behaviors.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Python Scripting for QA",
+        "stage_description": "Write reusable test automation scripts and data generators.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c004-python-bootcamp",
+            "title": "Python Programming for Beginners",
+            "slug": "c004-python-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Automated Quality Assurance & Testing",
+        "stage_description": "Unit, integration, E2E browser automation, and mock servers.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c038-qa-testing",
+            "title": "Automated Software Testing & Quality Assurance",
+            "slug": "c038-qa-testing",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Automated CI/CD Testing Pipelines",
+        "stage_description": "Enforce automated test gates before deployment merges.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c035-devops-cicd",
+            "title": "Modern CI/CD Pipelines & Infrastructure",
+            "slug": "c035-devops-cicd",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-18-uiux",
+    "slug": "ui-ux-designer",
+    "title": "UI/UX Designer",
+    "subtitle": "Design intuitive user journeys, wireframes, enterprise design systems, and high-fidelity Figma prototypes.",
+    "description": "Shape the future of digital products. Learn user research, information architecture, wireframing, heuristic evaluation, design thinking, micro-interactions, responsive design systems, and seamless handoff to engineering.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1600&auto=format&fit=crop&q=80",
+    "category": "UI/UX Design",
+    "difficulty": "beginner",
+    "duration_weeks": 3,
+    "estimated_hours": 36,
+    "total_courses": 3,
+    "rating": 4.92,
+    "average_rating": 4.92,
+    "enrolled_count": 8500,
+    "student_count": 8500,
+    "is_published": true,
+    "key_skills": [
+      "Figma",
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "Design Systems",
+      "Usability Testing",
+      "Interaction Design"
+    ],
+    "skills": [
+      "Figma",
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "Design Systems",
+      "Usability Testing",
+      "Interaction Design"
+    ],
+    "tools_and_technologies": [
+      "Figma",
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "Design Systems",
+      "Usability Testing"
+    ],
+    "career_outcomes": [
+      "Product Designer",
+      "UI/UX Designer",
+      "Interaction Designer",
+      "Design Systems Lead"
+    ],
+    "prerequisites": [
+      "An eye for aesthetics and empathy for user needs"
+    ],
+    "capstone_project": {
+      "title": "Complete Mobile Banking App Design & Prototype",
+      "description": "Scalable Enterprise Design System with Figma Variables"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Complete Figma Tool Mastery",
+        "stage_description": "Auto-layout, responsive components, variables, and interactive flows.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c023-figma-mastery",
+            "title": "Figma Complete Course",
+            "slug": "c023-figma-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Comprehensive UI/UX Product Design",
+        "stage_description": "User research, persona creation, wireframing, and accessibility standards.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c022-uiux-masterclass",
+            "title": "UI/UX Design Masterclass",
+            "slug": "c022-uiux-masterclass",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Frontend Implementation Fundamentals",
+        "stage_description": "Understand how CSS and modern browsers render design layouts.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-19-database",
+    "slug": "database-developer",
+    "title": "Database Developer",
+    "subtitle": "Specialize in relational SQL modeling, indexing strategies, query tuning, and database administration.",
+    "description": "Become a database authority. Master relational normalization, complex subqueries, window functions, query execution plan analysis, index design (B-tree, GIN, GiST), replication, partitioning, and automated backups.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1600&auto=format&fit=crop&q=80",
+    "category": "Database Development",
+    "difficulty": "all_levels",
+    "duration_weeks": 4,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.88,
+    "average_rating": 4.88,
+    "enrolled_count": 6100,
+    "student_count": 6100,
+    "is_published": true,
+    "key_skills": [
+      "PostgreSQL",
+      "Advanced SQL",
+      "Indexing",
+      "Query Optimization",
+      "Schema Design",
+      "Transactions",
+      "Replication",
+      "Data Modeling"
+    ],
+    "skills": [
+      "PostgreSQL",
+      "Advanced SQL",
+      "Indexing",
+      "Query Optimization",
+      "Schema Design",
+      "Transactions",
+      "Replication",
+      "Data Modeling"
+    ],
+    "tools_and_technologies": [
+      "PostgreSQL",
+      "Advanced SQL",
+      "Indexing",
+      "Query Optimization",
+      "Schema Design",
+      "Transactions"
+    ],
+    "career_outcomes": [
+      "Database Administrator (DBA)",
+      "Database Developer",
+      "Data Platform Engineer",
+      "Backend SQL Specialist"
+    ],
+    "prerequisites": [
+      "Basic logic and analytical thinking"
+    ],
+    "capstone_project": {
+      "title": "High-Traffic E-Commerce Relational Schema with Partitioning",
+      "description": "Query Performance Audit & Optimization Case Study"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: SQL & PostgreSQL Relational Database Mastery",
+        "stage_description": "Core SQL syntax, joins, constraints, triggers, and stored procedures.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Backend Data Access with Node.js",
+        "stage_description": "Connection pooling, ORMs vs raw queries, and transaction management.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c009-node-mastery",
+            "title": "Complete Node.js Backend Development",
+            "slug": "c009-node-mastery",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: Enterprise Microservices & Database Tier",
+        "stage_description": "Hibernate JPA mapping, second-level caches, and batch operations.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c007-java-enterprise",
+            "title": "Java Enterprise & Spring Boot Masterclass",
+            "slug": "c007-java-enterprise",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: High-Scale Distributed Database Architecture",
+        "stage_description": "Sharding, read replicas, write bottlenecks, and multi-region synchronization.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lp-20-dotnet",
+    "slug": "dotnet-developer",
+    "title": ".NET Developer",
+    "subtitle": "Enterprise application engineering with C#, modern .NET Core, Web APIs, and microservices.",
+    "description": "Launch your career with the Microsoft enterprise stack. Learn modern C#, ASP.NET Core Web APIs, Entity Framework Core, dependency injection, Clean Architecture patterns, and robust software engineering best practices.",
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    "banner_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format&fit=crop&q=80",
+    "category": "Web Development",
+    "difficulty": "intermediate",
+    "duration_weeks": 5,
+    "estimated_hours": 48,
+    "total_courses": 4,
+    "rating": 4.82,
+    "average_rating": 4.82,
+    "enrolled_count": 6700,
+    "student_count": 6700,
+    "is_published": true,
+    "key_skills": [
+      "C#",
+      ".NET Core",
+      "ASP.NET Web API",
+      "Entity Framework",
+      "SQL",
+      "Clean Architecture",
+      "REST APIs",
+      "Microservices"
+    ],
+    "skills": [
+      "C#",
+      ".NET Core",
+      "ASP.NET Web API",
+      "Entity Framework",
+      "SQL",
+      "Clean Architecture",
+      "REST APIs",
+      "Microservices"
+    ],
+    "tools_and_technologies": [
+      "C#",
+      ".NET Core",
+      "ASP.NET Web API",
+      "Entity Framework",
+      "SQL",
+      "Clean Architecture"
+    ],
+    "career_outcomes": [
+      ".NET Software Engineer",
+      "C# Backend Developer",
+      "Enterprise Solutions Developer"
+    ],
+    "prerequisites": [
+      "Understanding of object-oriented programming concepts"
+    ],
+    "capstone_project": {
+      "title": "Enterprise Inventory & Order Management Web API with ASP.NET Core",
+      "description": "Authentication & Identity Microservice with JWT and EF Core"
+    },
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage_title": "Stage 1: Web Fundamentals & JavaScript",
+        "stage_description": "Understand client-server architecture, HTTP, and browser APIs.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c012-webdev-bootcamp",
+            "title": "HTML CSS JavaScript Complete Course",
+            "slug": "c012-webdev-bootcamp",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 2,
+        "stage_title": "Stage 2: Relational Database Design with SQL",
+        "stage_description": "Relational modeling, stored procedures, and performance indexes.",
+        "is_milestone": false,
+        "courses": [
+          {
+            "course_id": "c036-sql-database",
+            "title": "SQL & PostgreSQL Relational Database Mastery",
+            "slug": "c036-sql-database",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 3,
+        "stage_title": "Stage 3: High Scale Distributed System Architecture",
+        "stage_description": "Microservices design, caching, message queues, and load balancing.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c034-system-design",
+            "title": "System Design for High Scale Applications",
+            "slug": "c034-system-design",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "stage_number": 4,
+        "stage_title": "Stage 4: Technical Interview Preparation & DSA",
+        "stage_description": "Prepare for enterprise C# and software engineering interviews.",
+        "is_milestone": true,
+        "courses": [
+          {
+            "course_id": "c033-interview-prep",
+            "title": "Tech Interview Preparation & Coding DSA",
+            "slug": "c033-interview-prep",
+            "thumbnail_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "duration_hours": 12,
+            "level": "all_levels",
+            "avg_rating": 4.8,
+            "student_count": 1500,
+            "price": 49.99,
+            "discount_price": 19.99,
+            "is_required": true
+          }
+        ]
+      }
+    ]
+  }
+]

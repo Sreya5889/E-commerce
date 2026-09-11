@@ -12,6 +12,11 @@ import { progressService } from '../../services/progress.service';
 import { messageService } from '../../services/message.service';
 import { courseService } from '../../services/course.service';
 import { learningPathService } from '../../services/learningPath.service';
+import { aptitudeService } from '../../services/aptitude.service';
+import { codelabService } from '../../services/codelab.service';
+import { projectService } from '../../services/project.service';
+import { careerService } from '../../services/career.service';
+import { jobService } from '../../services/job.service';
 import { PageTransition } from '../../components/layout/PageTransition';
 import { CourseCard } from '../../components/ui/CourseCard';
 import { Button } from '../../components/ui/Button';
@@ -39,13 +44,24 @@ import {
   ChevronRight,
   PlayCircle,
   ExternalLink,
-  Route
+  Route,
+  Target,
+  Code2,
+  FolderGit2,
+  Compass,
+  Briefcase,
+  Zap
 } from 'lucide-react';
 
 const TABS = [
   { key: 'overview', label: 'Overview', icon: LayoutDashboard },
   { key: 'courses', label: 'My Courses', icon: BookOpen },
   { key: 'learning-paths', label: 'Career Roadmaps', icon: Route },
+  { key: 'codelab', label: 'CodeLab (DSA & SQL)', icon: Code2 },
+  { key: 'projects', label: 'Project Portfolio', icon: FolderGit2 },
+  { key: 'aptitude', label: 'Aptitude & Mocks', icon: Target },
+  { key: 'career', label: 'Career Readiness', icon: Compass },
+  { key: 'jobs', label: 'Jobs & Applications', icon: Briefcase },
   { key: 'wishlist', label: 'Saved Wishlist', icon: Heart },
   { key: 'certificates', label: 'Certificates', icon: Award },
   { key: 'purchases', label: 'Order History', icon: ShoppingBag },
@@ -76,6 +92,8 @@ export const UserDashboard = () => {
   const [purchases, setPurchases] = useState([]);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [studentLearningPaths, setStudentLearningPaths] = useState([]);
+  const [aptitudeAnalytics, setAptitudeAnalytics] = useState(null);
+  const [aptitudeHistory, setAptitudeHistory] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [settingsForm, setSettingsForm] = useState({
@@ -98,13 +116,15 @@ export const UserDashboard = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const [enr, certs, notifs, orders_, recommended, userPaths] = await Promise.all([
+      const [enr, certs, notifs, orders_, recommended, userPaths, aptAnalytics, aptHist] = await Promise.all([
         enrollmentService.getUserEnrollments(user.id),
         certificateService.getUserCertificates(user.id),
         notificationService.getNotifications(user.id),
         orderService.getUserOrders(user.id),
         courseService.getCourses(),
-        learningPathService.getMyLearningPaths()
+        learningPathService.getMyLearningPaths(),
+        aptitudeService.getAnalytics().catch(() => null),
+        aptitudeService.getHistory({ limit: 5 }).catch(() => ({ attempts: [] }))
       ]);
 
       // If user has no enrollments in DB yet, provide seed enrollments for preview
@@ -122,6 +142,8 @@ export const UserDashboard = () => {
       setPurchases(orders_ || []);
       setRecommendedCourses((recommended || []).slice(0, 3));
       setStudentLearningPaths(userPaths || []);
+      setAptitudeAnalytics(aptAnalytics || null);
+      setAptitudeHistory(aptHist?.attempts || []);
 
       try {
         const convos = await messageService.getConversations(user.id);
@@ -394,6 +416,43 @@ export const UserDashboard = () => {
                 )}
               </div>
 
+              {/* Aptitude Arena & Placement Readiness Spotlight */}
+              <div className="p-6 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-transparent border border-indigo-200/60 dark:border-indigo-900/40 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div className="space-y-1 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2">
+                    <Target className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                    <span className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                      Campus Placements & IT Technical Screenings
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-base text-slate-900 dark:text-white">
+                    EduAcademy Aptitude Arena
+                  </h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed">
+                    Practice Quantitative, Logical, Verbal, and DI with company placement pattern questions. 
+                    {aptitudeAnalytics?.total_questions_solved ? (
+                      <span className="font-bold text-indigo-600 dark:text-indigo-400 block mt-1">
+                        You've solved {aptitudeAnalytics.total_questions_solved} questions with {aptitudeAnalytics.overall_accuracy}% accuracy!
+                      </span>
+                    ) : (
+                      ' Diagnostic feedback identifies your weak topics automatically.'
+                    )}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <Link to="/aptitude/practice">
+                    <Button size="sm">Launch Practice</Button>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setTab('aptitude')}
+                    className="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 text-slate-700 dark:text-slate-300"
+                  >
+                    View Scores
+                  </button>
+                </div>
+              </div>
+
               {/* Recommended Courses Carousel */}
               {recommendedCourses.length > 0 && (
                 <div className="space-y-5 pt-4">
@@ -546,6 +605,301 @@ export const UserDashboard = () => {
                 actionLink="/learning-paths"
               />
             )}
+          </div>
+        )}
+
+
+        {/* TAB: CODELAB */}
+        {activeTab === 'codelab' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <Code2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  <span>CodeLab Problem Solving</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Practice algorithmic DSA, SQL queries, and full-stack challenges in our isolated sandbox.
+                </p>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Link to="/codelab">
+                  <Button size="sm">Browse 30+ Problems</Button>
+                </Link>
+                <Link to="/codelab/daily">
+                  <Button size="sm" variant="outline">Daily Challenge</Button>
+                </Link>
+                <Link to="/codelab/submissions">
+                  <Button size="sm" variant="ghost">My Submissions</Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Coding Streak</span>
+                <div className="text-2xl font-black text-amber-500 mt-1">4 Days 🔥</div>
+                <span className="text-xs text-slate-500">Keep solving daily</span>
+              </div>
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Submissions Evaluated</span>
+                <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">12 Passed</div>
+                <span className="text-xs text-slate-500">100% test-case accuracy</span>
+              </div>
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Global Rank</span>
+                <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400 mt-1">#42</div>
+                <span className="text-xs text-slate-500">CodeLab Leaderboard</span>
+              </div>
+            </div>
+
+            <div className="p-6 bg-gradient-to-r from-emerald-600 to-teal-700 rounded-3xl text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="space-y-1">
+                <h3 className="text-lg font-bold">Ready to write code?</h3>
+                <p className="text-xs text-emerald-100">Step inside our full Monaco code editor with live Node.js/Python/SQL execution.</p>
+              </div>
+              <Link to="/codelab">
+                <Button variant="secondary" size="md">Open CodeLab Workspace</Button>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: PROJECTS */}
+        {activeTab === 'projects' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <FolderGit2 className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  <span>Real-World Project Blueprints</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Build production systems from architecture schemas to CI/CD deployments for your hiring portfolio.
+                </p>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Link to="/projects">
+                  <Button size="sm">Explore 10+ Blueprints</Button>
+                </Link>
+                <Link to="/projects/portfolio">
+                  <Button size="sm" variant="outline">Verified Portfolio</Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl text-center space-y-4">
+              <FolderGit2 className="w-12 h-12 text-purple-500 mx-auto" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Active Engineering Blueprints</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+                Choose a project blueprint (e.g. Modern Full Stack E-Commerce or Real-Time Collaborative Workspace), follow step-by-step milestones, and link your live demo.
+              </p>
+              <Link to="/projects">
+                <Button>Select a Project Blueprint</Button>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: CAREER */}
+        {activeTab === 'career' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <Compass className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <span>Career Readiness Command Center</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Your holistic 0-100 hiring readiness index synthesized across coursework, code accuracy, and portfolio.
+                </p>
+              </div>
+              <Link to="/career">
+                <Button size="sm">Full Readiness Analysis</Button>
+              </Link>
+            </div>
+
+            <div className="p-6 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-3xl text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="space-y-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-200">Current Score</span>
+                <div className="text-4xl font-black">68 / 100</div>
+                <p className="text-xs text-indigo-100 max-w-sm">
+                  You are approaching Job Ready status. Complete one more project blueprint to reach the 75+ benchmark.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 shrink-0">
+                <Link to="/career">
+                  <Button variant="secondary" size="sm">View Recommendations</Button>
+                </Link>
+                <Link to="/career/achievements">
+                  <Button variant="outline" className="bg-white/10 text-white border-white/20" size="sm">Achievements & XP</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: JOBS */}
+        {activeTab === 'jobs' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <span>Job & Internship Applications</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Track recruiter updates on roles applied through EduAcademy Easy Apply.
+                </p>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Link to="/jobs">
+                  <Button size="sm">Explore Openings</Button>
+                </Link>
+                <Link to="/jobs/saved">
+                  <Button size="sm" variant="outline">Saved Bookmarks</Button>
+                </Link>
+                <Link to="/jobs/applications">
+                  <Button size="sm" variant="ghost">Application Tracker</Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl text-center space-y-4">
+              <Briefcase className="w-12 h-12 text-blue-500 mx-auto" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Active Career Board</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+                Apply to curated roles at top partner companies with 1-click credential verification.
+              </p>
+              <Link to="/jobs">
+                <Button>Browse Matching Tech Jobs</Button>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: APTITUDE & MOCKS */}
+        {activeTab === 'aptitude' && (
+          <div className="space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <Target className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                  <span>Aptitude Arena Performance</span>
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Track your preparation for IT placement exams and technical aptitude screenings.
+                </p>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Link to="/aptitude/practice">
+                  <Button size="sm">Start Practice Set</Button>
+                </Link>
+                <Link to="/aptitude/mock-tests">
+                  <Button size="sm" variant="outline">Browse Mocks</Button>
+                </Link>
+                <Link to="/aptitude/analytics">
+                  <Button size="sm" variant="ghost">Full Analytics</Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Metrics Overview */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Total Attempts</span>
+                <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  {aptitudeAnalytics?.total_attempts || 0}
+                </div>
+                <span className="text-[11px] text-slate-500">Practice sets & exams</span>
+              </div>
+
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Questions Solved</span>
+                <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400">
+                  {aptitudeAnalytics?.total_questions_solved || 0}
+                </div>
+                <span className="text-[11px] text-slate-500">{aptitudeAnalytics?.total_correct || 0} correct</span>
+              </div>
+
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Overall Accuracy</span>
+                <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
+                  {aptitudeAnalytics?.overall_accuracy || 0}%
+                </div>
+                <span className="text-[11px] text-slate-500">Target: 80%+</span>
+              </div>
+
+              <div className="p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Avg Response Speed</span>
+                <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  {aptitudeAnalytics?.average_time_per_question || 0}s
+                </div>
+                <span className="text-[11px] text-slate-500">Per question</span>
+              </div>
+            </div>
+
+            {/* Recent Attempts Table */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                  Recent Assessments & Reports
+                </h3>
+                <Link to="/aptitude/history" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+                  View Full History
+                </Link>
+              </div>
+
+              {aptitudeHistory.length > 0 ? (
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 text-[11px] font-bold uppercase text-slate-400">
+                        <th className="py-3 px-4">Date</th>
+                        <th className="py-3 px-4">Mode</th>
+                        <th className="py-3 px-4">Score</th>
+                        <th className="py-3 px-4">Accuracy</th>
+                        <th className="py-3 px-4 text-right">Report</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                      {aptitudeHistory.map((att) => (
+                        <tr key={att.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
+                          <td className="py-3.5 px-4 font-medium">
+                            {att.created_at ? new Date(att.created_at).toLocaleDateString() : 'Recent'}
+                          </td>
+                          <td className="py-3.5 px-4 capitalize font-semibold text-indigo-600">
+                            {att.mode?.replace('_', ' ') || 'Practice'}
+                          </td>
+                          <td className="py-3.5 px-4 font-bold">
+                            {att.score} / {att.total_questions}
+                          </td>
+                          <td className="py-3.5 px-4 font-bold text-emerald-600">
+                            {att.accuracy}%
+                          </td>
+                          <td className="py-3.5 px-4 text-right">
+                            <Link
+                              to={`/aptitude/results/${att.id}`}
+                              className="text-xs font-bold text-indigo-600 hover:underline inline-flex items-center gap-1"
+                            >
+                              Report <ChevronRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <EmptyState
+                  icon={Target}
+                  title="No aptitude attempts yet"
+                  description="Complete a practice session or placement mock test to measure your skill."
+                  actionText="Launch Practice"
+                  actionLink="/aptitude/practice"
+                />
+              )}
+            </div>
           </div>
         )}
 

@@ -1,3 +1,10 @@
+import codelabRoutes from './codelab.routes.js';
+import projectRoutes from './project.routes.js';
+import interviewRoutes from './interview.routes.js';
+import careerRoutes from './career.routes.js';
+import gamificationRoutes from './gamification.routes.js';
+import jobRoutes from './job.routes.js';
+import aiCareerRoutes from './aiCareer.routes.js';
 import { Router } from 'express';
 import authRoutes from './auth.routes.js';
 import courseRoutes from './course.routes.js';
@@ -16,12 +23,14 @@ import certificateRoutes from './certificate.routes.js';
 import adminRoutes from './admin.routes.js';
 import supportRoutes from './support.routes.js';
 import learningPathRoutes from './learningPath.routes.js';
+import aptitudeRoutes from './aptitude.routes.js';
 
 const router = Router();
 
 router.use('/auth', authRoutes);
 router.use('/courses', courseRoutes);
 router.use('/learning-paths', learningPathRoutes);
+router.use('/aptitude', aptitudeRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/teachers', teacherRoutes);
 router.use('/cart', cartRoutes);
@@ -36,5 +45,13 @@ router.use('/notifications', notificationRoutes);
 router.use('/certificates', certificateRoutes);
 router.use('/admin', adminRoutes);
 router.use('/support', supportRoutes);
+
+router.use('/codelab', codelabRoutes);
+router.use('/projects', projectRoutes);
+router.use('/interview', interviewRoutes);
+router.use('/career', careerRoutes);
+router.use('/gamification', gamificationRoutes);
+router.use('/jobs', jobRoutes);
+router.use('/ai-career', aiCareerRoutes);
 
 export default router;

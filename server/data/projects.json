@@ -1,0 +1,231 @@
+{
+  "categories": [
+    "Full Stack",
+    "Frontend",
+    "Backend",
+    "AI & Data Science",
+    "Cloud & DevOps",
+    "Cybersecurity",
+    "Mobile"
+  ],
+  "projects": [
+    {
+      "id": "proj-001",
+      "slug": "full-stack-e-commerce-marketplace",
+      "title": "Full Stack Modern E-Commerce Platform",
+      "category": "Full Stack",
+      "difficulty": "advanced",
+      "estimated_hours": 45,
+      "banner_url": "https://images.unsplash.com/photo-1557821552-17105176677c?w=800",
+      "description": "Architect and deploy a high-concurrency e-commerce platform with product catalogs, shopping cart, Stripe payment webhooks, inventory management, and role-based admin controls.",
+      "real_world_use_case": "Powers enterprise direct-to-consumer digital commerce operations handling tens of thousands of simultaneous shoppers with zero checkout downtime.",
+      "learning_objectives": [
+        "Design scalable database schemas with PostgreSQL and transactional safety",
+        "Implement asynchronous payment webhooks with Stripe and idempotent order creation",
+        "Build responsive frontend user interfaces with React, Tailwind CSS, and optimistic updates",
+        "Deploy production applications with continuous integration and CDN asset caching"
+      ],
+      "prerequisites": [
+        "React & State Management",
+        "Node.js & Express",
+        "SQL & Database Transactions",
+        "RESTful API Design"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Stripe API",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "features": [
+        "Dynamic course/product browsing with multi-facet filters (category, price, rating)",
+        "Server-side cart management with session persistence",
+        "Stripe Checkout Session & Webhook fulfillment verification",
+        "Role-Based Access Control (RBAC) for Admin, Teacher, and Student",
+        "Real-time order invoice generation & delivery tracking"
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "Database & Schema Architecture",
+          "description": "Design tables for users, products, orders, order items, and transactions with foreign key cascades and indexes."
+        },
+        {
+          "step_number": 2,
+          "title": "Secure REST API Endpoints",
+          "description": "Construct authenticated Express endpoints with JWT validation and Zod payload sanitization."
+        },
+        {
+          "step_number": 3,
+          "title": "Frontend UI & Cart State",
+          "description": "Create responsive catalog and cart views with optimistic quantity updates and empty states."
+        },
+        {
+          "step_number": 4,
+          "title": "Stripe Payment Gateway Integration",
+          "description": "Configure Stripe payment intents, checkout redirect, and signed webhook listeners."
+        },
+        {
+          "step_number": 5,
+          "title": "CI/CD & Cloud Deployment",
+          "description": "Containerize using Docker, configure environment secrets, and deploy with SSL certificates."
+        }
+      ],
+      "database_requirements": "PostgreSQL 15+ with pg_trgm extension for full-text product search, transactions with SERIALIZABLE isolation for checkout.",
+      "api_requirements": "Express.js with JWT middleware, rate limiting on payment endpoints, CORS whitelist.",
+      "ui_requirements": "Tailwind CSS with responsive mobile breakpoints, accessibility compliance (WCAG AA).",
+      "deployment_requirements": "Automated GitHub Actions CI/CD pipeline, staging environment, production health probe."
+    },
+    {
+      "id": "proj-002",
+      "slug": "ai-powered-smart-resume-analyzer",
+      "title": "AI-Powered Resume Analyzer & Job Matcher",
+      "category": "AI & Data Science",
+      "difficulty": "intermediate",
+      "estimated_hours": 30,
+      "banner_url": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800",
+      "description": "Build an AI application that parses PDF resumes, extracts competencies, scores ATS compatibility, and matches candidates with real job openings using semantic vector embeddings.",
+      "real_world_use_case": "Used by tech recruiting agencies and university career cells to automate applicant pre-screening and provide candidate feedback.",
+      "learning_objectives": [
+        "Parse unstructured PDF documents into structured JSON entities",
+        "Generate and compare semantic vector embeddings using cosine similarity",
+        "Construct prompt engineering pipelines for structured LLM evaluation"
+      ],
+      "prerequisites": [
+        "Python or TypeScript",
+        "Basic NLP concepts",
+        "API Integration"
+      ],
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "OpenAI / Gemini API",
+        "React",
+        "Tailwind CSS"
+      ],
+      "features": [
+        "PDF drag-and-drop file upload with virus/size validation",
+        "Entity extraction (Experience, Education, Skills, Certifications)",
+        "ATS Scorecard (Formatting, Keywords, Impact metrics, Quantifiable results)",
+        "Job Description vs Resume match percentage with gap suggestions"
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "Document Parsing Engine",
+          "description": "Extract clean text from PDF and DOCX documents."
+        },
+        {
+          "step_number": 2,
+          "title": "LLM Prompt Engineering",
+          "description": "Design structured JSON prompts for ATS score and bullet-point critique."
+        },
+        {
+          "step_number": 3,
+          "title": "Interactive Dashboard UI",
+          "description": "Visualize scores with circular progress gauges and color-coded suggestions."
+        }
+      ]
+    },
+    {
+      "id": "proj-003",
+      "slug": "distributed-microservices-devops-pipeline",
+      "title": "Enterprise DevOps CI/CD & Kubernetes Pipeline",
+      "category": "Cloud & DevOps",
+      "difficulty": "advanced",
+      "estimated_hours": 40,
+      "banner_url": "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800",
+      "description": "Implement a complete GitOps automated deployment pipeline using Docker, GitHub Actions, Kubernetes (Minikube/EKS), Helm, and Prometheus/Grafana monitoring.",
+      "real_world_use_case": "Production deployment standard used by high-velocity software engineering organizations.",
+      "learning_objectives": [
+        "Containerize multi-tier applications with multi-stage Docker builds",
+        "Write Kubernetes manifests (Deployments, Services, Ingress, Secrets, ConfigMaps)",
+        "Set up Prometheus monitoring metrics and Grafana alerts"
+      ],
+      "prerequisites": [
+        "Linux fundamentals",
+        "Docker basics",
+        "Git workflows"
+      ],
+      "technologies": [
+        "Docker",
+        "Kubernetes",
+        "GitHub Actions",
+        "Prometheus",
+        "Grafana",
+        "Nginx"
+      ],
+      "features": [
+        "Multi-stage Dockerfile achieving sub-50MB production images",
+        "Automated lint, unit test, and image security scan on Pull Request",
+        "Zero-downtime rolling updates with liveness and readiness probes",
+        "Grafana dashboard tracking request latency (p95, p99), error rate, and CPU utilization"
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "Docker Multi-Stage Build",
+          "description": "Create optimized production containers."
+        },
+        {
+          "step_number": 2,
+          "title": "Kubernetes Cluster Manifests",
+          "description": "Declare declarative infrastructure configurations."
+        },
+        {
+          "step_number": 3,
+          "title": "Observability & Metrics",
+          "description": "Hook up Prometheus scraping and Grafana dashboards."
+        }
+      ]
+    },
+    {
+      "id": "proj-004",
+      "slug": "real-time-collaborative-code-editor",
+      "title": "Real-Time Collaborative Code Editor",
+      "category": "Frontend",
+      "difficulty": "intermediate",
+      "estimated_hours": 35,
+      "banner_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800",
+      "description": "Develop a Google Docs / VS Code Live Share style browser code editor supporting multi-user concurrent typing, WebSockets, syntax highlighting, and live chat.",
+      "real_world_use_case": "Powers remote pair programming sessions, technical coding interviews, and coding education classrooms.",
+      "learning_objectives": [
+        "Understand operational transformation (OT) and conflict-free replicated data types (CRDTs)",
+        "Build resilient WebSocket synchronization rooms with reconnection handling",
+        "Create high-performance syntax highlighting in React"
+      ],
+      "prerequisites": [
+        "WebSockets",
+        "React",
+        "Node.js"
+      ],
+      "technologies": [
+        "React",
+        "WebSockets",
+        "Node.js",
+        "Tailwind CSS"
+      ],
+      "features": [
+        "Room creation with shareable unique URL",
+        "Multi-cursor presence showing participant name and color",
+        "Real-time syntax highlighting for JS, Python, and HTML",
+        "Built-in audio/video or text chat for collaborators"
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "WebSocket Server Setup",
+          "description": "Handle room connections, heartbeats, and room broadcast."
+        },
+        {
+          "step_number": 2,
+          "title": "Editor & Cursor Sync",
+          "description": "Synchronize document edits and remote cursor coordinates."
+        }
+      ]
+    }
+  ]
+}

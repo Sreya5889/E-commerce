@@ -1,0 +1,145 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "title": "Beginner",
+      "min_xp": 0,
+      "max_xp": 200,
+      "badge_icon": "Sprout"
+    },
+    {
+      "level": 2,
+      "title": "Explorer",
+      "min_xp": 201,
+      "max_xp": 500,
+      "badge_icon": "Compass"
+    },
+    {
+      "level": 3,
+      "title": "Learner",
+      "min_xp": 501,
+      "max_xp": 1000,
+      "badge_icon": "BookOpen"
+    },
+    {
+      "level": 4,
+      "title": "Practitioner",
+      "min_xp": 1001,
+      "max_xp": 2000,
+      "badge_icon": "Code"
+    },
+    {
+      "level": 5,
+      "title": "Builder",
+      "min_xp": 2001,
+      "max_xp": 3500,
+      "badge_icon": "Hammer"
+    },
+    {
+      "level": 6,
+      "title": "Problem Solver",
+      "min_xp": 3501,
+      "max_xp": 5500,
+      "badge_icon": "Cpu"
+    },
+    {
+      "level": 7,
+      "title": "Interview Ready",
+      "min_xp": 5501,
+      "max_xp": 8000,
+      "badge_icon": "Target"
+    },
+    {
+      "level": 8,
+      "title": "Career Ready",
+      "min_xp": 8001,
+      "max_xp": 15000,
+      "badge_icon": "Trophy"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-001",
+      "code": "first_course",
+      "name": "First Course Milestone",
+      "description": "Enrolled in your first EduAcademy course",
+      "xp_reward": 50,
+      "icon": "GraduationCap"
+    },
+    {
+      "id": "ach-002",
+      "code": "first_path",
+      "name": "Career Path Explorer",
+      "description": "Started a comprehensive career Learning Path",
+      "xp_reward": 100,
+      "icon": "Route"
+    },
+    {
+      "id": "ach-003",
+      "code": "first_problem",
+      "name": "First Code Solved",
+      "description": "Successfully solved your first CodeLab problem",
+      "xp_reward": 50,
+      "icon": "Code"
+    },
+    {
+      "id": "ach-004",
+      "code": "50_problems",
+      "name": "Algorithm Specialist",
+      "description": "Solved 50 CodeLab programming challenges",
+      "xp_reward": 250,
+      "icon": "Flame"
+    },
+    {
+      "id": "ach-005",
+      "code": "aptitude_ace",
+      "name": "Aptitude Ace",
+      "description": "Achieved 90%+ accuracy in a full placement mock test",
+      "xp_reward": 150,
+      "icon": "Award"
+    },
+    {
+      "id": "ach-006",
+      "code": "first_project",
+      "name": "Project Architect",
+      "description": "Built and submitted your first portfolio project",
+      "xp_reward": 200,
+      "icon": "Briefcase"
+    },
+    {
+      "id": "ach-007",
+      "code": "interview_ready",
+      "name": "Interview Prepared",
+      "description": "Completed all technical and HR mock questions in your track",
+      "xp_reward": 200,
+      "icon": "CheckCircle2"
+    },
+    {
+      "id": "ach-008",
+      "code": "7_day_streak",
+      "name": "Weekly Habit Builder",
+      "description": "Maintained a 7-day continuous learning streak",
+      "xp_reward": 100,
+      "icon": "Zap"
+    },
+    {
+      "id": "ach-009",
+      "code": "30_day_streak",
+      "name": "Consistency Master",
+      "description": "Maintained a 30-day continuous learning streak",
+      "xp_reward": 500,
+      "icon": "Sparkles"
+    }
+  ],
+  "user_stats": {
+    "total_xp": 650,
+    "current_level": 3,
+    "level_title": "Learner",
+    "current_streak": 4,
+    "best_streak": 12,
+    "problems_solved": 8,
+    "projects_completed": 1,
+    "interview_practiced": 12,
+    "aptitude_accuracy": 84
+  }
+}

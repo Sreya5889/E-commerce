@@ -13,7 +13,7 @@ export const learningPathController = {
         difficulty = '',
         sort = 'popular',
         page = 1,
-        limit = 12
+        limit = 50
       } = req.query;
 
       // 1. Try DB first

@@ -43,7 +43,7 @@ export const LearningPaths = () => {
       setLoading(true);
       try {
         const [pathsRes, studentPaths] = await Promise.all([
-          learningPathService.getLearningPaths(),
+          learningPathService.getLearningPaths({ pageSize: 50 }),
           isAuthenticated ? learningPathService.getMyLearningPaths() : Promise.resolve([])
         ]);
         if (mounted) {
@@ -94,17 +94,53 @@ export const LearningPaths = () => {
 
     // Category filter
     if (selectedCategory !== 'all') {
-      const catNorm = selectedCategory.toLowerCase();
+      const catNorm = selectedCategory.toLowerCase().trim();
       list = list.filter(p => {
-        const pCat = (p.category || '').toLowerCase();
-        return pCat === catNorm || pCat.replace(/\s+/g, '-') === catNorm;
+        const pCat = (p.category || '').toLowerCase().trim();
+        const pTitle = (p.title || '').toLowerCase().trim();
+
+        if (catNorm === 'frontend') {
+          return pCat.includes('frontend') || pCat.includes('react') || pTitle.includes('frontend') || pTitle.includes('react');
+        }
+        if (catNorm === 'backend') {
+          return pCat.includes('backend') || pCat.includes('java') || pCat.includes('python') || pCat.includes('database') || pCat.includes('.net');
+        }
+        if (catNorm === 'data science' || catNorm === 'data' || catNorm.includes('ai')) {
+          return pCat.includes('data') || pCat.includes('artificial') || pCat.includes('intelligence') || pTitle.includes('data') || pTitle.includes('ai');
+        }
+        if (catNorm === 'cloud computing' || catNorm === 'cloud') {
+          return pCat.includes('cloud') || pTitle.includes('cloud') || pTitle.includes('devops');
+        }
+        if (catNorm === 'cyber security' || catNorm === 'cybersecurity') {
+          return pCat.includes('cyber');
+        }
+        if (catNorm === 'mobile development' || catNorm === 'mobile') {
+          return pCat.includes('mobile');
+        }
+        if (catNorm === 'software testing' || catNorm === 'testing') {
+          return pCat.includes('testing') || pCat.includes('qa') || pTitle.includes('qa');
+        }
+        if (catNorm === 'ui/ux design' || catNorm === 'design') {
+          return pCat.includes('design') || pCat.includes('ui');
+        }
+        if (catNorm === 'full stack') {
+          return pCat.includes('full stack') || pTitle.includes('full stack');
+        }
+
+        return pCat === catNorm || pCat.includes(catNorm) || catNorm.includes(pCat);
       });
     }
 
     // Difficulty filter
     if (selectedDifficulty !== 'all') {
-      const diffNorm = selectedDifficulty.toLowerCase();
-      list = list.filter(p => (p.difficulty || '').toLowerCase() === diffNorm);
+      const diffNorm = selectedDifficulty.toLowerCase().trim();
+      list = list.filter(p => {
+        const pDiff = (p.difficulty || '').toLowerCase().trim();
+        if (diffNorm === 'beginner') return pDiff === 'beginner' || pDiff === 'all_levels';
+        if (diffNorm === 'intermediate') return pDiff === 'intermediate' || pDiff === 'all_levels';
+        if (diffNorm === 'advanced') return pDiff === 'advanced';
+        return pDiff === diffNorm;
+      });
     }
 
     // Sort
@@ -126,12 +162,15 @@ export const LearningPaths = () => {
   // Categories list
   const categories = [
     { id: 'all', name: 'All Specializations' },
-    { id: 'Software Development', name: 'Software Development' },
-    { id: 'Data & AI', name: 'Data & AI' },
-    { id: 'Cloud & DevOps', name: 'Cloud & DevOps' },
-    { id: 'Cybersecurity', name: 'Cybersecurity' },
-    { id: 'Design & UX', name: 'Design & UX' },
-    { id: 'Quality Assurance', name: 'Quality Assurance' }
+    { id: 'Full Stack', name: 'Full Stack' },
+    { id: 'Frontend', name: 'Frontend & React' },
+    { id: 'Backend', name: 'Backend & APIs' },
+    { id: 'Data Science', name: 'Data Science & AI' },
+    { id: 'Cloud Computing', name: 'Cloud & DevOps' },
+    { id: 'Cyber Security', name: 'Cyber Security' },
+    { id: 'Mobile Development', name: 'Mobile App' },
+    { id: 'Software Testing', name: 'Testing / QA' },
+    { id: 'UI/UX Design', name: 'UI/UX Design' }
   ];
 
   const difficultyLevels = [

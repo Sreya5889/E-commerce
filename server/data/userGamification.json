@@ -1,0 +1,14 @@
+{
+  "demo-student-id": {
+    "total_xp": 650,
+    "current_level": 2,
+    "level_title": "Explorer",
+    "current_streak": 3,
+    "best_streak": 7,
+    "unlocked_achievements": [
+      "ach-001",
+      "ach-003"
+    ],
+    "updated_at": "2026-09-11T10:56:03.812Z"
+  }
+}
