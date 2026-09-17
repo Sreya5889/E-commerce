@@ -1,0 +1,568 @@
+{
+  "notes": [
+    {
+      "id": "note-1",
+      "user_id": "demo-student-id",
+      "course_id": "c1",
+      "lesson_id": "l1",
+      "content": "Key architectural rule: state management should be centralized with persistent sync middleware.",
+      "timestamp_seconds": 145,
+      "created_at": "2026-09-15T10:00:00.000Z",
+      "updated_at": "2026-09-15T10:00:00.000Z"
+    },
+    {
+      "id": "note-e152adc1-5357-4a1c-861c-b244e1202f99",
+      "user_id": "demo-student-id",
+      "course_id": "course-1",
+      "lesson_id": "lesson-101",
+      "content": "Important concept on React state management",
+      "timestamp_seconds": 145,
+      "created_at": "2026-09-17T10:12:46.910Z",
+      "updated_at": "2026-09-17T10:12:46.910Z"
+    },
+    {
+      "id": "note-247fad6b-a6c5-4414-8bfd-74fa9352d74b",
+      "user_id": "demo-student-id",
+      "course_id": "course-1",
+      "lesson_id": "lesson-101",
+      "content": "Important concept on React state management",
+      "timestamp_seconds": 145,
+      "created_at": "2026-09-17T10:13:43.956Z",
+      "updated_at": "2026-09-17T10:13:43.956Z"
+    },
+    {
+      "id": "note-045061ba-8df2-4ade-88c1-393536699951",
+      "user_id": "demo-student-id",
+      "course_id": "course-1",
+      "lesson_id": "lesson-101",
+      "content": "Important concept on React state management",
+      "timestamp_seconds": 145,
+      "created_at": "2026-09-17T10:38:49.488Z",
+      "updated_at": "2026-09-17T10:38:49.488Z"
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": "bm-1",
+      "user_id": "demo-student-id",
+      "course_id": "c1",
+      "lesson_id": "l1",
+      "created_at": "2026-09-15T10:05:00.000Z"
+    },
+    {
+      "id": "bm-ef17d0ae-a633-4c96-9967-a44bfe14bd70",
+      "user_id": "demo-student-id",
+      "course_id": "course-1",
+      "lesson_id": "lesson-101",
+      "created_at": "2026-09-17T10:38:49.497Z"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz-l1",
+      "course_id": "c1",
+      "lesson_id": "l1",
+      "title": "React Architecture & Component Lifecycle Check",
+      "passing_score": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "question": "What is the primary advantage of React 19 Actions over manual async state handling?",
+          "options": [
+            "They automatically manage pending states, optimistic updates, and error handling",
+            "They force the entire application into client-side rendering",
+            "They eliminate the need for JavaScript in the browser",
+            "They replace CSS animations with WebGL"
+          ],
+          "correct_index": 0,
+          "explanation": "React Actions streamline asynchronous transactions by natively coordinating pending states, error boundaries, and optimistic UI transitions."
+        },
+        {
+          "id": "q2",
+          "question": "When designing an offline-first learning system, where should student progress first be committed?",
+          "options": [
+            "Only in third-party analytics",
+            "In local fast-access storage with background synchronizer queue to the backend",
+            "Directly to a blockchain ledger",
+            "Strictly in server session cookies without client cache"
+          ],
+          "correct_index": 1,
+          "explanation": "An offline-first design commits immediately to resilient local storage (IndexedDB/localStorage) and dispatches an asynchronous reconciliation queue to the cloud database."
+        },
+        {
+          "id": "q3",
+          "question": "What is the time complexity of looking up a lesson bookmark in a JavaScript Set or Hash Map?",
+          "options": [
+            "O(N)",
+            "O(N log N)",
+            "O(1) average time",
+            "O(N^2)"
+          ],
+          "correct_index": 2,
+          "explanation": "Sets and Hash Maps use bucketed hash indexing providing O(1) average constant-time lookups."
+        }
+      ],
+      "created_at": "2026-09-15T09:00:00.000Z"
+    }
+  ],
+  "quiz_attempts": [
+    {
+      "id": "qa-1",
+      "user_id": "demo-student-id",
+      "quiz_id": "quiz-l1",
+      "score": 100,
+      "passed": true,
+      "answers": [
+        0,
+        1,
+        2
+      ],
+      "created_at": "2026-09-15T11:00:00.000Z"
+    },
+    {
+      "id": "qa-8514157e-8788-4156-859e-46264a472b01",
+      "user_id": "demo-student-id",
+      "quiz_id": "quiz-quiz-lesson-101",
+      "score": 0,
+      "passed": false,
+      "correctCount": 0,
+      "totalQuestions": 2,
+      "answers": {
+        "q1": "B"
+      },
+      "created_at": "2026-09-17T10:12:46.937Z"
+    },
+    {
+      "id": "qa-99b74a04-2eb8-4ad8-9191-4f5b5f08c58f",
+      "user_id": "demo-student-id",
+      "quiz_id": "quiz-quiz-lesson-101",
+      "score": 0,
+      "passed": false,
+      "correctCount": 0,
+      "totalQuestions": 2,
+      "answers": {
+        "0": 1
+      },
+      "created_at": "2026-09-17T10:13:43.979Z"
+    },
+    {
+      "id": "qa-84cdab9d-c813-45fa-9f2f-d45144d145b7",
+      "user_id": "demo-student-id",
+      "quiz_id": "quiz-quiz-lesson-101",
+      "score": 0,
+      "passed": false,
+      "correctCount": 0,
+      "totalQuestions": 2,
+      "answers": {
+        "0": 1
+      },
+      "created_at": "2026-09-17T10:38:49.509Z"
+    }
+  ],
+  "study_plans": [
+    {
+      "id": "plan-160881c5-18c7-4d7d-a37b-dc72704094af",
+      "user_id": "demo-student-id",
+      "career_goal": "Full Stack Developer",
+      "weekly_hours": 15,
+      "skill_level": "Intermediate",
+      "plan_data": {
+        "title": "Full Stack Developer Placement Roadmap",
+        "target_role": "Full Stack Developer",
+        "weekly_hours": 15,
+        "daily_commitment": "2.1 hrs / day",
+        "skill_level": "Intermediate",
+        "duration_weeks": 6,
+        "weekly_goals": [
+          {
+            "week": 1,
+            "title": "Foundational Mastery & Frontend Engineering",
+            "tasks": [
+              {
+                "id": "task-542e4c55-e806-45e1-bda9-8ebe6ee8d7ad",
+                "title": "Complete Core Framework Patterns & Reactive State",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-59ce613c-d7c7-471c-b0d2-72fa76101806",
+                "title": "Solve 4 DSA Arrays & Two-Pointer problems on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-eba06b7b-ccdb-41a3-ad19-8b3c45f53557",
+                "title": "Aptitude: Quantitative Percentages & Ratios Practice",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 2,
+            "title": "Backend Systems & Database Design",
+            "tasks": [
+              {
+                "id": "task-015e2f7b-03cb-474b-9279-57fcfb53450f",
+                "title": "Study Relational Schema Normalization & Indexing",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-26b84754-7c5a-47d8-9c29-3ea7a1d717a4",
+                "title": "Solve 3 SQL JOIN & Group By queries on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-8158eb24-614c-45f0-ae15-1a720208a27f",
+                "title": "Aptitude: Logical Number Series & Syllogisms",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 3,
+            "title": "Real-World Capstone & Technical Screening Prep",
+            "tasks": [
+              {
+                "id": "task-785ae9de-9f90-4389-8488-399bb9b9b6cf",
+                "title": "Build Project Hub Milestone 1 (Architecture & Setup)",
+                "type": "project",
+                "link": "/projects",
+                "completed": false
+              },
+              {
+                "id": "task-ff66c730-3fe4-4295-aab1-035637cd99e6",
+                "title": "Interview Hub: Review ACID, Caching, and RESTful APIs",
+                "type": "interview",
+                "link": "/interview",
+                "completed": false
+              },
+              {
+                "id": "task-29760e51-551f-4d55-9c25-c6c23a5ff62b",
+                "title": "Take 1 Full-Length Placement Mock Exam",
+                "type": "mock",
+                "link": "/aptitude/mock-tests",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+      "is_active": true,
+      "created_at": "2026-09-17T10:38:49.481Z",
+      "updated_at": "2026-09-17T10:38:49.481Z"
+    },
+    {
+      "id": "plan-4d684abe-3ffc-4de0-a0b6-7013dbddc2d8",
+      "user_id": "demo-student-id",
+      "career_goal": "Full Stack Developer",
+      "weekly_hours": 15,
+      "skill_level": "Intermediate",
+      "plan_data": {
+        "title": "Full Stack Developer Placement Roadmap",
+        "target_role": "Full Stack Developer",
+        "weekly_hours": 15,
+        "daily_commitment": "2.1 hrs / day",
+        "skill_level": "Intermediate",
+        "duration_weeks": 6,
+        "weekly_goals": [
+          {
+            "week": 1,
+            "title": "Foundational Mastery & Frontend Engineering",
+            "tasks": [
+              {
+                "id": "task-d8c1c00c-20c6-483d-b30e-338464655c37",
+                "title": "Complete Core Framework Patterns & Reactive State",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-fbf7402a-5879-4ee1-a7fc-7ff64d5d9791",
+                "title": "Solve 4 DSA Arrays & Two-Pointer problems on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-3d26ccd3-85d8-4b2f-8356-5b0fac08bec1",
+                "title": "Aptitude: Quantitative Percentages & Ratios Practice",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 2,
+            "title": "Backend Systems & Database Design",
+            "tasks": [
+              {
+                "id": "task-55b5cb1e-72ca-4b78-8880-7c3b17f5bfa9",
+                "title": "Study Relational Schema Normalization & Indexing",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-642a845f-4f21-4b6c-a748-efe2ee1fcb19",
+                "title": "Solve 3 SQL JOIN & Group By queries on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-9b9aafd5-2023-495c-83a2-52a8834f7ac7",
+                "title": "Aptitude: Logical Number Series & Syllogisms",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 3,
+            "title": "Real-World Capstone & Technical Screening Prep",
+            "tasks": [
+              {
+                "id": "task-327c6746-d76c-4cff-bd1a-833f095ff16c",
+                "title": "Build Project Hub Milestone 1 (Architecture & Setup)",
+                "type": "project",
+                "link": "/projects",
+                "completed": false
+              },
+              {
+                "id": "task-5ad91810-54d8-44fe-ad06-f9b1044ceca5",
+                "title": "Interview Hub: Review ACID, Caching, and RESTful APIs",
+                "type": "interview",
+                "link": "/interview",
+                "completed": false
+              },
+              {
+                "id": "task-f2c7e3dd-6c3e-4cc5-a165-545727de1595",
+                "title": "Take 1 Full-Length Placement Mock Exam",
+                "type": "mock",
+                "link": "/aptitude/mock-tests",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+      "is_active": false,
+      "created_at": "2026-09-17T10:13:43.948Z",
+      "updated_at": "2026-09-17T10:13:43.948Z"
+    },
+    {
+      "id": "plan-caeaa742-c2f1-4f1e-9703-3e081aa489fd",
+      "user_id": "demo-student-id",
+      "career_goal": "Full Stack Developer",
+      "weekly_hours": 10,
+      "skill_level": "Intermediate",
+      "plan_data": {
+        "title": "Full Stack Developer Placement Roadmap",
+        "target_role": "Full Stack Developer",
+        "weekly_hours": 10,
+        "daily_commitment": "1.4 hrs / day",
+        "skill_level": "Intermediate",
+        "duration_weeks": 10,
+        "weekly_goals": [
+          {
+            "week": 1,
+            "title": "Foundational Mastery & Frontend Engineering",
+            "tasks": [
+              {
+                "id": "task-5952e5ca-ab50-4674-b456-504cbf386ff4",
+                "title": "Complete Core Framework Patterns & Reactive State",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-39a0282b-c56b-4b94-b981-9cee37bc8e40",
+                "title": "Solve 4 DSA Arrays & Two-Pointer problems on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-877cf343-21f2-470f-8255-0c48beb6c44a",
+                "title": "Aptitude: Quantitative Percentages & Ratios Practice",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 2,
+            "title": "Backend Systems & Database Design",
+            "tasks": [
+              {
+                "id": "task-1d510352-fbb0-4deb-94f7-bbcd7ab64328",
+                "title": "Study Relational Schema Normalization & Indexing",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "task-4753e031-61b2-468d-b284-80db928c6657",
+                "title": "Solve 3 SQL JOIN & Group By queries on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "task-e32dfb49-3844-493a-8f5b-2a1726fc1b53",
+                "title": "Aptitude: Logical Number Series & Syllogisms",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 3,
+            "title": "Real-World Capstone & Technical Screening Prep",
+            "tasks": [
+              {
+                "id": "task-fab5f47f-8e48-480c-8e40-148a9dd81864",
+                "title": "Build Project Hub Milestone 1 (Architecture & Setup)",
+                "type": "project",
+                "link": "/projects",
+                "completed": false
+              },
+              {
+                "id": "task-2bb87530-d52b-434b-bd6f-a873497b9b23",
+                "title": "Interview Hub: Review ACID, Caching, and RESTful APIs",
+                "type": "interview",
+                "link": "/interview",
+                "completed": false
+              },
+              {
+                "id": "task-22b4ea4e-dc62-455c-89c1-c02663d31479",
+                "title": "Take 1 Full-Length Placement Mock Exam",
+                "type": "mock",
+                "link": "/aptitude/mock-tests",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+      "is_active": false,
+      "created_at": "2026-09-17T10:12:46.901Z",
+      "updated_at": "2026-09-17T10:12:46.901Z"
+    },
+    {
+      "id": "plan-demo",
+      "user_id": "demo-student-id",
+      "career_goal": "Full Stack Developer",
+      "weekly_hours": 15,
+      "skill_level": "Intermediate",
+      "plan_data": {
+        "title": "Full Stack Career Readiness Mastery",
+        "target_role": "Full Stack Developer",
+        "duration_weeks": 8,
+        "daily_commitment": "2.1 hours / day",
+        "weekly_goals": [
+          {
+            "week": 1,
+            "title": "Frontend Architecture & Modern React",
+            "tasks": [
+              {
+                "id": "t-1",
+                "title": "Complete React Component Design Patterns module",
+                "type": "course",
+                "link": "/courses",
+                "completed": true
+              },
+              {
+                "id": "t-2",
+                "title": "Solve 3 DSA Array & Two-Pointer problems on CodeLab",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": true
+              },
+              {
+                "id": "t-3",
+                "title": "Quantitative Aptitude: Percentages & Ratio Practice",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 2,
+            "title": "Backend APIs & Database Schema Design",
+            "tasks": [
+              {
+                "id": "t-4",
+                "title": "Express & PostgreSQL relational query optimization",
+                "type": "course",
+                "link": "/courses",
+                "completed": false
+              },
+              {
+                "id": "t-5",
+                "title": "Solve 2 Medium SQL Aggregation challenges",
+                "type": "coding",
+                "link": "/codelab",
+                "completed": false
+              },
+              {
+                "id": "t-6",
+                "title": "Logical Reasoning: Number Series & Syllogisms test",
+                "type": "aptitude",
+                "link": "/aptitude/practice",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "week": 3,
+            "title": "Real-World Portfolio Building",
+            "tasks": [
+              {
+                "id": "t-7",
+                "title": "Milestone 1 of Full Stack E-Commerce Project Hub",
+                "type": "project",
+                "link": "/projects",
+                "completed": false
+              },
+              {
+                "id": "t-8",
+                "title": "Review System Design ACID & Caching in Interview Hub",
+                "type": "interview",
+                "link": "/interview",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+      "is_active": false,
+      "created_at": "2026-09-15T08:00:00.000Z",
+      "updated_at": "2026-09-15T08:00:00.000Z"
+    }
+  ],
+  "resume_positions": [
+    {
+      "user_id": "demo-student-id",
+      "course_id": "c1",
+      "lesson_id": "l1",
+      "position_seconds": 120,
+      "updated_at": "2026-09-16T10:00:00.000Z"
+    }
+  ]
+}

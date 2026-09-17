@@ -29,6 +29,7 @@ import {
 import { PageTransition } from '../../components/layout/PageTransition';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
+import { formatINR } from '../../utils/currency';
 import { CourseCard } from '../../components/ui/CourseCard';
 import { Modal } from '../../components/ui/Modal';
 
@@ -516,12 +517,12 @@ export const CourseDetail = () => {
                 <div className="space-y-1">
                   <div className="flex items-baseline space-x-3">
                     <span className="text-3xl font-black text-slate-900 dark:text-white">
-                      ${hasDiscount ? discountPrice.toFixed(2) : price.toFixed(2)}
+                      {formatINR(hasDiscount ? discountPrice : price)}
                     </span>
                     {hasDiscount && (
                       <>
                         <span className="text-sm text-slate-400 line-through font-medium">
-                          ${price.toFixed(2)}
+                          {formatINR(price)}
                         </span>
                         <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
                           {Math.round(((price - discountPrice) / price) * 100)}% off

@@ -10,6 +10,7 @@ router.get('/problems', codelabController.getProblems);
 router.get('/problems/:slug', codelabController.getProblemBySlug);
 router.get('/daily', codelabController.getDailyChallenge);
 router.get('/leaderboard', codelabController.getLeaderboard);
+router.get('/stats/user', optionalAuth, codelabController.getUserStats);
 router.get('/submissions', optionalAuth, codelabController.getSubmissions);
 
 router.post('/run', codelabController.runCode);

@@ -224,5 +224,30 @@ export const codelabService = {
       { rank: 2, name: 'Priya Sharma', solved: 44, xp: 2180, accuracy: 92, avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100' },
       { rank: 3, name: 'David Chen', solved: 41, xp: 1950, accuracy: 89, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100' }
     ];
+  },
+
+  async getUserStats(): Promise<any> {
+    try {
+      const res = await api.get('/codelab/stats/user');
+      if (res.data?.success && res.data.data) return res.data.data;
+    } catch {}
+    return {
+      totalSolved: 4,
+      totalAttempted: 6,
+      totalAvailable: 12,
+      acceptanceRate: 85,
+      difficultyStats: {
+        easy: { solved: 3, total: 4, progress: 75 },
+        medium: { solved: 1, total: 6, progress: 17 },
+        hard: { solved: 0, total: 2, progress: 0 }
+      },
+      recommendedDifficulty: 'Medium',
+      nextRecommendedProblem: {
+        id: 'two-sum-dsa',
+        slug: 'two-sum-dsa',
+        title: 'Two Sum (DSA)',
+        difficulty: 'Easy'
+      }
+    };
   }
 };

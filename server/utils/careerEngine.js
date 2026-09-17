@@ -2,6 +2,7 @@ import { codelabStore } from './codelabStore.js';
 import { projectStore } from './projectStore.js';
 import { interviewStore } from './interviewStore.js';
 import { gamificationStore } from './gamificationStore.js';
+import { aptitudeStore } from './aptitudeStore.js';
 
 /**
  * Computes EduAcademy Career Readiness Score (0-100)
@@ -69,12 +70,17 @@ export function calculateCareerReadiness(userId) {
       profile: { score: profileScore, max: 5, label: 'Profile & Resume' }
     },
     skillsMatrix: [
-      { skill: 'React & Frontend', level: 'Intermediate', progress: 75 },
-      { skill: 'JavaScript / TypeScript', level: 'Intermediate', progress: 80 },
-      { skill: 'Node.js & Express', level: 'Intermediate', progress: 70 },
-      { skill: 'SQL & Databases', level: 'Advanced', progress: 85 },
-      { skill: 'Data Structures & Algorithms', level: 'Beginner', progress: 45 },
-      { skill: 'Cloud & Docker', level: 'Beginner', progress: 35 }
+      { skill: 'Programming', level: solvedProblems >= 5 ? 'Advanced' : 'Intermediate', progress: Math.min(95, Math.max(35, 45 + solvedProblems * 5)) },
+      { skill: 'Web Development', level: 'Advanced', progress: 85 },
+      { skill: 'Backend', level: 'Intermediate', progress: Math.min(90, Math.max(40, 55 + solvedProblems * 4)) },
+      { skill: 'Databases', level: 'Advanced', progress: Math.min(95, Math.max(50, 65 + solvedProblems * 3)) },
+      { skill: 'DSA', level: solvedProblems >= 8 ? 'Advanced' : solvedProblems >= 3 ? 'Intermediate' : 'Beginner', progress: Math.min(95, Math.max(25, 30 + solvedProblems * 6)) },
+      { skill: 'Coding', level: solvedProblems >= 5 ? 'Advanced' : 'Intermediate', progress: Math.min(100, Math.max(30, Math.round((solvedProblems / 12) * 100))) },
+      { skill: 'Aptitude', level: (aptitudeStore.getStudentAnalytics(userId)?.overall_accuracy || 75) >= 70 ? 'Advanced' : 'Intermediate', progress: aptitudeStore.getStudentAnalytics(userId)?.overall_accuracy || 75 },
+      { skill: 'Projects', level: completedProjects >= 2 ? 'Advanced' : 'Intermediate', progress: Math.min(100, Math.max(35, (completedProjects + 1) * 35)) },
+      { skill: 'Interview Preparation', level: 'Intermediate', progress: 70 },
+      { skill: 'Cloud', level: 'Beginner', progress: 55 },
+      { skill: 'AI/ML', level: 'Beginner', progress: 45 }
     ],
     roadmapStage: totalScore > 75 ? 'Job Ready' : totalScore > 50 ? 'Interview Ready' : totalScore > 30 ? 'Build' : 'Practice',
     recommendations

@@ -272,7 +272,9 @@ export const aptitudeController = {
         category_id = null,
         topic_id = null,
         total_questions = 10,
-        duration_minutes = 15
+        duration_minutes = 15,
+        negative_marking = false,
+        negative_marking_penalty = 0.25
       } = req.body;
 
       const attempt = aptitudeStore.startAttempt({
@@ -282,7 +284,9 @@ export const aptitudeController = {
         categoryId: category_id,
         topicId: topic_id,
         totalQuestions: total_questions,
-        durationMinutes: duration_minutes
+        durationMinutes: duration_minutes,
+        negativeMarking: negative_marking,
+        negativeMarkingPenalty: negative_marking_penalty
       });
 
       return res.status(201).json({

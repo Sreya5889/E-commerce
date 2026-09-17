@@ -13,6 +13,7 @@ import { PageTransition } from '../../components/layout/PageTransition';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { EmptyState } from '../../components/ui/EmptyState';
+import { formatINR } from '../../utils/currency';
 
 export const InstructorDashboard = () => {
   const { user } = useAuth();
@@ -299,7 +300,7 @@ export const InstructorDashboard = () => {
                           {c.title}
                         </h3>
                         <div className="flex items-center space-x-4 text-xs text-slate-500 dark:text-slate-400">
-                          <span>${c.discount_price ?? c.discountPrice ?? c.price ?? 29.99}</span>
+                          <span>{formatINR(c.discount_price ?? c.discountPrice ?? c.price ?? 999)}</span>
                           <span>•</span>
                           <span>{Number(c.student_count ?? c.studentCount ?? 0).toLocaleString()} students</span>
                           <span>•</span>
@@ -343,13 +344,13 @@ export const InstructorDashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl space-y-3">
                 <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Available for Payout</span>
-                <p className="text-3xl font-black text-slate-900 dark:text-white">$1,840.00</p>
+                <p className="text-3xl font-black text-slate-900 dark:text-white">₹1,48,500</p>
                 <Button size="sm" className="w-full">Request Immediate Payout</Button>
               </div>
 
               <div className="p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl space-y-3">
                 <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Estimated Monthly Run-Rate</span>
-                <p className="text-3xl font-black text-slate-900 dark:text-white">$3,420.00</p>
+                <p className="text-3xl font-black text-slate-900 dark:text-white">₹2,85,000</p>
                 <p className="text-xs text-emerald-600 font-semibold">+18.5% compared to last cycle</p>
               </div>
 

@@ -21,6 +21,7 @@ import {
   Code2, FolderGit2, Briefcase, Sparkles
 } from 'lucide-react';
 import { CATEGORIES } from '../../constants/mockData';
+import { formatINR } from '../../utils/currency';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -480,8 +481,8 @@ export const AdminDashboard = () => {
                         { label: 'Students', value: totalStudents, icon: GraduationCap, color: 'green' },
                         { label: 'Instructors', value: Number(stats.total_teachers ?? 0), icon: ShieldCheck, color: 'purple' },
                         { label: 'Courses', value: totalCourses, icon: BookOpen, color: 'amber' },
-                        { label: 'Total Revenue', value: `$${(totalRevenue || 0).toFixed(0)}`, icon: DollarSign, color: 'emerald' },
-                        { label: 'Monthly Revenue', value: `$${(Number(stats.monthly_revenue ?? totalRevenue * 0.15 ?? 0) || 0).toFixed(0)}`, icon: TrendingUp, color: 'indigo' },
+                        { label: 'Total Revenue', value: formatINR(totalRevenue || 0), icon: DollarSign, color: 'emerald' },
+                        { label: 'Monthly Revenue', value: formatINR(Number(stats.monthly_revenue ?? totalRevenue * 0.15 ?? 0) || 0), icon: TrendingUp, color: 'indigo' },
                       ].map(({ label, value, icon: Icon, color }) => (
                         <div key={label} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-premium p-5 shadow-sm space-y-3">
                           <div className={`w-10 h-10 rounded-xl bg-${color}-50 dark:bg-${color}-950/20 flex items-center justify-center`}>
@@ -530,7 +531,7 @@ export const AdminDashboard = () => {
                                   </div>
                                 </td>
                                 <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-300 font-medium">{course.studentCount?.toLocaleString()}</td>
-                                <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-300 font-medium">${(course.discountPrice || course.price).toFixed(2)}</td>
+                                <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-300 font-medium">{formatINR(course.discountPrice || course.price || 999)}</td>
                                 <td className="px-6 py-4 text-right">
                                   <span className="flex items-center justify-end space-x-1 text-amber-500 font-bold">
                                     <Star className="w-3.5 h-3.5 fill-current" />
@@ -1421,7 +1422,7 @@ export const AdminDashboard = () => {
                           <tr key={order.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                             <td className="px-6 py-4 font-mono text-slate-600 dark:text-slate-300">{order.id}</td>
                             <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{new Date(order.createdAt).toLocaleDateString()}</td>
-                            <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">${order.grandTotal?.toFixed(2)}</td>
+                            <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">{formatINR(order.grandTotal || 0)}</td>
                             <td className="px-6 py-4">
                               <span className={`px-2 py-1 text-[9px] font-bold rounded-full uppercase ${
                                 order.status === 'completed' ? 'bg-green-100 text-green-700' :

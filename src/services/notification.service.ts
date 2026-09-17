@@ -1,7 +1,17 @@
+import { api } from '../lib/api';
 import { supabase } from '../lib/supabase';
 
 export const notificationService = {
   async getNotifications(userId: string) {
+    try {
+      const res = await api.get('/notifications');
+      if (res.data?.success && Array.isArray(res.data.data)) {
+        return res.data.data;
+      }
+    } catch (apiErr) {
+      console.warn('[NotificationService] Backend API failed, falling back to Supabase:', apiErr);
+    }
+
     const { data, error } = await supabase
       .from('notifications')
       .select('*')

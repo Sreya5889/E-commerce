@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
+import { gamificationStore } from './gamificationStore.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -339,7 +340,9 @@ export const aptitudeStore = {
     categoryId = null,
     topicId = null,
     totalQuestions = 10,
-    durationMinutes = 15
+    durationMinutes = 15,
+    negativeMarking = false,
+    negativeMarkingPenalty = 0.25
   }) {
     const attemptId = 'att-' + crypto.randomUUID();
     const attempts = this.getAttempts();
@@ -353,6 +356,8 @@ export const aptitudeStore = {
       topic_id: topicId,
       total_questions: Number(totalQuestions),
       duration_minutes: Number(durationMinutes),
+      negative_marking: Boolean(negativeMarking),
+      negative_marking_penalty: Number(negativeMarkingPenalty) || 0.25,
       score: 0,
       accuracy: 0,
       correct_count: 0,
@@ -479,9 +484,15 @@ export const aptitudeStore = {
         recommendation: 'Strengthen fundamental concepts in ' + t.topic_name + ' with dedicated practice.'
       }));
 
+    const hasNegative = Boolean(attempt.negative_marking);
+    const penalty = hasNegative ? (Number(attempt.negative_marking_penalty) || 0.25) : 0;
+    const computedScore = Math.max(0, Math.round((correctCount - (incorrectCount * penalty)) * 100) / 100);
+
     attempt.status = 'completed';
     attempt.total_questions = totalQuestions;
-    attempt.score = correctCount;
+    attempt.score = computedScore;
+    attempt.raw_correct_score = correctCount;
+    attempt.negative_penalty_deducted = hasNegative ? Math.round(incorrectCount * penalty * 100) / 100 : 0;
     attempt.correct_count = correctCount;
     attempt.incorrect_count = incorrectCount;
     attempt.unanswered_count = unansweredCount;
@@ -492,6 +503,21 @@ export const aptitudeStore = {
     attempt.topic_performance = topicPerformance;
     attempt.weak_topics = weakTopics;
     attempt.completed_at = new Date().toISOString();
+
+    if (attempt.mode === 'daily_challenge' && studentId && studentId !== 'guest') {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const existingDaily = attempts.find(a =>
+        a.id !== attempt.id &&
+        a.student_id === studentId &&
+        a.mode === 'daily_challenge' &&
+        a.status === 'completed' &&
+        a.completed_at?.startsWith(todayStr)
+      );
+      attempt.duplicate_claim_prevented = Boolean(existingDaily);
+      if (!existingDaily) {
+        gamificationStore.awardXp(studentId, 25, 'Completed Daily Aptitude Challenge');
+      }
+    }
 
     this.saveAttempts(attempts);
     return attempt;

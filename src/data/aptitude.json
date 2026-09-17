@@ -285,6 +285,48 @@
       "name": "Mixed Data Interpretation",
       "slug": "mixed-data",
       "display_order": 6
+    },
+    {
+      "id": "top-quant-algebra",
+      "category_id": "cat-quant",
+      "name": "Algebra",
+      "slug": "algebra",
+      "display_order": 11
+    },
+    {
+      "id": "top-quant-geometry",
+      "category_id": "cat-quant",
+      "name": "Geometry",
+      "slug": "geometry",
+      "display_order": 12
+    },
+    {
+      "id": "top-quant-mensuration",
+      "category_id": "cat-quant",
+      "name": "Mensuration",
+      "slug": "mensuration",
+      "display_order": 13
+    },
+    {
+      "id": "top-logic-data-suff",
+      "category_id": "cat-logic",
+      "name": "Data Sufficiency",
+      "slug": "data-sufficiency",
+      "display_order": 11
+    },
+    {
+      "id": "top-verb-synonyms",
+      "category_id": "cat-verbal",
+      "name": "Synonyms",
+      "slug": "synonyms",
+      "display_order": 11
+    },
+    {
+      "id": "top-verb-antonyms",
+      "category_id": "cat-verbal",
+      "name": "Antonyms",
+      "slug": "antonyms",
+      "display_order": 12
     }
   ],
   "questions": [
@@ -1527,6 +1569,193 @@
       "tags": [
         "Bar Charts",
         "Weighted Averages"
+      ]
+    },
+    {
+      "id": "q-alg-01",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-algebra",
+      "difficulty": "medium",
+      "question_text": "If x + 1/x = 4, find the value of x^2 + 1/x^2.",
+      "options": [
+        {
+          "key": "A",
+          "text": "14"
+        },
+        {
+          "key": "B",
+          "text": "16"
+        },
+        {
+          "key": "C",
+          "text": "18"
+        },
+        {
+          "key": "D",
+          "text": "12"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Squaring both sides of (x + 1/x) = 4 gives x^2 + 2 + 1/x^2 = 16. Therefore, x^2 + 1/x^2 = 16 - 2 = 14.",
+      "company_tags": [
+        "TCS",
+        "Infosys",
+        "Wipro"
+      ]
+    },
+    {
+      "id": "q-geom-01",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-geometry",
+      "difficulty": "easy",
+      "question_text": "The three angles of a triangle are in the ratio 2 : 3 : 5. What is the measure of the largest angle?",
+      "options": [
+        {
+          "key": "A",
+          "text": "72°"
+        },
+        {
+          "key": "B",
+          "text": "90°"
+        },
+        {
+          "key": "C",
+          "text": "100°"
+        },
+        {
+          "key": "D",
+          "text": "85°"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "Sum of angles in a triangle is 180°. Total parts = 2 + 3 + 5 = 10. Largest angle = (5/10) * 180° = 90°.",
+      "company_tags": [
+        "Cognizant",
+        "Accenture"
+      ]
+    },
+    {
+      "id": "q-mens-01",
+      "category_id": "cat-quant",
+      "topic_id": "top-quant-mensuration",
+      "difficulty": "medium",
+      "question_text": "A rectangular field has length 28 m and breadth 15 m. A 2 m wide path runs along the inside border. Find the area of the path.",
+      "options": [
+        {
+          "key": "A",
+          "text": "156 sq m"
+        },
+        {
+          "key": "B",
+          "text": "172 sq m"
+        },
+        {
+          "key": "C",
+          "text": "180 sq m"
+        },
+        {
+          "key": "D",
+          "text": "144 sq m"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "Outer area = 28 * 15 = 420 sq m. Inner length = 28 - 4 = 24 m, inner breadth = 15 - 4 = 11 m. Inner area = 24 * 11 = 264 sq m. Path area = 420 - 264 = 156 sq m.",
+      "company_tags": [
+        "TCS Ninja",
+        "Capgemini"
+      ]
+    },
+    {
+      "id": "q-ds-01",
+      "category_id": "cat-logic",
+      "topic_id": "top-logic-data-suff",
+      "difficulty": "medium",
+      "question_text": "Is positive integer n divisible by 6?\nStatement I: n is divisible by 2.\nStatement II: n is divisible by 3.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Statement I alone is sufficient"
+        },
+        {
+          "key": "B",
+          "text": "Statement II alone is sufficient"
+        },
+        {
+          "key": "C",
+          "text": "Both statements TOGETHER are sufficient, but NEITHER alone is sufficient"
+        },
+        {
+          "key": "D",
+          "text": "Statements I and II together are NOT sufficient"
+        }
+      ],
+      "correct_option": "C",
+      "explanation": "A number is divisible by 6 if and only if it is divisible by both 2 and 3. Statement I gives divisibility by 2; Statement II gives divisibility by 3. Combining both confirms divisibility by 6.",
+      "company_tags": [
+        "Amazon",
+        "TCS Digital"
+      ]
+    },
+    {
+      "id": "q-syn-01",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-synonyms",
+      "difficulty": "easy",
+      "question_text": "Choose the word most SIMILAR in meaning to 'PRAGMATIC':",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theoretical"
+        },
+        {
+          "key": "B",
+          "text": "Practical"
+        },
+        {
+          "key": "C",
+          "text": "Idealistic"
+        },
+        {
+          "key": "D",
+          "text": "Erratic"
+        }
+      ],
+      "correct_option": "B",
+      "explanation": "'Pragmatic' means dealing with things sensibly and realistically based on practical considerations.",
+      "company_tags": [
+        "Wipro",
+        "Infosys"
+      ]
+    },
+    {
+      "id": "q-ant-01",
+      "category_id": "cat-verbal",
+      "topic_id": "top-verb-antonyms",
+      "difficulty": "easy",
+      "question_text": "Choose the word most OPPOSITE in meaning to 'EPHEMERAL':",
+      "options": [
+        {
+          "key": "A",
+          "text": "Permanent"
+        },
+        {
+          "key": "B",
+          "text": "Transient"
+        },
+        {
+          "key": "C",
+          "text": "Brief"
+        },
+        {
+          "key": "D",
+          "text": "Fleeting"
+        }
+      ],
+      "correct_option": "A",
+      "explanation": "'Ephemeral' means lasting for a very short time. Its antonym is 'Permanent' or 'Eternal'.",
+      "company_tags": [
+        "TCS",
+        "Accenture"
       ]
     }
   ],

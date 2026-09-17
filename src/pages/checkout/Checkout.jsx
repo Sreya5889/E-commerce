@@ -17,6 +17,7 @@ import {
 import { PageTransition } from '../../components/layout/PageTransition';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
+import { formatINR } from '../../utils/currency';
 
 const COUNTRIES = [
   'United States',
@@ -379,7 +380,7 @@ export const Checkout = () => {
                       </span>
                     </div>
                     <span className="font-bold text-slate-900 dark:text-white flex-shrink-0">
-                      ${Number(item.discount_price ?? item.price ?? 49.99).toFixed(2)}
+                      {formatINR(item.discount_price ?? item.price ?? 999)}
                     </span>
                   </div>
                 ))}
@@ -389,22 +390,22 @@ export const Checkout = () => {
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs">
                 <div className="flex justify-between text-slate-500">
                   <span>Subtotal</span>
-                  <span className="font-semibold text-slate-900 dark:text-white">${subtotal.toFixed(2)}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">{formatINR(subtotal)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-emerald-600 font-semibold">
                     <span>Discount ({coupon?.code})</span>
-                    <span>-${discount.toFixed(2)}</span>
+                    <span>-{formatINR(discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-slate-500">
                   <span>Taxes (5%)</span>
-                  <span className="font-semibold text-slate-900 dark:text-white">${tax.toFixed(2)}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white">{formatINR(tax)}</span>
                 </div>
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-baseline">
                   <span className="font-bold text-sm text-slate-900 dark:text-white">Total Amount</span>
                   <span className="text-xl font-black text-primary-600 dark:text-primary-400">
-                    ${total.toFixed(2)}
+                    {formatINR(total)}
                   </span>
                 </div>
               </div>

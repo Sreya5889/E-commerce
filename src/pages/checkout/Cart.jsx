@@ -19,6 +19,7 @@ import {
 import { PageTransition } from '../../components/layout/PageTransition';
 import { Button } from '../../components/ui/Button';
 import { EmptyState } from '../../components/ui/EmptyState';
+import { formatINR } from '../../utils/currency';
 
 export const Cart = () => {
   const navigate = useNavigate();
@@ -178,11 +179,11 @@ export const Cart = () => {
                     {/* Price Column */}
                     <div className="sm:text-right flex-shrink-0 self-start sm:self-center">
                       <p className="text-lg font-black text-slate-900 dark:text-white">
-                        ${hasDiscount ? discountPrice.toFixed(2) : price.toFixed(2)}
+                        {formatINR(hasDiscount ? discountPrice : price)}
                       </p>
                       {hasDiscount && (
                         <p className="text-xs text-slate-400 line-through">
-                          ${price.toFixed(2)}
+                          {formatINR(price)}
                         </p>
                       )}
                     </div>
@@ -202,25 +203,25 @@ export const Cart = () => {
                 <div className="space-y-3 text-xs">
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Original Price:</span>
-                    <span className="font-semibold text-slate-900 dark:text-white">${subtotal.toFixed(2)}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">{formatINR(subtotal)}</span>
                   </div>
 
                   {discount > 0 && (
                     <div className="flex justify-between text-emerald-600 dark:text-emerald-400 font-semibold">
                       <span>Discount ({coupon?.code}):</span>
-                      <span>-${discount.toFixed(2)}</span>
+                      <span>-{formatINR(discount)}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Estimated Tax (5%):</span>
-                    <span className="font-semibold text-slate-900 dark:text-white">${tax.toFixed(2)}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">{formatINR(tax)}</span>
                   </div>
 
                   <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-between items-baseline">
                     <span className="text-sm font-bold text-slate-900 dark:text-white">Total:</span>
                     <span className="text-2xl font-black text-primary-600 dark:text-primary-400">
-                      ${total.toFixed(2)}
+                      {formatINR(total)}
                     </span>
                   </div>
                 </div>

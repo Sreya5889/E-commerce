@@ -35,7 +35,7 @@ export const couponController = {
 
       if (subtotal < Number(coupon.minimum_order_amount)) {
         throw new AppError(
-          `Minimum order amount of $${Number(coupon.minimum_order_amount).toFixed(2)} required to use this coupon`,
+          `Minimum order amount of ₹${Math.round(Number(coupon.minimum_order_amount)).toLocaleString('en-IN')} required to use this coupon`,
           400,
           'MIN_ORDER_NOT_MET'
         );

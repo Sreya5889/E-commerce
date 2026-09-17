@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle2, BookOpen, Award, LayoutDashboard } from 'lucide-react';
 import { PageTransition } from '../../components/layout/PageTransition';
+import { formatINR } from '../../utils/currency';
 
 export const OrderSuccess = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ export const OrderSuccess = () => {
             )}
             {grandTotal !== undefined && (
               <div className="inline-block px-4 py-2 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-lg font-extrabold rounded-premium border border-green-200 dark:border-green-900/30">
-                Total Charged: ${parseFloat(grandTotal).toFixed(2)}
+                Total Charged: {formatINR(grandTotal)}
               </div>
             )}
           </div>

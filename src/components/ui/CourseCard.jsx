@@ -4,6 +4,7 @@ import { Star, Clock, BookOpen, Heart, ShoppingCart, Check } from 'lucide-react'
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 import { Badge } from './Badge';
+import { formatINR } from '../../utils/currency';
 
 export const CourseCard = ({ course, className = '' }) => {
   const { addToCart, isInCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
@@ -159,12 +160,12 @@ export const CourseCard = ({ course, className = '' }) => {
         <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-baseline space-x-2">
             <span className="text-lg font-black text-slate-900 dark:text-white">
-              ${discountPrice}
+              {formatINR(discountPrice)}
             </span>
             {hasDiscount && (
               <>
                 <span className="text-xs text-slate-400 line-through font-medium">
-                  ${price}
+                  {formatINR(price)}
                 </span>
                 <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
                   {discountPercent}% OFF

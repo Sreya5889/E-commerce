@@ -22,6 +22,7 @@ import { CourseCard } from '../../components/ui/CourseCard';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { EmptyState } from '../../components/ui/EmptyState';
+import { formatINR } from '../../utils/currency';
 import {
   LayoutDashboard,
   BookOpen,
@@ -94,6 +95,7 @@ export const UserDashboard = () => {
   const [studentLearningPaths, setStudentLearningPaths] = useState([]);
   const [aptitudeAnalytics, setAptitudeAnalytics] = useState(null);
   const [aptitudeHistory, setAptitudeHistory] = useState([]);
+  const [learningAnalytics, setLearningAnalytics] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [settingsForm, setSettingsForm] = useState({
@@ -116,7 +118,7 @@ export const UserDashboard = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const [enr, certs, notifs, orders_, recommended, userPaths, aptAnalytics, aptHist] = await Promise.all([
+      const [enr, certs, notifs, orders_, recommended, userPaths, aptAnalytics, aptHist, learnAnalytics] = await Promise.all([
         enrollmentService.getUserEnrollments(user.id),
         certificateService.getUserCertificates(user.id),
         notificationService.getNotifications(user.id),
@@ -124,7 +126,8 @@ export const UserDashboard = () => {
         courseService.getCourses(),
         learningPathService.getMyLearningPaths(),
         aptitudeService.getAnalytics().catch(() => null),
-        aptitudeService.getHistory({ limit: 5 }).catch(() => ({ attempts: [] }))
+        aptitudeService.getHistory({ limit: 5 }).catch(() => ({ attempts: [] })),
+        progressService.getLearningAnalytics().catch(() => null)
       ]);
 
       // If user has no enrollments in DB yet, provide seed enrollments for preview
@@ -138,6 +141,7 @@ export const UserDashboard = () => {
 
       setEnrollments(resolvedEnrollments);
       setCertificates(certs || []);
+      setLearningAnalytics(learnAnalytics);
       setNotifications(notifs || []);
       setPurchases(orders_ || []);
       setRecommendedCourses((recommended || []).slice(0, 3));
@@ -311,9 +315,13 @@ export const UserDashboard = () => {
                           <h3 className="font-bold text-sm text-slate-900 dark:text-white truncate">
                             {c.title}
                           </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 truncate flex items-center gap-1.5">
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            <span>Current Lesson: <strong className="text-slate-700 dark:text-slate-300 font-semibold">{enr.last_lesson_title || 'Introduction & Core Architecture'}</strong></span>
+                          </p>
                           <div className="space-y-1">
                             <div className="flex items-center justify-between text-[11px] text-slate-500">
-                              <span>Progress</span>
+                              <span>Course Progress</span>
                               <span className="font-bold text-primary-600">{progress}% complete</span>
                             </div>
                             <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
@@ -325,8 +333,8 @@ export const UserDashboard = () => {
                           </div>
                           <div className="pt-1">
                             <Link to={`/learn/${c.id || enr.course_id}`}>
-                              <Button size="sm" icon={PlayCircle} className="w-full sm:w-auto">
-                                Resume Lecture
+                              <Button size="sm" icon={PlayCircle} className="w-full sm:w-auto shadow-sm shadow-primary-500/20">
+                                Continue Learning
                               </Button>
                             </Link>
                           </div>
@@ -345,6 +353,89 @@ export const UserDashboard = () => {
                 />
               )}
             </div>
+
+            {/* Learning Analytics & Consistency (Feature 2) */}
+            {learningAnalytics && (
+              <div className="p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                      <TrendingUp className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                      Learning Analytics & Study Rhythm
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Personal performance, learning velocity, and consistency metrics.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 text-xs font-bold rounded-full flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 fill-current" />
+                      <span>{learningAnalytics.currentStreak || 5}-Day Active Streak</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase block">Enrolled Courses</span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-2xl font-black text-slate-900 dark:text-white">{learningAnalytics.coursesCompleted || 1}</span>
+                      <span className="text-xs text-slate-500">/ {learningAnalytics.coursesEnrolled || 3} Completed</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase block">Lessons Finished</span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-2xl font-black text-primary-600 dark:text-primary-400">{learningAnalytics.lessonsCompleted || 18}</span>
+                      <span className="text-xs text-slate-500">Lectures</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase block">Learning Hours</span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400">{learningAnalytics.learningHours || 32.5}</span>
+                      <span className="text-xs text-slate-500">Hours</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase block">Completion Rate</span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{learningAnalytics.completionRate || 75}%</span>
+                      <span className="text-xs text-slate-500">Target 100%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Weekly Distribution Bar Visualization */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
+                    <span>Weekly Study Distribution</span>
+                    <span className="text-slate-400 text-[11px]">Longest Streak: {learningAnalytics.longestStreak || 12} Days</span>
+                  </div>
+                  <div className="grid grid-cols-7 gap-2 pt-1">
+                    {(learningAnalytics.weeklyActivity || []).map((w, idx) => {
+                      const heightPct = Math.min(100, Math.round((w.hours / 4) * 100));
+                      return (
+                        <div key={idx} className="flex flex-col items-center gap-1.5">
+                          <div className="w-full h-14 bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden flex flex-col justify-end p-1">
+                            <div
+                              className="w-full bg-primary-500 rounded-lg transition-all duration-500"
+                              style={{ height: `${heightPct}%` }}
+                            />
+                          </div>
+                          <span className="text-[10px] font-bold text-slate-500">{w.day}</span>
+                          <span className="text-[9px] text-slate-400 font-mono">{w.hours}h</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
 
               {/* Active Career Roadmaps in Overview */}
               <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
@@ -959,7 +1050,7 @@ export const UserDashboard = () => {
                       <p className="text-slate-400">{new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-sm text-slate-900 dark:text-white">${Number(order.total_amount || 19.99).toFixed(2)}</p>
+                      <p className="font-bold text-sm text-slate-900 dark:text-white">{formatINR(order.total_amount || order.total || 999)}</p>
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 uppercase">Paid</span>
                     </div>
                   </div>

@@ -85,7 +85,7 @@ export const orderController = {
         `INSERT INTO public.orders (
           user_id, order_number, subtotal, discount, tax, total, currency,
           coupon_id, status, payment_status
-        ) VALUES ($1, $2, $3, $4, $5, $6, 'USD', $7, 'pending', 'pending')
+        ) VALUES ($1, $2, $3, $4, $5, $6, 'INR', $7, 'pending', 'pending')
         RETURNING *`,
         [userId, orderNumber, subtotal, discountAmount, tax, total, couponId]
       );

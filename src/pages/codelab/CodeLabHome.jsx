@@ -10,6 +10,7 @@ export const CodeLabHome = () => {
   const [problems, setProblems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [daily, setDaily] = useState(null);
+  const [userStats, setUserStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const selectedCat = searchParams.get('category') || 'all';
@@ -20,14 +21,16 @@ export const CodeLabHome = () => {
     const loadData = async () => {
       setLoading(true);
       try {
-        const [probs, cats, d] = await Promise.all([
+        const [probs, cats, d, stats] = await Promise.all([
           codelabService.getProblems({ category: selectedCat, difficulty: selectedDiff, search: searchQuery }),
           codelabService.getCategories(),
-          codelabService.getDailyChallenge()
+          codelabService.getDailyChallenge(),
+          codelabService.getUserStats().catch(() => null)
         ]);
         setProblems(probs);
         setCategories(cats);
         setDaily(d);
+        setUserStats(stats);
       } catch (err) {
         console.error('Failed to load CodeLab data:', err);
       } finally {
@@ -65,7 +68,7 @@ export const CodeLabHome = () => {
               {/* Stats pill bar */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-800/80">
                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
-                  <div className="text-xl font-bold text-white">8</div>
+                  <div className="text-xl font-bold text-white">{userStats?.totalSolved ?? 8}</div>
                   <div className="text-[11px] text-slate-400">Problems Solved</div>
                 </div>
                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
@@ -76,8 +79,8 @@ export const CodeLabHome = () => {
                   <div className="text-[11px] text-slate-400">Coding Streak</div>
                 </div>
                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
-                  <div className="text-xl font-bold text-emerald-400">92%</div>
-                  <div className="text-[11px] text-slate-400">Accuracy Rate</div>
+                  <div className="text-xl font-bold text-emerald-400">{userStats?.acceptanceRate ?? 92}%</div>
+                  <div className="text-[11px] text-slate-400">Acceptance Rate</div>
                 </div>
                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
                   <div className="text-xl font-bold text-indigo-400">Level 3</div>
@@ -90,6 +93,65 @@ export const CodeLabHome = () => {
 
         {/* 2. Main Container */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-8">
+          {/* Difficulty Progression Banner (Feature 3) */}
+          {userStats?.difficultyStats && (
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center gap-2">
+                    <Target className="w-4 h-4 text-primary-600" />
+                    DSA Difficulty Progression & Next Recommended Challenge
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Track your solved problems across Easy fundamentals to Medium/Hard placement vectors.
+                  </p>
+                </div>
+
+                {userStats.nextRecommendedProblem && (
+                  <Link to={`/codelab/problems/${userStats.nextRecommendedProblem.slug || userStats.nextRecommendedProblem.id}`}>
+                    <Button size="sm" variant="outline" className="text-xs">
+                      <span>Solve Next: {userStats.nextRecommendedProblem.title}</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+
+              {/* Progress bars */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-semibold">
+                    <span className="text-emerald-600 dark:text-emerald-400">Easy Fundamentals</span>
+                    <span className="text-slate-500">{userStats.difficultyStats.easy.solved} / {userStats.difficultyStats.easy.total}</span>
+                  </div>
+                  <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div className="bg-emerald-500 h-full rounded-full transition-all duration-500" style={{ width: `${userStats.difficultyStats.easy.progress}%` }} />
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-semibold">
+                    <span className="text-amber-600 dark:text-amber-400">Medium Placement</span>
+                    <span className="text-slate-500">{userStats.difficultyStats.medium.solved} / {userStats.difficultyStats.medium.total}</span>
+                  </div>
+                  <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div className="bg-amber-500 h-full rounded-full transition-all duration-500" style={{ width: `${userStats.difficultyStats.medium.progress}%` }} />
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-semibold">
+                    <span className="text-rose-600 dark:text-rose-400">Hard Advanced</span>
+                    <span className="text-slate-500">{userStats.difficultyStats.hard.solved} / {userStats.difficultyStats.hard.total}</span>
+                  </div>
+                  <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div className="bg-rose-500 h-full rounded-full transition-all duration-500" style={{ width: `${userStats.difficultyStats.hard.progress}%` }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Daily Challenge Card */}
           {daily?.problem && (
             <div className="bg-gradient-to-r from-primary-900/90 via-indigo-900/80 to-slate-900 text-white rounded-3xl p-6 border border-primary-500/30 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
